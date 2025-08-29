@@ -1,0 +1,152 @@
+import React, { useEffect } from 'react';
+import Header from '../../components/ui/Header';
+import HeroSection from './components/HeroSection';
+import CompanyStory from './components/CompanyStory';
+import LeadershipTeam from './components/LeadershipTeam';
+import CertificationsWall from './components/CertificationsWall';
+import InnovationLab from './components/InnovationLab';
+
+const About = () => {
+  useEffect(() => {
+    // Scroll to top when component mounts
+    window.scrollTo(0, 0);
+    
+    // Set page title
+    document.title = 'About Us - MCCT Industry | Masters of Industrial Construction';
+    
+    // Set meta description
+    const metaDescription = document.querySelector('meta[name="description"]');
+    if (metaDescription) {
+      metaDescription?.setAttribute('content', 
+        'Discover MCCT Industry\'s 30+ year journey in industrial construction excellence. Meet our leadership team, explore our certifications, and learn about our innovative approach to metallic construction.'
+      );
+    }
+  }, []);
+
+  return (
+    <div className="min-h-screen bg-white">
+      <Header />
+      {/* Main Content */}
+      <main className="pt-16 lg:pt-20">
+        {/* Hero Section */}
+        <HeroSection />
+        
+        {/* Company Story & Timeline */}
+        <CompanyStory />
+        
+        {/* Leadership Team */}
+        <LeadershipTeam />
+        
+        {/* Certifications Wall */}
+        <CertificationsWall />
+        
+        {/* Innovation Laboratory */}
+        <InnovationLab />
+      </main>
+      {/* Footer */}
+      <footer className="bg-slate-900 text-white py-16">
+        <div className="industrial-container">
+          <div className="grid lg:grid-cols-4 gap-8">
+            {/* Company Info */}
+            <div className="lg:col-span-2">
+              <div className="flex items-center space-x-3 mb-6">
+                <div className="w-12 h-12 bg-gradient-to-br from-accent to-primary rounded-lg flex items-center justify-center">
+                  <svg className="w-7 h-7 text-white" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M12 2L2 7v10c0 5.55 3.84 9.74 9 11 5.16-1.26 9-5.45 9-11V7l-10-5z"/>
+                    <path d="M8 11l2 2 4-4" stroke="currentColor" strokeWidth="2" fill="none"/>
+                  </svg>
+                </div>
+                <div>
+                  <h3 className="font-headline text-xl font-bold">MCCT Industry</h3>
+                  <p className="font-mono text-xs text-gray-400 tracking-wider">ENGINEERED EXCELLENCE</p>
+                </div>
+              </div>
+              
+              <p className="text-gray-300 leading-relaxed mb-6 max-w-md">
+                For over three decades, we've been engineering excellence in metallic industrial construction, 
+                building the backbone of industry with unwavering precision and reliability.
+              </p>
+              
+              <div className="flex items-center space-x-4">
+                <div className="text-center">
+                  <div className="text-2xl font-bold text-accent">30+</div>
+                  <div className="text-xs text-gray-400">Years</div>
+                </div>
+                <div className="text-center">
+                  <div className="text-2xl font-bold text-accent">500+</div>
+                  <div className="text-xs text-gray-400">Projects</div>
+                </div>
+                <div className="text-center">
+                  <div className="text-2xl font-bold text-accent">99.8%</div>
+                  <div className="text-xs text-gray-400">Safety</div>
+                </div>
+              </div>
+            </div>
+
+            {/* Quick Links */}
+            <div>
+              <h4 className="font-headline text-lg font-bold mb-4">Quick Links</h4>
+              <ul className="space-y-2">
+                {[
+                  { name: 'Our Services', href: '/services' },
+                  { name: 'Project Portfolio', href: '/projects' },
+                  { name: 'Innovation Lab', href: '/innovation' },
+                  { name: 'Contact Us', href: '/contact' }
+                ]?.map((link, index) => (
+                  <li key={index}>
+                    <a 
+                      href={link?.href}
+                      className="text-gray-300 hover:text-accent industrial-transition text-sm"
+                    >
+                      {link?.name}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            {/* Contact Info */}
+            <div>
+              <h4 className="font-headline text-lg font-bold mb-4">Contact Info</h4>
+              <div className="space-y-3">
+                <div className="text-sm text-gray-300">
+                  <div className="font-medium">Headquarters</div>
+                  <div>123 Industrial Avenue</div>
+                  <div>75001 Paris, France</div>
+                </div>
+                <div className="text-sm text-gray-300">
+                  <div className="font-medium">Phone</div>
+                  <div>+33 1 42 86 83 00</div>
+                </div>
+                <div className="text-sm text-gray-300">
+                  <div className="font-medium">Email</div>
+                  <div>info@mcct-industry.com</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Bottom Bar */}
+          <div className="border-t border-gray-700 mt-12 pt-8 flex flex-col md:flex-row justify-between items-center">
+            <div className="text-sm text-gray-400">
+              © {new Date()?.getFullYear()} MCCT Industry. All rights reserved.
+            </div>
+            <div className="flex items-center space-x-6 mt-4 md:mt-0">
+              <a href="#" className="text-sm text-gray-400 hover:text-accent industrial-transition">
+                Privacy Policy
+              </a>
+              <a href="#" className="text-sm text-gray-400 hover:text-accent industrial-transition">
+                Terms of Service
+              </a>
+              <a href="#" className="text-sm text-gray-400 hover:text-accent industrial-transition">
+                Cookie Policy
+              </a>
+            </div>
+          </div>
+        </div>
+      </footer>
+    </div>
+  );
+};
+
+export default About;

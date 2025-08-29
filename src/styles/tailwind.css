@@ -1,0 +1,190 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@400;500;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* Core System Colors */
+    --color-background: #FFFFFF; /* white */
+    --color-foreground: #2C3E50; /* slate-800 */
+    --color-border: #E1E8ED; /* gray-200 */
+    --color-input: #FFFFFF; /* white */
+    --color-ring: #E67E22; /* orange-600 */
+    --color-card: #FFFFFF; /* white */
+    --color-card-foreground: #2C3E50; /* slate-800 */
+    --color-popover: #FFFFFF; /* white */
+    --color-popover-foreground: #2C3E50; /* slate-800 */
+    --color-muted: #F8F9FA; /* gray-50 */
+    --color-muted-foreground: #7F8C8D; /* gray-500 */
+
+    /* Brand Colors */
+    --color-primary: #2C3E50; /* slate-800 */
+    --color-primary-foreground: #FFFFFF; /* white */
+    --color-secondary: #34495E; /* slate-700 */
+    --color-secondary-foreground: #FFFFFF; /* white */
+    --color-accent: #E67E22; /* orange-600 */
+    --color-accent-foreground: #FFFFFF; /* white */
+
+    /* Status Colors */
+    --color-success: #27AE60; /* green-600 */
+    --color-success-foreground: #FFFFFF; /* white */
+    --color-warning: #F39C12; /* yellow-500 */
+    --color-warning-foreground: #FFFFFF; /* white */
+    --color-error: #E74C3C; /* red-500 */
+    --color-error-foreground: #FFFFFF; /* white */
+    --color-destructive: #E74C3C; /* red-500 */
+    --color-destructive-foreground: #FFFFFF; /* white */
+
+    /* Text Colors */
+    --color-text-primary: #2C3E50; /* slate-800 */
+    --color-text-secondary: #7F8C8D; /* gray-500 */
+    --color-surface: #F8F9FA; /* gray-50 */
+
+    /* Border Radius */
+    --radius: 0.5rem;
+  }
+
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    font-family: 'Open Sans', sans-serif;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Roboto Condensed', sans-serif;
+    font-weight: 700;
+  }
+
+  .font-headline {
+    font-family: 'Roboto Condensed', sans-serif;
+  }
+
+  .font-body {
+    font-family: 'Open Sans', sans-serif;
+  }
+
+  .font-cta {
+    font-family: 'Montserrat', sans-serif;
+  }
+
+  .font-mono {
+    font-family: 'JetBrains Mono', monospace;
+  }
+}
+
+@layer components {
+  .industrial-shadow {
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+
+  .industrial-shadow-lg {
+    box-shadow: 0 8px 24px rgba(52, 73, 94, 0.15);
+  }
+
+  .industrial-hover {
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .industrial-hover:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(52, 73, 94, 0.15);
+  }
+
+  .metallic-overlay {
+    background: linear-gradient(135deg, rgba(189, 195, 199, 0.1) 0%, rgba(52, 73, 94, 0.05) 100%);
+  }
+
+  .precision-grid {
+    display: grid;
+    gap: 1.5rem;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  }
+
+  .industrial-border {
+    border: 1px solid rgba(44, 62, 80, 0.1);
+  }
+
+  .accent-border {
+    border: 2px solid var(--color-accent);
+  }
+
+  .parallax-container {
+    transform-style: preserve-3d;
+    will-change: transform;
+  }
+
+  .text-industrial {
+    color: var(--color-text-primary);
+  }
+
+  .text-industrial-secondary {
+    color: var(--color-text-secondary);
+  }
+
+  .bg-industrial {
+    background-color: var(--color-primary);
+  }
+
+  .bg-industrial-secondary {
+    background-color: var(--color-secondary);
+  }
+
+  .bg-surface {
+    background-color: var(--color-surface);
+  }
+}
+
+@layer utilities {
+  .animation-delay-200 {
+    animation-delay: 0.2s;
+  }
+
+  .animation-delay-400 {
+    animation-delay: 0.4s;
+  }
+
+  .animation-delay-600 {
+    animation-delay: 0.6s;
+  }
+
+  .transform-gpu {
+    transform: translateZ(0);
+    will-change: transform;
+  }
+
+  .industrial-spacing {
+    padding: 3.5rem 0;
+  }
+
+  .industrial-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1rem;
+  }
+
+  @media (min-width: 768px) {
+    .industrial-container {
+      padding: 0 2rem;
+    }
+  }
+
+  .industrial-transition {
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .hover-lift:hover {
+    transform: translateY(-4px);
+  }
+
+  .hover-scale:hover {
+    transform: scale(1.02);
+  }
+}
