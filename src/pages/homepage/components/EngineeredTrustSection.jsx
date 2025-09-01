@@ -116,15 +116,15 @@ const EngineeredTrustSection = () => {
           <div className="inline-flex items-center space-x-2 bg-success/10 rounded-full px-4 py-2 mb-6">
             <Icon name="Shield" size={16} className="text-success" />
             <span className="font-cta text-sm font-medium text-success uppercase tracking-wide">
-              Engineered Trust
+Une confiance technique
             </span>
           </div>
           <h2 className="font-headline text-4xl lg:text-5xl font-bold text-primary mb-6">
-            Safety, Quality & Reliability
+            Sécurité, Qualité & Fiabilité
           </h2>
           <p className="text-lg text-text-secondary max-w-3xl mx-auto leading-relaxed">
-            Our commitment to excellence is measured not just in successful projects, 
-            but in the trust we've built through consistent safety performance and quality delivery.
+            Notre engagement envers l'excellence se mesure non seulement par des projets réussis,
+            mais aussi par la confiance que nous avons bâtie grâce à une performance de sécurité constante et une livraison de qualité.
           </p>
         </div>
 
@@ -138,10 +138,10 @@ const EngineeredTrustSection = () => {
               {animatedStats?.safetyDays?.toLocaleString()}
             </div>
             <div className="font-cta text-sm text-text-secondary uppercase tracking-wide">
-              Safety Days
+              Jours de sécurité
             </div>
             <div className="font-cta text-xs text-success mt-1">
-              Without Lost Time Incident
+              Sans incident de perte de temps
             </div>
           </div>
 
@@ -153,10 +153,10 @@ const EngineeredTrustSection = () => {
               {animatedStats?.projectsCompleted?.toLocaleString()}
             </div>
             <div className="font-cta text-sm text-text-secondary uppercase tracking-wide">
-              Projects Completed
+              Projets terminés
             </div>
             <div className="font-cta text-xs text-accent mt-1">
-              On Time & Budget
+              À temps et dans le budget
             </div>
           </div>
 
@@ -168,10 +168,10 @@ const EngineeredTrustSection = () => {
               {animatedStats?.steelTonnage?.toLocaleString()}
             </div>
             <div className="font-cta text-sm text-text-secondary uppercase tracking-wide">
-              Tons Steel Installed
+              Ton d'acier installés
             </div>
             <div className="font-cta text-xs text-primary mt-1">
-              Precision Engineered
+              Ingénierie de Précision
             </div>
           </div>
 
@@ -183,10 +183,10 @@ const EngineeredTrustSection = () => {
               {animatedStats?.clientSatisfaction}%
             </div>
             <div className="font-cta text-sm text-text-secondary uppercase tracking-wide">
-              Client Satisfaction
+              Satisfaction Client
             </div>
             <div className="font-cta text-xs text-warning mt-1">
-              Verified Reviews
+              Avis Vérifiés
             </div>
           </div>
         </div>
@@ -200,7 +200,7 @@ const EngineeredTrustSection = () => {
                 <Icon name="Award" size={20} className="text-accent" />
               </div>
               <h3 className="font-headline text-2xl font-bold text-primary">
-                Industry Certifications
+                Certifications de l'industrie
               </h3>
             </div>
 
@@ -225,7 +225,7 @@ const EngineeredTrustSection = () => {
                       </p>
                       <div className="flex items-center space-x-2 text-xs text-text-secondary">
                         <Icon name="Calendar" size={12} />
-                        <span>Valid until: {new Date(cert.validUntil)?.toLocaleDateString()}</span>
+                        <span>Valide jusqu'au: {new Date(cert.validUntil)?.toLocaleDateString()}</span>
                       </div>
                     </div>
                   </div>
@@ -241,7 +241,7 @@ const EngineeredTrustSection = () => {
                 <Icon name="Shield" size={20} className="text-success" />
               </div>
               <h3 className="font-headline text-2xl font-bold text-primary">
-                Safety Performance
+                Performance de Sécurité
               </h3>
             </div>
 
@@ -283,11 +283,11 @@ const EngineeredTrustSection = () => {
                 <Icon name="AlertTriangle" size={20} className="text-success flex-shrink-0 mt-1" />
                 <div>
                   <h4 className="font-headline text-sm font-bold text-success mb-1">
-                    Zero Harm Commitment
+                    Engagement Zéro Harm
                   </h4>
                   <p className="text-xs text-text-secondary leading-relaxed">
-                    Every team member returns home safely every day. This is our unwavering commitment 
-                    and the foundation of everything we do at MCCT Industry.
+                    Chaque membre de l'équipe rentre chez lui en toute sécurité chaque jour. C'est notre engagement indéfectible
+                    et le fondement de tout ce que nous faisons chez MCCT Industry.
                   </p>
                 </div>
               </div>
@@ -298,9 +298,9 @@ const EngineeredTrustSection = () => {
         {/* Bottom Trust Statement */}
         <div className="text-center mt-16">
           <div className="max-w-4xl mx-auto">
-            <blockquote className="text-xl lg:text-2xl font-headline font-medium text-primary italic mb-6">
-              "Trust is built through consistent performance, transparent communication, 
-              and an unwavering commitment to safety and quality in every project we undertake."
+            <blockquote className="text-xl lg:text-2xl font-headline font-medium text-accent italic mb-6">
+              "La confiance se construit grâce à une performance constante, une communication transparente,
+              et un engagement indéfectible envers la sécurité et la qualité dans chaque projet que nous entreprenons."
             </blockquote>
             <div className="flex items-center justify-center space-x-4">
               <div className="w-12 h-12 bg-accent/20 rounded-full flex items-center justify-center">
@@ -308,7 +308,7 @@ const EngineeredTrustSection = () => {
               </div>
               <div className="text-left">
                 <div className="font-cta font-semibold text-primary">
-                  Jean-Pierre Dubois
+                  Mohammed Belkacem
                 </div>
                 <div className="font-cta text-sm text-text-secondary">
                   CEO & Founder, MCCT Industry

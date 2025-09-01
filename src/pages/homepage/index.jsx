@@ -5,18 +5,18 @@ import HeroSection from './components/HeroSection';
 import CapabilityMatrix from './components/CapabilityMatrix';
 import EngineeredTrustSection from './components/EngineeredTrustSection';
 import TestimonialCarousel from './components/TestimonialCarousel';
-import InnovationSpotlight from './components/InnovationSpotlight';
 import EmergencyContactSection from './components/EmergencyContactSection';
+import ProjectsSection from "./components/ProjectsSection";
 
 const Homepage = () => {
   return (
     <>
       <Helmet>
-        <title>MCCT Industry - Engineered Excellence in Industrial Construction</title>
-        <meta name="description" content="Leading metallic industrial construction authority specializing in structural steel, plant construction, and advanced welding technologies. 15+ years of zero-incident safety record." />
-        <meta name="keywords" content="industrial construction, structural steel, metallic fabrication, plant construction, welding technologies, MCCT Industry" />
-        <meta property="og:title" content="MCCT Industry - Engineered Excellence in Industrial Construction" />
-        <meta property="og:description" content="Your trusted partner for complex industrial construction projects with proven expertise in structural steel and advanced manufacturing facilities." />
+        <title>MCCT Industry - L'excellence technique dans la construction industrielle</title>
+        <meta name="description" content="Autorité de premier plan en construction industrielle métallique, spécialisée dans l'acier structurel, la construction d'installations et les technologies de soudage avancées. Plus de 15 ans d'expérience sans incident." />
+        <meta name="keywords" content="construction industrielle, acier structurel, fabrication métallique, construction d'installations, technologies de soudage, MCCT Industry" />
+        <meta property="og:title" content="MCCT Industry - L'excellence technique dans la construction industrielle" />
+        <meta property="og:description" content="Votre partenaire de confiance pour des projets de construction industrielle complexes, avec une expertise avérée dans l'acier structurel et les installations de fabrication avancées." />
         <meta property="og:type" content="website" />
         <link rel="canonical" href="/homepage" />
       </Helmet>
@@ -33,16 +33,17 @@ const Homepage = () => {
           {/* Engineered Trust - Safety & Quality Metrics */}
           <EngineeredTrustSection />
           
-          {/* Client Testimonial Carousel */}
-          <TestimonialCarousel />
-          
-          {/* Innovation Spotlight */}
-          <InnovationSpotlight />
-          
+
+
+          {/* Project Spotlight */}
+          <ProjectsSection />
+
+
           {/* Emergency Contact Section */}
           <EmergencyContactSection />
         </main>
-
+          {/* Client Testimonial Carousel */}
+          <TestimonialCarousel />
         {/* Footer */}
         <footer className="bg-primary text-white py-16">
           <div className="industrial-container">
@@ -62,13 +63,13 @@ const Homepage = () => {
                   </div>
                 </div>
                 <p className="text-white/80 leading-relaxed mb-6 max-w-md">
-                  Leading the future of industrial metallic construction with precision engineering, 
-                  unwavering safety standards, and innovative solutions for complex infrastructure projects.
+                  À la pointe de l'avenir de la construction métallique industrielle grâce à une ingénierie de précision, 
+                  des normes de sécurité inébranlables et des solutions innovantes pour des projets d'infrastructure complexes.
                 </p>
                 <div className="flex items-center space-x-4">
                   <div className="flex items-center space-x-2">
                     <div className="w-2 h-2 bg-success rounded-full animate-pulse"></div>
-                    <span className="text-success text-sm font-cta font-medium">24/7 Emergency Available</span>
+                    <span className="text-success text-sm font-cta font-medium">Disponible 24/7</span>
                   </div>
                 </div>
               </div>
@@ -77,10 +78,10 @@ const Homepage = () => {
               <div>
                 <h4 className="font-headline text-lg font-bold mb-4">Services</h4>
                 <ul className="space-y-2 text-white/80">
-                  <li><a href="/services" className="hover:text-accent transition-colors">Structural Steel</a></li>
-                  <li><a href="/services" className="hover:text-accent transition-colors">Industrial Fabrication</a></li>
-                  <li><a href="/services" className="hover:text-accent transition-colors">Plant Construction</a></li>
-                  <li><a href="/services" className="hover:text-accent transition-colors">Maintenance Services</a></li>
+                  <li><a href="/services" className="hover:text-accent transition-colors">Acier Structurel</a></li>
+                  <li><a href="/services" className="hover:text-accent transition-colors">Fabrication Industrielle</a></li>
+                  <li><a href="/services" className="hover:text-accent transition-colors">Construction d'Installations</a></li>
+                  <li><a href="/services" className="hover:text-accent transition-colors">Services de Maintenance</a></li>
                 </ul>
               </div>
 
@@ -94,7 +95,7 @@ const Homepage = () => {
                   </div>
                   <div className="flex items-center space-x-2">
                     <span className="text-error">🚨</span>
-                    <span className="text-sm font-medium text-error">Emergency: +33 1 42 86 24 7</span>
+                    <span className="text-sm font-medium text-error">Urgence: +33 1 42 86 24 7</span>
                   </div>
                   <div className="flex items-center space-x-2">
                     <span className="text-accent">✉️</span>
@@ -102,7 +103,7 @@ const Homepage = () => {
                   </div>
                   <div className="flex items-center space-x-2">
                     <span className="text-accent">📍</span>
-                    <span className="text-sm">Paris, Île-de-France</span>
+                    <span className="text-sm">13, rue Ahmed El Mejatti -ex Alpes , rés. les Alpes, 1° étg. 20330 Casablanca - Maroc</span>
                   </div>
                 </div>
               </div>
@@ -111,10 +112,10 @@ const Homepage = () => {
             {/* Bottom Bar */}
             <div className="border-t border-white/20 mt-12 pt-8 flex flex-col md:flex-row justify-between items-center">
               <div className="text-white/60 text-sm">
-                © {new Date()?.getFullYear()} MCCT Industry. All rights reserved.
+                © {new Date()?.getFullYear()} MCCT Industry. Tous droits réservés.
               </div>
               <div className="flex items-center space-x-6 mt-4 md:mt-0">
-                <span className="text-white/60 text-sm">ISO 9001 • OHSAS 18001 • EN 1090</span>
+                <span className="text-white/60 text-sm">Casablanca, Maroc</span>
               </div>
             </div>
           </div>

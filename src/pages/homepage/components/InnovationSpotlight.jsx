@@ -12,7 +12,7 @@ const InnovationSpotlight = () => {
       title: "Advanced Welding Technologies",
       subtitle: "Precision MIG/TIG Systems",
       description: "State-of-the-art automated welding systems with real-time quality monitoring and adaptive control for superior joint integrity and consistency.",
-      image: "https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=600&h=400&fit=crop",
+    image: "/assets/images/box1.jpg",
       category: "Technology",
       impact: "40% faster welding with 99.8% quality consistency",
       features: [
@@ -29,7 +29,7 @@ const InnovationSpotlight = () => {
       title: "Sustainable Steel Solutions",
       subtitle: "Green Construction Initiative",
       description: "Revolutionary approach to industrial construction using recycled steel and carbon-neutral processes, reducing environmental impact while maintaining structural excellence.",
-      image: "https://images.pexels.com/photos/236698/pexels-photo-236698.jpeg?w=600&h=400&fit=crop",
+    image: "/assets/images/tuyau.jpg",
       category: "Sustainability",
       impact: "60% reduction in carbon footprint",
       features: [
@@ -46,7 +46,7 @@ const InnovationSpotlight = () => {
       title: "Digital Twin Technology",
       subtitle: "Predictive Maintenance Systems",
       description: "Advanced IoT sensors and AI-powered analytics create digital replicas of structures, enabling predictive maintenance and optimized performance monitoring.",
-      image: "https://images.pixabay.com/photo/2016/11/29/06/15/adult-1867743_1280.jpg?w=600&h=400&fit=crop",
+    image: "/assets/images/stairs.jpg",
       category: "Digital Innovation",
       impact: "85% reduction in unplanned downtime",
       features: [
@@ -63,7 +63,7 @@ const InnovationSpotlight = () => {
       title: "Modular Construction Systems",
       subtitle: "Rapid Assembly Solutions",
       description: "Innovative modular steel systems designed for rapid on-site assembly, reducing construction time and minimizing site disruption for industrial facilities.",
-      image: "https://images.unsplash.com/photo-1581094794329-c8112a89af12?w=600&h=400&fit=crop",
+    image: "/assets/images/personel1.jpg",
       category: "Efficiency",
       impact: "50% faster project completion",
       features: [

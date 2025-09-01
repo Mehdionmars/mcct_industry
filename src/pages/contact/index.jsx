@@ -43,7 +43,8 @@ const ContactPage = () => {
           <LocationInfo />
           
           {/* Team Contacts */}
-          <TeamContacts />
+          
+          {/* <TeamContacts /> */}
         </main>
 
         {/* Footer */}

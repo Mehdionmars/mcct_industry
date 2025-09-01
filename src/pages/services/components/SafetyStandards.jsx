@@ -247,7 +247,7 @@ const SafetyStandards = () => {
               </div>
               <div className="text-center">
                 <div className="font-headline text-2xl font-bold text-primary mb-2">Coverage Area</div>
-                <div className="font-cta text-lg text-accent font-semibold">Pan-European</div>
+                <div className="font-cta text-lg text-accent font-semibold">Pan-MADopean</div>
                 <div className="text-sm text-text-secondary mt-1">Multi-location support</div>
               </div>
             </div>

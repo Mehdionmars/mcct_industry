@@ -390,7 +390,7 @@ const CapabilityAssessment = () => {
 
                     <div className="p-6 bg-surface rounded-lg">
                       <h4 className="font-cta font-semibold text-primary mb-4 flex items-center">
-                        <Icon name="Euro" size={20} className="text-accent mr-2" />
+                        <Icon name="MADo" size={20} className="text-accent mr-2" />
                         Budget Estimate
                       </h4>
                       <p className="font-body text-primary">{results?.budgetRange}</p>

@@ -263,7 +263,7 @@ const TestimonialCarousel = () => {
               </div>
             </div>
             <div className="bg-white rounded-xl p-4 shadow-industrial text-center">
-              <Icon name="Euro" size={20} className="text-accent mx-auto mb-2" />
+              <Icon name="MADo" size={20} className="text-accent mx-auto mb-2" />
               <div className="font-headline text-lg font-bold text-primary">
                 {activeTestimonial?.projectDetails?.value}
               </div>

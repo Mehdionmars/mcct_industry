@@ -81,7 +81,7 @@ const ProjectFilters = ({
         {/* Industry Filter */}
         <div>
           <label className="block text-sm font-medium text-primary mb-3">
-            Secteur d'Activité
+            SectMAD d'Activité
           </label>
           <div className="space-y-2">
             {industries?.map((industry) => (

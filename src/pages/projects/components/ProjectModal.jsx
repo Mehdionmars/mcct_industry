@@ -16,7 +16,7 @@ const ProjectModal = ({ project, isOpen, onClose, onVirtualTour }) => {
   const formatCurrency = (amount) => {
     return new Intl.NumberFormat('fr-FR', {
       style: 'currency',
-      currency: 'EUR',
+      currency: 'MAD',
       minimumFractionDigits: 0,
       maximumFractionDigits: 0
     })?.format(amount);
@@ -68,7 +68,7 @@ const ProjectModal = ({ project, isOpen, onClose, onVirtualTour }) => {
           </div>
 
           <div className="flex items-center space-x-2">
-            {project?.hasVirtualTour && (
+            {/* {project?.hasVirtualTour && (
               <Button
                 variant="outline"
                 size="sm"
@@ -79,7 +79,7 @@ const ProjectModal = ({ project, isOpen, onClose, onVirtualTour }) => {
               >
                 Visite 360°
               </Button>
-            )}
+            )} */}
             <button
               onClick={onClose}
               className="p-2 hover:bg-gray-100 rounded-lg transition-colors duration-200"
@@ -338,7 +338,7 @@ const ProjectModal = ({ project, isOpen, onClose, onVirtualTour }) => {
                   </div>
                 </div>
 
-                <div className="flex space-x-3">
+                {/* <div className="flex space-x-3">
                   <Button
                     variant="outline"
                     size="sm"
@@ -358,7 +358,7 @@ const ProjectModal = ({ project, isOpen, onClose, onVirtualTour }) => {
                   >
                     Discuter du Projet
                   </Button>
-                </div>
+                </div> */}
               </div>
             </div>
           </div>

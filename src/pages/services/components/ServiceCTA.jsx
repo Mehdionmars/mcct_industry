@@ -20,14 +20,14 @@ const ServiceCTA = () => {
       color: "bg-warning",
       hoverColor: "hover:bg-warning/90"
     },
-    {
-      title: "Technical Quote",
-      description: "Get detailed pricing for your industrial construction project",
-      icon: "Calculator",
-      action: "Request Quote",
-      color: "bg-success",
-      hoverColor: "hover:bg-success/90"
-    }
+    // {
+    //   title: "Technical Quote",
+    //   description: "Get detailed pricing for your industrial construction project",
+    //   icon: "Calculator",
+    //   action: "Request Quote",
+    //   color: "bg-success",
+    //   hoverColor: "hover:bg-success/90"
+    // }
   ];
 
   const quickStats = [
@@ -77,7 +77,7 @@ const ServiceCTA = () => {
           </div>
 
           {/* Contact Methods */}
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-16">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 mb-20">
             {contactMethods?.map((method, index) => (
               <div key={index} className="bg-white/10 backdrop-blur-sm rounded-xl p-8 text-center industrial-hover">
                 <div className={`w-16 h-16 ${method?.color} rounded-xl flex items-center justify-center mx-auto mb-6`}>
@@ -153,7 +153,7 @@ const ServiceCTA = () => {
           {/* Trust Indicators */}
           <div className="mt-16 text-center">
             <p className="text-white/60 font-body text-sm mb-6">
-              Trusted by leading industrial companies across Europe
+              Trusted by leading industrial companies across MADope
             </p>
             <div className="flex flex-wrap justify-center items-center gap-8 opacity-60">
               <div className="flex items-center space-x-2">

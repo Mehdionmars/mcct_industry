@@ -1,308 +1,149 @@
-import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
-import Icon from '../../../components/AppIcon';
-import Image from '../../../components/AppImage';
-import Button from '../../../components/ui/Button';
+import React from 'react';
 
-const HeroSection = () => {
-  const [currentSlide, setCurrentSlide] = useState(0);
-  const [isAutoPlaying, setIsAutoPlaying] = useState(true);
-
-  const heroProjects = [
-    {
-      id: 1,
-      title: "Advanced Manufacturing Complex",
-      subtitle: "Precision Steel Framework Installation",
-      description: "3,500 tons of structural steel for automotive manufacturing facility with zero safety incidents",
-      image: "https://images.unsplash.com/photo-1581094794329-c8112a89af12?w=1200&h=800&fit=crop",
-      metrics: {
-        tonnage: "3,500",
-        timeline: "8 months",
-        safety: "Zero incidents"
-      },
-      category: "Manufacturing"
-    },
-    {
-      id: 2,
-      title: "Industrial Plant Expansion",
-      subtitle: "Complex Structural Engineering",
-      description: "Multi-phase expansion project featuring advanced welding technologies and sustainable materials",
-      image: "https://images.pexels.com/photos/236698/pexels-photo-236698.jpeg?w=1200&h=800&fit=crop",
-      metrics: {
-        tonnage: "2,800",
-        timeline: "12 months",
-        safety: "OHSAS certified"
-      },
-      category: "Industrial"
-    },
-    {
-      id: 3,
-      title: "Energy Infrastructure Project",
-      subtitle: "Critical Infrastructure Development",
-      description: "High-precision metallic construction for renewable energy facility with advanced corrosion protection",
-      image: "https://images.pixabay.com/photo/2017/08/10/02/05/tiles-shapes-2617112_1280.jpg?w=1200&h=800&fit=crop",
-      metrics: {
-        tonnage: "4,200",
-        timeline: "10 months",
-        safety: "ISO 9001"
-      },
-      category: "Energy"
-    }
-  ];
-
-  useEffect(() => {
-    if (!isAutoPlaying) return;
-    
-    const interval = setInterval(() => {
-      setCurrentSlide((prev) => (prev + 1) % heroProjects?.length);
-    }, 6000);
-
-    return () => clearInterval(interval);
-  }, [isAutoPlaying, heroProjects?.length]);
-
-  const goToSlide = (index) => {
-    setCurrentSlide(index);
-    setIsAutoPlaying(false);
-    setTimeout(() => setIsAutoPlaying(true), 10000);
+const Icon = ({ name, size = 24, className = "" }) => {
+  const icons = {
+    Lightbulb: (
+      <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}>
+        <path d="m15 14 5-5-5-5"/>
+        <path d="M9 9.5c0 1.5-1.5 3-3 3s-3-1.5-3-3 1.5-3 3-3 3 1.5 3 3"/>
+        <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v10z"/>
+      </svg>
+    ),
+    ArrowRight: (
+      <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}>
+        <path d="m9 18 6-6-6-6"/>
+      </svg>
+    ),
+    Play: (
+      <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}>
+        <polygon points="5,3 19,12 5,21"/>
+      </svg>
+    ),
+    Zap: (
+      <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}>
+        <polygon points="13,2 3,14 12,14 11,22 21,10 12,10 13,2"/>
+      </svg>
+    ),
+    Cpu: (
+      <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}>
+        <rect width="16" height="16" x="4" y="4" rx="2"/>
+        <rect width="6" height="6" x="9" y="9" rx="1"/>
+        <path d="M15 2v2"/>
+        <path d="M15 20v2"/>
+        <path d="M2 15h2"/>
+        <path d="M2 9h2"/>
+        <path d="M20 15h2"/>
+        <path d="M20 9h2"/>
+        <path d="M9 2v2"/>
+        <path d="M9 20v2"/>
+      </svg>
+    ),
+    ChevronDown: (
+      <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}>
+        <path d="m6 9 6 6 6-6"/>
+      </svg>
+    )
   };
+  
+  return icons[name] || null;
+};
 
-  const nextSlide = () => {
-    setCurrentSlide((prev) => (prev + 1) % heroProjects?.length);
-    setIsAutoPlaying(false);
-    setTimeout(() => setIsAutoPlaying(true), 10000);
+const Button = ({ children, variant = "default", size = "md", className = "", iconName, iconPosition = "right", ...props }) => {
+  const baseClasses = "inline-flex items-center justify-center font-medium transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2";
+  
+  const variants = {
+    default: "bg-blue-600 hover:bg-blue-700 text-white focus:ring-blue-500",
+    outline: "border border-gray-300 bg-transparent hover:bg-gray-50 text-gray-700 focus:ring-blue-500"
   };
-
-  const prevSlide = () => {
-    setCurrentSlide((prev) => (prev - 1 + heroProjects?.length) % heroProjects?.length);
-    setIsAutoPlaying(false);
-    setTimeout(() => setIsAutoPlaying(true), 10000);
+  
+  const sizes = {
+    md: "px-4 py-2 text-sm rounded-md",
+    lg: "px-6 py-3 text-base rounded-lg"
   };
-
-  const currentProject = heroProjects?.[currentSlide];
-
+  
+  const icon = iconName ? <Icon name={iconName} size={size === "lg" ? 20 : 16} /> : null;
+  
   return (
-    <section className="relative min-h-screen bg-gradient-to-br from-primary via-secondary to-primary overflow-hidden">
-      {/* Background Image with Overlay */}
-      <div className="absolute inset-0">
-        <div className="relative w-full h-full">
-          <Image
-            src={currentProject?.image}
-            alt={currentProject?.title}
-            className="w-full h-full object-cover transition-all duration-1000"
-          />
-          <div className="absolute inset-0 bg-gradient-to-r from-primary/90 via-primary/70 to-transparent"></div>
-          <div className="absolute inset-0 bg-gradient-to-t from-primary/80 via-transparent to-transparent"></div>
-        </div>
-      </div>
-      {/* Content Container */}
-      <div className="relative z-10 industrial-container min-h-screen flex items-center">
-        <div className="grid lg:grid-cols-2 gap-12 items-center w-full py-20">
-          {/* Left Content */}
-          <div className="text-white space-y-8">
-            {/* Category Badge */}
-            <div className="inline-flex items-center space-x-2 bg-accent/20 backdrop-blur-sm border border-accent/30 rounded-full px-4 py-2">
-              <Icon name="Building" size={16} className="text-accent" />
-              <span className="font-cta text-sm font-medium text-accent">
-                {currentProject?.category} Excellence
-              </span>
-            </div>
+    <button className={`${baseClasses} ${variants[variant]} ${sizes[size]} ${className}`} {...props}>
+      {icon && iconPosition === "left" && <span className="mr-2">{icon}</span>}
+      {children}
+      {icon && iconPosition === "right" && <span className="ml-2">{icon}</span>}
+    </button>
+  );
+};
 
-            {/* Main Headlines */}
+const InnovationHero = () => {
+  return (
+    <section className="relative min-h-screen overflow-hidden bg-gray-100">
+      {/* Background Image */}
+      <div
+        className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+        style={{ backgroundImage: `url('/assets/images/first.jpg')` }}
+      />
+
+      {/* Overlay Pattern (optionnel) */}
+      <div className="absolute inset-0 opacity-10">
+        <div className="absolute top-20 left-10 w-32 h-32 border-2 border-white rotate-45"></div>
+        <div className="absolute top-40 right-20 w-24 h-24 border border-white rotate-12"></div>
+        <div className="absolute bottom-40 left-1/4 w-16 h-16 border-2 border-orange-500 rotate-45"></div>
+        <div className="absolute bottom-20 right-1/3 w-20 h-20 border border-orange-500 rotate-12"></div>
+      </div>
+
+      <div className="relative container mx-auto px-4 pt-24 lg:pt-32 pb-16">
+        <div className="grid lg:grid-cols-2 gap-12 items-center">
+          {/* Left side can remain empty if you want the image visible */}
+          <div className="hidden lg:block" />
+
+          {/* Right side content with white mirrored background */}
+          <div className="bg-white rounded-xl p-12 shadow-2xl space-y-8">
             <div className="space-y-4">
-              <h1 className="font-headline text-4xl lg:text-6xl font-bold leading-tight">
-                {currentProject?.title}
+              <h1 className="text-4xl lg:text-5xl font-bold text-gray-900 leading-tight">
+                Constructeur de
+                <span className="block text-orange-500">bâtiment métallique</span>
               </h1>
-              <h2 className="font-headline text-xl lg:text-2xl font-medium text-white/90">
-                {currentProject?.subtitle}
-              </h2>
-              <p className="text-lg text-white/80 max-w-xl leading-relaxed">
-                {currentProject?.description}
+
+              <p className="text-lg text-gray-700 leading-relaxed max-w-2xl">
+                Entreprise de charpente métallique implantée à Casablanca depuis 2023, MCCT Industry est spécialisée dans la construction de bâtiments industriels pour de nombreux secteurs d'activité.
               </p>
             </div>
 
-            {/* Project Metrics */}
-            <div className="grid grid-cols-3 gap-6">
-              <div className="text-center lg:text-left">
-                <div className="font-headline text-2xl lg:text-3xl font-bold text-accent">
-                  {currentProject?.metrics?.tonnage}
-                </div>
-                <div className="font-cta text-sm text-white/70 uppercase tracking-wide">
-                  Tons Steel
-                </div>
-              </div>
-              <div className="text-center lg:text-left">
-                <div className="font-headline text-2xl lg:text-3xl font-bold text-accent">
-                  {currentProject?.metrics?.timeline}
-                </div>
-                <div className="font-cta text-sm text-white/70 uppercase tracking-wide">
-                  Completion
-                </div>
-              </div>
-              <div className="text-center lg:text-left">
-                <div className="font-headline text-2xl lg:text-3xl font-bold text-success">
-                  100%
-                </div>
-                <div className="font-cta text-sm text-white/70 uppercase tracking-wide">
-                  Safety Record
-                </div>
-              </div>
-            </div>
-
-            {/* CTA Buttons */}
             <div className="flex flex-col sm:flex-row gap-4">
-              <Link to="/projects">
-                <Button
-                  variant="default"
-                  size="lg"
-                  className="bg-accent hover:bg-accent/90 text-white font-cta font-semibold shadow-industrial-lg w-full sm:w-auto"
-                  iconName="ArrowRight"
-                  iconPosition="right"
-                >
-                  Explore Our Projects
-                </Button>
-              </Link>
-              <Link to="/contact">
-                <Button
-                  variant="outline"
-                  size="lg"
-                  className="border-white/30 text-white hover:bg-white/10 font-cta font-medium w-full sm:w-auto"
-                  iconName="Phone"
-                  iconPosition="left"
-                >
-                  Get Consultation
-                </Button>
-              </Link>
+              <Button
+                variant="default"
+                size="lg"
+                className="bg-orange-500 hover:bg-orange-600 text-white font-semibold shadow-lg"
+                iconName="ArrowRight"
+                iconPosition="right"
+              >
+                Faites nous part de votre projet
+              </Button>
             </div>
 
-            {/* Trust Indicators */}
-            <div className="flex items-center space-x-6 pt-4">
-              <div className="flex items-center space-x-2">
-                <Icon name="Shield" size={20} className="text-success" />
-                <span className="font-cta text-sm text-white/80">ISO 9001 Certified</span>
+            {/* Stats */}
+            <div className="grid grid-cols-3 gap-10 pt-8 border-t border-gray-200">
+              <div className="text-center">
+                <div className="text-3xl font-bold text-orange-500">50+</div>
+                <div className="text-sm text-gray-500 font-mono">R&D Projects</div>
               </div>
-              <div className="flex items-center space-x-2">
-                <Icon name="Award" size={20} className="text-success" />
-                <span className="font-cta text-sm text-white/80">OHSAS 18001</span>
+              <div className="text-center">
+                <div className="text-3xl font-bold text-orange-500">15</div>
+                <div className="text-sm text-gray-500 font-mono">Tech Partners</div>
               </div>
-              <div className="flex items-center space-x-2">
-                <Icon name="Clock" size={20} className="text-accent" />
-                <span className="font-cta text-sm text-white/80">24/7 Emergency</span>
-              </div>
-            </div>
-          </div>
-
-          {/* Right Content - Project Showcase */}
-          <div className="hidden lg:block">
-            <div className="relative">
-              {/* Main Project Card */}
-              <div className="bg-white/10 backdrop-blur-md rounded-2xl p-8 border border-white/20 shadow-industrial-lg">
-                <div className="space-y-6">
-                  <div className="flex items-center justify-between">
-                    <h3 className="font-headline text-xl font-bold text-white">
-                      Project Highlights
-                    </h3>
-                    <div className="flex items-center space-x-2">
-                      <div className="w-2 h-2 bg-success rounded-full animate-pulse"></div>
-                      <span className="font-cta text-sm text-success">Active Project</span>
-                    </div>
-                  </div>
-
-                  {/* Technical Specifications */}
-                  <div className="grid grid-cols-2 gap-4">
-                    <div className="bg-white/5 rounded-lg p-4">
-                      <div className="flex items-center space-x-2 mb-2">
-                        <Icon name="Zap" size={16} className="text-accent" />
-                        <span className="font-cta text-sm text-white/70">Welding Tech</span>
-                      </div>
-                      <div className="font-headline text-lg font-bold text-white">
-                        Advanced MIG/TIG
-                      </div>
-                    </div>
-                    <div className="bg-white/5 rounded-lg p-4">
-                      <div className="flex items-center space-x-2 mb-2">
-                        <Icon name="Shield" size={16} className="text-success" />
-                        <span className="font-cta text-sm text-white/70">Safety Rating</span>
-                      </div>
-                      <div className="font-headline text-lg font-bold text-success">
-                        Zero Incidents
-                      </div>
-                    </div>
-                  </div>
-
-                  {/* Progress Indicators */}
-                  <div className="space-y-3">
-                    <div className="flex justify-between items-center">
-                      <span className="font-cta text-sm text-white/70">Project Progress</span>
-                      <span className="font-cta text-sm font-medium text-white">85%</span>
-                    </div>
-                    <div className="w-full bg-white/10 rounded-full h-2">
-                      <div className="bg-accent h-2 rounded-full transition-all duration-1000" style={{width: '85%'}}></div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              {/* Floating Stats */}
-              <div className="absolute -top-4 -right-4 bg-accent rounded-xl p-4 shadow-industrial">
-                <div className="text-center">
-                  <div className="font-headline text-2xl font-bold text-white">15+</div>
-                  <div className="font-cta text-xs text-white/90 uppercase tracking-wide">Years</div>
-                </div>
+              <div className="text-center">
+                <div className="text-3xl font-bold text-orange-500">98%</div>
+                <div className="text-sm text-gray-500 font-mono">Efficiency Gain</div>
               </div>
             </div>
           </div>
         </div>
       </div>
-      {/* Navigation Controls */}
-      <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-20">
-        <div className="flex items-center space-x-4">
-          {/* Slide Indicators */}
-          <div className="flex space-x-2">
-            {heroProjects?.map((_, index) => (
-              <button
-                key={index}
-                onClick={() => goToSlide(index)}
-                className={`w-3 h-3 rounded-full transition-all duration-300 ${
-                  index === currentSlide 
-                    ? 'bg-accent scale-125' :'bg-white/30 hover:bg-white/50'
-                }`}
-                aria-label={`Go to slide ${index + 1}`}
-              />
-            ))}
-          </div>
 
-          {/* Navigation Arrows */}
-          <div className="flex space-x-2 ml-6">
-            <button
-              onClick={prevSlide}
-              className="w-10 h-10 bg-white/10 backdrop-blur-sm border border-white/20 rounded-full flex items-center justify-center text-white hover:bg-white/20 transition-all duration-200"
-              aria-label="Previous slide"
-            >
-              <Icon name="ChevronLeft" size={20} />
-            </button>
-            <button
-              onClick={nextSlide}
-              className="w-10 h-10 bg-white/10 backdrop-blur-sm border border-white/20 rounded-full flex items-center justify-center text-white hover:bg-white/20 transition-all duration-200"
-              aria-label="Next slide"
-            >
-              <Icon name="ChevronRight" size={20} />
-            </button>
-          </div>
-        </div>
-      </div>
       {/* Scroll Indicator */}
-      <div className="absolute bottom-8 right-8 z-20">
-        <div className="flex flex-col items-center space-y-2 text-white/60">
-          <span className="font-cta text-xs uppercase tracking-wide transform rotate-90 origin-center">
-            Scroll
-          </span>
-          <div className="w-px h-8 bg-white/30">
-            <div className="w-px h-4 bg-accent animate-pulse"></div>
-          </div>
-        </div>
+      <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce">
+        <Icon name="ChevronDown" size={24} className="text-gray-900" />
       </div>
     </section>
   );
 };
 
-export default HeroSection;
+export default InnovationHero;

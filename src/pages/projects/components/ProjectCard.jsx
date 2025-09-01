@@ -85,7 +85,7 @@ const ProjectCard = ({ project, onViewDetails, onVirtualTour }) => {
           </div>
         </div>
 
-        {/* Virtual Tour Badge */}
+        {/* Virtual Tour Badge
         {project?.hasVirtualTour && (
           <div className="absolute bottom-4 right-4">
             <button
@@ -96,7 +96,7 @@ const ProjectCard = ({ project, onViewDetails, onVirtualTour }) => {
               <Icon name="Camera" size={16} />
             </button>
           </div>
-        )}
+        )} */}
       </div>
       {/* Project Content */}
       <div className="p-6">

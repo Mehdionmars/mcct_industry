@@ -5,37 +5,37 @@ import Image from '../../../components/AppImage';
 const CompanyStory = () => {
   const milestones = [
     {
-      year: "1993",
-      title: "Foundation & First Steps",
-      description: "MCCT Industry was founded with a vision to revolutionize industrial construction through precision engineering and unwavering commitment to quality.",
+      year: "Fondée en",
+      title: "2023",
+      description: "Depuis sa création en 2023, la société MCCT Industry s'est imposée comme un leader dans le domaine de la métallurgie, de la serrurerie et de la fumisterie. Forte d'une expérience solide et d'un engagement envers l'excellence, notre entreprise offre des solutions métallurgiques innovantes et sur mesure pour répondre aux besoins spécifiques de nos clients.",
       image: "https://images.unsplash.com/photo-1504307651254-35680f356dfd?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80",
       icon: "Building"
     },
     {
-      year: "2001",
-      title: "Technology Integration",
-      description: "Pioneered the use of advanced welding technologies and computer-aided design systems, setting new industry standards for precision.",
+      year: "Expertise",
+      title: "",
+      description: "Chez MCCT Industry, nous combinons une expertise technique approfondie avec une créativité sans faille pour concevoir, fabriquer et installer une large gamme de produits métalliques. Que ce soit des structures métalliques complexes, des équipements industriels sur mesure, des systèmes de ventilation ou des solutions de sécurité, notre équipe expérimentée est prête à relever les défis les plus exigeants.",
       image: "https://images.unsplash.com/photo-1581092918056-0c4c3acd3789?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80",
       icon: "Cpu"
     },
     {
-      year: "2010",
-      title: "Sustainability Leadership",
-      description: "Launched comprehensive green building initiatives, becoming one of the first industrial contractors to achieve carbon-neutral operations.",
+      year: "Qualité et Innovation",
+      title: "",
+      description: "Lancement d'initiatives de construction écologique complètes, devenant l'un des premiers entrepreneurs industriels à atteindre des opérations neutres en carbone.",
       image: "https://images.unsplash.com/photo-1497435334941-8c899ee9e8e9?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80",
       icon: "Leaf"
     },
     {
-      year: "2018",
-      title: "Digital Transformation",
-      description: "Implemented IoT sensors and real-time monitoring systems across all projects, enhancing safety and efficiency by 40%.",
+      year: "Service Clientèle de Premier Ordre",
+      title: "",
+      description: "Chez MCCT Industry, nous plaçons nos clients au centre de nos préoccupations. Nous travaillons en étroite collaboration avec chaque client pour comprendre leurs besoins uniques et leur fournir des solutions personnalisées qui dépassent leurs attentes. Notre équipe dévouée est là pour vous accompagner à chaque étape du processus, de la conception à l'installation et au-delà.",
       image: "https://images.unsplash.com/photo-1518709268805-4e9042af2176?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80",
       icon: "Smartphone"
     },
     {
-      year: "2025",
-      title: "Future Vision",
-      description: "Continuing to lead the industry with AI-powered project management and sustainable construction practices for the next generation.",
+      year: "Engagement envers l'Environnement et la Sécurité",
+      title: "",
+      description: "Nous sommes conscients de notre responsabilité envers l'environnement et la sécurité de nos employés et de nos clients. C'est pourquoi nous nous engageons à respecter les normes les plus strictes en matière de santé, de sécurité et d'environnement dans toutes nos opérations. Que vous ayez besoin d'une solution métallurgique sur mesure ou que vous souhaitiez en savoir plus sur nos services, n'hésitez pas à nous contacter. Chez MCCT Industry, nous sommes là pour transformer vos idées en réalité.",
       image: "https://images.unsplash.com/photo-1581094794329-c8112a89af12?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80",
       icon: "Rocket"
     }
@@ -132,30 +132,30 @@ const CompanyStory = () => {
         {/* Company Values */}
         <div className="mt-20 lg:mt-32 text-center">
           <h3 className="font-headline text-2xl lg:text-3xl font-bold text-primary mb-12">
-            Our Core Values Drive Everything We Do
+            Nos valeurs fondamentales guident toutes nos actions
           </h3>
           
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
             {[
               {
                 icon: "Shield",
-                title: "Safety First",
-                description: "Zero-compromise approach to workplace safety and project security"
+                title: "La sécurité avant tout",
+                description: "Approche sans compromis en matière de sécurité au travail et de sécurité des projets"
               },
               {
                 icon: "Award",
-                title: "Quality Excellence",
-                description: "Exceeding industry standards through meticulous attention to detail"
+                title: "Qualité Excellence",
+                description: "Dépasser les normes de l'industrie grâce à une attention méticuleuse aux détails"
               },
               {
                 icon: "Users",
-                title: "Team Collaboration",
-                description: "Fostering partnerships that create extraordinary results"
+                title: "Collaboration",
+                description: "Favoriser des partenariats qui créent des résultats extraordinaires"
               },
               {
                 icon: "Lightbulb",
                 title: "Innovation",
-                description: "Continuously advancing construction technology and methods"
+                description: "Faire progresser continuellement la technologie et les méthodes de construction"
               }
             ]?.map((value, index) => (
               <div key={index} className="text-center group">

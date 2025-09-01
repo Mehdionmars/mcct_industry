@@ -1,21 +1,45 @@
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import Icon from '../../../components/AppIcon';
 import Button from '../../../components/ui/Button';
 
 const ServiceCard = ({ service, isExpanded, onToggle }) => {
   const [activeTab, setActiveTab] = useState('overview');
+  const cardRef = useRef(null);
+
+  // Hook pour gérer le clic en dehors du composant
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (cardRef.current && !cardRef.current.contains(event.target) && isExpanded) {
+        onToggle(); // Ferme le card si on clique en dehors et qu'il est ouvert
+      }
+    };
+
+    // Ajoute l'event listener seulement si le card est ouvert
+    if (isExpanded) {
+      document.addEventListener('mousedown', handleClickOutside);
+    }
+
+    // Nettoie l'event listener
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, [isExpanded, onToggle]);
 
   const tabs = [
     { id: 'overview', label: 'Overview', icon: 'Eye' },
     { id: 'process', label: 'Process', icon: 'GitBranch' },
     { id: 'specs', label: 'Specifications', icon: 'FileText' },
-    { id: 'projects', label: 'Projects', icon: 'Building' }
+    { id: 'projects', label: 'Projects', icon: 'Building' },
+    { id: 'gallery', label: 'Gallery', icon: 'Image' }
   ];
 
   return (
-    <div className={`bg-white rounded-xl shadow-industrial border border-gray-200 overflow-hidden transition-all duration-500 ${
-      isExpanded ? 'col-span-full' : ''
-    }`}>
+    <div 
+      ref={cardRef}
+      className={`bg-white rounded-xl shadow-industrial border border-gray-200 overflow-hidden transition-all duration-500 ${
+        isExpanded ? 'col-span-full' : ''
+      }`}
+    >
       {/* Card Header */}
       <div className="p-6 lg:p-8">
         <div className="flex items-start justify-between mb-6">
@@ -184,6 +208,25 @@ const ServiceCard = ({ service, isExpanded, onToggle }) => {
                 </div>
               </div>
             )}
+            
+            {/* Gallery Tab */}
+            {activeTab === 'gallery' && (
+              <div className="space-y-6">
+                <h4 className="font-headline text-xl font-bold text-primary mb-6">Gallery</h4>
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                  {service?.gallery?.map((image, index) => (
+                    <div key={index} className="overflow-hidden rounded-lg">
+                      <img
+                        src={image.src}
+                        alt={image.alt}
+                        className="w-full h-48 object-cover transition-transform duration-300 hover:scale-105"
+                      />
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
+
           </div>
 
           {/* Action Footer */}

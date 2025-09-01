@@ -38,10 +38,10 @@ const About = () => {
         <LeadershipTeam />
         
         {/* Certifications Wall */}
-        <CertificationsWall />
+        {/* <CertificationsWall /> */}
         
         {/* Innovation Laboratory */}
-        <InnovationLab />
+        {/* <InnovationLab /> */}
       </main>
       {/* Footer */}
       <footer className="bg-slate-900 text-white py-16">

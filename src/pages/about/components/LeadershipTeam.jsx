@@ -75,18 +75,18 @@ const LeadershipTeam = () => {
               <Icon name="Users" size={24} className="text-white" />
             </div>
             <span className="font-mono text-accent text-sm tracking-wider uppercase">
-              Leadership Team
+              Équipe de direction
             </span>
           </div>
           
           <h2 className="font-headline text-3xl lg:text-5xl font-bold text-primary mb-6">
-            Meet the Visionaries Behind
-            <span className="block text-accent">MCCT's Success</span>
+            Rencontrez les visionnaires à l'origine
+            <span className="block text-accent">du succès de MCCT</span>
           </h2>
           
           <p className="text-lg text-gray-600 leading-relaxed">
-            Our leadership team combines decades of industry experience with innovative thinking, 
-            driving MCCT Industry toward a future of engineering excellence and sustainable construction.
+            Notre équipe de direction combine des décennies d'expérience dans l'industrie avec une pensée innovante,
+            propulsant MCCT Industry vers un avenir d'excellence en ingénierie et de construction durable.
           </p>
         </div>
 
@@ -182,14 +182,14 @@ const LeadershipTeam = () => {
                 <div className="grid lg:grid-cols-2 gap-8">
                   {/* Bio */}
                   <div>
-                    <h4 className="font-headline text-lg font-bold text-primary mb-4">Biography</h4>
+                    <h4 className="font-headline text-lg font-bold text-primary mb-4">Biographie</h4>
                     <p className="text-gray-600 leading-relaxed mb-6">
                       {selectedMember?.bio}
                     </p>
                     
                     {/* Contact */}
                     <div className="bg-surface p-4 rounded-lg">
-                      <h5 className="font-cta font-semibold text-primary mb-3">Contact Information</h5>
+                      <h5 className="font-cta font-semibold text-primary mb-3">Informations de contact</h5>
                       <div className="space-y-2">
                         <div className="flex items-center space-x-3">
                           <Icon name="Mail" size={16} className="text-accent" />
@@ -206,7 +206,7 @@ const LeadershipTeam = () => {
                   {/* Expertise & Certifications */}
                   <div className="space-y-6">
                     <div>
-                      <h4 className="font-headline text-lg font-bold text-primary mb-4">Core Expertise</h4>
+                      <h4 className="font-headline text-lg font-bold text-primary mb-4">Compétences clés</h4>
                       <div className="flex flex-wrap gap-2">
                         {selectedMember?.expertise?.map((skill, index) => (
                           <span
@@ -240,15 +240,15 @@ const LeadershipTeam = () => {
         {/* Team Stats */}
         <div className="bg-white rounded-2xl p-8 industrial-shadow">
           <h3 className="font-headline text-2xl font-bold text-primary text-center mb-8">
-            Our Team by the Numbers
+Notre équipe en chiffres
           </h3>
           
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-8">
             {[
-              { number: "85+", label: "Team Members", icon: "Users" },
-              { number: "150+", label: "Combined Years", icon: "Clock" },
+              { number: "85+", label: "Membres de l'équipe", icon: "Users" },
+              { number: "150+", label: "Années combinées", icon: "Clock" },
               { number: "45+", label: "Certifications", icon: "Award" },
-              { number: "12", label: "Specializations", icon: "Settings" }
+              { number: "12", label: "Spécialisations", icon: "Settings" }
             ]?.map((stat, index) => (
               <div key={index} className="text-center">
                 <div className="w-12 h-12 bg-accent rounded-lg flex items-center justify-center mx-auto mb-3">

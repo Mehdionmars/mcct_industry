@@ -9,8 +9,8 @@ const VirtualTourModal = ({ project, isOpen, onClose }) => {
   if (!isOpen || !project) return null;
 
   const tourViews = [
-    { id: 'exterior', label: 'Vue Extérieure', icon: 'Building' },
-    { id: 'interior', label: 'Vue Intérieure', icon: 'Home' },
+    { id: 'exterior', label: 'Vue ExtériMADe', icon: 'Building' },
+    { id: 'interior', label: 'Vue IntériMADe', icon: 'Home' },
     { id: 'aerial', label: 'Vue Aérienne', icon: 'Plane' },
     { id: 'technical', label: 'Zones Techniques', icon: 'Settings' }
   ];
@@ -21,9 +21,9 @@ const VirtualTourModal = ({ project, isOpen, onClose }) => {
 
   // Mock 360° tour URLs - in real implementation, these would be actual tour URLs
   const getTourUrl = (view) => {
-    const baseUrl = "https://www.google.com/maps/embed";
+    const basMADl = "https://www.google.com/maps/embed";
     const coords = project?.coordinates || { lat: 48.8566, lng: 2.3522 }; // Default to Paris
-    return `${baseUrl}?pb=!1m18!1m12!1m3!1d2624.9916256937595!2d${coords?.lng}!3d${coords?.lat}!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zNDjCsDUxJzI0LjAiTiAywrAyMScwNy45IkU!5e0!3m2!1sfr!2sfr!4v1640995200000!5m2!1sfr!2sfr`;
+    return `${basMADl}?pb=!1m18!1m12!1m3!1d2624.9916256937595!2d${coords?.lng}!3d${coords?.lat}!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zNDjCsDUxJzI0LjAiTiAywrAyMScwNy45IkU!5e0!3m2!1sfr!2sfr!4v1640995200000!5m2!1sfr!2sfr`;
   };
 
   return (
@@ -32,7 +32,7 @@ const VirtualTourModal = ({ project, isOpen, onClose }) => {
         {/* Header */}
         <div className="flex items-center justify-between p-6 border-b border-gray-200 bg-gradient-to-r from-primary to-secondary">
           <div className="flex items-center space-x-4">
-            <div className="w-12 h-12 bg-white/20 rounded-lg flex items-center justify-center">
+            {/* <div className="w-12 h-12 bg-white/20 rounded-lg flex items-center justify-center">
               <Icon name="Camera" size={24} className="text-white" />
             </div>
             <div>
@@ -42,7 +42,7 @@ const VirtualTourModal = ({ project, isOpen, onClose }) => {
               <p className="text-white/80 text-sm">
                 {project?.title} - {project?.location}
               </p>
-            </div>
+            </div> */}
           </div>
 
           <div className="flex items-center space-x-3">
@@ -75,7 +75,7 @@ const VirtualTourModal = ({ project, isOpen, onClose }) => {
           </div>
         </div>
 
-        {/* Tour Content */}
+        Tour Content
         <div className="relative h-[calc(95vh-120px)] bg-gray-900">
           {/* Loading Overlay */}
           {isLoading && (
@@ -92,7 +92,7 @@ const VirtualTourModal = ({ project, isOpen, onClose }) => {
             </div>
           )}
 
-          {/* 360° Tour Iframe */}
+          360° Tour Iframe
           <iframe
             src={getTourUrl(currentView)}
             className="w-full h-full border-0"

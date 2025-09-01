@@ -9,71 +9,71 @@ const CapabilityMatrix = () => {
   const capabilities = [
     {
       id: 1,
-      title: "Structural Steel",
-      subtitle: "Heavy Industrial Framework",
-      description: "Complex steel framework installations for manufacturing facilities, warehouses, and industrial complexes with precision engineering.",
+      title: "Acier de construction",
+      subtitle: "Structure industrielle lourde",
+      description: "Installations complexes de charpentes métalliques pour les installations de fabrication, entrepôts et complexes industriels avec ingénierie de précision.",
       icon: "Building",
-      image: "https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=600&h=400&fit=crop",
-      sectors: ["Manufacturing", "Automotive", "Aerospace", "Energy"],
+    image: "/assets/images/box.jpg",
+      sectors: ["Fabrication", "Automobile", "Aérospatiale", "Énergie"],
       specifications: [
-        "Up to 5,000 tons capacity",
-        "Advanced welding technologies",
-        "Seismic-resistant design",
-        "Corrosion protection systems"
+        "Capacité jusqu'à 5 000 tonnes",
+        "Technologies de soudage avancées",
+        "Conception résistante aux séismes",
+        "Systèmes de protection contre la corrosion"
       ],
-      projects: "150+ completed",
-      safety: "Zero incidents in 2024"
+      projects: "150+ réalisés",
+      safety: "Zéro incident en 2024"
     },
     {
       id: 2,
-      title: "Industrial Fabrication",
-      subtitle: "Precision Manufacturing",
-      description: "Custom metallic fabrication services including specialized equipment housings, conveyor systems, and industrial machinery components.",
+      title: "Fabrication industrielle",
+      subtitle: "Fabrication de précision",
+      description: "Services de fabrication métallique sur mesure incluant les boîtiers d'équipements spécialisés, systèmes de convoyage et composants de machines industrielles.",
       icon: "Settings",
-      image: "https://images.pexels.com/photos/162553/keys-workshop-mechanic-tools-162553.jpeg?w=600&h=400&fit=crop",
-      sectors: ["Chemical", "Pharmaceutical", "Food Processing", "Mining"],
+    image: "/assets/images/tuyau.jpg",
+      sectors: ["Chimique", "Pharmaceutique", "Transformation alimentaire", "Mines"],
       specifications: [
-        "CNC precision cutting",
-        "Multi-axis machining",
-        "Quality control systems",
-        "Custom alloy solutions"
+        "Découpe de précision CNC",
+        "Usinage multi-axes",
+        "Systèmes de contrôle qualité",
+        "Solutions d'alliages personnalisés"
       ],
       projects: "200+ fabrications",
-      safety: "ISO 9001 certified"
+      safety: "Certifié ISO 9001"
     },
     {
       id: 3,
-      title: "Plant Construction",
-      subtitle: "Complete Facility Development",
-      description: "End-to-end plant construction services from foundation to commissioning, specializing in industrial and manufacturing facilities.",
+      title: "Construction d'usines",
+      subtitle: "Développement complet d'installations",
+      description: "Services de construction d'usines de bout en bout, des fondations à la mise en service, spécialisés dans les installations industrielles et de fabrication.",
       icon: "Factory",
-      image: "https://images.pixabay.com/photo/2016/11/29/06/15/adult-1867743_1280.jpg?w=600&h=400&fit=crop",
-      sectors: ["Power Generation", "Petrochemical", "Water Treatment", "Renewable Energy"],
+    image: "/assets/images/stairs.jpg",
+      sectors: ["Production d'énergie", "Pétrochimique", "Traitement des eaux", "Énergie renouvelable"],
       specifications: [
-        "Turnkey project delivery",
-        "Multi-disciplinary teams",
-        "Advanced project management",
-        "Environmental compliance"
+        "Livraison de projets clés en main",
+        "Équipes multidisciplinaires",
+        "Gestion de projet avancée",
+        "Conformité environnementale"
       ],
-      projects: "75+ facilities",
-      safety: "OHSAS 18001 certified"
+      projects: "75+ installations",
+      safety: "Certifié OHSAS 18001"
     },
     {
       id: 4,
-      title: "Maintenance Services",
-      subtitle: "24/7 Industrial Support",
-      description: "Comprehensive maintenance and repair services ensuring optimal performance and extended lifecycle of industrial metallic structures.",
+      title: "Services de maintenance",
+      subtitle: "Support industriel 24h/24 7j/7",
+      description: "Services complets de maintenance et de réparation assurant des performances optimales et une durée de vie prolongée des structures métalliques industrielles.",
       icon: "Wrench",
-      image: "https://images.unsplash.com/photo-1581094794329-c8112a89af12?w=600&h=400&fit=crop",
-      sectors: ["All Industrial Sectors", "Emergency Response", "Preventive Care", "Upgrades"],
+    image: "/assets/images/personel1.jpg",
+      sectors: ["Tous secteurs industriels", "Intervention d'urgence", "Soins préventifs", "Améliorations"],
       specifications: [
-        "24/7 emergency response",
-        "Predictive maintenance",
-        "Structural health monitoring",
-        "Retrofit and upgrades"
+        "Intervention d'urgence 24h/24 7j/7",
+        "Maintenance prédictive",
+        "Surveillance de l'état structurel",
+        "Rénovation et améliorations"
       ],
-      projects: "500+ maintenance contracts",
-      safety: "Emergency certified"
+      projects: "500+ contrats de maintenance",
+      safety: "Certifié intervention d'urgence"
     }
   ];
 
@@ -87,15 +87,15 @@ const CapabilityMatrix = () => {
           <div className="inline-flex items-center space-x-2 bg-accent/10 rounded-full px-4 py-2 mb-6">
             <Icon name="Zap" size={16} className="text-accent" />
             <span className="font-cta text-sm font-medium text-accent uppercase tracking-wide">
-              Technical Expertise
+              Expertise technique
             </span>
           </div>
           <h2 className="font-headline text-4xl lg:text-5xl font-bold text-primary mb-6">
-            Industrial Capability Matrix
+            Matrice des capacités industrielles
           </h2>
           <p className="text-lg text-text-secondary max-w-3xl mx-auto leading-relaxed">
-            Explore our comprehensive technical expertise across different industrial sectors. 
-            Each capability represents years of specialized experience and proven project success.
+            Explorez notre expertise technique complète à travers différents secteurs industriels. 
+            Chaque capacité représente des années d'expérience spécialisée et de succès prouvés de projets.
           </p>
         </div>
 
@@ -172,7 +172,7 @@ const CapabilityMatrix = () => {
               {/* Sectors */}
               <div className="mb-6">
                 <h4 className="font-headline text-lg font-bold text-primary mb-3">
-                  Industrial Sectors
+                  Secteurs industriels
                 </h4>
                 <div className="flex flex-wrap gap-2">
                   {activeData?.sectors?.map((sector, index) => (
@@ -189,7 +189,7 @@ const CapabilityMatrix = () => {
               {/* Technical Specifications */}
               <div className="mb-6">
                 <h4 className="font-headline text-lg font-bold text-primary mb-3">
-                  Technical Specifications
+                  Spécifications techniques
                 </h4>
                 <div className="space-y-2">
                   {activeData?.specifications?.map((spec, index) => (
@@ -208,7 +208,7 @@ const CapabilityMatrix = () => {
                     {activeData?.projects}
                   </div>
                   <div className="font-cta text-xs text-text-secondary uppercase tracking-wide">
-                    Projects Completed
+                    Projets réalisés
                   </div>
                 </div>
                 <div className="bg-surface rounded-lg p-4 text-center">
@@ -216,7 +216,7 @@ const CapabilityMatrix = () => {
                     {activeData?.safety}
                   </div>
                   <div className="font-cta text-xs text-text-secondary uppercase tracking-wide">
-                    Safety Record
+                    Dossier de sécurité
                   </div>
                 </div>
               </div>
@@ -224,7 +224,7 @@ const CapabilityMatrix = () => {
               {/* CTA */}
               <Link to="/services">
                 <button className="w-full bg-accent hover:bg-accent/90 text-white font-cta font-semibold py-3 px-6 rounded-lg transition-all duration-200 flex items-center justify-center space-x-2">
-                  <span>Explore {activeData?.title} Services</span>
+                  <span>Explorer les services {activeData?.title}</span>
                   <Icon name="ArrowRight" size={16} />
                 </button>
               </Link>
@@ -236,23 +236,23 @@ const CapabilityMatrix = () => {
         <div className="text-center mt-16">
           <div className="bg-white rounded-2xl shadow-industrial p-8 max-w-4xl mx-auto">
             <h3 className="font-headline text-2xl font-bold text-primary mb-4">
-              Need a Custom Industrial Solution?
+              Besoin d'une solution industrielle sur mesure ?
             </h3>
             <p className="text-text-secondary mb-6 max-w-2xl mx-auto">
-              Our engineering team specializes in developing tailored solutions for unique industrial challenges. 
-              Let's discuss your specific requirements and technical specifications.
+              Notre équipe d'ingénierie se spécialise dans le développement de solutions adaptées aux défis industriels uniques. 
+              Discutons de vos exigences spécifiques et spécifications techniques.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Link to="/contact">
                 <button className="bg-accent hover:bg-accent/90 text-white font-cta font-semibold py-3 px-8 rounded-lg transition-all duration-200 flex items-center space-x-2">
                   <Icon name="MessageSquare" size={16} />
-                  <span>Discuss Your Project</span>
+                  <span>Discuter de votre projet</span>
                 </button>
               </Link>
               <Link to="/services">
                 <button className="border-2 border-accent text-accent hover:bg-accent hover:text-white font-cta font-semibold py-3 px-8 rounded-lg transition-all duration-200 flex items-center space-x-2">
                   <Icon name="FileText" size={16} />
-                  <span>View All Services</span>
+                  <span>Voir tous les services</span>
                 </button>
               </Link>
             </div>

@@ -67,9 +67,9 @@ const CertificationsWall = () => {
       category: 'quality',
       name: "EN 1090",
       fullName: "Execution of Steel Structures and Aluminium Structures",
-      issuer: "European Committee for Standardization",
+      issuer: "MADopean Committee for Standardization",
       validUntil: "November 2025",
-      description: "European standard for the execution of steel and aluminium structures, ensuring quality and safety.",
+      description: "MADopean standard for the execution of steel and aluminium structures, ensuring quality and safety.",
       image: "https://images.unsplash.com/photo-1518709268805-4e9042af2176?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80",
       level: "Gold",
       icon: "Building"

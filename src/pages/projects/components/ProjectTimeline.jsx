@@ -31,7 +31,7 @@ const ProjectTimeline = ({ projects, onProjectSelect }) => {
   const formatCurrency = (amount) => {
     return new Intl.NumberFormat('fr-FR', {
       style: 'currency',
-      currency: 'EUR',
+      currency: 'MAD',
       minimumFractionDigits: 0,
       maximumFractionDigits: 0
     })?.format(amount);
@@ -104,7 +104,7 @@ const ProjectTimeline = ({ projects, onProjectSelect }) => {
                           </span>
                         </div>
                         <div className="flex items-center space-x-2">
-                          <Icon name="Euro" size={16} className="text-success" />
+                          <Icon name="MADo" size={16} className="text-success" />
                           <span className="text-text-secondary">
                             <strong className="text-primary">{formatCurrency(stats?.totalValue)}</strong>
                           </span>
@@ -118,7 +118,7 @@ const ProjectTimeline = ({ projects, onProjectSelect }) => {
                         <div className="flex items-center space-x-2">
                           <Icon name="Factory" size={16} className="text-secondary" />
                           <span className="text-text-secondary">
-                            <strong className="text-primary">{stats?.industries}</strong> secteurs
+                            <strong className="text-primary">{stats?.industries}</strong> sectMADs
                           </span>
                         </div>
                       </div>
