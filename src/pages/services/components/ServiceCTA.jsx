@@ -144,7 +144,7 @@ const ServiceCTA = () => {
                 <div className="text-center">
                   <Icon name="MapPin" size={24} className="text-accent mx-auto mb-2" />
                   <div className="font-cta font-semibold text-white mb-1">Visit Office</div>
-                  <div className="text-white/80 font-body">Paris, Lyon, Marseille</div>
+                  <div className="text-white/80 font-body">Casablanca, Maroc</div>
                 </div>
               </div>
             </div>
