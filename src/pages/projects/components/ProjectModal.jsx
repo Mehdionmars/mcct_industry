@@ -24,9 +24,9 @@ const ProjectModal = ({ project, isOpen, onClose, onVirtualTour }) => {
 
   const tabs = [
     { id: 'overview', label: 'Vue d\'ensemble', icon: 'Eye' },
-    { id: 'technical', label: 'Spécifications', icon: 'Settings' },
-    { id: 'timeline', label: 'Chronologie', icon: 'Clock' },
-    { id: 'testimonial', label: 'Témoignage', icon: 'MessageSquare' }
+    // { id: 'technical', label: 'Spécifications', icon: 'Settings' },
+    // { id: 'timeline', label: 'Chronologie', icon: 'Clock' },
+    // { id: 'testimonial', label: 'Témoignage', icon: 'MessageSquare' }
   ];
 
   const nextImage = () => {

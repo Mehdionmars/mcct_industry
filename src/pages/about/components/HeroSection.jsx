@@ -2,7 +2,7 @@ import React from 'react';
 import Icon from '../../../components/AppIcon';
 import Image from '../../../components/AppImage';
 import Button from '../../../components/ui/Button';
-
+//page aboout
 const HeroSection = () => {
   return (
     <section className="relative bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 text-white overflow-hidden">
@@ -23,18 +23,18 @@ const HeroSection = () => {
                   <Icon name="Building" size={24} className="text-white" />
                 </div>
                 <span className="font-mono text-accent text-sm tracking-wider uppercase">
-                  About MCCT Industry
+                  A propos de MCCT Industry
                 </span>
               </div>
               
               <h1 className="font-headline text-4xl lg:text-6xl font-bold leading-tight">
-                Masters of
-                <span className="block text-accent">Industrial Construction</span>
+                Maître
+                <span className="block text-accent">de la Construction Industrielle</span>
               </h1>
               
               <p className="text-xl lg:text-2xl text-gray-300 leading-relaxed">
-                For over three decades, we've been engineering excellence in metallic industrial construction, 
-                building the backbone of industry with unwavering precision and reliability.
+                Nous concevons l'excellence dans la construction industrielle métallique,
+                bâtissant l'épine dorsale de l'industrie avec une précision et une fiabilité sans faille.
               </p>
             </div>
 
@@ -46,22 +46,20 @@ const HeroSection = () => {
                 iconName="Users"
                 iconPosition="left"
               >
-                Meet Our Team
+                Contactez-nous
               </Button>
-              
-              <Button
-                variant="outline"
-                size="lg"
-                className="border-white text-white hover:bg-white hover:text-slate-900 font-cta font-medium"
-                iconName="Award"
-                iconPosition="left"
-              >
-                Our Achievements
-              </Button>
+<Button
+  variant="outline"
+  size="lg"
+  className="border-white text-white hover:bg-white hover:text-slate-900 font-cta font-medium"
+  to="/projects"
+>
+  Nos Réalisations
+</Button>
             </div>
 
             {/* Key Stats */}
-            <div className="grid grid-cols-3 gap-6 pt-8 border-t border-gray-700">
+            {/* <div className="grid grid-cols-3 gap-6 pt-8 border-t border-gray-700">
               <div className="text-center">
                 <div className="text-3xl lg:text-4xl font-bold text-accent">30+</div>
                 <div className="text-sm text-gray-400 font-mono tracking-wide">Years Experience</div>
@@ -74,14 +72,14 @@ const HeroSection = () => {
                 <div className="text-3xl lg:text-4xl font-bold text-accent">99.8%</div>
                 <div className="text-sm text-gray-400 font-mono tracking-wide">Safety Record</div>
               </div>
-            </div>
+            </div> */}
           </div>
 
           {/* Image */}
           <div className="relative">
             <div className="relative rounded-2xl overflow-hidden industrial-shadow-lg">
               <Image
-                src="https://images.unsplash.com/photo-1581094794329-c8112a89af12?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+                src="/assets/images/atelier.jpg"
                 alt="MCCT Industry construction team working on industrial project"
                 className="w-full h-96 lg:h-[500px] object-cover"
               />
@@ -89,7 +87,7 @@ const HeroSection = () => {
             </div>
             
             {/* Floating Achievement Card */}
-            <div className="absolute -bottom-6 -left-6 bg-white text-slate-900 p-6 rounded-xl industrial-shadow-lg">
+            {/* <div className="absolute -bottom-6 -left-6 bg-white text-slate-900 p-6 rounded-xl industrial-shadow-lg">
               <div className="flex items-center space-x-3">
                 <div className="w-12 h-12 bg-success rounded-lg flex items-center justify-center">
                   <Icon name="Shield" size={24} className="text-white" />
@@ -99,7 +97,7 @@ const HeroSection = () => {
                   <div className="text-sm text-gray-600">Quality Certified</div>
                 </div>
               </div>
-            </div>
+            </div> */}
           </div>
         </div>
       </div>

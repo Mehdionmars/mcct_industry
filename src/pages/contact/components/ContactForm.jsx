@@ -26,39 +26,38 @@ const ContactForm = () => {
 
   const [errors, setErrors] = useState({});
   const [isSubmitting, setIsSubmitting] = useState(false);
-
+//traduit tous en francais
   const projectTypeOptions = [
-    { value: 'new-construction', label: 'New Industrial Construction' },
-    { value: 'facility-expansion', label: 'Facility Expansion' },
-    { value: 'renovation', label: 'Renovation & Modernization' },
-    { value: 'maintenance', label: 'Maintenance & Repair' },
-    { value: 'emergency', label: 'Emergency Repair' },
-    { value: 'consultation', label: 'Technical Consultation' }
+    { value: 'new-construction', label: 'Nouvelle Construction Industrielle' },
+    { value: 'facility-expansion', label: 'Expansion d\'Installation' },
+    { value: 'renovation', label: 'Renovation & Modernisation' },
+    { value: 'maintenance', label: 'Maintenance & Réparation' },
+    { value: 'repair', label: 'Réparation' },
+    { value: 'consultation', label: 'Consultation Technique' }
   ];
 
   const timelineOptions = [
-    { value: 'immediate', label: 'Immediate (Emergency)' },
-    { value: '1-3-months', label: '1-3 Months' },
-    { value: '3-6-months', label: '3-6 Months' },
-    { value: '6-12-months', label: '6-12 Months' },
-    { value: '12-months', label: '12+ Months' },
-    { value: 'planning', label: 'Planning Phase' }
+    { value: 'immediate', label: 'Immédiat (0-1 mois)' },
+    { value: '1-3-Mois', label: '1-3 Mois' },
+    { value: '3-6-Mois', label: '3-6 Mois' },
+    { value: '6-12-Mois', label: '6-12 Mois' },
+    { value: '12-Mois', label: '12+ Mois' },
   ];
 
   const budgetOptions = [
-    { value: 'under-100k', label: 'Under €100,000' },
-    { value: '100k-500k', label: '€100,000 - €500,000' },
+    { value: 'Moins de 100 DHS', label: 'Moins de 100 DHS' },
+    { value: ' 100k-500 DHS', label: 'DHS100,000 - €500,000 DHS' },
     { value: '500k-1m', label: '€500,000 - €1,000,000' },
     { value: '1m-5m', label: '€1,000,000 - €5,000,000' },
-    { value: 'over-5m', label: 'Over €5,000,000' },
-    { value: 'discuss', label: 'Prefer to Discuss' }
+    { value: 'Plus de 5m', label: 'Plus de €5,000,000' },
+    { value: 'discuter', label: 'Préférer discuter' }
   ];
 
   const urgencyOptions = [
-    { value: 'low', label: 'Low - Planning Stage' },
-    { value: 'medium', label: 'Medium - Active Planning' },
-    { value: 'high', label: 'High - Ready to Start' },
-    { value: 'critical', label: 'Critical - Emergency' }
+    { value: 'faible', label: 'Faible - Phase de Planification' },
+    { value: 'moyenne', label: 'Moyenne - Planification Active' },
+    { value: 'élevée', label: 'Élevée - Prêt à Commencer' },
+    { value: 'critique', label: 'Critique - Urgent' }
   ];
 
   const handleInputChange = (e) => {
@@ -84,19 +83,19 @@ const ContactForm = () => {
   const validateForm = () => {
     const newErrors = {};
 
-    if (!formData?.firstName?.trim()) newErrors.firstName = 'First name is required';
-    if (!formData?.lastName?.trim()) newErrors.lastName = 'Last name is required';
-    if (!formData?.email?.trim()) newErrors.email = 'Email is required';
-    if (!formData?.phone?.trim()) newErrors.phone = 'Phone number is required';
-    if (!formData?.company?.trim()) newErrors.company = 'Company name is required';
-    if (!formData?.projectType) newErrors.projectType = 'Project type is required';
-    if (!formData?.description?.trim()) newErrors.description = 'Project description is required';
-    if (!formData?.agreesToTerms) newErrors.agreesToTerms = 'You must agree to the terms';
+    if (!formData?.firstName?.trim()) newErrors.firstName = 'Le prénom est requis';
+    if (!formData?.lastName?.trim()) newErrors.lastName = 'Le nom est requis';
+    if (!formData?.email?.trim()) newErrors.email = 'L\'email est requis';
+    if (!formData?.phone?.trim()) newErrors.phone = 'Le numéro de téléphone est requis';
+    if (!formData?.company?.trim()) newErrors.company = 'Le nom de l\'entreprise est requis';
+    if (!formData?.projectType) newErrors.projectType = 'Le type de projet est requis';
+    if (!formData?.description?.trim()) newErrors.description = 'La description du projet est requise';
+    if (!formData?.agreesToTerms) newErrors.agreesToTerms = 'Vous devez accepter les conditions';
 
     // Email validation
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (formData?.email && !emailRegex?.test(formData?.email)) {
-      newErrors.email = 'Please enter a valid email address';
+      newErrors.email = 'Veuillez entrer une adresse email valide';
     }
 
     setErrors(newErrors);
@@ -113,7 +112,7 @@ const ContactForm = () => {
     // Simulate form submission
     try {
       await new Promise(resolve => setTimeout(resolve, 2000));
-      alert('Thank you for your inquiry! Our team will contact you within 24 hours.');
+      alert('Merci pour votre demande ! Notre équipe vous contactera dans les 24 heures.');
       
       // Reset form
       setFormData({
@@ -134,7 +133,7 @@ const ContactForm = () => {
         agreesToTerms: false
       });
     } catch (error) {
-      alert('There was an error submitting your form. Please try again.');
+      alert('Une erreur s\'est produite lors de l\'envoi de votre formulaire. Veuillez réessayer.');
     } finally {
       setIsSubmitting(false);
     }
@@ -148,17 +147,16 @@ const ContactForm = () => {
           <div className="text-center mb-12">
             <div className="inline-flex items-center space-x-2 bg-primary/10 rounded-full px-6 py-3 mb-6">
               <Icon name="FileText" size={20} className="text-primary" />
-              <span className="font-cta font-medium text-sm tracking-wide text-primary">PROJECT INQUIRY</span>
+              <span className="font-cta font-medium text-sm tracking-wide text-primary">DEMANDE DE PROJET</span>
             </div>
             
             <h2 className="font-headline text-3xl lg:text-5xl font-bold text-primary mb-6">
-              Start Your Project
+              Démarrez Votre Projet
               <span className="block text-accent">Consultation</span>
             </h2>
             
             <p className="text-lg text-text-secondary max-w-2xl mx-auto leading-relaxed">
-              Provide us with your project details and we'll prepare a comprehensive proposal 
-              tailored to your industrial construction needs.
+              Remplissez le formulaire ci-dessous pour discuter de votre projet industriel avec notre équipe d'experts. Nous sommes impatients de collaborer avec vous pour concrétiser votre vision.
             </p>
           </div>
 
@@ -174,29 +172,29 @@ const ContactForm = () => {
                 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <Input
-                    label="First Name"
+                    label="Prénom"
                     type="text"
                     name="firstName"
                     value={formData?.firstName}
                     onChange={handleInputChange}
                     error={errors?.firstName}
                     required
-                    placeholder="Enter your first name"
+                    placeholder="Entrez votre prénom"
                   />
                   
                   <Input
-                    label="Last Name"
+                    label="Nom"
                     type="text"
                     name="lastName"
                     value={formData?.lastName}
                     onChange={handleInputChange}
                     error={errors?.lastName}
                     required
-                    placeholder="Enter your last name"
+                    placeholder="Entrez votre nom"
                   />
                   
                   <Input
-                    label="Email Address"
+                    label="Email"
                     type="email"
                     name="email"
                     value={formData?.email}
@@ -207,7 +205,7 @@ const ContactForm = () => {
                   />
                   
                   <Input
-                    label="Phone Number"
+                    label="Téléphone"
                     type="tel"
                     name="phone"
                     value={formData?.phone}
@@ -218,7 +216,7 @@ const ContactForm = () => {
                   />
                   
                   <Input
-                    label="Company Name"
+                    label="Nom de l'entreprise"
                     type="text"
                     name="company"
                     value={formData?.company}
@@ -229,12 +227,12 @@ const ContactForm = () => {
                   />
                   
                   <Input
-                    label="Position/Title"
+                    label="Position/Titre"
                     type="text"
                     name="position"
                     value={formData?.position}
                     onChange={handleInputChange}
-                    placeholder="Your job title"
+                    placeholder="Votre poste"
                   />
                 </div>
               </div>
@@ -248,38 +246,31 @@ const ContactForm = () => {
                 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
                   <Select
-                    label="Project Type"
+                    label="Type de projet"
                     options={projectTypeOptions}
                     value={formData?.projectType}
                     onChange={(value) => handleSelectChange('projectType', value)}
                     error={errors?.projectType}
                     required
-                    placeholder="Select project type"
+                    placeholder="Choisissez le type de projet"
                   />
                   
                   <Select
-                    label="Project Timeline"
+                    label="Timeline du projet"
                     options={timelineOptions}
                     value={formData?.projectTimeline}
                     onChange={(value) => handleSelectChange('projectTimeline', value)}
-                    placeholder="Select timeline"
+                    placeholder="Choisissez la timeline du projet"
                   />
                   
                   <Select
-                    label="Estimated Budget"
+                    label="Budget estimé"
                     options={budgetOptions}
                     value={formData?.budget}
                     onChange={(value) => handleSelectChange('budget', value)}
-                    placeholder="Select budget range"
+                    placeholder="Choisissez la fourchette de budget"
                   />
-                  
-                  <Select
-                    label="Project Urgency"
-                    options={urgencyOptions}
-                    value={formData?.urgency}
-                    onChange={(value) => handleSelectChange('urgency', value)}
-                    placeholder="Select urgency level"
-                  />
+                
                 </div>
                 
                 <Input
@@ -288,13 +279,13 @@ const ContactForm = () => {
                   name="location"
                   value={formData?.location}
                   onChange={handleInputChange}
-                  placeholder="City, Region, or Address"
+                  placeholder="Ville, Région ou Adresse"
                   className="mb-6"
                 />
                 
                 <div>
                   <label className="block text-sm font-medium text-primary mb-2">
-                    Project Description *
+                    Description du projet *
                   </label>
                   <textarea
                     name="description"
@@ -302,7 +293,7 @@ const ContactForm = () => {
                     onChange={handleInputChange}
                     rows={6}
                     className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-accent focus:border-accent resize-none"
-                    placeholder="Please describe your project requirements, including:\n• Type of industrial facility\n• Specific construction needs\n• Technical requirements\n• Any special considerations"
+                    placeholder="Veuillez décrire vos besoins en matière de projet, y compris :\n• Type d'installation industrielle\n• Besoins spécifiques en matière de construction\n• Exigences techniques\n• Considérations particulières"
                     required
                   />
                   {errors?.description && (
@@ -315,21 +306,21 @@ const ContactForm = () => {
               <div>
                 <h3 className="font-headline text-xl font-bold text-primary mb-6 flex items-center">
                   <Icon name="Settings" size={20} className="mr-3 text-accent" />
-                  Additional Services
+                  Services supplémentaires
                 </h3>
                 
                 <div className="space-y-4">
                   <Checkbox
-                    label="I have existing architectural plans or drawings"
-                    description="We can review and work with your existing documentation"
+                    label="J'ai des plans ou des dessins architecturaux existants"
+                    description="Nous pouvons examiner et travailler avec votre documentation existante"
                     checked={formData?.hasPlans}
                     onChange={(e) => handleInputChange(e)}
                     name="hasPlans"
                   />
                   
                   <Checkbox
-                    label="I need a site assessment and feasibility study"
-                    description="Our team can evaluate your site and provide recommendations"
+                    label="J'ai besoin d'une évaluation du site et d'une étude de faisabilité"
+                    description="Notre équipe peut évaluer votre site et fournir des recommandations"
                     checked={formData?.needsAssessment}
                     onChange={(e) => handleInputChange(e)}
                     name="needsAssessment"
@@ -341,8 +332,8 @@ const ContactForm = () => {
               <div className="border-t border-gray-200 pt-8">
                 <div className="mb-6">
                   <Checkbox
-                    label="I agree to the terms and conditions and privacy policy"
-                    description="By submitting this form, you consent to MCCT Industry contacting you about your project"
+                    label="J'accepte les termes et conditions ainsi que la politique de confidentialité"
+                    description="En soumettant ce formulaire, vous consentez à ce que MCCT Industry vous contacte au sujet de votre projet"
                     checked={formData?.agreesToTerms}
                     onChange={(e) => handleInputChange(e)}
                     name="agreesToTerms"
@@ -354,7 +345,7 @@ const ContactForm = () => {
                 <div className="flex flex-col sm:flex-row items-center justify-between space-y-4 sm:space-y-0">
                   <div className="text-sm text-text-secondary">
                     <Icon name="Shield" size={16} className="inline mr-2 text-success" />
-                    Your information is secure and will never be shared
+                    Vos informations sont sécurisées et confidentielles.
                   </div>
                   
                   <Button
@@ -367,19 +358,19 @@ const ContactForm = () => {
                     iconName="Send"
                     iconPosition="right"
                   >
-                    {isSubmitting ? 'Submitting...' : 'Submit Project Inquiry'}
+                    {isSubmitting ? 'Submitting...' : 'Soumettre la demande de projet'}
                   </Button>
                 </div>
               </div>
             </form>
           </div>
 
-          {/* Response Time Notice */}
+          {/*    Time Notice */}
           <div className="mt-8 text-center">
             <div className="inline-flex items-center space-x-2 bg-success/10 rounded-full px-6 py-3">
               <Icon name="Clock" size={16} className="text-success" />
               <span className="text-sm font-cta font-medium text-success">
-                We respond to all inquiries within 24 hours
+                Nous répondons généralement dans les 24 heures
               </span>
             </div>
           </div>

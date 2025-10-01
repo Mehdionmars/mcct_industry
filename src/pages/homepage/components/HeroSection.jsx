@@ -121,7 +121,7 @@ const InnovationHero = () => {
 
             {/* Stats */}
             <div className="grid grid-cols-3 gap-10 pt-8 border-t border-gray-200">
-              <div className="text-center">
+              {/* <div className="text-center">
                 <div className="text-3xl font-bold text-orange-500">50+</div>
                 <div className="text-sm text-gray-500 font-mono">R&D Projects</div>
               </div>
@@ -132,7 +132,7 @@ const InnovationHero = () => {
               <div className="text-center">
                 <div className="text-3xl font-bold text-orange-500">98%</div>
                 <div className="text-sm text-gray-500 font-mono">Efficiency Gain</div>
-              </div>
+              </div> */}
             </div>
           </div>
         </div>
@@ -140,7 +140,7 @@ const InnovationHero = () => {
 
       {/* Scroll Indicator */}
       <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce">
-        <Icon name="ChevronDown" size={24} className="text-gray-900" />
+        <Icon name="ChevronDown" size={36} className="text-white" />
       </div>
     </section>
   );

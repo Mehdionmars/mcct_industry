@@ -12,65 +12,26 @@ const LocationInfo = () => {
       city: "Lyon, France 69003",
       phone: "+33 4 72 34 56 78",
       email: "lyon@mcct.com",
-      hours: "Monday - Friday: 7:00 AM - 6:00 PM",
-      emergency: "24/7 Emergency Response",
-      coordinates: "45.7640,4.8357",
-      services: [
-        "Project Management",
-        "Engineering Services",
-        "Technical Consultation",
-        "Safety Coordination"
-      ],
-      features: [
-        "Design Center",
-        "Material Testing Lab",
-        "Client Meeting Rooms",
-        "Equipment Showroom"
-      ]
     },
-    {
-      id: 2,
-      name: "MCCT Manufacturing",
-      type: "Production & Fabrication Facility",
-      address: "89 Rue de la Métallurgie",
-      city: "Saint-Étienne, France 42000",
-      phone: "+33 4 77 12 34 56",
-      email: "production@mcct.com",
-      hours: "Monday - Friday: 6:00 AM - 10:00 PM",
-      emergency: "24/7 Production Support",
-      coordinates: "45.4397,4.3872",
-      services: [
-        "Steel Fabrication",
-        "Quality Control",
-        "Custom Manufacturing",
-        "Logistics Coordination"
-      ],
-      features: [
-        "50,000 sq ft Facility",
-        "Advanced CNC Equipment",
-        "Quality Testing Lab",
-        "Shipping & Receiving"
-      ]
-    }
   ];
 
   const serviceAreas = [
     {
       region: "Auvergne-Rhône-Alpes",
       coverage: "Primary Service Area",
-      responseTime: "Same Day",
+        Time: "Same Day",
       projects: "150+ Active Projects"
     },
     {
       region: "Provence-Alpes-Côte d\'Azur",
       coverage: "Extended Service Area",
-      responseTime: "Next Day",
+        Time: "Next Day",
       projects: "75+ Active Projects"
     },
     {
       region: "Occitanie",
       coverage: "Regional Coverage",
-      responseTime: "48 Hours",
+        Time: "48 Hours",
       projects: "50+ Active Projects"
     }
   ];
@@ -149,10 +110,10 @@ const LocationInfo = () => {
                     <Icon name="Clock" size={16} className="text-success" />
                     <span className="text-sm">{location?.hours}</span>
                   </div>
-                  <div className="flex items-center space-x-3">
+                  {/* <div className="flex items-center space-x-3">
                     <Icon name="AlertTriangle" size={16} className="text-error" />
-                    <span className="text-sm font-semibold">{location?.emergency}</span>
-                  </div>
+                    <span className="text-sm font-semibold">{location?. }</span>
+                  </div> */}
                 </div>
 
                 {/* Services */}
@@ -215,7 +176,7 @@ const LocationInfo = () => {
             </h3>
             <p className="text-text-secondary max-w-2xl mx-auto">
               Our strategic positioning allows us to provide comprehensive coverage across 
-              Southern France with varying response times based on location.
+              Southern France with varying    times based on location.
             </p>
           </div>
 
@@ -233,8 +194,8 @@ const LocationInfo = () => {
                 
                 <div className="space-y-2">
                   <div className="flex items-center justify-between text-sm">
-                    <span className="text-text-secondary">Response Time:</span>
-                    <span className="font-semibold text-success">{area?.responseTime}</span>
+                    <span className="text-text-secondary">   Time:</span>
+                    <span className="font-semibold text-success">{area?.  Time}</span>
                   </div>
                   <div className="flex items-center justify-between text-sm">
                     <span className="text-text-secondary">Active Projects:</span>

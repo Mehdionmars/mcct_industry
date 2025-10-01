@@ -16,23 +16,24 @@ const ServicesPage = () => {
     <div className="min-h-screen bg-white">
       <Header />
 
-      {/* Hero Section */}
+      {/* Section Héros */}
       <ServiceHero />
 
-      {/* Services Grid */}
+      {/* Grille des Services */}
       <section className="py-16 lg:py-24 bg-surface">
         <div className="industrial-container">
           <div className="text-center mb-16">
             <div className="inline-flex items-center space-x-2 bg-primary/10 text-primary px-4 py-2 rounded-full mb-6">
               <span className="font-cta font-medium text-sm tracking-wide">
-                OUR EXPERTISE
+                NOTRE EXPERTISE
               </span>
             </div>
             <h2 className="font-headline text-3xl lg:text-4xl font-bold text-primary mb-4">
-              Comprehensive Service Portfolio
+              Portefeuille de services complet
             </h2>
             <p className="text-text-secondary font-body text-lg max-w-3xl mx-auto">
-              Explore our complete range of industrial construction services.
+              Découvrez notre gamme complète de services de construction
+              industrielle.
             </p>
           </div>
 
@@ -49,7 +50,7 @@ const ServicesPage = () => {
         </div>
       </section>
 
-      {/* Call to Action */}
+      {/* Appel à l’action */}
       <ServiceCTA />
     </div>
   );

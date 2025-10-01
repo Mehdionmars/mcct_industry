@@ -15,21 +15,21 @@ const ContactPage = () => {
   return (
     <>
       <Helmet>
-        <title>Contact MCCT Industry - Partnership Portal | Industrial Construction Experts</title>
+        <title>Contact MCCT Industry - EXPERT EN CONSTRUCTION METALLIQUE</title>
         <meta 
           name="description" 
-          content="Connect with MCCT Industry's expert team for industrial construction projects. 24/7 emergency response, project consultations, and technical support across Southern France." 
+          content="Connect with MCCT Industry's expert team for industrial construction projects. 24/7     , project consultations, and technical support across Southern France." 
         />
-        <meta name="keywords" content="MCCT Industry contact, industrial construction consultation, emergency repair services, project inquiry, metallic construction experts, France" />
+        <meta name="keywords" content="MCCT Industry contact, industrial construction consultation,   repair services, project inquiry, metallic construction experts, France" />
         <meta property="og:title" content="Contact MCCT Industry - Partnership Portal" />
-        <meta property="og:description" content="Connect with MCCT Industry's expert team for industrial construction projects. 24/7 emergency response and technical support." />
+        <meta property="og:description" content="Connect with MCCT Industry's expert team for industrial construction projects. 24/7      and technical support." />
         <meta property="og:type" content="website" />
         <link rel="canonical" href="/contact" />
       </Helmet>
       <div className="min-h-screen bg-background">
         <Header />
         
-        <main className="pt-16 lg:pt-20">
+        <main className="">
           {/* Hero Section */}
           <ContactHero />
           
@@ -40,7 +40,7 @@ const ContactPage = () => {
           <ContactForm />
           
           {/* Location Information */}
-          <LocationInfo />
+          {/* <LocationInfo /> */}
           
           {/* Team Contacts */}
           
@@ -62,64 +62,59 @@ const ContactPage = () => {
                   </div>
                   <div>
                     <h3 className="font-headline text-xl font-bold">MCCT Industry</h3>
-                    <p className="font-mono text-xs text-white/70 tracking-wider">ENGINEERED EXCELLENCE</p>
+                    <p className="font-mono text-xs text-white/70 tracking-wider"> </p>
                   </div>
                 </div>
                 <p className="text-white/80 leading-relaxed mb-4">
-                  Leading industrial construction authority specializing in metallic structures, 
-                  safety-first practices, and innovative engineering solutions across Southern France.
+                  Expert en construction métallique et industrielle.
+                  Nous fournissons des solutions complètes pour vos projets industriels, de la conception à la réalisation, partout au Maroc.
                 </p>
                 <div className="flex items-center space-x-4">
                   <div className="flex items-center space-x-2">
                     <div className="w-2 h-2 bg-success rounded-full animate-pulse"></div>
-                    <span className="text-sm text-white/70">24/7 Emergency Response</span>
+                    <span className="text-sm text-white/70">24/7 Disponible</span>
                   </div>
                 </div>
               </div>
 
               {/* Quick Links */}
               <div>
-                <h4 className="font-cta font-semibold text-white mb-4">Quick Contact</h4>
+                <h4 className="font-cta font-semibold text-white mb-4">Contact Info</h4>
                 <div className="space-y-3">
                   <div className="flex items-center space-x-2">
                     <span className="text-accent">📞</span>
-                    <span className="text-sm text-white/80">+33 4 72 34 56 78</span>
+                    <span className="text-sm text-white/80"> : +212 661 49 47 61</span>
                   </div>
                   <div className="flex items-center space-x-2">
                     <span className="text-accent">✉️</span>
-                    <span className="text-sm text-white/80">contact@mcct.com</span>
+                    <span className="text-sm text-white/80">contact@mcct-industry.ma</span>
                   </div>
                   <div className="flex items-center space-x-2">
                     <span className="text-accent">📍</span>
-                    <span className="text-sm text-white/80">Lyon, France</span>
-                  </div>
-                  <div className="flex items-center space-x-2">
-                    <span className="text-error">🚨</span>
-                    <span className="text-sm text-white/80">Emergency: +33 4 72 34 56 99</span>
+                    <span className="text-sm text-white/80">Casablanca, Maroc</span>
                   </div>
                 </div>
               </div>
 
               {/* Business Hours */}
               <div>
-                <h4 className="font-cta font-semibold text-white mb-4">Business Hours</h4>
+                <h4 className="font-cta font-semibold text-white mb-4">Nos Horaires</h4>
                 <div className="space-y-2 text-sm text-white/80">
                   <div className="flex justify-between">
-                    <span>Monday - Friday:</span>
+                    <span>Lundi - Vendredi:</span>
                     <span>7:00 AM - 6:00 PM</span>
                   </div>
                   <div className="flex justify-between">
-                    <span>Saturday:</span>
+                    <span>Samedi:</span>
                     <span>8:00 AM - 2:00 PM</span>
                   </div>
                   <div className="flex justify-between">
-                    <span>Sunday:</span>
-                    <span>Emergency Only</span>
+                    <span>Dimanche:</span>
                   </div>
                   <div className="pt-2 border-t border-white/20">
                     <div className="flex justify-between font-semibold text-success">
-                      <span>Emergency:</span>
-                      <span>24/7 Available</span>
+                      <span> :</span>
+                      <span>24/7 Disponible</span>
                     </div>
                   </div>
                 </div>
@@ -129,13 +124,13 @@ const ContactPage = () => {
             {/* Bottom Bar */}
             <div className="border-t border-white/20 mt-8 pt-8 flex flex-col md:flex-row items-center justify-between">
               <p className="text-sm text-white/60 mb-4 md:mb-0">
-                © {new Date()?.getFullYear()} MCCT Industry. All rights reserved. | Engineered Excellence in Industrial Construction
+                © {new Date()?.getFullYear()} MCCT Industry. Tous droits réservés. | VOTRE VISION, NOTRE MISSION
               </p>
-              <div className="flex items-center space-x-6 text-sm text-white/60">
+              {/* <div className="flex items-center space-x-6 text-sm text-white/60">
                 <span>Privacy Policy</span>
                 <span>Terms of Service</span>
                 <span>Safety Standards</span>
-              </div>
+              </div> */}
             </div>
           </div>
         </footer>

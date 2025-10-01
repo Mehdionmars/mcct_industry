@@ -32,13 +32,6 @@ const CompanyStory = () => {
       image: "https://images.unsplash.com/photo-1518709268805-4e9042af2176?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80",
       icon: "Smartphone"
     },
-    {
-      year: "Engagement envers l'Environnement et la Sécurité",
-      title: "",
-      description: "Nous sommes conscients de notre responsabilité envers l'environnement et la sécurité de nos employés et de nos clients. C'est pourquoi nous nous engageons à respecter les normes les plus strictes en matière de santé, de sécurité et d'environnement dans toutes nos opérations. Que vous ayez besoin d'une solution métallurgique sur mesure ou que vous souhaitiez en savoir plus sur nos services, n'hésitez pas à nous contacter. Chez MCCT Industry, nous sommes là pour transformer vos idées en réalité.",
-      image: "https://images.unsplash.com/photo-1581094794329-c8112a89af12?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80",
-      icon: "Rocket"
-    }
   ];
 
   return (
@@ -51,18 +44,18 @@ const CompanyStory = () => {
               <Icon name="Clock" size={24} className="text-white" />
             </div>
             <span className="font-mono text-accent text-sm tracking-wider uppercase">
-              Our Journey
+              Notre Histoire
             </span>
           </div>
           
           <h2 className="font-headline text-3xl lg:text-5xl font-bold text-primary mb-6">
-            Three Decades of
-            <span className="block text-accent">Engineering Excellence</span>
+            Votre Partenaire de Confiance pour
+            <span className="block text-accent">l'Excellence en Ingénierie</span>
           </h2>
           
           <p className="text-lg text-gray-600 leading-relaxed">
-            From humble beginnings to industry leadership, our story is one of continuous innovation, 
-            unwavering commitment to quality, and the relentless pursuit of engineering perfection.
+            L'industrie, notre histoire est celle de l'innovation continue,
+            d'un engagement indéfectible envers la qualité et de la quête incessante de la perfection en ingénierie.
           </p>
         </div>
 

@@ -21,8 +21,6 @@ const CapabilityMatrix = () => {
         "Conception résistante aux séismes",
         "Systèmes de protection contre la corrosion"
       ],
-      projects: "150+ réalisés",
-      safety: "Zéro incident en 2024"
     },
     {
       id: 2,
@@ -38,8 +36,6 @@ const CapabilityMatrix = () => {
         "Systèmes de contrôle qualité",
         "Solutions d'alliages personnalisés"
       ],
-      projects: "200+ fabrications",
-      safety: "Certifié ISO 9001"
     },
     {
       id: 3,
@@ -55,8 +51,6 @@ const CapabilityMatrix = () => {
         "Gestion de projet avancée",
         "Conformité environnementale"
       ],
-      projects: "75+ installations",
-      safety: "Certifié OHSAS 18001"
     },
     {
       id: 4,
@@ -72,8 +66,6 @@ const CapabilityMatrix = () => {
         "Surveillance de l'état structurel",
         "Rénovation et améliorations"
       ],
-      projects: "500+ contrats de maintenance",
-      safety: "Certifié intervention d'urgence"
     }
   ];
 

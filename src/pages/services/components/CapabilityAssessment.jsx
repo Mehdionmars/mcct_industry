@@ -23,28 +23,28 @@ const CapabilityAssessment = () => {
   const [results, setResults] = useState(null);
 
   const facilityTypes = [
-    { value: 'manufacturing', label: 'Manufacturing Plant' },
-    { value: 'warehouse', label: 'Warehouse & Distribution' },
-    { value: 'power', label: 'Power Generation Facility' },
-    { value: 'chemical', label: 'Chemical Processing Plant' },
-    { value: 'automotive', label: 'Automotive Assembly' },
-    { value: 'food', label: 'Food Processing Facility' },
-    { value: 'pharmaceutical', label: 'Pharmaceutical Plant' },
-    { value: 'other', label: 'Other Industrial Facility' }
+    { value: 'manufacturing', label: 'Usine de fabrication' },
+    { value: 'warehouse', label: 'Entrepôt & Distribution' },
+    { value: 'power', label: 'Centrale de production d’énergie' },
+    { value: 'chemical', label: 'Usine de traitement chimique' },
+    { value: 'automotive', label: 'Assemblage automobile' },
+    { value: 'food', label: 'Usine de transformation alimentaire' },
+    { value: 'pharmaceutical', label: 'Usine pharmaceutique' },
+    { value: 'other', label: 'Autre installation industrielle' }
   ];
 
   const projectScales = [
-    { value: 'small', label: 'Small (< €500K)' },
-    { value: 'medium', label: 'Medium (€500K - €2M)' },
-    { value: 'large', label: 'Large (€2M - €10M)' },
-    { value: 'enterprise', label: 'Enterprise (> €10M)' }
+    { value: 'small', label: 'Petit (< 500K DHS)' },
+    { value: 'medium', label: 'Moyen (500K – 2M DHS)' },
+    { value: 'large', label: 'Grand (2M – 10M DHS)' },
+    { value: 'enterprise', label: 'Très grand (> 10M DHS)' }
   ];
 
   const timelines = [
-    { value: 'urgent', label: 'Urgent (< 3 months)' },
-    { value: 'standard', label: 'Standard (3-6 months)' },
-    { value: 'extended', label: 'Extended (6-12 months)' },
-    { value: 'phased', label: 'Phased (> 12 months)' }
+    { value: 'urgent', label: 'Urgent (< 3 mois)' },
+    { value: 'standard', label: 'Standard (3-6 mois)' },
+    { value: 'extended', label: 'Étendu (6-12 mois)' },
+    { value: 'phased', label: 'Par phases (> 12 mois)' }
   ];
 
   const handleInputChange = (field, value) => {
@@ -66,7 +66,6 @@ const CapabilityAssessment = () => {
   };
 
   const generateRecommendations = () => {
-    // Mock recommendation logic based on form data
     const recommendations = {
       primaryServices: [],
       additionalServices: [],
@@ -75,32 +74,32 @@ const CapabilityAssessment = () => {
       nextSteps: []
     };
 
-    // Logic based on facility type and scale
     if (formData?.facilityType === 'manufacturing' || formData?.facilityType === 'automotive') {
-      recommendations?.primaryServices?.push('Structural Steel Erection', 'Industrial Fabrication');
+      recommendations?.primaryServices?.push('Montage de structures métalliques', 'Fabrication industrielle');
     }
     if (formData?.projectScale === 'large' || formData?.projectScale === 'enterprise') {
-      recommendations?.additionalServices?.push('Project Management', '24/7 Support');
+      recommendations?.additionalServices?.push('Gestion de projet', 'Support 24/7');
     }
     if (formData?.timeline === 'urgent') {
-      recommendations?.additionalServices?.push('Emergency Response Team');
+      recommendations?.additionalServices?.push('Équipe d’intervention rapide');
     }
 
-    recommendations.timeline = `Based on your ${formData?.timeline} timeline, we recommend a ${
-      formData?.timeline === 'urgent' ? '3-phase accelerated' : 'standard 4-phase'
-    } approach.`;
+    recommendations.timeline = `En fonction de votre délai ${formData?.timeline}, nous recommandons une approche ${
+      formData?.timeline === 'urgent' ? 'accélérée en 3 phases' : 'standard en 4 phases'
+    }.`;
 
-    recommendations.budgetRange = `For a ${formData?.projectScale} ${formData?.facilityType} project, typical investment ranges from €${
-      formData?.projectScale === 'small' ? '300K-700K' :
-      formData?.projectScale === 'medium' ? '700K-2.5M' :
-      formData?.projectScale === 'large' ? '2M-12M' : '10M+'
+    recommendations.budgetRange = `Pour un projet ${formData?.projectScale} de type ${formData?.facilityType}, 
+    l’investissement typique varie entre ${
+      formData?.projectScale === 'small' ? '300K – 700K DHS' :
+      formData?.projectScale === 'medium' ? '700K – 2,5M DHS' :
+      formData?.projectScale === 'large' ? '2M – 12M DHS' : '10M+ DHS'
     }.`;
 
     recommendations.nextSteps = [
-      'Schedule technical consultation with our engineering team',
-      'Conduct detailed site assessment and feasibility study',
-      'Develop customized project proposal with timeline and budget',
-      'Present solution to your stakeholder team'
+      'Planifier une consultation technique avec notre équipe d’ingénieurs',
+      'Réaliser une étude de site et de faisabilité détaillée',
+      'Développer une proposition personnalisée avec budget et calendrier',
+      'Présenter la solution à vos parties prenantes'
     ];
 
     setResults(recommendations);
@@ -108,10 +107,10 @@ const CapabilityAssessment = () => {
   };
 
   const steps = [
-    { number: 1, title: 'Project Details', icon: 'Building' },
-    { number: 2, title: 'Requirements', icon: 'Settings' },
-    { number: 3, title: 'Contact Info', icon: 'User' },
-    { number: 4, title: 'Recommendations', icon: 'Target' }
+    { number: 1, title: 'Détails du projet', icon: 'Building' },
+    { number: 2, title: 'Exigences', icon: 'Settings' },
+    { number: 3, title: 'Coordonnées', icon: 'User' },
+    { number: 4, title: 'Recommandations', icon: 'Target' }
   ];
 
   return (
@@ -122,13 +121,13 @@ const CapabilityAssessment = () => {
           <div className="text-center mb-12">
             <div className="inline-flex items-center space-x-2 bg-accent/10 text-accent px-4 py-2 rounded-full mb-6">
               <Icon name="Calculator" size={20} />
-              <span className="font-cta font-medium text-sm tracking-wide">CAPABILITY ASSESSMENT</span>
+              <span className="font-cta font-medium text-sm tracking-wide">ÉVALUATION DES CAPACITÉS</span>
             </div>
             <h2 className="font-headline text-3xl lg:text-4xl font-bold text-primary mb-4">
-              Find Your Perfect Service Match
+              Trouvez le service idéal pour votre projet
             </h2>
             <p className="text-text-secondary font-body text-lg max-w-2xl mx-auto">
-              Answer a few questions about your project and receive customized service recommendations with timeline and budget estimates.
+              Répondez à quelques questions et recevez des recommandations personnalisées avec délais et estimations budgétaires.
             </p>
           </div>
 
@@ -168,11 +167,11 @@ const CapabilityAssessment = () => {
           <div className="bg-white rounded-xl shadow-industrial p-8">
             {currentStep === 1 && (
               <div className="space-y-6">
-                <h3 className="font-headline text-2xl font-bold text-primary mb-6">Project Details</h3>
+                <h3 className="font-headline text-2xl font-bold text-primary mb-6">Détails du projet</h3>
                 
                 <Select
-                  label="Facility Type"
-                  description="What type of industrial facility are you working with?"
+                  label="Type d’installation"
+                  description="Quel type d’installation industrielle possédez-vous ?"
                   options={facilityTypes}
                   value={formData?.facilityType}
                   onChange={(value) => handleInputChange('facilityType', value)}
@@ -180,8 +179,8 @@ const CapabilityAssessment = () => {
                 />
 
                 <Select
-                  label="Project Scale"
-                  description="What's the estimated budget range for this project?"
+                  label="Échelle du projet"
+                  description="Quelle est la fourchette budgétaire estimée ?"
                   options={projectScales}
                   value={formData?.projectScale}
                   onChange={(value) => handleInputChange('projectScale', value)}
@@ -189,8 +188,8 @@ const CapabilityAssessment = () => {
                 />
 
                 <Select
-                  label="Timeline"
-                  description="When do you need the project completed?"
+                  label="Délai"
+                  description="Quand souhaitez-vous que le projet soit terminé ?"
                   options={timelines}
                   value={formData?.timeline}
                   onChange={(value) => handleInputChange('timeline', value)}
@@ -198,77 +197,77 @@ const CapabilityAssessment = () => {
                 />
 
                 <Input
-                  label="Project Location"
+                  label="Localisation du projet"
                   type="text"
-                  placeholder="City, Country"
+                  placeholder="Ville, Pays"
                   value={formData?.location}
                   onChange={(e) => handleInputChange('location', e?.target?.value)}
-                  description="This helps us assign the right regional team"
+                  description="Cela nous permet d’affecter l’équipe régionale appropriée"
                 />
               </div>
             )}
 
             {currentStep === 2 && (
               <div className="space-y-6">
-                <h3 className="font-headline text-2xl font-bold text-primary mb-6">Special Requirements</h3>
+                <h3 className="font-headline text-2xl font-bold text-primary mb-6">Exigences spéciales</h3>
                 
                 <div className="space-y-4">
                   <label className="font-cta font-medium text-primary">
-                    Special Requirements or Challenges
+                    Exigences ou défis particuliers
                   </label>
                   <textarea
                     className="w-full p-4 border border-gray-200 rounded-lg font-body resize-none focus:ring-2 focus:ring-accent focus:border-accent"
                     rows="6"
-                    placeholder="Describe any specific requirements, challenges, or constraints for your project..."
+                    placeholder="Décrivez les exigences, défis ou contraintes spécifiques de votre projet..."
                     value={formData?.specialRequirements}
                     onChange={(e) => handleInputChange('specialRequirements', e?.target?.value)}
                   />
                   <p className="text-sm text-text-secondary">
-                    Include details about environmental conditions, safety requirements, regulatory compliance, or technical specifications.
+                    Incluez des détails sur les conditions environnementales, exigences de sécurité, conformité réglementaire ou spécifications techniques.
                   </p>
                 </div>
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <div className="p-6 bg-surface rounded-lg">
-                    <h4 className="font-cta font-semibold text-primary mb-4">Common Requirements</h4>
+                    <h4 className="font-cta font-semibold text-primary mb-4">Exigences courantes</h4>
                     <ul className="space-y-2 text-sm">
                       <li className="flex items-center space-x-2">
                         <Icon name="CheckCircle" size={16} className="text-success" />
-                        <span>Hazardous environment compliance</span>
+                        <span>Conformité aux environnements dangereux</span>
                       </li>
                       <li className="flex items-center space-x-2">
                         <Icon name="CheckCircle" size={16} className="text-success" />
-                        <span>Seismic resistance requirements</span>
+                        <span>Exigences de résistance sismique</span>
                       </li>
                       <li className="flex items-center space-x-2">
                         <Icon name="CheckCircle" size={16} className="text-success" />
-                        <span>High-temperature applications</span>
+                        <span>Applications à haute température</span>
                       </li>
                       <li className="flex items-center space-x-2">
                         <Icon name="CheckCircle" size={16} className="text-success" />
-                        <span>Corrosion-resistant materials</span>
+                        <span>Matériaux résistants à la corrosion</span>
                       </li>
                     </ul>
                   </div>
                   
                   <div className="p-6 bg-surface rounded-lg">
-                    <h4 className="font-cta font-semibold text-primary mb-4">Specialized Services</h4>
+                    <h4 className="font-cta font-semibold text-primary mb-4">Services spécialisés</h4>
                     <ul className="space-y-2 text-sm">
                       <li className="flex items-center space-x-2">
                         <Icon name="Zap" size={16} className="text-accent" />
-                        <span>Emergency response capability</span>
+                        <span>Capacité d’intervention rapide</span>
                       </li>
                       <li className="flex items-center space-x-2">
                         <Icon name="Zap" size={16} className="text-accent" />
-                        <span>24/7 maintenance support</span>
+                        <span>Support maintenance 24/7</span>
                       </li>
                       <li className="flex items-center space-x-2">
                         <Icon name="Zap" size={16} className="text-accent" />
-                        <span>Phased construction approach</span>
+                        <span>Approche de construction par phases</span>
                       </li>
                       <li className="flex items-center space-x-2">
                         <Icon name="Zap" size={16} className="text-accent" />
-                        <span>Minimal downtime requirements</span>
+                        <span>Minimisation des interruptions</span>
                       </li>
                     </ul>
                   </div>
@@ -278,40 +277,40 @@ const CapabilityAssessment = () => {
 
             {currentStep === 3 && (
               <div className="space-y-6">
-                <h3 className="font-headline text-2xl font-bold text-primary mb-6">Contact Information</h3>
+                <h3 className="font-headline text-2xl font-bold text-primary mb-6">Coordonnées</h3>
                 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <Input
-                    label="Full Name"
+                    label="Nom complet"
                     type="text"
-                    placeholder="Your full name"
+                    placeholder="Votre nom complet"
                     value={formData?.contactInfo?.name}
                     onChange={(e) => handleInputChange('contactInfo.name', e?.target?.value)}
                     required
                   />
 
                   <Input
-                    label="Company"
+                    label="Entreprise"
                     type="text"
-                    placeholder="Company name"
+                    placeholder="Nom de l’entreprise"
                     value={formData?.contactInfo?.company}
                     onChange={(e) => handleInputChange('contactInfo.company', e?.target?.value)}
                     required
                   />
 
                   <Input
-                    label="Email Address"
+                    label="Adresse e-mail"
                     type="email"
-                    placeholder="your.email@company.com"
+                    placeholder="votre.email@entreprise.com"
                     value={formData?.contactInfo?.email}
                     onChange={(e) => handleInputChange('contactInfo.email', e?.target?.value)}
                     required
                   />
 
                   <Input
-                    label="Phone Number"
+                    label="Numéro de téléphone"
                     type="tel"
-                    placeholder="+33 1 23 45 67 89"
+                    placeholder="+212 6 12 34 56 78"
                     value={formData?.contactInfo?.phone}
                     onChange={(e) => handleInputChange('contactInfo.phone', e?.target?.value)}
                     required
@@ -322,9 +321,9 @@ const CapabilityAssessment = () => {
                   <div className="flex items-start space-x-3">
                     <Icon name="Shield" size={20} className="text-success flex-shrink-0 mt-1" />
                     <div>
-                      <h4 className="font-cta font-semibold text-primary mb-2">Privacy & Data Protection</h4>
+                      <h4 className="font-cta font-semibold text-primary mb-2">Confidentialité & Protection des données</h4>
                       <p className="text-sm text-text-secondary">
-                        Your information is protected under GDPR regulations. We'll only use this data to provide your customized recommendations and follow up on your project inquiry. You can request data deletion at any time.
+                        Vos informations sont protégées conformément au RGPD. Nous utiliserons ces données uniquement pour fournir vos recommandations personnalisées et pour le suivi de votre projet. Vous pouvez demander la suppression de vos données à tout moment.
                       </p>
                     </div>
                   </div>
@@ -339,10 +338,10 @@ const CapabilityAssessment = () => {
                     <Icon name="CheckCircle" size={32} className="text-success" />
                   </div>
                   <h3 className="font-headline text-2xl font-bold text-primary mb-2">
-                    Your Customized Recommendations
+                    Vos recommandations personnalisées
                   </h3>
                   <p className="text-text-secondary font-body">
-                    Based on your project requirements, here are our tailored service recommendations.
+                    En fonction de votre projet, voici nos recommandations de services adaptées.
                   </p>
                 </div>
 
@@ -351,7 +350,7 @@ const CapabilityAssessment = () => {
                     <div className="p-6 bg-accent/5 rounded-lg border border-accent/20">
                       <h4 className="font-cta font-semibold text-primary mb-4 flex items-center">
                         <Icon name="Star" size={20} className="text-accent mr-2" />
-                        Primary Services Recommended
+                        Services principaux recommandés
                       </h4>
                       <ul className="space-y-2">
                         {results?.primaryServices?.map((service, index) => (
@@ -366,7 +365,7 @@ const CapabilityAssessment = () => {
                     <div className="p-6 bg-surface rounded-lg">
                       <h4 className="font-cta font-semibold text-primary mb-4 flex items-center">
                         <Icon name="Plus" size={20} className="text-accent mr-2" />
-                        Additional Services
+                        Services supplémentaires
                       </h4>
                       <ul className="space-y-2">
                         {results?.additionalServices?.map((service, index) => (
@@ -383,7 +382,7 @@ const CapabilityAssessment = () => {
                     <div className="p-6 bg-surface rounded-lg">
                       <h4 className="font-cta font-semibold text-primary mb-4 flex items-center">
                         <Icon name="Clock" size={20} className="text-accent mr-2" />
-                        Timeline Recommendation
+                        Recommandation de délai
                       </h4>
                       <p className="font-body text-primary">{results?.timeline}</p>
                     </div>
@@ -391,7 +390,7 @@ const CapabilityAssessment = () => {
                     <div className="p-6 bg-surface rounded-lg">
                       <h4 className="font-cta font-semibold text-primary mb-4 flex items-center">
                         <Icon name="MADo" size={20} className="text-accent mr-2" />
-                        Budget Estimate
+                        Estimation budgétaire
                       </h4>
                       <p className="font-body text-primary">{results?.budgetRange}</p>
                     </div>
@@ -401,7 +400,7 @@ const CapabilityAssessment = () => {
                 <div className="p-6 bg-primary/5 rounded-lg border border-primary/20">
                   <h4 className="font-cta font-semibold text-primary mb-4 flex items-center">
                     <Icon name="MapPin" size={20} className="text-accent mr-2" />
-                    Recommended Next Steps
+                    Étapes suivantes recommandées
                   </h4>
                   <ol className="space-y-3">
                     {results?.nextSteps?.map((step, index) => (
@@ -426,7 +425,7 @@ const CapabilityAssessment = () => {
                   iconName="ChevronLeft"
                   iconPosition="left"
                 >
-                  Previous
+                  Précédent
                 </Button>
               )}
               
@@ -438,7 +437,7 @@ const CapabilityAssessment = () => {
                   iconName="ChevronRight"
                   iconPosition="right"
                 >
-                  Continue
+                  Continuer
                 </Button>
               )}
 
@@ -450,7 +449,7 @@ const CapabilityAssessment = () => {
                   iconName="Target"
                   iconPosition="right"
                 >
-                  Get Recommendations
+                  Obtenir recommandations
                 </Button>
               )}
 
@@ -461,7 +460,7 @@ const CapabilityAssessment = () => {
                     iconName="Download"
                     iconPosition="left"
                   >
-                    Download Report
+                    Télécharger le rapport
                   </Button>
                   <Button
                     variant="default"
@@ -469,7 +468,7 @@ const CapabilityAssessment = () => {
                     iconName="Phone"
                     iconPosition="left"
                   >
-                    Schedule Consultation
+                    Planifier une consultation
                   </Button>
                 </div>
               )}

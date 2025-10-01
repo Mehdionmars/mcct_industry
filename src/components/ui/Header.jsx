@@ -9,10 +9,10 @@ const Header = () => {
   const location = useLocation();
 
   const navigationItems = [
-    { name: 'Home', path: '/homepage', icon: 'Home' },
-    { name: 'Services', path: '/services', icon: 'Settings' },
-    { name: 'Projects', path: '/projects', icon: 'Building' },
-    { name: 'About', path: '/about', icon: 'Users' },
+    { name: 'Accueil', path: '/homepage', icon: 'Home' },
+    { name: 'Nos Services', path: '/services', icon: 'Settings' },
+    { name: 'Nos Projets', path: '/projects', icon: 'Building' },
+    { name: 'À Propos', path: '/about', icon: 'Users' },
   ];
 
   const secondaryItems = [
@@ -41,14 +41,14 @@ const Header = () => {
   };
 
   return (
-<header className="fixed top-0 left-0 right-0 z-50">
+<header className="sticky top-0 z-50">
   {/* Top Info Bar */}
-  <div className="bg-white text-text-primary text-xs lg:text-sm border-b border-gray-200">
-    <div className="industrial-container flex justify-end items-center h-8 lg:h-10 space-x-6">
-      <span>📍 Casablanca, Maroc</span>
-      <span>📞 +212 555 123 456</span>
-      <span>🏢 123 Rue Exemple, Casablanca</span>
-    </div>
+ <div className="bg-white text-gray-800 text-xs sm:text-xs lg:text-sm border-b border-gray-200">
+          <div className="max-w-7xl mx-auto px-2 sm:px-4 flex flex-wrap lg:flex-nowrap justify-center lg:justify-end items-center min-h-8 lg:h-10 gap-1 sm:gap-2 lg:gap-6 py-1 lg:py-0">
+            <span className="flex items-center gap-1 text-center">📍 Casablanca</span>
+            <span className="flex items-center gap-1">📞 +212 661 49 47 61</span>
+            <span className="hidden md:flex items-center gap-1">🏢 13, Rue Ahmed El Majjati, Res Les Alpes</span>
+          </div>
   </div>
 
 
@@ -173,23 +173,16 @@ const Header = () => {
 
               {/* Mobile CTA Section */}
               <div className="mt-6 pt-4 border-t border-gray-200 space-y-3">
-                <Button
-                  variant="default"
-                  fullWidth
-                  className="bg-accent hover:bg-accent/90 text-white font-cta font-semibold shadow-metallic"
-                  iconName="ArrowRight"
-                  iconPosition="right"
-                >
-                  Request Project Consultation
-                </Button>
-                
-                <div className="text-center">
-                  <p className="text-xs text-text-secondary font-mono tracking-wide">
-                    EMERGENCY RESPONSE AVAILABLE 24/7
-                  </p>
-                  <p className="text-sm font-cta font-semibold text-success mt-1">
-                    Call: (555) 123-4567
-                  </p>
+               <Button
+  variant="default"
+  fullWidth
+  className="bg-accent hover:bg-accent/90 text-white font-cta font-semibold shadow-metallic"
+  iconName="ArrowRight"
+  iconPosition="right"
+>
+  Demander une consultation de projet
+</Button>
+                <div className="text-sm text-text-secondary text-center">
                 </div>
               </div>
             </nav>

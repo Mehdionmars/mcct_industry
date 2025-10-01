@@ -27,21 +27,21 @@ const ContactHero = () => {
 
           {/* Main Heading */}
           <h1 className="font-headline text-4xl lg:text-6xl font-bold mb-6 leading-tight">
-            Let's Build Your
-            <span className="block text-accent">Industrial Vision</span>
+            VOTRE VISION ,
+            <span className="block text-accent">NOTRE MISSION</span>
           </h1>
 
           {/* Subheading */}
           <p className="text-xl lg:text-2xl text-white/90 mb-8 max-w-3xl mx-auto leading-relaxed">
-            From initial consultation to project completion, MCCT Industry is
-            your trusted partner in metallic industrial construction excellence.
+          "La construction métallique est notre spécialité, et notre
+ savoir-faire se transmet avec fierté."
           </p>
 
           {/* Key Features */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
+          {/* <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
             <div className="flex items-center justify-center space-x-3 bg-white/5 backdrop-blur-sm rounded-lg p-4">
               <Clock size={24} className="text-accent" />
-              <span className="font-cta font-medium">24/7 Emergency Response</span>
+              <span className="font-cta font-medium">24/7     </span>
             </div>
             <div className="flex items-center justify-center space-x-3 bg-white/5 backdrop-blur-sm rounded-lg p-4">
               <Shield size={24} className="text-accent" />
@@ -51,7 +51,7 @@ const ContactHero = () => {
               <Award size={24} className="text-accent" />
               <span className="font-cta font-medium">Certified Excellence</span>
             </div>
-          </div>
+          </div> */}
 
           {/* CTA Buttons */}
           <div className="flex flex-col sm:flex-row items-center justify-center space-y-4 sm:space-y-0 sm:space-x-6">
@@ -62,7 +62,7 @@ const ContactHero = () => {
               icon={<ArrowDown size={20} />}
               iconPosition="right"
             >
-              Start Your Project
+              COMMENCE TON PROJET
             </Button>
             <Button
               variant="outline"
@@ -71,23 +71,23 @@ const ContactHero = () => {
               icon={<Phone size={20} />}
               iconPosition="left"
             >
-              Emergency: (555) 123-4567
+              TEL : +212 661 49 47 61
             </Button>
           </div>
 
           {/* Trust Indicators */}
-          <div className="mt-16 pt-8 border-t border-white/20">
+          {/* <div className="mt-16 pt-8 border-t border-white/20">
             <p className="text-sm text-white/70 mb-4 font-mono tracking-wide">
               TRUSTED BY INDUSTRY LEADERS
             </p>
             <div className="flex items-center justify-center space-x-8 opacity-60">
-              <div className="text-2xl font-bold">500+</div>
+              <div className="text-2xl font-bold">50+</div>
               <div className="w-px h-8 bg-white/30"></div>
               <div className="text-2xl font-bold">25 Years</div>
               <div className="w-px h-8 bg-white/30"></div>
               <div className="text-2xl font-bold">Zero Incidents</div>
             </div>
-          </div>
+          </div> */}
         </div>
       </div>
 

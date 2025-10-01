@@ -3,13 +3,6 @@ import { useNavigate } from "react-router-dom";
 
 const projects = [
   {
-    id: 1,
-    title: "Bureaux et atelier de réparation en charpente métallique à Orgères (35)",
-    category: "Commerce automobile",
-    image: "/assets/images/image (1).jpg",
-    bg: "bg-white",
-  },
-  {
     id: 2,
     title: "Complexe sportif en charpente métallique à Saint-Sauveur-des-Landes (35)",
     category: "Tertiaire et collectivités",
@@ -28,13 +21,6 @@ const projects = [
     title: "Bâtiment artisanal en charpente métallique à Cléguer (56)",
     category: "BTP et artisanat",
     image: "/assets/images/image (15).jpg",
-    bg: "bg-white",
-  },
-  {
-    id: 6,
-    title: "Bâtiment artisanal en charpente métallique à Cléguer (56)",
-    category: "BTP et artisanat",
-    image: "/assets/images/box2.jpg",
     bg: "bg-white",
   },
 ];

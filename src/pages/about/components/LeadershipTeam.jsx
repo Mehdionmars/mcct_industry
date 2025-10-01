@@ -9,60 +9,16 @@ const LeadershipTeam = () => {
   const leaders = [
     {
       id: 1,
-      name: "Jean-Pierre Dubois",
-      position: "Chief Executive Officer & Founder",
-      experience: "32 years",
-      image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80",
-      bio: "Jean-Pierre founded MCCT Industry with a vision to revolutionize industrial construction through precision engineering. His leadership has guided the company through three decades of growth and innovation.",
-      expertise: ["Strategic Leadership", "Industrial Engineering", "Business Development", "Client Relations"],
-      certifications: ["Professional Engineer (PE)", "Project Management Professional (PMP)", "LEED AP"],
+      name: "Mohammed ID BELKACEM",
+      position: "Directeur Général",
+      experience: "",
+      image: "",
+
       contact: {
         email: "jp.dubois@mcct-industry.com",
         phone: "+33 1 42 86 83 00"
       }
     },
-    {
-      id: 2,
-      name: "Marie-Claire Rousseau",
-      position: "Chief Technical Officer",
-      experience: "28 years",
-      image: "https://images.unsplash.com/photo-1494790108755-2616c9c0e5b5?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80",
-      bio: "Marie-Claire leads our technical innovation initiatives and oversees all engineering operations. Her expertise in advanced welding technologies has positioned MCCT as an industry pioneer.",
-      expertise: ["Advanced Welding Technologies", "Structural Engineering", "Quality Assurance", "Technical Innovation"],
-      certifications: ["Certified Welding Inspector (CWI)", "Structural Engineering License", "ISO 9001 Lead Auditor"],
-      contact: {
-        email: "mc.rousseau@mcct-industry.com",
-        phone: "+33 1 42 86 83 01"
-      }
-    },
-    {
-      id: 3,
-      name: "Antoine Moreau",
-      position: "Director of Operations",
-      experience: "25 years",
-      image: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80",
-      bio: "Antoine ensures seamless project execution across all MCCT operations. His operational excellence has resulted in a 99.8% on-time delivery record and industry-leading safety standards.",
-      expertise: ["Project Management", "Operations Optimization", "Safety Management", "Team Leadership"],
-      certifications: ["OSHA 30-Hour Construction", "Six Sigma Black Belt", "Construction Safety Manager"],
-      contact: {
-        email: "a.moreau@mcct-industry.com",
-        phone: "+33 1 42 86 83 02"
-      }
-    },
-    {
-      id: 4,
-      name: "Sophie Laurent",
-      position: "Head of Sustainability & Innovation",
-      experience: "18 years",
-      image: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80",
-      bio: "Sophie drives MCCT's sustainability initiatives and innovation programs. Under her leadership, the company achieved carbon-neutral operations and pioneered green construction practices.",
-      expertise: ["Sustainable Construction", "Environmental Engineering", "Green Building Design", "Innovation Management"],
-      certifications: ["LEED AP BD+C", "BREEAM Assessor", "Environmental Management Systems"],
-      contact: {
-        email: "s.laurent@mcct-industry.com",
-        phone: "+33 1 42 86 83 03"
-      }
-    }
   ];
 
   return (
@@ -238,7 +194,7 @@ const LeadershipTeam = () => {
         )}
 
         {/* Team Stats */}
-        <div className="bg-white rounded-2xl p-8 industrial-shadow">
+        {/* <div className="bg-white rounded-2xl p-8 industrial-shadow">
           <h3 className="font-headline text-2xl font-bold text-primary text-center mb-8">
 Notre équipe en chiffres
           </h3>
@@ -263,7 +219,7 @@ Notre équipe en chiffres
               </div>
             ))}
           </div>
-        </div>
+        </div> */}
       </div>
     </section>
   );

@@ -7,7 +7,7 @@ import ProjectCard from './components/ProjectCard';
 import ProjectFilters from './components/ProjectFilters';
 import ProjectTimeline from './components/ProjectTimeline';
 import ProjectModal from './components/ProjectModal';
-import VirtualTourModal from './components/ProjectModal';
+import projectsData from '../../data/projects';
 
 const Projects = () => {
   const [viewMode, setViewMode] = useState('grid');
@@ -24,119 +24,11 @@ const Projects = () => {
   });
   const [selectedProject, setSelectedProject] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [isVirtualTourOpen, setIsVirtualTourOpen] = useState(false);
   const [virtualTourProject, setVirtualTourProject] = useState(null);
+  const [isVirtualTourOpen, setIsVirtualTourOpen] = useState(false);
 
-  // Mock projects data
-  const allProjects = [
-      {
-    id: 1,
-    title: "Centre de Production Automobile Renault",
-    location: "Lyon, France",
-    industry: "Manufacturing",
-    client: "Renault Group",
-    completionYear: 2023,
-    squareFootage: 45000,
-    steelTonnage: 2800,
-    timeline: 18,
-    safetyRecord: 0,
-    complexity: "High",
-    rating: 5,
-    projectValue: 12500000,
-    image: "/assets/images/image (1).jpg",
-    description: "Complexe industriel moderne pour la production...",
-    gallery: [
-      "/assets/images/image (15).jpg",
-      "/assets/images/image (16).jpg",
-      "/assets/images/image (17).jpg",
-      "/assets/images/image (18).jpg"
-    ],
-    hasVirtualTour: true,
-    featured: true,
-    awardWinning: true,
-    sustainableBuild: true,
-    coordinates: { lat: 45.7640, lng: 4.8357 },
-  },
-  {
-    id: 2,
-    title: "Centrale Solaire Thermique EDF",
-    location: "Marseille, France",
-    industry: "Energy",
-    client: "EDF Énergies Nouvelles",
-    completionYear: 2023,
-    squareFootage: 28000,
-    steelTonnage: 1850,
-    timeline: 14,
-    safetyRecord: 0,
-    complexity: "High",
-    rating: 5,
-    projectValue: 8900000,
-    image: "/assets/images/image (19).jpg",
-    description: "Installation de production d'énergie solaire...",
-    gallery: [
-      "/assets/images/image (20).jpg",
-      "/assets/images/image (21).jpg",
-      "/assets/images/image (22).jpg"
-    ],
-    hasVirtualTour: true,
-    featured: true,
-    sustainableBuild: true,
-    coordinates: { lat: 43.2965, lng: 5.3698 },
-  },
-  {
-    id: 3,
-    title: "Complexe Chimique Total Petrochemicals",
-    location: "Le Havre, France",
-    industry: "Chemical Processing",
-    client: "TotalEnergies",
-    completionYear: 2022,
-    squareFootage: 62000,
-    steelTonnage: 4200,
-    timeline: 24,
-    safetyRecord: 0,
-    complexity: "High",
-    rating: 5,
-    projectValue: 18500000,
-    image: "/assets/images/image (17).jpg",
-    description: "Unité de traitement pétrochimique...",
-    gallery: [
-      "/assets/images/image (24).jpg",
-      "/assets/images/image (25).jpg",
-      "/assets/images/image (26).jpg"
-    ],
-    hasVirtualTour: false,
-    featured: true,
-    awardWinning: false,
-    sustainableBuild: true,
-    coordinates: { lat: 49.4944, lng: 0.1079 },
-  },
-  {
-    id: 4,
-    title: "Centre Logistique Amazon",
-    location: "Metz, France",
-    industry: "Logistics",
-    client: "Amazon Logistics",
-    completionYear: 2023,
-    squareFootage: 75000,
-    steelTonnage: 3600,
-    timeline: 16,
-    safetyRecord: 0,
-    complexity: "Medium",
-    rating: 4,
-    projectValue: 15200000,
-    image: "/assets/images/image (27).jpg",
-    description: "Entrepôt automatisé de grande envergure...",
-    gallery: [
-      "/assets/images/image (15).jpg",
-      "/assets/images/image (16).jpg",
-      "/assets/images/image (17).jpg"
-    ],
-    hasVirtualTour: true,
-    featured: false,
-    sustainableBuild: true,
-    coordinates: { lat: 49.1193, lng: 6.1757 },
-  },
-  ];
+  // Transforme l'objet en tableau
+  const allProjects = Object.values(projectsData);
 
   // Filter and sort projects
   const filteredProjects = useMemo(() => {
@@ -273,14 +165,14 @@ const Projects = () => {
         <Header />
         
         {/* Hero Section */}
-      <section className="pt-[120px] lg:pt-[140px] pb-12 bg-gradient-to-br from-primary via-secondary to-primary relative overflow-hidden">
-  <div className="absolute inset-0 bg-black/20"></div>
-  <div className="absolute inset-0">
-    <div className="absolute top-20 left-10 w-32 h-32 bg-accent/10 rounded-full blur-3xl"></div>
-    <div className="absolute bottom-20 right-10 w-40 h-40 bg-white/5 rounded-full blur-3xl"></div>
-  </div>
-  
-  <div className="industrial-container relative z-10">
+        <section className="pt-[120px] lg:pt-[140px] pb-12 bg-gradient-to-br from-primary via-secondary to-primary relative overflow-hidden">
+          <div className="absolute inset-0 bg-black/20"></div>
+          <div className="absolute inset-0">
+            <div className="absolute top-20 left-10 w-32 h-32 bg-accent/10 rounded-full blur-3xl"></div>
+            <div className="absolute bottom-20 right-10 w-40 h-40 bg-white/5 rounded-full blur-3xl"></div>
+          </div>
+          
+          <div className="industrial-container relative z-10">
             <div className="max-w-4xl mx-auto text-center">
               <div className="flex items-center justify-center space-x-3 mb-9">
                 <div className="w-16 h-16 bg-white/10 rounded-lg flex items-center justify-center">
@@ -320,29 +212,6 @@ const Projects = () => {
                   <div className="text-orange-500 font-mono text-sm tracking-wider">Satisfaction Client</div>
                 </div>
               </div>
-
-              {/* <div className="flex flex-col sm:flex-row items-center justify-center space-y-4 sm:space-y-0 sm:space-x-4">
-                <Button
-                  variant="default"
-                  size="lg"
-                  className="bg-accent hover:bg-accent/90 text-white font-cta font-semibold shadow-industrial"
-                  iconName="Eye"
-                  iconPosition="left"
-                  iconSize={20}
-                >
-                  Explorer les Projets
-                </Button>
-                <Button
-                  variant="outline"
-                  size="lg"
-                  className="border-white/30 text-white hover:bg-white/10 font-cta font-medium"
-                  iconName="Camera"
-                  iconPosition="left"
-                  iconSize={20}
-                >
-                  Visites Virtuelles
-                </Button>
-              </div> */}
             </div>
           </div>
         </section>
@@ -375,7 +244,7 @@ const Projects = () => {
                 <button
                   onClick={() => setViewMode('grid')}
                   className={`flex items-center space-x-2 px-4 py-2 rounded-md text-sm font-medium transition-colors duration-200 ${
-                    viewMode === 'grid' ?'bg-white text-primary shadow-sm' :'text-text-secondary hover:text-primary'
+                    viewMode === 'grid' ? 'bg-white text-primary shadow-sm' : 'text-text-secondary hover:text-primary'
                   }`}
                 >
                   <Icon name="Grid3X3" size={16} />
@@ -384,7 +253,7 @@ const Projects = () => {
                 <button
                   onClick={() => setViewMode('timeline')}
                   className={`flex items-center space-x-2 px-4 py-2 rounded-md text-sm font-medium transition-colors duration-200 ${
-                    viewMode === 'timeline' ?'bg-white text-primary shadow-sm' :'text-text-secondary hover:text-primary'
+                    viewMode === 'timeline' ? 'bg-white text-primary shadow-sm' : 'text-text-secondary hover:text-primary'
                   }`}
                 >
                   <Icon name="Clock" size={16} />
@@ -451,7 +320,7 @@ const Projects = () => {
               </h2>
               
               <p className="text-xl text-white/90 mb-8 leading-relaxed">
-                Discutons de vos besoins en construction métallique industrielle.\n
+                Discutons de vos besoins en construction métallique industrielle.
                 Notre équipe d'experts est prête à transformer votre vision en réalité.
               </p>
 

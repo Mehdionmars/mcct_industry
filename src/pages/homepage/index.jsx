@@ -5,7 +5,6 @@ import HeroSection from './components/HeroSection';
 import CapabilityMatrix from './components/CapabilityMatrix';
 import EngineeredTrustSection from './components/EngineeredTrustSection';
 import TestimonialCarousel from './components/TestimonialCarousel';
-import EmergencyContactSection from './components/EmergencyContactSection';
 import ProjectsSection from "./components/ProjectsSection";
 
 const Homepage = () => {
@@ -23,7 +22,7 @@ const Homepage = () => {
       <div className="min-h-screen bg-background">
         <Header />
         
-        <main className="pt-16 lg:pt-20">
+        <main className="">
           {/* Hero Section with Dynamic Project Showcase */}
           <HeroSection />
           
@@ -39,8 +38,8 @@ const Homepage = () => {
           <ProjectsSection />
 
 
-          {/* Emergency Contact Section */}
-          <EmergencyContactSection />
+          {/*   Contact Section */}
+          {/* < ContactSection /> */}
         </main>
           {/* Client Testimonial Carousel */}
           <TestimonialCarousel />
@@ -91,15 +90,15 @@ const Homepage = () => {
                 <div className="space-y-3 text-white/80">
                   <div className="flex items-center space-x-2">
                     <span className="text-accent">📞</span>
-                    <span className="text-sm">+33 1 42 86 15 30</span>
+                    <span className="text-sm">+212 661 49 47 61 </span>
                   </div>
-                  <div className="flex items-center space-x-2">
+                  {/* <div className="flex items-center space-x-2">
                     <span className="text-error">🚨</span>
-                    <span className="text-sm font-medium text-error">Urgence: +33 1 42 86 24 7</span>
-                  </div>
+                    <span className="text-sm font-medium text-error">Urgence: +33 1 42 86 24 7</span> 
+                  </div> */}
                   <div className="flex items-center space-x-2">
                     <span className="text-accent">✉️</span>
-                    <span className="text-sm">contact@mcct-industry.fr</span>
+                    <span className="text-sm">contact@mcct-industry.ma/</span>
                   </div>
                   <div className="flex items-center space-x-2">
                     <span className="text-accent">📍</span>

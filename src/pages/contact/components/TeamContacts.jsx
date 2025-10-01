@@ -79,18 +79,18 @@ const TeamContacts = () => {
     }
   ];
 
-  const emergencyContacts = [
+  const  Contacts = [
     {
-      title: "Emergency Response Team",
-      description: "24/7 emergency repair and maintenance services",
+      title: "     Team",
+      description: "24/7   repair and maintenance services",
       phone: "+33 4 72 34 56 99",
-      email: "emergency@mcct.com",
+      email: " @mcct.com",
       icon: "AlertTriangle",
       color: "error"
     },
     {
       title: "After-Hours Support",
-      description: "Non-emergency support outside business hours",
+      description: "Non-  support outside business hours",
       phone: "+33 4 72 34 57 00",
       email: "support@mcct.com",
       icon: "Clock",
@@ -245,11 +245,11 @@ const TeamContacts = () => {
           ))}
         </div>
 
-        {/* Emergency Contacts */}
+        {/*   Contacts */}
         <div className="bg-white rounded-xl shadow-industrial border border-gray-200 p-8 lg:p-12">
           <div className="text-center mb-8">
             <h3 className="font-headline text-2xl font-bold text-primary mb-4">
-              Emergency & After-Hours Support
+                & After-Hours Support
             </h3>
             <p className="text-text-secondary max-w-2xl mx-auto">
               When urgent situations arise, our specialized support teams are available 
@@ -258,7 +258,7 @@ const TeamContacts = () => {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {emergencyContacts?.map((contact, index) => (
+            { Contacts?.map((contact, index) => (
               <div
                 key={index}
                 className="bg-surface rounded-lg border border-gray-200 p-6 text-center industrial-hover"
@@ -299,7 +299,7 @@ const TeamContacts = () => {
             <div className="inline-flex items-center space-x-2 bg-success/10 rounded-full px-6 py-3 mb-4">
               <Icon name="Shield" size={16} className="text-success" />
               <span className="text-sm font-cta font-medium text-success">
-                All emergency calls are prioritized and logged for quality assurance
+                All   calls are prioritized and logged for quality assurance
               </span>
             </div>
             <p className="text-sm text-text-secondary">

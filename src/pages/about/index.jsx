@@ -27,7 +27,7 @@ const About = () => {
     <div className="min-h-screen bg-white">
       <Header />
       {/* Main Content */}
-      <main className="pt-16 lg:pt-20">
+      <main className="">
         {/* Hero Section */}
         <HeroSection />
         
@@ -58,16 +58,20 @@ const About = () => {
                 </div>
                 <div>
                   <h3 className="font-headline text-xl font-bold">MCCT Industry</h3>
-                  <p className="font-mono text-xs text-gray-400 tracking-wider">ENGINEERED EXCELLENCE</p>
+                  <p className="font-mono text-xs text-gray-400 tracking-wider">INGÉNIÉRIE D'EXCELLENCE</p>
                 </div>
               </div>
               
               <p className="text-gray-300 leading-relaxed mb-6 max-w-md">
-                For over three decades, we've been engineering excellence in metallic industrial construction, 
-                building the backbone of industry with unwavering precision and reliability.
+                Grâce à notre solide expérience, nos ressources
+ techniques et humaines, MCCT INDUSTRY s'est
+ forgé une réputation de leader dans le secteur de
+ la construction métallique. Nous avons gagné la
+ confiance de nos clients en livrant des réalisations
+ qui répondent pleinement à leurs attentes.
               </p>
               
-              <div className="flex items-center space-x-4">
+              {/* <div className="flex items-center space-x-4">
                 <div className="text-center">
                   <div className="text-2xl font-bold text-accent">30+</div>
                   <div className="text-xs text-gray-400">Years</div>
@@ -80,18 +84,18 @@ const About = () => {
                   <div className="text-2xl font-bold text-accent">99.8%</div>
                   <div className="text-xs text-gray-400">Safety</div>
                 </div>
-              </div>
+              </div> */}
             </div>
 
             {/* Quick Links */}
             <div>
-              <h4 className="font-headline text-lg font-bold mb-4">Quick Links</h4>
+              <h4 className="font-headline text-lg font-bold mb-4">Lien rapide</h4>
               <ul className="space-y-2">
                 {[
-                  { name: 'Our Services', href: '/services' },
-                  { name: 'Project Portfolio', href: '/projects' },
-                  { name: 'Innovation Lab', href: '/innovation' },
-                  { name: 'Contact Us', href: '/contact' }
+                  { name: 'Nos Services', href: '/services' },
+                  { name: 'Portefeuille de Projets', href: '/projects' },
+                  { name: 'Laboratoire d\'Innovation', href: '/innovation' },
+                  { name: 'Contactez-nous', href: '/contact' }
                 ]?.map((link, index) => (
                   <li key={index}>
                     <a 
@@ -110,9 +114,10 @@ const About = () => {
               <h4 className="font-headline text-lg font-bold mb-4">Contact Info</h4>
               <div className="space-y-3">
                 <div className="text-sm text-gray-300">
-                  <div className="font-medium">Headquarters</div>
-                  <div>123 Industrial Avenue</div>
-                  <div>75001 Paris, France</div>
+                  <div className="font-medium">Notre Bureau</div>
+
+                                     <span className="text-sm">13, rue Ahmed El Mejatti -ex Alpes , rés. les Alpes, 1° étg. 20330 Casablanca - Maroc</span>
+
                 </div>
                 <div className="text-sm text-gray-300">
                   <div className="font-medium">Phone</div>
@@ -129,7 +134,7 @@ const About = () => {
           {/* Bottom Bar */}
           <div className="border-t border-gray-700 mt-12 pt-8 flex flex-col md:flex-row justify-between items-center">
             <div className="text-sm text-gray-400">
-              © {new Date()?.getFullYear()} MCCT Industry. All rights reserved.
+              © {new Date()?.getFullYear()} MCCT Industry. tout droit est reserve.
             </div>
             <div className="flex items-center space-x-6 mt-4 md:mt-0">
               <a href="#" className="text-sm text-gray-400 hover:text-accent industrial-transition">
