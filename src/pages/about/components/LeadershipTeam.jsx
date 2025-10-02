@@ -2,24 +2,11 @@ import React, { useState } from 'react';
 import Icon from '../../../components/AppIcon';
 import Image from '../../../components/AppImage';
 import Button from '../../../components/ui/Button';
+import { useTeamMembers } from '../../../hooks/useTeamMembers';
 
 const LeadershipTeam = () => {
+  const { teamMembers: leaders, loading, error } = useTeamMembers();
   const [selectedMember, setSelectedMember] = useState(null);
-
-  const leaders = [
-    {
-      id: 1,
-      name: "Mohammed ID BELKACEM",
-      position: "Directeur Général",
-      experience: "",
-      image: "",
-
-      contact: {
-        email: "jp.dubois@mcct-industry.com",
-        phone: "+33 1 42 86 83 00"
-      }
-    },
-  ];
 
   return (
     <section className="bg-surface py-20 lg:py-32">
@@ -46,7 +33,29 @@ const LeadershipTeam = () => {
           </p>
         </div>
 
+        {/* Loading State */}
+        {loading && (
+          <div className="text-center py-16">
+            <div className="w-16 h-16 border-4 border-accent border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
+            <p className="text-text-secondary">Chargement de l'équipe...</p>
+          </div>
+        )}
+
+        {/* Error State */}
+        {error && (
+          <div className="text-center py-16">
+            <div className="w-24 h-24 bg-red-100 rounded-full flex items-center justify-center mx-auto mb-6">
+              <Icon name="AlertCircle" size={32} className="text-red-500" />
+            </div>
+            <h3 className="font-headline text-xl font-bold text-primary mb-2">
+              Erreur de chargement
+            </h3>
+            <p className="text-text-secondary mb-6">{error}</p>
+          </div>
+        )}
+
         {/* Leadership Grid */}
+        {!loading && !error && (
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8 mb-16">
           {leaders?.map((leader) => (
             <div
@@ -96,6 +105,7 @@ const LeadershipTeam = () => {
             </div>
           ))}
         </div>
+        )}
 
         {/* Detailed Profile Modal */}
         {selectedMember && (
@@ -121,7 +131,7 @@ const LeadershipTeam = () => {
                       </p>
                       <div className="flex items-center space-x-2 text-sm text-gray-500">
                         <Icon name="Clock" size={14} />
-                        <span>{selectedMember?.experience} experience</span>
+                        <span>{selectedMember?.experience} d'experience</span>
                       </div>
                     </div>
                   </div>
@@ -149,11 +159,11 @@ const LeadershipTeam = () => {
                       <div className="space-y-2">
                         <div className="flex items-center space-x-3">
                           <Icon name="Mail" size={16} className="text-accent" />
-                          <span className="text-sm text-gray-600">{selectedMember?.contact?.email}</span>
+                          <span className="text-sm text-gray-600">{selectedMember?.email}</span>
                         </div>
                         <div className="flex items-center space-x-3">
                           <Icon name="Phone" size={16} className="text-accent" />
-                          <span className="text-sm text-gray-600">{selectedMember?.contact?.phone}</span>
+                          <span className="text-sm text-gray-600">{selectedMember?.phone}</span>
                         </div>
                       </div>
                     </div>
