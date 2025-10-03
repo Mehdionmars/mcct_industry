@@ -11,7 +11,7 @@ export default defineConfig({
   outDir: "dist",
     chunkSizeWarningLimit: 2000,
   },
-base: process.env.VITE_BASE_URL || "/",
+  base: "/",
   plugins: [tsconfigPaths(), react(), tagger()],
   server: {
     port: "4028",
