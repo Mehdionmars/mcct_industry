@@ -195,22 +195,22 @@ const Projects = () => {
 
               {/* Stats */}
               <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mb-8">
-                <div className="text-center">
+                {/* <div className="text-center">
                   <div className="text-3xl font-bold text-white mb-1">150+</div>
                   <div className="text-orange-500 font-mono text-sm tracking-wider">Projets Réalisés</div>
-                </div>
-                <div className="text-center">
+                </div> */}
+                {/* <div className="text-center">
                   <div className="text-3xl font-bold text-white mb-1">2M+</div>
                   <div className="text-orange-500 font-mono text-sm tracking-wider">m² Construits</div>
-                </div>
-                <div className="text-center">
+                </div> */}
+                {/* <div className="text-center">
                   <div className="text-3xl font-bold text-white mb-1">50K+</div>
                   <div className="text-orange-500 font-mono text-sm tracking-wider">Tonnes d'Acier</div>
-                </div>
-                <div className="text-center">
+                </div> */}
+                {/* <div className="text-center">
                   <div className="text-3xl font-bold text-white mb-1">98%</div>
                   <div className="text-orange-500 font-mono text-sm tracking-wider">Satisfaction Client</div>
-                </div>
+                </div> */}
               </div>
             </div>
           </div>
@@ -325,16 +325,16 @@ const Projects = () => {
               </p>
 
               <div className="flex flex-col sm:flex-row items-center justify-center space-y-4 sm:space-y-0 sm:space-x-4">
-                <Button
-                  variant="default"
-                  size="lg"
-                  className="bg-accent hover:bg-accent/90 text-white font-cta font-semibold shadow-industrial"
-                  iconName="ArrowRight"
-                  iconPosition="right"
-                  iconSize={20}
-                >
-                  Demander un Devis
-                </Button>
+<a href="/contact">
+  <Button 
+    variant="default" 
+    className="bg-accent hover:bg-accent/90" 
+    iconName="MessageSquare" 
+    iconPosition="left"
+  >
+    Demander un devis
+  </Button>
+</a>
                 <Button
                   variant="outline"
                   size="lg"

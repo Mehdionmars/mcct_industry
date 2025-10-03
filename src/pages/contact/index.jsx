@@ -14,21 +14,26 @@ const ContactPage = () => {
 
   return (
     <>
-      <Helmet>
-        <title>Contact MCCT Industry - EXPERT EN CONSTRUCTION METALLIQUE</title>
-        <meta 
-          name="description" 
-          content="Connect with MCCT Industry's expert team for industrial construction projects. 24/7     , project consultations, and technical support across Southern France." 
-        />
-        <meta name="keywords" content="MCCT Industry contact, industrial construction consultation,   repair services, project inquiry, metallic construction experts, France" />
-        <meta property="og:title" content="Contact MCCT Industry - Partnership Portal" />
-        <meta property="og:description" content="Connect with MCCT Industry's expert team for industrial construction projects. 24/7      and technical support." />
-        <meta property="og:type" content="website" />
-        <link rel="canonical" href="/contact" />
-      </Helmet>
-      <div className="min-h-screen bg-background">
-        <Header />
-        
+  <Helmet>
+    <title>Contact MCCT Industry - EXPERT EN CONSTRUCTION MÉTALLIQUE</title>
+    <meta 
+      name="description" 
+      content="Contactez l’équipe experte de MCCT Industry pour vos projets de construction métallique et industrielle. Consultations 24/7 et assistance technique partout au Maroc." 
+    />
+    <meta 
+      name="keywords" 
+      content="MCCT Industry contact, consultation construction métallique, services de réparation, demande de projet, experts en construction métallique, Maroc" 
+    />
+    <meta property="og:title" content="Contact MCCT Industry - Portail de Contact" />
+    <meta 
+      property="og:description" 
+      content="Contactez l’équipe experte de MCCT Industry pour vos projets de construction industrielle. Assistance technique et accompagnement 24/7." 
+    />
+    <meta property="og:type" content="website" />
+    <link rel="canonical" href="/contact" />
+  </Helmet>
+  <div className="min-h-screen bg-background">
+    <Header />
         <main className="">
           {/* Hero Section */}
           <ContactHero />

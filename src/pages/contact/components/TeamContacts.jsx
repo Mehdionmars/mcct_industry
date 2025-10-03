@@ -10,8 +10,8 @@ const TeamContacts = () => {
       name: "Jean-Pierre Dubois",
       position: "Project Director",
       department: "Project Management",
-      email: "jp.dubois@mcct.com",
-      phone: "+33 4 72 34 56 79",
+      email: "m.idbelkacem@mcct-industry.ma",
+      phone: "+212 661 494761",
       avatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=400&fit=crop&crop=face",
       specialties: [
         "Large-scale Industrial Projects",
@@ -19,88 +19,34 @@ const TeamContacts = () => {
         "Client Relationship Management",
         "Project Timeline Optimization"
       ],
-      experience: "15+ years",
-      languages: ["French", "English", "German"],
-      availability: "Monday - Friday, 8:00 AM - 6:00 PM"
+      experience: "",
+      languages: [""],
+      availability: ""
     },
-    {
-      id: 2,
-      name: "Marie-Claire Rousseau",
-      position: "Safety Coordinator",
-      department: "Safety & Compliance",
-      email: "mc.rousseau@mcct.com",
-      phone: "+33 4 72 34 56 80",
-      avatar: "https://images.unsplash.com/photo-1494790108755-2616b612b786?w=400&h=400&fit=crop&crop=face",
-      specialties: [
-        "Industrial Safety Standards",
-        "OSHA Compliance",
-        "Risk Assessment",
-        "Safety Training Programs"
-      ],
-      experience: "12+ years",
-      languages: ["French", "English"],
-      availability: "Monday - Friday, 7:00 AM - 5:00 PM"
-    },
-    {
-      id: 3,
-      name: "Antoine Moreau",
-      position: "Technical Specialist",
-      department: "Engineering & Design",
-      email: "a.moreau@mcct.com",
-      phone: "+33 4 72 34 56 81",
-      avatar: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=400&h=400&fit=crop&crop=face",
-      specialties: [
-        "Structural Engineering",
-        "Material Specifications",
-        "CAD Design & Modeling",
-        "Technical Documentation"
-      ],
-      experience: "18+ years",
-      languages: ["French", "English", "Italian"],
-      availability: "Monday - Friday, 8:00 AM - 6:00 PM"
-    },
-    {
-      id: 4,
-      name: "Sophie Lefevre",
-      position: "Client Relations Manager",
-      department: "Business Development",
-      email: "s.lefevre@mcct.com",
-      phone: "+33 4 72 34 56 82",
-      avatar: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=400&h=400&fit=crop&crop=face",
-      specialties: [
-        "Partnership Development",
-        "Contract Negotiation",
-        "Vendor Relations",
-        "Business Strategy"
-      ],
-      experience: "10+ years",
-      languages: ["French", "English", "Spanish"],
-      availability: "Monday - Friday, 9:00 AM - 6:00 PM"
-    }
   ];
 
   const  Contacts = [
     {
-      title: "     Team",
-      description: "24/7   repair and maintenance services",
-      phone: "+33 4 72 34 56 99",
-      email: " @mcct.com",
+      title: "Support Technique d'Urgence",
+      description: "24/7 Support technique pour les situations critiques",
+      phone: "+212 661 49 47 61",
+      email: "contact@mcct-industry.ma",
       icon: "AlertTriangle",
       color: "error"
     },
     {
-      title: "After-Hours Support",
-      description: "Non-  support outside business hours",
-      phone: "+33 4 72 34 57 00",
-      email: "support@mcct.com",
+      title: "Hors-Temps Support",
+      description: "Non-urgent support outside business hours",
+      phone: "+212 661 49 47 63",
+      email: "contact@mcct-industry.ma",
       icon: "Clock",
       color: "warning"
     },
     {
-      title: "Technical Hotline",
-      description: "Immediate technical consultation and guidance",
-      phone: "+33 4 72 34 57 01",
-      email: "technical@mcct.com",
+      title: "Direction Technique",
+      description: "Consultation et support technique spécialisé immédiat",
+      phone: "+212 661 49 47 62",
+      email: "D.Technique@mcct-industry.ma",
       icon: "Settings",
       color: "primary"
     }

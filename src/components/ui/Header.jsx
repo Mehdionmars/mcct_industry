@@ -173,15 +173,16 @@ const Header = () => {
 
               {/* Mobile CTA Section */}
               <div className="mt-6 pt-4 border-t border-gray-200 space-y-3">
-               <Button
-  variant="default"
-  fullWidth
-  className="bg-accent hover:bg-accent/90 text-white font-cta font-semibold shadow-metallic"
-  iconName="ArrowRight"
-  iconPosition="right"
->
-  Demander une consultation de projet
-</Button>
+<a href="/contact">
+  <Button 
+    variant="default" 
+    className="bg-accent hover:bg-accent/90" 
+    iconName="MessageSquare" 
+    iconPosition="left"
+  >
+    Demander un devis
+  </Button>
+</a>
                 <div className="text-sm text-text-secondary text-center">
                 </div>
               </div>
