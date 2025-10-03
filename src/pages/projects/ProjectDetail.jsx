@@ -140,16 +140,14 @@ const ProjectDetail = () => {
                   >
                     Nous appeler
                   </Button>
-<a href="/contact">
-  <Button 
-    variant="default" 
-    className="bg-accent hover:bg-accent/90" 
-    iconName="MessageSquare" 
-    iconPosition="left"
-  >
-    Demander un devis
-  </Button>
-</a>
+                  <Button 
+                    variant="outline"
+                    className="w-full border-white text-white hover:bg-white hover:text-sky-600"
+                    iconName="Mail"
+                    iconPosition="left"
+                  >
+                    Demander un devis
+                  </Button>
                 </div>
               </div>
             </div>

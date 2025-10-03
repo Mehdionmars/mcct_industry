@@ -93,7 +93,7 @@ const ContactMethods = () => {
   const contactMethods = [
     {
       id: 1,
-      title: "Consultation de Projet",
+      title: "Project Consultation",
       description:
         "Planifiez une consultation avec nos experts pour discuter de vos besoins spécifiques en matière de construction industrielle.",
       icon: "Building2",
@@ -102,8 +102,8 @@ const ContactMethods = () => {
       details: [
         // "Consultation initiale gratuite",
         // "",
-        // "Propositions de projets personnalisés",
-        // "Examen de faisabilité technique",
+        // "Custom project proposals",
+        // "Technical feasibility review",
       ],
     },
   ];

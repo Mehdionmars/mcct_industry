@@ -6,12 +6,12 @@ const LocationInfo = () => {
   const locations = [
     {
       id: 1,
-      name: "MCCT Industry - Casablanca",
-      type: "Siège Technique et Administratif",
-      address: "13, rue Ahmed El Mejatti -ex Alpes , rés. les Alpes, 1° étg. 20330 Casablanca - Maroc",
-      city: "Casablanca, Maroc",
-      phone: "+212 661 49 47 61",
-      email: "contact@mcct-industry.ma",
+      name: "MCCT Headquarters",
+      type: "Main Office & Engineering Center",
+      address: "125 Avenue de l\'Industrie",
+      city: "Lyon, France 69003",
+      phone: "+33 4 72 34 56 78",
+      email: "lyon@mcct.com",
     },
   ];
 
@@ -43,17 +43,17 @@ const LocationInfo = () => {
         <div className="text-center mb-16">
           <div className="inline-flex items-center space-x-2 bg-success/10 rounded-full px-6 py-3 mb-6">
             <Icon name="MapPin" size={20} className="text-success" />
-            <span className="font-cta font-medium text-sm tracking-wide text-success">Localisation</span>
+            <span className="font-cta font-medium text-sm tracking-wide text-success">LOCATIONS & SERVICE AREAS</span>
           </div>
           
           <h2 className="font-headline text-3xl lg:text-5xl font-bold text-primary mb-6">
-Trouvez nous facilement
-            <span className="block text-accent">Partout au maroc</span>
+            Find Us Across
+            <span className="block text-accent">Southern France</span>
           </h2>
           
           <p className="text-lg text-text-secondary max-w-3xl mx-auto leading-relaxed">
-            Avec des installations stratégiquement situées et une couverture régionale complète,
-            MCCT Industry est positionnée pour répondre efficacement à vos besoins en construction industrielle.
+            With strategically located facilities and comprehensive regional coverage, 
+            MCCT Industry is positioned to serve your industrial construction needs efficiently.
           </p>
         </div>
 
@@ -118,7 +118,7 @@ Trouvez nous facilement
 
                 {/* Services */}
                 <div className="mb-6">
-                  <h4 className="font-cta font-semibold text-primary mb-3">Services Disponibles</h4>
+                  <h4 className="font-cta font-semibold text-primary mb-3">Services Available</h4>
                   <div className="grid grid-cols-2 gap-2">
                     {location?.services?.map((service, index) => (
                       <div key={index} className="flex items-center space-x-2">
@@ -131,7 +131,7 @@ Trouvez nous facilement
 
                 {/* Features */}
                 <div className="mb-6">
-                  <h4 className="font-cta font-semibold text-primary mb-3">Caractéristiques de l'établissement</h4>
+                  <h4 className="font-cta font-semibold text-primary mb-3">Facility Features</h4>
                   <div className="grid grid-cols-2 gap-2">
                     {location?.features?.map((feature, index) => (
                       <div key={index} className="flex items-center space-x-2">
@@ -151,7 +151,7 @@ Trouvez nous facilement
                     iconName="Phone"
                     iconPosition="left"
                   >
-                    Appeler la localisation
+                    Call Location
                   </Button>
                   <Button
                     variant="outline"
@@ -160,7 +160,7 @@ Trouvez nous facilement
                     iconName="Navigation"
                     iconPosition="left"
                   >
-                    Obtenir des directions
+                    Get Directions
                   </Button>
                 </div>
               </div>
@@ -172,11 +172,11 @@ Trouvez nous facilement
         <div className="bg-surface rounded-xl shadow-industrial border border-gray-200 p-8 lg:p-12">
           <div className="text-center mb-8">
             <h3 className="font-headline text-2xl font-bold text-primary mb-4">
-              Couverture des Services Régionaux
+              Regional Service Coverage
             </h3>
             <p className="text-text-secondary max-w-2xl mx-auto">
-              Notre positionnement stratégique nous permet de fournir une couverture complète à travers
-              le Maroc avec des délais variables en fonction de l'emplacement.
+              Our strategic positioning allows us to provide comprehensive coverage across 
+              Southern France with varying    times based on location.
             </p>
           </div>
 
@@ -211,11 +211,11 @@ Trouvez nous facilement
             <div className="inline-flex items-center space-x-2 bg-primary/10 rounded-full px-6 py-3 mb-4">
               <Icon name="Info" size={16} className="text-primary" />
               <span className="text-sm font-cta font-medium text-primary">
-                Couverture étendue disponible pour les projets à grande échelle
+                Extended coverage available for large-scale projects
               </span>
             </div>
             <p className="text-sm text-text-secondary">
-              Contactez-nous pour discuter de la disponibilité des services dans d'autres régions du Maroc et des pays voisins.
+              Contact us to discuss service availability in other regions of France and neighboring countries.
             </p>
           </div>
         </div>

@@ -1,12 +1,32 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import { useProjects } from "../../../hooks/useProjects";
+
+const projects = [
+  {
+    id: 2,
+    title: "Complexe sportif en charpente métallique à Saint-Sauveur-des-Landes (35)",
+    category: "Tertiaire et collectivités",
+    image: "/assets/images/image (17).jpg",
+    bg: "bg-white",
+  },
+  {
+    id: 3,
+    title: "Bâtiment en charpente métallique pour les carrières Henry Frères à Javené (35)",
+    category: "BTP et artisanat",
+    image: "/assets/images/image (16).jpg",
+    bg: "bg-white",
+  },
+  {
+    id: 4,
+    title: "Bâtiment artisanal en charpente métallique à Cléguer (56)",
+    category: "BTP et artisanat",
+    image: "/assets/images/image (15).jpg",
+    bg: "bg-white",
+  },
+];
 
 const ProjectsSection = () => {
   const navigate = useNavigate();
-  const { projects, loading } = useProjects();
-
-  const featuredProjects = projects.filter(p => p.featured).slice(0, 3);
 
   const handleProjectClick = (projectId) => {
     navigate(`/projects/${projectId}`);
@@ -27,37 +47,28 @@ const ProjectsSection = () => {
           </div>
         </div>
 
-        {/* Loading State */}
-        {loading && (
-          <div className="text-center py-8">
-            <div className="w-12 h-12 border-4 border-accent border-t-transparent rounded-full animate-spin mx-auto"></div>
-          </div>
-        )}
-
         {/* Grille type "bento" */}
-        {!loading && (
         <div className="columns-1 sm:columns-2 md:columns-3 gap-4">
-          {featuredProjects.map((project) => (
+          {projects.map((project) => (
             <div
               key={project.id}
               onClick={() => handleProjectClick(project.id)}
               className="mb-4 relative block break-inside-avoid rounded-lg overflow-hidden shadow-md group cursor-pointer"
             >
               <img
-                src={project.images?.[0] || '/assets/images/no_image.png'}
+                src={project.image}
                 alt={project.title}
                 className="w-full h-auto object-cover transition-transform duration-300 group-hover:scale-105"
               />
               <div
-                className="absolute bottom-4 left-4 right-4 p-4 rounded-md shadow-md bg-white"
+                className={`absolute bottom-4 left-4 right-4 p-4 rounded-md shadow-md ${project.bg}`}
               >
                 <h3 className="text-lg font-bold text-gray-800">{project.title}</h3>
-                <p className="text-sm uppercase text-gray-500 mt-1">{project.industry}</p>
+                <p className="text-sm uppercase text-gray-500 mt-1">{project.category}</p>
               </div>
             </div>
           ))}
         </div>
-        )}
       </div>
     </section>
   );

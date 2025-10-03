@@ -144,16 +144,9 @@ const ServiceCard = ({ service, isExpanded, onToggle }) => {
                 <Button variant="outline" iconName="Phone" iconPosition="left">
                   Appeler un expert
                 </Button>
-<a href="/contact">
-  <Button 
-    variant="default" 
-    className="bg-accent hover:bg-accent/90" 
-    iconName="MessageSquare" 
-    iconPosition="left"
-  >
-    Demander un devis
-  </Button>
-</a>
+                <Button variant="default" className="bg-accent hover:bg-accent/90" iconName="MessageSquare" iconPosition="left">
+                  Demander un devis
+                </Button>
               </div>
             </div>
           </div>

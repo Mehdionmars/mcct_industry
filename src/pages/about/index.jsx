@@ -12,13 +12,13 @@ const About = () => {
     window.scrollTo(0, 0);
     
     // Set page title
-    document.title = 'A Propos de nous - MCCT Industry | Maitres de la Construction Industrielle';
+    document.title = 'About Us - MCCT Industry | Masters of Industrial Construction';
     
     // Set meta description
     const metaDescription = document.querySelector('meta[name="description"]');
     if (metaDescription) {
       metaDescription?.setAttribute('content', 
-        'Decouvre le parcours de MCCT Industry dans l\'excellence de la construction industrielle. Rencontrez notre équipe de direction, explorez nos certifications et découvrez notre approche innovante de la construction métallique.'
+        'Discover MCCT Industry\'s 30+ year journey in industrial construction excellence. Meet our leadership team, explore our certifications, and learn about our innovative approach to metallic construction.'
       );
     }
   }, []);
@@ -125,7 +125,7 @@ const About = () => {
                 </div>
                 <div className="text-sm text-gray-300">
                   <div className="font-medium">Email</div>
-                  <div>contact@mcct-industry.com</div>
+                  <div>info@mcct-industry.com</div>
                 </div>
               </div>
             </div>

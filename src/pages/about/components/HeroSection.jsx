@@ -39,7 +39,6 @@ const HeroSection = () => {
             </div>
 
             <div className="flex flex-wrap gap-4">
-                            <a href="/contact">
               <Button
                 variant="default"
                 size="lg"
@@ -49,8 +48,6 @@ const HeroSection = () => {
               >
                 Contactez-nous
               </Button>
-              </a>
-              <a href="/projects">
 <Button
   variant="outline"
   size="lg"
@@ -59,7 +56,6 @@ const HeroSection = () => {
 >
   Nos Réalisations
 </Button>
-              </a>
             </div>
 
             {/* Key Stats */}

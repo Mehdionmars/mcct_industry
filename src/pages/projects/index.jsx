@@ -7,10 +7,9 @@ import ProjectCard from './components/ProjectCard';
 import ProjectFilters from './components/ProjectFilters';
 import ProjectTimeline from './components/ProjectTimeline';
 import ProjectModal from './components/ProjectModal';
-import { useProjects } from '../../hooks/useProjects';
+import projectsData from '../../data/projects';
 
 const Projects = () => {
-  const { projects: allProjects, loading, error } = useProjects();
   const [viewMode, setViewMode] = useState('grid');
   const [filters, setFilters] = useState({
     industry: 'all',
@@ -27,6 +26,9 @@ const Projects = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [virtualTourProject, setVirtualTourProject] = useState(null);
   const [isVirtualTourOpen, setIsVirtualTourOpen] = useState(false);
+
+  // Transforme l'objet en tableau
+  const allProjects = Object.values(projectsData);
 
   // Filter and sort projects
   const filteredProjects = useMemo(() => {
@@ -193,22 +195,22 @@ const Projects = () => {
 
               {/* Stats */}
               <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mb-8">
-                {/* <div className="text-center">
+                <div className="text-center">
                   <div className="text-3xl font-bold text-white mb-1">150+</div>
                   <div className="text-orange-500 font-mono text-sm tracking-wider">Projets Réalisés</div>
-                </div> */}
-                {/* <div className="text-center">
+                </div>
+                <div className="text-center">
                   <div className="text-3xl font-bold text-white mb-1">2M+</div>
                   <div className="text-orange-500 font-mono text-sm tracking-wider">m² Construits</div>
-                </div> */}
-                {/* <div className="text-center">
+                </div>
+                <div className="text-center">
                   <div className="text-3xl font-bold text-white mb-1">50K+</div>
                   <div className="text-orange-500 font-mono text-sm tracking-wider">Tonnes d'Acier</div>
-                </div> */}
-                {/* <div className="text-center">
+                </div>
+                <div className="text-center">
                   <div className="text-3xl font-bold text-white mb-1">98%</div>
                   <div className="text-orange-500 font-mono text-sm tracking-wider">Satisfaction Client</div>
-                </div> */}
+                </div>
               </div>
             </div>
           </div>
@@ -260,46 +262,23 @@ const Projects = () => {
               </div>
             </div>
 
-            {/* Loading State */}
-            {loading && (
-              <div className="text-center py-16">
-                <div className="w-16 h-16 border-4 border-accent border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
-                <p className="text-text-secondary">Chargement des projets...</p>
-              </div>
-            )}
-
-            {/* Error State */}
-            {error && (
-              <div className="text-center py-16">
-                <div className="w-24 h-24 bg-red-100 rounded-full flex items-center justify-center mx-auto mb-6">
-                  <Icon name="AlertCircle" size={32} className="text-red-500" />
-                </div>
-                <h3 className="font-headline text-xl font-bold text-primary mb-2">
-                  Erreur de chargement
-                </h3>
-                <p className="text-text-secondary mb-6">{error}</p>
-              </div>
-            )}
-
             {/* Projects Display */}
-            {!loading && !error && (
-              viewMode === 'grid' ? (
-                <div className="precision-grid">
-                  {filteredProjects?.map((project) => (
-                    <ProjectCard
-                      key={project?.id}
-                      project={project}
-                      onViewDetails={handleViewDetails}
-                      onVirtualTour={handleVirtualTour}
-                    />
-                  ))}
-                </div>
-              ) : (
-                <ProjectTimeline
-                  projects={filteredProjects}
-                  onProjectSelect={handleViewDetails}
-                />
-              )
+            {viewMode === 'grid' ? (
+              <div className="precision-grid">
+                {filteredProjects?.map((project) => (
+                  <ProjectCard
+                    key={project?.id}
+                    project={project}
+                    onViewDetails={handleViewDetails}
+                    onVirtualTour={handleVirtualTour}
+                  />
+                ))}
+              </div>
+            ) : (
+              <ProjectTimeline
+                projects={filteredProjects}
+                onProjectSelect={handleViewDetails}
+              />
             )}
 
             {/* No Results */}
@@ -346,16 +325,16 @@ const Projects = () => {
               </p>
 
               <div className="flex flex-col sm:flex-row items-center justify-center space-y-4 sm:space-y-0 sm:space-x-4">
-<a href="/contact">
-  <Button 
-    variant="default" 
-    className="bg-accent hover:bg-accent/90" 
-    iconName="MessageSquare" 
-    iconPosition="left"
-  >
-    Demander un devis
-  </Button>
-</a>
+                <Button
+                  variant="default"
+                  size="lg"
+                  className="bg-accent hover:bg-accent/90 text-white font-cta font-semibold shadow-industrial"
+                  iconName="ArrowRight"
+                  iconPosition="right"
+                  iconSize={20}
+                >
+                  Demander un Devis
+                </Button>
                 <Button
                   variant="outline"
                   size="lg"

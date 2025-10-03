@@ -21,7 +21,7 @@ const ContactHero = () => {
           <div className="inline-flex items-center space-x-2 bg-white/10 backdrop-blur-sm rounded-full px-6 py-3 mb-8">
             <Phone size={20} className="text-accent" />
             <span className="font-cta font-medium text-sm tracking-wide">
-              PORTAIL DE CONTACT
+              PARTNERSHIP PORTAL
             </span>
           </div>
 
