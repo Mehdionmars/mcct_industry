@@ -7,9 +7,10 @@ import ProjectCard from './components/ProjectCard';
 import ProjectFilters from './components/ProjectFilters';
 import ProjectTimeline from './components/ProjectTimeline';
 import ProjectModal from './components/ProjectModal';
-import projectsData from '../../data/projects';
+import { useProjects } from '../../hooks/useProjects';
 
 const Projects = () => {
+  const { projects: allProjects, loading, error } = useProjects();
   const [viewMode, setViewMode] = useState('grid');
   const [filters, setFilters] = useState({
     industry: 'all',
@@ -26,9 +27,6 @@ const Projects = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [virtualTourProject, setVirtualTourProject] = useState(null);
   const [isVirtualTourOpen, setIsVirtualTourOpen] = useState(false);
-
-  // Transforme l'objet en tableau
-  const allProjects = Object.values(projectsData);
 
   // Filter and sort projects
   const filteredProjects = useMemo(() => {
@@ -262,23 +260,46 @@ const Projects = () => {
               </div>
             </div>
 
-            {/* Projects Display */}
-            {viewMode === 'grid' ? (
-              <div className="precision-grid">
-                {filteredProjects?.map((project) => (
-                  <ProjectCard
-                    key={project?.id}
-                    project={project}
-                    onViewDetails={handleViewDetails}
-                    onVirtualTour={handleVirtualTour}
-                  />
-                ))}
+            {/* Loading State */}
+            {loading && (
+              <div className="text-center py-16">
+                <div className="w-16 h-16 border-4 border-accent border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
+                <p className="text-text-secondary">Chargement des projets...</p>
               </div>
-            ) : (
-              <ProjectTimeline
-                projects={filteredProjects}
-                onProjectSelect={handleViewDetails}
-              />
+            )}
+
+            {/* Error State */}
+            {error && (
+              <div className="text-center py-16">
+                <div className="w-24 h-24 bg-red-100 rounded-full flex items-center justify-center mx-auto mb-6">
+                  <Icon name="AlertCircle" size={32} className="text-red-500" />
+                </div>
+                <h3 className="font-headline text-xl font-bold text-primary mb-2">
+                  Erreur de chargement
+                </h3>
+                <p className="text-text-secondary mb-6">{error}</p>
+              </div>
+            )}
+
+            {/* Projects Display */}
+            {!loading && !error && (
+              viewMode === 'grid' ? (
+                <div className="precision-grid">
+                  {filteredProjects?.map((project) => (
+                    <ProjectCard
+                      key={project?.id}
+                      project={project}
+                      onViewDetails={handleViewDetails}
+                      onVirtualTour={handleVirtualTour}
+                    />
+                  ))}
+                </div>
+              ) : (
+                <ProjectTimeline
+                  projects={filteredProjects}
+                  onProjectSelect={handleViewDetails}
+                />
+              )
             )}
 
             {/* No Results */}
