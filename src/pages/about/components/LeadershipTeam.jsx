@@ -8,21 +8,6 @@ const LeadershipTeam = () => {
   const { teamMembers: leaders, loading, error } = useTeamMembers();
   const [selectedMember, setSelectedMember] = useState(null);
 
-  const leaders = [
-    {
-      id: 1,
-      name: "Mohammed ID BELKACEM",
-      position: "Directeur Général",
-      experience: "",
-      image: "",
-
-      contact: {
-        email: "jp.dubois@mcct-industry.com",
-        phone: "+33 1 42 86 83 00"
-      }
-    },
-  ];
-
   return (
     <section className="bg-surface py-20 lg:py-32">
       <div className="industrial-container">
