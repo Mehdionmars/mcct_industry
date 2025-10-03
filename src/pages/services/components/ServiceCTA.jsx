@@ -139,12 +139,12 @@ const ServiceCTA = () => {
                 <div className="text-center">
                   <Icon name="Mail" size={24} className="text-accent mx-auto mb-2" />
                   <div className="font-cta font-semibold text-white mb-1">Envoyez-nous un email</div>
-                  <div className="text-white/80 font-body">projects@mcct-industry.com</div>
+                  <div className="text-white/80 font-body">contact@mcct-industry.ma</div>
                 </div>
                 <div className="text-center">
                   <Icon name="MapPin" size={24} className="text-accent mx-auto mb-2" />
-                  <div className="font-cta font-semibold text-white mb-1">Visit Office</div>
-                  <div className="text-white/80 font-body">Paris, Lyon, Marseille</div>
+                  <div className="font-cta font-semibold text-white mb-1">Visitez notre bureau</div>
+                  <div className="text-white/80 font-body">Casablanca, Rabat</div>
                 </div>
               </div>
             </div>
@@ -153,7 +153,7 @@ const ServiceCTA = () => {
           {/* Indicateurs de confiance */}
           <div className="mt-16 text-center">
             <p className="text-white/60 font-body text-sm mb-6">
-              Partenaire de confiance des plus grandes entreprises industrielles à MADope
+              Partenaire de confiance des plus grandes entreprises industrielles au Maroc
             </p>
             <div className="flex flex-wrap justify-center items-center gap-8 opacity-60">
               {/* <div className="flex items-center space-x-2">

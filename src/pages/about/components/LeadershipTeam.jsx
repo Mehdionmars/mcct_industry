@@ -15,8 +15,8 @@ const LeadershipTeam = () => {
       image: "",
 
       contact: {
-        email: "jp.dubois@mcct-industry.com",
-        phone: "+33 1 42 86 83 00"
+        email: "m.idbelkacem@mcct-industry.ma",
+        phone: "+212 661 49 47 61"
       }
     },
   ];

@@ -121,11 +121,11 @@ const About = () => {
                 </div>
                 <div className="text-sm text-gray-300">
                   <div className="font-medium">Phone</div>
-                  <div>+33 1 42 86 83 00</div>
+                  <div>+212 661 49 47 61</div>
                 </div>
                 <div className="text-sm text-gray-300">
                   <div className="font-medium">Email</div>
-                  <div>info@mcct-industry.com</div>
+                  <div>contact@mcct-industry.ma</div>
                 </div>
               </div>
             </div>

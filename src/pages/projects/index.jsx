@@ -159,7 +159,7 @@ const Projects = () => {
         <meta property="og:title" content="Projets - MCCT Industry | Excellence en Construction Métallique" />
         <meta property="og:description" content="Explorez nos projets industriels exceptionnels avec visites virtuelles 360° et études de cas détaillées." />
         <meta property="og:type" content="website" />
-        <link rel="canonical" href="https://mcct-industry.fr/projects" />
+        <link rel="canonical" href="https://mcct-industry.ma/projects" />
       </Helmet>
       <div className="min-h-screen bg-background">
         <Header />
