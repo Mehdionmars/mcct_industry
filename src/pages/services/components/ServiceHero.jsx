@@ -34,7 +34,7 @@ const ServiceHero = () => {
             </h1>
 
             {/* Sous-titre */}
-            <p className="font-body text-xl lg:text-2xl text-white/90 mb-8 leading-relaxed max-w-lg">
+            <p className="font-body text-xl lg:text-2xl text-gray-700 mb-8 leading-relaxed max-w-lg">
               De l’érection de structures métalliques aux réparations, notre maîtrise technique transforme des défis industriels complexes en excellence
               d’ingénierie.
             </p>
@@ -43,19 +43,19 @@ const ServiceHero = () => {
             <div className="grid grid-cols-2 gap-8 lg:grid-cols-2">
               <div className="text-left">
                 <div className="text-3xl lg:text-4xl font-headline font-bold text-accent mb-2">50+</div>
-                <div className="text-sm font-cta text-white/80 tracking-wide">PROJETS RÉALISÉS</div>
+                <div className="text-sm font-cta text-gray-700 tracking-wide">PROJETS RÉALISÉS</div>
               </div>
               <div className="text-left">
                 <div className="text-3xl lg:text-4xl font-headline font-bold text-accent mb-2">10+</div>
-                <div className="text-sm font-cta text-white/80 tracking-wide">ANNÉES D’EXPÉRIENCE</div>
+                <div className="text-sm font-cta text-gray-700 tracking-wide">ANNÉES D’EXPÉRIENCE</div>
               </div>
               <div className="text-left">
                 <div className="text-3xl lg:text-4xl font-headline font-bold text-accent mb-2">100%</div>
-                <div className="text-sm font-cta text-white/80 tracking-wide">DOSSIER SÉCURITÉ</div>
+                <div className="text-sm font-cta text-gray-700 tracking-wide">DOSSIER SÉCURITÉ</div>
               </div>
               <div className="text-left">
                 <div className="text-3xl lg:text-4xl font-headline font-bold text-accent mb-2">24/7</div>
-                <div className="text-sm font-cta text-white/80 tracking-wide">ASSISTANCE</div>
+                <div className="text-sm font-cta text-gray-700 tracking-wide">ASSISTANCE</div>
               </div>
             </div>
           </div>

@@ -57,7 +57,7 @@ const ServiceCTA = () => {
               Transformez votre vision industrielle
               <span className="block text-accent">en réalité d’ingénierie</span>
             </h2>
-            <p className="text-xl lg:text-2xl text-white/90 mb-8 max-w-3xl mx-auto leading-relaxed">
+            <p className="text-xl lg:text-2xl text-gray-700 mb-8 max-w-3xl mx-auto leading-relaxed">
               Collaborez avec l’équipe d’experts de MCCT Industry pour obtenir des résultats exceptionnels qui dépassent les attentes et les normes du secteur.
             </p>
           </div>
@@ -69,7 +69,7 @@ const ServiceCTA = () => {
                 <div className="text-3xl lg:text-4xl font-headline font-bold text-accent mb-2">
                   {stat?.value}
                 </div>
-                <div className="text-sm font-cta text-white/80 tracking-wide">
+                <div className="text-sm font-cta text-gray-700 tracking-wide">
                   {stat?.label}
                 </div>
               </div>
@@ -83,12 +83,12 @@ const ServiceCTA = () => {
                 <div className={`w-16 h-16 ${method?.color} rounded-xl flex items-center justify-center mx-auto mb-6`}>
                   <Icon name={method?.icon} size={32} className="text-white" />
                 </div>
-                <h3 className="font-cta font-bold text-xl text-white mb-4">{method?.title}</h3>
-                <p className="text-white/80 font-body mb-6 leading-relaxed">{method?.description}</p>
+                <h3 className="font-cta font-bold text-xl text-gray-700 mb-4">{method?.title}</h3>
+                <p className="text-gray-700 font-body mb-6 leading-relaxed">{method?.description}</p>
                 <Button
                   variant="outline"
                   size="lg"
-                  className={`border-white text-white hover:bg-white hover:text-primary font-cta font-semibold w-full`}
+                  className={`border-gray-700 text-gray-700 hover:bg-white hover:text-primary font-cta font-semibold w-full`}
                   iconName="ArrowRight"
                   iconPosition="right"
                 >
@@ -101,10 +101,10 @@ const ServiceCTA = () => {
           {/* Section CTA principale */}
           <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-8 lg:p-12 text-center">
             <div className="max-w-4xl mx-auto">
-              <h3 className="font-headline text-2xl lg:text-3xl font-bold text-white mb-6">
+              <h3 className="font-headline text-2xl lg:text-3xl font-bold text-gray-700 mb-6">
                 Prêt à discuter de votre projet de construction industrielle ?
               </h3>
-              <p className="text-white/90 font-body text-lg mb-8 leading-relaxed">
+              <p className="text-gray-700 font-body text-lg mb-8 leading-relaxed">
                 Nos experts en ingénierie sont disponibles pour vous fournir une consultation personnalisée et développer la solution idéale pour vos besoins spécifiques.
               </p>
               
@@ -121,7 +121,7 @@ const ServiceCTA = () => {
                 <Button
                   variant="outline"
                   size="xl"
-                  className="border-white text-white hover:bg-white hover:text-primary font-cta font-semibold"
+                  className="border-gray-700 text-gray-700 hover:bg-white hover:text-primary font-cta font-semibold"
                   iconName="Download"
                   iconPosition="left"
                 >
@@ -133,18 +133,18 @@ const ServiceCTA = () => {
               <div className="grid grid-cols-1 md:grid-cols-3 gap-6 pt-8 border-t border-white/20">
                 <div className="text-center">
                   <Icon name="Phone" size={24} className="text-accent mx-auto mb-2" />
-                  <div className="font-cta font-semibold text-white mb-1">Appel direct</div>
-                  <div className="text-white/80 font-body">+33 1 23 45 67 89</div>
+                  <div className="font-cta font-semibold text-gray-700 mb-1">Appel direct</div>
+                  <div className="text-gray-700/80 font-body">+33 1 23 45 67 89</div>
                 </div>
                 <div className="text-center">
                   <Icon name="Mail" size={24} className="text-accent mx-auto mb-2" />
-                  <div className="font-cta font-semibold text-white mb-1">Envoyez-nous un email</div>
-                  <div className="text-white/80 font-body">contact@mcct-industry.ma</div>
+                  <div className="font-cta font-semibold text-gray-700 mb-1">Envoyez-nous un email</div>
+                  <div className="text-gray-700/80 font-body">contact@mcct-industry.ma</div>
                 </div>
                 <div className="text-center">
                   <Icon name="MapPin" size={24} className="text-accent mx-auto mb-2" />
-                  <div className="font-cta font-semibold text-white mb-1">Visitez notre bureau</div>
-                  <div className="text-white/80 font-body">Casablanca, Rabat</div>
+                  <div className="font-cta font-semibold text-gray-700 mb-1">Visitez notre bureau</div>
+                  <div className="text-gray-700/80 font-body">Casablanca, Rabat</div>
                 </div>
               </div>
             </div>

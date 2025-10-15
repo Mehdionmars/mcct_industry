@@ -32,7 +32,7 @@ const ContactHero = () => {
           </h1>
 
           {/* Subheading */}
-          <p className="text-xl lg:text-2xl text-white/90 mb-8 max-w-3xl mx-auto leading-relaxed">
+          <p className="text-xl lg:text-2xl text-gray-700 mb-8 max-w-3xl mx-auto leading-relaxed">
           "La construction métallique est notre spécialité, et notre
  savoir-faire se transmet avec fierté."
           </p>
@@ -67,7 +67,7 @@ const ContactHero = () => {
             <Button
               variant="outline"
               size="lg"
-              className="border-white text-white hover:bg-white hover:text-primary font-cta font-semibold"
+              className="border-slate-300 text-gray-700 hover:bg-white hover:text-primary font-cta font-semibold"
               icon={<Phone size={20} />}
               iconPosition="left"
             >

@@ -9,6 +9,7 @@ import Projects from './pages/projects';
 import ProjectDetail from "./pages/projects/ProjectDetail";
 import About from './pages/about';
 import Homepage from './pages/homepage';
+import UnderConstruction   from './pages/error_404';
 
 const Routes = () => {
   return (
@@ -23,7 +24,9 @@ const Routes = () => {
         <Route path="/projects" element={<Projects />} />
         <Route path="/projects/:id" element={<ProjectDetail />} />
         <Route path="/homepage" element={<Homepage />} />
-          <Route path="/about" element={<About />} />
+        <Route path="/about" element={<About />} />
+        <Route path="/under-construction" element={<UnderConstruction />} />
+        {/* Catch-all route for 404 Not Found */}
         <Route path="*" element={<NotFound />} />
       </RouterRoutes>
       </ErrorBoundary>

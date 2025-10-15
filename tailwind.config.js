@@ -18,58 +18,58 @@ module.exports = {
     },
     extend: {
       colors: {
-        border: "var(--color-border)", /* gray-200 */
-        input: "var(--color-input)", /* white */
-        ring: "var(--color-ring)", /* orange-600 */
-        background: "var(--color-background)", /* white */
-        foreground: "var(--color-foreground)", /* slate-800 */
+        border: "var(--color-border)",
+        input: "var(--color-input)",
+        ring: "var(--color-ring)",
+        background: "var(--color-background)",
+        foreground: "var(--color-foreground)",
         primary: {
-          DEFAULT: "var(--color-primary)", /* slate-800 */
-          foreground: "var(--color-primary-foreground)", /* white */
+          DEFAULT: "var(--color-primary)",
+          foreground: "var(--color-primary-foreground)",
         },
         secondary: {
-          DEFAULT: "var(--color-secondary)", /* slate-700 */
-          foreground: "var(--color-secondary-foreground)", /* white */
+          DEFAULT: "var(--color-secondary)",
+          foreground: "var(--color-secondary-foreground)",
         },
         destructive: {
-          DEFAULT: "var(--color-destructive)", /* red-500 */
-          foreground: "var(--color-destructive-foreground)", /* white */
+          DEFAULT: "var(--color-destructive)",
+          foreground: "var(--color-destructive-foreground)",
         },
         muted: {
-          DEFAULT: "var(--color-muted)", /* gray-50 */
-          foreground: "var(--color-muted-foreground)", /* gray-500 */
+          DEFAULT: "var(--color-muted)",
+          foreground: "var(--color-muted-foreground)",
         },
         accent: {
-          DEFAULT: "var(--color-accent)", /* orange-600 */
-          foreground: "var(--color-accent-foreground)", /* white */
+          DEFAULT: "var(--color-accent)",
+          foreground: "var(--color-accent-foreground)",
         },
         popover: {
-          DEFAULT: "var(--color-popover)", /* white */
-          foreground: "var(--color-popover-foreground)", /* slate-800 */
+          DEFAULT: "var(--color-popover)",
+          foreground: "var(--color-popover-foreground)",
         },
         card: {
-          DEFAULT: "var(--color-card)", /* white */
-          foreground: "var(--color-card-foreground)", /* slate-800 */
+          DEFAULT: "var(--color-card)",
+          foreground: "var(--color-card-foreground)",
         },
         success: {
-          DEFAULT: "var(--color-success)", /* green-600 */
-          foreground: "var(--color-success-foreground)", /* white */
+          DEFAULT: "var(--color-success)",
+          foreground: "var(--color-success-foreground)",
         },
         warning: {
-          DEFAULT: "var(--color-warning)", /* yellow-500 */
-          foreground: "var(--color-warning-foreground)", /* white */
+          DEFAULT: "var(--color-warning)",
+          foreground: "var(--color-warning-foreground)",
         },
         error: {
-          DEFAULT: "var(--color-error)", /* red-500 */
-          foreground: "var(--color-error-foreground)", /* white */
+          DEFAULT: "var(--color-error)",
+          foreground: "var(--color-error-foreground)",
         },
-        surface: "var(--color-surface)", /* gray-50 */
-        'text-primary': "var(--color-text-primary)", /* slate-800 */
-        'text-secondary': "var(--color-text-secondary)", /* gray-500 */
+        surface: "var(--color-surface)",
+        'text-primary': "var(--color-text-primary)",
+        'text-secondary': "var(--color-text-secondary)",
         industrial: {
-          DEFAULT: "var(--color-primary)", /* slate-800 */
-          secondary: "var(--color-secondary)", /* slate-700 */
-          accent: "var(--color-accent)", /* orange-600 */
+          DEFAULT: "var(--color-primary)",
+          secondary: "var(--color-secondary)",
+          accent: "var(--color-accent)",
         },
       },
       borderRadius: {
@@ -114,6 +114,8 @@ module.exports = {
         "slide-in-right": "slide-in-right 0.5s ease-out",
         "scale-in": "scale-in 0.3s ease-out",
         "counter": "counter 2s ease-out",
+        "float": "float 3s ease-in-out infinite",
+        "rotate": "rotate 20s linear infinite",
       },
       keyframes: {
         "accordion-down": {
@@ -147,6 +149,14 @@ module.exports = {
         "counter": {
           from: { transform: "translateY(10px)", opacity: "0" },
           to: { transform: "translateY(0)", opacity: "1" },
+        },
+        "float": {
+          "0%, 100%": { transform: "translateY(0px)" },
+          "50%": { transform: "translateY(-20px)" },
+        },
+        "rotate": {
+          from: { transform: "rotate(0deg)" },
+          to: { transform: "rotate(360deg)" },
         },
       },
       transitionTimingFunction: {

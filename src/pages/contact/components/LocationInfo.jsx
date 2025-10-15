@@ -27,12 +27,6 @@ const LocationInfo = () => {
       coverage: "Extended Service Area",
         Time: "Next Day",
       projects: "75+ Active Projects"
-    },
-    {
-      region: "Occitanie",
-      coverage: "Regional Coverage",
-        Time: "48 Hours",
-      projects: "50+ Active Projects"
     }
   ];
 

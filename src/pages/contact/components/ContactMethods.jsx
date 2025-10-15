@@ -27,7 +27,7 @@ const getButtonVariant = (color) => {
 
 // Contact Method Card
 const ContactCard = ({ method }) => (
-  <div className="bg-white rounded-xl shadow-industrial border border-gray-200 p-8 industrial-hover group">
+  <div className="bg-white rounded-xl shadow-industrial border border-gray-700 p-8 industrial-hover group">
     <div className="flex items-start space-x-4 mb-6">
       <div
         className={`p-4 rounded-xl border-2 ${getColorClasses(
@@ -134,7 +134,7 @@ const ContactMethods = () => {
             <span className="block text-accent">Canal de Communication</span>
           </h2>
 
-          <p className="text-lg text-text-secondary max-w-3xl mx-auto leading-relaxed">
+          <p className="text-lg text-gray-700 max-w-3xl mx-auto leading-relaxed">
             Que vous préfériez un appel téléphonique direct, un e-mail détaillé,
             ou une visite en personne, MCCT Industry est prêt à vous assister.
           </p>
