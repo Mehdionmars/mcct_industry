@@ -1,157 +1,137 @@
-import React, { useEffect } from 'react';
-import Header from '../../components/ui/Header';
-import HeroSection from './components/HeroSection';
-import CompanyStory from './components/CompanyStory';
-import LeadershipTeam from './components/LeadershipTeam';
-import CertificationsWall from './components/CertificationsWall';
-import InnovationLab from './components/InnovationLab';
+import React from 'react';
+import PageMeta from '../../components/ui/PageMeta';
+import SiteHeader from '../../components/ui/SiteHeader';
+import SiteCTA from '../../components/ui/SiteCTA';
+import WhatsAppFab from '../../components/ui/WhatsAppFab';
+import Reveal from '../../components/ui/Reveal';
+import { ACCENT, bodyFont, headingFont, container } from '../../components/ui/mcctTheme';
+import { keyFigures } from '../../data/mcct';
+import { img } from '../../data/gallery';
 
-const About = () => {
-  useEffect(() => {
-    // Scroll to top when component mounts
-    window.scrollTo(0, 0);
-    
-    // Set page title
-    document.title = 'About Us - MCCT Industry | Masters of Industrial Construction';
-    
-    // Set meta description
-    const metaDescription = document.querySelector('meta[name="description"]');
-    if (metaDescription) {
-      metaDescription?.setAttribute('content', 
-        'Discover MCCT Industry\'s 30+ year journey in industrial construction excellence. Meet our leadership team, explore our certifications, and learn about our innovative approach to metallic construction.'
-      );
-    }
-  }, []);
+const pillars = [
+  {
+    label: 'MISSION',
+    text: 'Réaliser des solutions industrielles fiables et précises, en accompagnant nos clients de l’étude à la mise en service.'
+  },
+  {
+    label: 'VISION',
+    text: 'Devenir un référent marocain de la construction métallique et des projets industriels à forte exigence technique.'
+  },
+  {
+    label: 'VALEURS',
+    text: 'Excellence, sécurité, innovation, engagement — à chaque étape, en atelier comme sur chantier.'
+  }
+];
 
-  return (
-    <div className="min-h-screen bg-white">
-      <Header />
-      {/* Main Content */}
-      <main className="">
-        {/* Hero Section */}
-        <HeroSection />
-        
-        {/* Company Story & Timeline */}
-        <CompanyStory />
-        
-        {/* Leadership Team */}
-        <LeadershipTeam />
-        
-        {/* Certifications Wall */}
-        {/* <CertificationsWall /> */}
-        
-        {/* Innovation Laboratory */}
-        {/* <InnovationLab /> */}
-      </main>
-      {/* Footer */}
-      <footer className="bg-slate-900 text-white py-16">
-        <div className="industrial-container">
-          <div className="grid lg:grid-cols-4 gap-8">
-            {/* Company Info */}
-            <div className="lg:col-span-2">
-              <div className="flex items-center space-x-3 mb-6">
-                <div className="w-12 h-12 bg-gradient-to-br from-accent to-primary rounded-lg flex items-center justify-center">
-                  <svg className="w-7 h-7 text-white" viewBox="0 0 24 24" fill="currentColor">
-                    <path d="M12 2L2 7v10c0 5.55 3.84 9.74 9 11 5.16-1.26 9-5.45 9-11V7l-10-5z"/>
-                    <path d="M8 11l2 2 4-4" stroke="currentColor" strokeWidth="2" fill="none"/>
-                  </svg>
-                </div>
-                <div>
-                  <h3 className="font-headline text-xl font-bold">MCCT Industry</h3>
-                  <p className="font-mono text-xs text-gray-400 tracking-wider">INGÉNIÉRIE D'EXCELLENCE</p>
-                </div>
-              </div>
-              
-              <p className="text-gray-300 leading-relaxed mb-6 max-w-md">
-                Grâce à notre solide expérience, nos ressources
- techniques et humaines, MCCT INDUSTRY s'est
- forgé une réputation de leader dans le secteur de
- la construction métallique. Nous avons gagné la
- confiance de nos clients en livrant des réalisations
- qui répondent pleinement à leurs attentes.
-              </p>
-              
-              {/* <div className="flex items-center space-x-4">
-                <div className="text-center">
-                  <div className="text-2xl font-bold text-accent">30+</div>
-                  <div className="text-xs text-gray-400">Years</div>
-                </div>
-                <div className="text-center">
-                  <div className="text-2xl font-bold text-accent">500+</div>
-                  <div className="text-xs text-gray-400">Projects</div>
-                </div>
-                <div className="text-center">
-                  <div className="text-2xl font-bold text-accent">99.8%</div>
-                  <div className="text-xs text-gray-400">Safety</div>
-                </div>
-              </div> */}
-            </div>
+const About = () => (
+  <div className="min-h-screen bg-[#F5F5F2] text-[#17191C] antialiased" style={bodyFont}>
+    <PageMeta title="À propos — constructeur métallique à Casablanca | MCCT Industrie" description="MCCT Industrie, entreprise marocaine basée à Casablanca, spécialisée dans l’ingénierie, la fabrication et la construction métallique." />
 
-            {/* Quick Links */}
-            <div>
-              <h4 className="font-headline text-lg font-bold mb-4">Lien rapide</h4>
-              <ul className="space-y-2">
-                {[
-                  { name: 'Nos Services', href: '/services' },
-                  { name: 'Portefeuille de Projets', href: '/projects' },
-                  { name: 'Laboratoire d\'Innovation', href: '/innovation' },
-                  { name: 'Contactez-nous', href: '/contact' }
-                ]?.map((link, index) => (
-                  <li key={index}>
-                    <a 
-                      href={link?.href}
-                      className="text-gray-300 hover:text-accent industrial-transition text-sm"
-                    >
-                      {link?.name}
-                    </a>
-                  </li>
-                ))}
-              </ul>
-            </div>
+    <WhatsAppFab />
+    <SiteHeader />
 
-            {/* Contact Info */}
-            <div>
-              <h4 className="font-headline text-lg font-bold mb-4">Contact Info</h4>
-              <div className="space-y-3">
-                <div className="text-sm text-gray-300">
-                  <div className="font-medium">Notre Bureau</div>
+    <section className="relative flex min-h-[62vh] items-end overflow-hidden bg-[#0D0F10]">
+      <img
+        src={img('IMG_7894')}
+        alt="Équipe MCCT sur un chantier de couverture"
+        className="absolute inset-0 h-full w-full object-cover"
+      />
+      <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(13,15,16,0.4),rgba(13,15,16,0.85))]" />
+      <div className={`${container} relative pb-16 pt-[140px] text-white`}>
+        <p className="mb-4 text-[13px] font-extrabold tracking-[0.26em] text-[#cfd6dc]">À PROPOS</p>
+        <h1
+          className="text-[clamp(2.6rem,6vw,5.6rem)] font-bold leading-[0.98] tracking-[-0.02em]"
+          style={headingFont}
+        >
+          UNE ENTREPRISE
+          <br />
+          D&apos;INGÉNIEURS
+          <br />
+          ET DE BÂTISSEURS
+          <span style={{ color: ACCENT }}>.</span>
+        </h1>
+      </div>
+    </section>
 
-                                     <span className="text-sm">13, rue Ahmed El Mejatti -ex Alpes , rés. les Alpes, 1° étg. 20330 Casablanca - Maroc</span>
+    <section className="py-[110px]">
+      <div className={`${container} grid items-start gap-14 [grid-template-columns:repeat(auto-fit,minmax(320px,1fr))]`}>
+        <Reveal>
+          <p className="mb-[18px] text-[13px] font-extrabold tracking-[0.24em]" style={{ color: ACCENT }}>
+            01 — QUI SOMMES-NOUS
+          </p>
+          <h2
+            className="text-[clamp(2.2rem,4.2vw,3.8rem)] font-bold leading-none tracking-[-0.02em]"
+            style={headingFont}
+          >
+            MOROCCAN COMPANY OF CONSTRUCTION TECHNOLOGY
+            <span style={{ color: ACCENT }}>.</span>
+          </h2>
+        </Reveal>
+        <Reveal className="max-w-[520px] pt-3">
+          <p className="mb-5 text-[17px] leading-[1.7] text-[#3a3f45]">
+            MCCT Industrie est une entreprise marocaine basée à Casablanca, spécialisée dans l’ingénierie, la
+            fabrication et la construction métallique.
+          </p>
+          <p className="text-[17px] leading-[1.7] text-[#3a3f45]">
+            Nous intervenons sur l’ensemble du cycle des projets industriels : études, fabrication en atelier, montage
+            sur site et maintenance des installations.
+          </p>
+        </Reveal>
+      </div>
+    </section>
 
-                </div>
-                <div className="text-sm text-gray-300">
-                  <div className="font-medium">Phone</div>
-                  <div>+212 661 49 47 61</div>
-                </div>
-                <div className="text-sm text-gray-300">
-                  <div className="font-medium">Email</div>
-                  <div>contact@mcct-industry.ma</div>
-                </div>
-              </div>
-            </div>
-          </div>
+    <section className="bg-[#0D0F10] py-[110px] text-white">
+      <div className={`${container} grid gap-12 [grid-template-columns:repeat(auto-fit,minmax(300px,1fr))]`}>
+        {pillars?.map((pillar) => (
+          <Reveal key={pillar?.label} className="border-t-[3px] border-[#2478BE] pt-7">
+            <p className="mb-3.5 text-[13px] font-extrabold tracking-[0.24em]" style={{ color: ACCENT }}>
+              {pillar?.label}
+            </p>
+            <p className="text-[19px] leading-[1.6] text-[#d8dde1]">{pillar?.text}</p>
+          </Reveal>
+        ))}
+      </div>
+    </section>
 
-          {/* Bottom Bar */}
-          <div className="border-t border-gray-700 mt-12 pt-8 flex flex-col md:flex-row justify-between items-center">
-            <div className="text-sm text-gray-400">
-              © {new Date()?.getFullYear()} MCCT Industry. tout droit est reserve.
-            </div>
-            <div className="flex items-center space-x-6 mt-4 md:mt-0">
-              <a href="#" className="text-sm text-gray-400 hover:text-accent industrial-transition">
-                Privacy Policy
-              </a>
-              <a href="#" className="text-sm text-gray-400 hover:text-accent industrial-transition">
-                Terms of Service
-              </a>
-              <a href="#" className="text-sm text-gray-400 hover:text-accent industrial-transition">
-                Cookie Policy
-              </a>
-            </div>
-          </div>
-        </div>
-      </footer>
-    </div>
-  );
-};
+    <section className="py-[110px]">
+      <div className={`${container} grid gap-10 [grid-template-columns:repeat(auto-fit,minmax(220px,1fr))]`}>
+        {keyFigures?.map((figure) => (
+          <Reveal key={figure?.label}>
+            <p
+              className="text-[clamp(3rem,5vw,4.6rem)] font-extrabold tracking-[-0.03em]"
+              style={{ color: ACCENT }}
+            >
+              {figure?.value}+
+            </p>
+            <p className="mt-2 text-[12.5px] font-bold tracking-[0.2em] text-[#565e66]">{figure?.label}</p>
+          </Reveal>
+        ))}
+      </div>
+    </section>
+
+    <section className="pb-[110px]">
+      <div className={`${container} grid gap-6 min-[900px]:[grid-template-columns:2fr_1fr]`}>
+        <Reveal className="overflow-hidden">
+          <img
+            src={img('IMG_7864')}
+            alt="Hangar métallique MCCT"
+            loading="lazy"
+            className="block h-[420px] w-full object-cover transition-transform [transition-duration:600ms] hover:scale-[1.04]"
+          />
+        </Reveal>
+        <Reveal className="overflow-hidden">
+          <img
+            src={img('IMG_7916')}
+            alt="Atelier de soudure MCCT"
+            loading="lazy"
+            className="block h-[420px] w-full object-cover transition-transform [transition-duration:600ms] hover:scale-[1.04]"
+          />
+        </Reveal>
+      </div>
+    </section>
+
+    <SiteCTA />
+  </div>
+);
 
 export default About;

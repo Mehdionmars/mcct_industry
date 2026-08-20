@@ -116,6 +116,13 @@ module.exports = {
         "counter": "counter 2s ease-out",
         "float": "float 3s ease-in-out infinite",
         "rotate": "rotate 20s linear infinite",
+        "galerie-fade": "galerie-fade 0.25s both",
+        "galerie-pop": "galerie-pop 0.3s cubic-bezier(0.22, 1, 0.36, 1) both",
+        "mcct-shine": "mcct-shine 2.8s infinite",
+        "mcct-pulse": "mcct-pulse 3s infinite",
+        "mcct-rise": "mcct-rise 0.8s cubic-bezier(0.22, 1, 0.36, 1) both",
+        "mcct-hero-zoom": "mcct-hero-zoom 1.6s cubic-bezier(0.22, 1, 0.36, 1) both",
+        "mcct-load": "mcct-load 1.6s cubic-bezier(0.4, 0, 0.2, 1) both",
       },
       keyframes: {
         "accordion-down": {
@@ -157,6 +164,35 @@ module.exports = {
         "rotate": {
           from: { transform: "rotate(0deg)" },
           to: { transform: "rotate(360deg)" },
+        },
+        "galerie-fade": {
+          from: { opacity: "0" },
+          to: { opacity: "1" },
+        },
+        "galerie-pop": {
+          from: { opacity: "0", transform: "scale(0.96)" },
+          to: { opacity: "1", transform: "scale(1)" },
+        },
+        "mcct-shine": {
+          "0%": { left: "-60%" },
+          "60%": { left: "130%" },
+          "100%": { left: "130%" },
+        },
+        "mcct-pulse": {
+          "0%, 100%": { boxShadow: "0 0 0 0 rgba(36,120,190,.45)" },
+          "50%": { boxShadow: "0 0 0 10px rgba(36,120,190,0)" },
+        },
+        "mcct-rise": {
+          from: { opacity: "0", transform: "translateY(40px)" },
+          to: { opacity: "1", transform: "translateY(0)" },
+        },
+        "mcct-hero-zoom": {
+          from: { transform: "scale(1.08)" },
+          to: { transform: "scale(1)" },
+        },
+        "mcct-load": {
+          from: { transform: "scaleX(0)" },
+          to: { transform: "scaleX(1)" },
         },
       },
       transitionTimingFunction: {

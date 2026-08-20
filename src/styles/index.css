@@ -97,3 +97,20 @@ body {
     font-family: "Inter", system-ui, -apple-system, sans-serif;
   }
 }
+/* Accessibilité : neutralise animations et transitions si l'utilisateur les refuse. */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Fond de l'écran d'accueil, appliqué avant même le montage de React. */
+html.mcct-booting,
+html.mcct-booting body {
+  background-color: #0D0F10;
+}

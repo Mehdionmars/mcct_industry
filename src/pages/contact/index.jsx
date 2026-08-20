@@ -1,142 +1,96 @@
-import React, { useEffect } from 'react';
-import { Helmet } from 'react-helmet';
-import Header from '../../components/ui/Header';
-import ContactHero from './components/ContactHero';
-import ContactMethods from './components/ContactMethods';
-import ContactForm from './components/ContactForm';
-import LocationInfo from './components/LocationInfo';
-import TeamContacts from './components/TeamContacts';
+import React from 'react';
+import PageMeta from '../../components/ui/PageMeta';
+import SiteHeader from '../../components/ui/SiteHeader';
+import WhatsAppFab from '../../components/ui/WhatsAppFab';
+import McctContactForm from '../../components/ui/McctContactForm';
+import {
+  ACCENT,
+  bodyFont,
+  headingFont,
+  container,
+  EMAIL,
+  EMAIL_HREF,
+  PHONE,
+  PHONE_HREF,
+  WHATSAPP_HREF
+} from '../../components/ui/mcctTheme';
 
-const ContactPage = () => {
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  }, []);
+const ContactPage = () => (
+  <div className="min-h-screen bg-[#111315] text-white antialiased" style={bodyFont}>
+    <PageMeta title="Contact — MCCT Industrie, Casablanca" description="Contactez MCCT Industrie à Casablanca : ingénierie, fabrication et construction métallique. Devis et demandes de projet par email ou WhatsApp." />
 
-  return (
-    <>
-      <Helmet>
-        <title>Contact MCCT Industry - EXPERT EN CONSTRUCTION METALLIQUE</title>
-        <meta 
-          name="description" 
-          content="Connect with MCCT Industry's expert team for industrial construction projects. 24/7     , project consultations, and technical support across Southern France." 
-        />
-        <meta name="keywords" content="MCCT Industry contact, industrial construction consultation,   repair services, project inquiry, metallic construction experts, France" />
-        <meta property="og:title" content="Contact MCCT Industry - Partnership Portal" />
-        <meta property="og:description" content="Connect with MCCT Industry's expert team for industrial construction projects. 24/7      and technical support." />
-        <meta property="og:type" content="website" />
-        <link rel="canonical" href="/contact" />
-      </Helmet>
-      <div className="min-h-screen bg-background">
-        <Header />
-        
-        <main className="">
-          {/* Hero Section */}
-          <ContactHero />
-          
-          {/* Contact Methods */}
-          <ContactMethods />
-          
-          {/* Contact Form */}
-          <ContactForm />
-          
-          {/* Location Information */}
-          {/* <LocationInfo /> */}
-          
-          {/* Team Contacts */}
-          
-          {/* <TeamContacts /> */}
-        </main>
+    <WhatsAppFab />
+    <SiteHeader variant="dark" />
 
-        {/* Footer */}
-        <footer className="bg-primary text-white py-12">
-          <div className="industrial-container">
-            <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
-              {/* Company Info */}
-              <div className="md:col-span-2">
-                <div className="flex items-center space-x-3 mb-6">
-                  <div className="w-12 h-12 bg-gradient-to-br from-accent to-accent/80 rounded-lg flex items-center justify-center">
-                    <svg className="w-7 h-7 text-white" viewBox="0 0 24 24" fill="currentColor">
-                      <path d="M12 2L2 7v10c0 5.55 3.84 9.74 9 11 5.16-1.26 9-5.45 9-11V7l-10-5z"/>
-                      <path d="M8 11l2 2 4-4" stroke="currentColor" strokeWidth="2" fill="none"/>
-                    </svg>
-                  </div>
-                  <div>
-                    <h3 className="font-headline text-xl font-bold">MCCT Industry</h3>
-                    <p className="font-mono text-xs text-white/70 tracking-wider"> </p>
-                  </div>
-                </div>
-                <p className="text-white/80 leading-relaxed mb-4">
-                  Expert en construction métallique et industrielle.
-                  Nous fournissons des solutions complètes pour vos projets industriels, de la conception à la réalisation, partout au Maroc.
-                </p>
-                <div className="flex items-center space-x-4">
-                  <div className="flex items-center space-x-2">
-                    <div className="w-2 h-2 bg-success rounded-full animate-pulse"></div>
-                    <span className="text-sm text-white/70">24/7 Disponible</span>
-                  </div>
-                </div>
-              </div>
+    <section className="pb-[120px] pt-[110px]">
+      <div className={container}>
+        <h1
+          className="mb-16 text-[clamp(2.8rem,7vw,6.4rem)] font-bold leading-[0.96] tracking-[-0.02em]"
+          style={headingFont}
+        >
+          CONSTRUISONS
+          <br />
+          QUELQUE CHOSE
+          <br />
+          ENSEMBLE
+          <span style={{ color: ACCENT }}>.</span>
+        </h1>
 
-              {/* Quick Links */}
-              <div>
-                <h4 className="font-cta font-semibold text-white mb-4">Contact Info</h4>
-                <div className="space-y-3">
-                  <div className="flex items-center space-x-2">
-                    <span className="text-accent">📞</span>
-                    <span className="text-sm text-white/80"> : +212 661 49 47 61</span>
-                  </div>
-                  <div className="flex items-center space-x-2">
-                    <span className="text-accent">✉️</span>
-                    <span className="text-sm text-white/80">contact@mcct-industry.ma</span>
-                  </div>
-                  <div className="flex items-center space-x-2">
-                    <span className="text-accent">📍</span>
-                    <span className="text-sm text-white/80">Casablanca, Maroc</span>
-                  </div>
-                </div>
-              </div>
-
-              {/* Business Hours */}
-              <div>
-                <h4 className="font-cta font-semibold text-white mb-4">Nos Horaires</h4>
-                <div className="space-y-2 text-sm text-white/80">
-                  <div className="flex justify-between">
-                    <span>Lundi - Vendredi:</span>
-                    <span>7:00 AM - 6:00 PM</span>
-                  </div>
-                  <div className="flex justify-between">
-                    <span>Samedi:</span>
-                    <span>8:00 AM - 2:00 PM</span>
-                  </div>
-                  <div className="flex justify-between">
-                    <span>Dimanche:</span>
-                  </div>
-                  <div className="pt-2 border-t border-white/20">
-                    <div className="flex justify-between font-semibold text-success">
-                      <span> :</span>
-                      <span>24/7 Disponible</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
+        <div className="grid items-start gap-16 [grid-template-columns:repeat(auto-fit,minmax(320px,1fr))]">
+          <div>
+            <div className="text-[15.5px] leading-[2] text-[#9aa2a9]">
+              <p className="font-extrabold tracking-[0.14em] text-white">MCCT INDUSTRIE</p>
+              <p className="mt-3">
+                13, rue Ahmed El Mejatti — ex Alpes,
+                <br />
+                rés. les Alpes, 1<sup>er</sup> étage
+                <br />
+                Casablanca — Maroc
+              </p>
+              <p className="mt-4">
+                <a href={PHONE_HREF} className="text-[#c4cad0] hover:text-[#2478BE]">
+                  {PHONE}
+                </a>
+              </p>
+              <p>
+                <a href={EMAIL_HREF} className="text-[#c4cad0] hover:text-[#2478BE]">
+                  {EMAIL}
+                </a>
+              </p>
+              <p className="mt-4">
+                <a
+                  href={WHATSAPP_HREF}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="font-bold text-[#25D366] hover:text-white"
+                >
+                  Écrire sur WhatsApp →
+                </a>
+              </p>
             </div>
 
-            {/* Bottom Bar */}
-            <div className="border-t border-white/20 mt-8 pt-8 flex flex-col md:flex-row items-center justify-between">
-              <p className="text-sm text-white/60 mb-4 md:mb-0">
-                © {new Date()?.getFullYear()} MCCT Industry. Tous droits réservés. | VOTRE VISION, NOTRE MISSION
-              </p>
-              {/* <div className="flex items-center space-x-6 text-sm text-white/60">
-                <span>Privacy Policy</span>
-                <span>Terms of Service</span>
-                <span>Safety Standards</span>
-              </div> */}
+            <div className="mt-10 overflow-hidden border border-[#23272b]">
+              <iframe
+                title="Carte — MCCT Industrie, Casablanca"
+                src="https://www.google.com/maps?q=13+rue+Ahmed+El+Mejatti+Casablanca&output=embed"
+                loading="lazy"
+                className="block h-[300px] w-full border-0 grayscale contrast-[1.05]"
+              />
             </div>
           </div>
-        </footer>
+
+          <McctContactForm />
+        </div>
       </div>
-    </>
-  );
-};
+    </section>
+
+    <div
+      className={`${container} flex flex-wrap justify-between gap-4 border-t border-[#23272b] pb-[34px] pt-6 text-[12px] tracking-[0.08em] text-[#565e66]`}
+    >
+      <span>© 2026 MCCT INDUSTRIE — CASABLANCA, MAROC</span>
+      <span>MENTIONS LÉGALES · POLITIQUE DE CONFIDENTIALITÉ</span>
+    </div>
+  </div>
+);
 
 export default ContactPage;

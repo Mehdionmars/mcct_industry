@@ -1,160 +1,247 @@
-// src/pages/projects/ProjectDetail.jsx
-import React, { useEffect } from 'react';
-import Header from '../../components/ui/Header';
-import { useParams, useNavigate } from 'react-router-dom';
-import Button from '../../components/ui/Button';
-import Icon from '../../components/AppIcon';
-import projectsData from '../../data/projects';
+import React, { useCallback, useMemo, useState } from 'react';
+import { Link, useParams } from 'react-router-dom';
+import PageMeta from '../../components/ui/PageMeta';
+import SiteHeader from '../../components/ui/SiteHeader';
+import SiteCTA from '../../components/ui/SiteCTA';
+import WhatsAppFab from '../../components/ui/WhatsAppFab';
+import Lightbox from '../../components/ui/Lightbox';
+import Reveal from '../../components/ui/Reveal';
+import NotFound from '../NotFound';
+import { ACCENT, bodyFont, headingFont, container } from '../../components/ui/mcctTheme';
+import { projects, projectBySlug } from '../../data/mcct';
 
 const ProjectDetail = () => {
   const { id } = useParams();
-  const navigate = useNavigate();
-  const project = projectsData[id];
+  const [index, setIndex] = useState(-1);
 
-  // Redirection automatique si le projet n'existe pas
-  useEffect(() => {
-    if (!project) {
-      navigate('/projects#projects');
-    }
-  }, [project, navigate]);
+  const project = useMemo(() => projectBySlug(id), [id]);
+  const gallery = project?.gallery ?? [];
 
-  if (!project) return null; // Rend rien pendant la redirection
+  const step = useCallback(
+    (direction) => {
+      const total = gallery?.length;
+      if (!total) return;
+      setIndex((current) => (current < 0 ? current : (current + direction + total) % total));
+    },
+    [gallery]
+  );
+
+  // Un slug inconnu doit répondre « page introuvable », pas afficher un projet par défaut.
+  if (!project) return <NotFound />;
+
+  const currentItem = index >= 0 ? gallery?.[index] : null;
+  const counter = currentItem
+    ? `${String(index + 1)?.padStart(2, '0')} / ${String(gallery?.length)?.padStart(2, '0')}`
+    : '';
+
+  // Seules les informations réellement disponibles sont affichées.
+  const specs = [
+    { key: 'CATÉGORIE', value: project?.category },
+    { key: 'LOCALISATION', value: project?.location },
+    project?.year ? { key: 'ANNÉE', value: project?.year } : null,
+    project?.client ? { key: 'CLIENT', value: project?.client } : null,
+    project?.services?.length ? { key: 'PRESTATIONS', value: project?.services?.join(' · ') } : null
+  ]?.filter(Boolean);
+
+  const related = projects
+    ?.filter((item) => item?.slug !== project?.slug)
+    ?.sort((a, b) => (b?.category === project?.category) - (a?.category === project?.category))
+    ?.slice(0, 3);
+
+  const meta = [project?.location?.toUpperCase(), project?.year]?.filter(Boolean)?.join(' · ');
+  const wideImage = gallery?.length > 1 ? gallery?.[gallery.length - 1] : null;
 
   return (
-    <>
-      <Header />
-      <main className="min-h-screen bg-gray-50">
-       {/* Hero Section */}
-<section className="relative h-[500px] md:h-[600px] bg-gray-900 overflow-hidden">
-  <img
-    src={project.images[0]}
-    alt={project.title}
-    className="w-full h-full object-cover object-center scale-105 transition-transform duration-500"
-  />
-  <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
-  <div className="absolute bottom-8 left-8 text-white">
-    <div className="flex items-center space-x-2 mb-4">
-      <Button
-        variant="ghost"
-        size="sm"
-        onClick={() => navigate(-1)}
-        iconName="ArrowLeft"
-        iconPosition="left"
-        className="text-white hover:bg-white/20"
-      >
-        Retour
-      </Button>
-    </div>
-    <span className="text-sky-400 uppercase text-sm font-medium">{project.category}</span>
-    <h1 className="text-3xl md:text-4xl font-bold mt-2 max-w-4xl">{project.title}</h1>
-  </div>
-</section>
+    <div className="min-h-screen bg-[#F5F5F2] text-[#17191C] antialiased" style={bodyFont}>
+      <PageMeta
+        title={`${project?.title} — ${project?.category?.toLowerCase()} | MCCT Industrie`}
+        description={project?.introduction}
+        image={project?.src}
+      />
 
-        <div className="container mx-auto px-4 py-12">
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
-            {/* Contenu principal */}
-            <div className="lg:col-span-2 space-y-8">
-              {/* Description */}
-              <div>
-                <h2 className="text-2xl font-bold text-gray-800 mb-4">Description du projet</h2>
-                <p className="text-gray-600 leading-relaxed text-lg">{project.description}</p>
-              </div>
+      <WhatsAppFab />
+      <SiteHeader />
 
-              {/* Caractéristiques */}
-              <div>
-                <h2 className="text-2xl font-bold text-gray-800 mb-6">Caractéristiques techniques</h2>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                  {project.specifications.map((spec, index) => (
-                    <div key={index} className="bg-white p-4 rounded-lg shadow-sm border">
-                      <dt className="text-sm font-medium text-gray-500">{spec.label}</dt>
-                      <dd className="text-lg font-semibold text-gray-900 mt-1">{spec.value}</dd>
-                    </div>
-                  ))}
-                </div>
-              </div>
+      <section className="relative flex min-h-[82vh] items-end overflow-hidden bg-[#0D0F10]">
+        <img src={project?.src} alt={project?.title} className="absolute inset-0 h-full w-full object-cover" />
+        <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(13,15,16,0.3),rgba(13,15,16,0.9))]" />
+        <div className={`${container} relative pb-16 pt-[140px] text-white`}>
+          <Link
+            to="/projects"
+            className="mb-[26px] inline-flex items-center gap-2.5 text-[12px] font-extrabold tracking-[0.18em] text-[#c4cad0] transition-colors hover:text-white"
+          >
+            ← TOUS LES PROJETS
+          </Link>
+          <p className="mb-4 text-[13px] font-extrabold tracking-[0.26em]" style={{ color: ACCENT }}>
+            {project?.category}
+          </p>
+          <h1
+            className="text-[clamp(2.4rem,5.6vw,5rem)] font-bold uppercase leading-[0.98] tracking-[-0.02em]"
+            style={headingFont}
+          >
+            {project?.title}
+          </h1>
+          {meta ? <p className="mt-[22px] text-[15px] tracking-[0.1em] text-[#c4cad0]">{meta}</p> : null}
+        </div>
+      </section>
 
-              {/* Prestations */}
-              <div>
-                <h2 className="text-2xl font-bold text-gray-800 mb-6">Prestations réalisées</h2>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-                  {project.features.map((feature, index) => (
-                    <div key={index} className="flex items-center space-x-3">
-                      <Icon name="CheckCircle" size={20} className="text-green-500 flex-shrink-0" />
-                      <span className="text-gray-700">{feature}</span>
-                    </div>
-                  ))}
-                </div>
-              </div>
-
-              {/* Galerie */}
-              <div>
-                <h2 className="text-2xl font-bold text-gray-800 mb-6">Galerie photos</h2>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                  {project.images.map((image, index) => (
-                    <div key={index} className="overflow-hidden rounded-lg shadow-md">
-                      <img
-                        src={image}
-                        alt={`${project.title} - Photo ${index + 1}`}
-                        className="w-full h-64 object-cover hover:scale-105 transition-transform duration-300"
-                      />
-                    </div>
-                  ))}
-                </div>
-              </div>
+      <section className="bg-[#0D0F10] pb-[90px] text-white">
+        <div
+          className={`${container} grid gap-8 border-t border-[#23272b] pt-12 [grid-template-columns:repeat(auto-fit,minmax(min(100%,180px),1fr))]`}
+        >
+          {specs?.map((spec) => (
+            <div key={spec?.key}>
+              <p className="mb-2 text-[11px] font-extrabold tracking-[0.2em]" style={{ color: ACCENT }}>
+                {spec?.key}
+              </p>
+              <p className="text-[17px] font-bold text-white">{spec?.value}</p>
             </div>
+          ))}
+        </div>
+      </section>
 
-            {/* Sidebar */}
-            <div className="space-y-6">
-              {/* Informations du projet */}
-              <div className="bg-white p-6 rounded-lg shadow-md border">
-                <h3 className="text-xl font-bold text-gray-800 mb-4">Informations projet</h3>
-                <div className="space-y-3">
-                  <div>
-                    <span className="text-sm font-medium text-gray-500">Localisation</span>
-                    <p className="text-gray-800 font-medium">{project.location}</p>
-                  </div>
-                  <div>
-                    <span className="text-sm font-medium text-gray-500">Année de réalisation</span>
-                    <p className="text-gray-800 font-medium">{project.year}</p>
-                  </div>
-                  <div>
-                    <span className="text-sm font-medium text-gray-500">Client</span>
-                    <p className="text-gray-800 font-medium">{project.client}</p>
-                  </div>
-                  <div>
-                    <span className="text-sm font-medium text-gray-500">Surface</span>
-                    <p className="text-gray-800 font-medium">{project.surface}</p>
-                  </div>
-                </div>
-              </div>
+      {project?.introduction ? (
+        <section className="pt-[110px]">
+          <div className={container}>
+            <Reveal
+              as="p"
+              className="max-w-[880px] text-[clamp(1.25rem,2.4vw,1.75rem)] leading-[1.5]"
+              style={headingFont}
+            >
+              {project?.introduction}
+            </Reveal>
+          </div>
+        </section>
+      ) : null}
 
-              {/* Call to Action */}
-              <div className="bg-sky-600 text-white p-6 rounded-lg">
-                <h3 className="text-xl font-bold mb-4">Projet similaire ?</h3>
-                <p className="mb-4">Discutons de votre projet de construction métallique.</p>
-                <div className="space-y-2">
-                  <Button 
-                    className="w-full bg-white text-sky-600 hover:bg-gray-100"
-                    iconName="Phone"
-                    iconPosition="left"
+      {project?.sections?.length ? (
+        <section className="pt-16">
+          <div className={container}>
+            {project?.sections?.map((section, sectionIndex) => (
+              <Reveal
+                key={section?.title}
+                className="grid items-start gap-12 pb-[72px] [grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr))]"
+              >
+                <div className="min-w-0">
+                  <p className="mb-3.5 text-[12px] font-extrabold tracking-[0.24em]" style={{ color: ACCENT }}>
+                    {String(sectionIndex + 1)?.padStart(2, '0')}
+                  </p>
+                  <h2
+                    className="text-[clamp(1.8rem,3.4vw,2.8rem)] font-bold leading-[1.04] tracking-[-0.02em]"
+                    style={headingFont}
                   >
-                    Nous appeler
-                  </Button>
-                  <Button 
-                    variant="outline"
-                    className="w-full border-white text-white hover:bg-white hover:text-sky-600"
-                    iconName="Mail"
-                    iconPosition="left"
-                  >
-                    Demander un devis
-                  </Button>
+                    {section?.title}
+                  </h2>
                 </div>
-              </div>
+                <p className="max-w-[560px] text-[17px] leading-[1.7] text-[#3a3f45]">{section?.body}</p>
+              </Reveal>
+            ))}
+          </div>
+        </section>
+      ) : null}
+
+      {project?.materials?.length ? (
+        <section className="pb-[90px]">
+          <div className={container}>
+            <p className="mb-4 text-[12px] font-extrabold tracking-[0.24em] text-[#565e66]">MATÉRIAUX</p>
+            <div className="flex flex-wrap gap-2.5">
+              {project?.materials?.map((material) => (
+                <span
+                  key={material}
+                  className="border border-[#c6c6c1] px-4 py-2.5 text-[11.5px] font-bold tracking-[0.14em] text-[#565e66]"
+                >
+                  {material}
+                </span>
+              ))}
             </div>
           </div>
+        </section>
+      ) : null}
+
+      {wideImage ? (
+        <section className="overflow-hidden">
+          <img
+            src={wideImage?.src}
+            alt={wideImage?.alt}
+            loading="lazy"
+            className="block h-[clamp(320px,62vh,680px)] w-full object-cover"
+          />
+        </section>
+      ) : null}
+
+      {gallery?.length > 1 ? (
+        <section className="py-[110px]">
+          <div className={container}>
+            <Reveal
+              as="h2"
+              className="mb-10 text-[clamp(1.8rem,3.4vw,2.8rem)] font-bold leading-none tracking-[-0.02em]"
+              style={headingFont}
+            >
+              GALERIE DU PROJET
+              <span style={{ color: ACCENT }}>.</span>
+            </Reveal>
+
+            <div className="grid auto-rows-[150px] grid-cols-2 gap-2.5 min-[900px]:auto-rows-[230px] min-[900px]:gap-4 min-[900px]:[grid-template-columns:repeat(auto-fill,minmax(260px,1fr))]">
+              {gallery?.map((item, itemIndex) => (
+                <button
+                  key={item?.id}
+                  type="button"
+                  onClick={() => setIndex(itemIndex)}
+                  aria-label={item?.alt}
+                  className="group relative min-h-0 cursor-pointer overflow-hidden border-none bg-[#0D0F10] p-0"
+                >
+                  <img
+                    src={item?.thumbSrc}
+                    alt={item?.alt}
+                    loading="lazy"
+                    className="block h-full w-full object-cover transition-transform [transition-duration:600ms] [transition-timing-function:cubic-bezier(0.22,1,0.36,1)] group-hover:scale-105"
+                  />
+                </button>
+              ))}
+            </div>
+          </div>
+        </section>
+      ) : null}
+
+      {currentItem ? (
+        <Lightbox
+          item={currentItem}
+          counter={counter}
+          onClose={() => setIndex(-1)}
+          onPrev={() => step(-1)}
+          onNext={() => step(1)}
+          showProjectLink={false}
+        />
+      ) : null}
+
+      <section className="bg-[#E7E7E4] py-[100px]">
+        <div className={container}>
+          <p className="mb-9 text-[13px] font-extrabold tracking-[0.24em]" style={{ color: ACCENT }}>
+            AUTRES PROJETS
+          </p>
+          <div className="grid gap-6 [grid-template-columns:repeat(auto-fit,minmax(min(100%,280px),1fr))]">
+            {related?.map((item) => (
+              <Link key={item?.slug} to={`/projects/${item?.slug}`} className="group block">
+                <span className="block overflow-hidden bg-[#0D0F10]">
+                  <img
+                    src={item?.thumbSrc}
+                    alt={item?.title}
+                    loading="lazy"
+                    className="block h-[260px] w-full object-cover transition-transform [transition-duration:600ms] [transition-timing-function:cubic-bezier(0.22,1,0.36,1)] group-hover:scale-105"
+                  />
+                </span>
+                <span className="mt-3.5 block text-[11.5px] font-extrabold tracking-[0.18em]" style={{ color: ACCENT }}>
+                  {item?.category}
+                </span>
+                <span className="mt-1.5 block text-[19px] font-extrabold tracking-[-0.01em]">{item?.title}</span>
+              </Link>
+            ))}
+          </div>
         </div>
-      </main>
-    </>
+      </section>
+
+      <SiteCTA title="VOTRE PROJET, NOTRE PROCHAIN CHANTIER" accentSuffix="." />
+    </div>
   );
 };
 
