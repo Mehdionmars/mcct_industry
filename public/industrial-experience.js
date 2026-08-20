@@ -36,6 +36,10 @@
       if (this._init) return; this._init = true;
       CHAPTERS = this.getAttribute('data-lang') === 'en' ? CHAPTERS_EN : CHAPTERS_FR;
       const coarsePtr = window.matchMedia('(pointer: coarse)').matches || window.innerWidth < 768;
+      // Sur petit écran, le texte passe en blanc sur un voile sombre : le gris foncé
+      // de la version desktop devient illisible par-dessus la maquette claire.
+      const narrow = window.innerWidth < 900;
+      this._narrow = narrow;
       const lowEnd = coarsePtr && ((navigator.deviceMemory && navigator.deviceMemory <= 4) || (navigator.hardwareConcurrency && navigator.hardwareConcurrency <= 4));
       this.style.cssText = 'display:block;height:' + (coarsePtr ? '340vh' : '500vh') + ';position:relative;background:#dfe3e6;';
       this.innerHTML = `
@@ -44,23 +48,26 @@
           <div data-fallback style="position:absolute;inset:0;display:none;background:url('${FALLBACK_IMG}') center/cover;">
             <div style="position:absolute;inset:0;background:rgba(13,15,16,.55);"></div>
           </div>
+          <div data-scrim style="position:absolute;inset:0;pointer-events:none;display:${narrow ? 'block' : 'none'};background:linear-gradient(180deg,rgba(13,15,16,0) 26%,rgba(13,15,16,.72) 58%,rgba(13,15,16,.93) 100%);"></div>
           <div data-overlay style="position:absolute;inset:0;pointer-events:none;"></div>
-          <div data-ind style="position:absolute;left:40px;bottom:36px;font-family:'Space Grotesk','Manrope',sans-serif;font-weight:700;letter-spacing:.2em;font-size:12px;color:#17191C;">01 / 06 — INTRO</div>
-          <div data-anno style="position:absolute;right:40px;top:20%;opacity:0;transition:opacity .5s;border:1px solid ${ACCS};background:rgba(245,245,242,.85);backdrop-filter:blur(6px);padding:14px 18px;font-family:'Manrope',sans-serif;">
+          <div data-ind style="position:absolute;left:${narrow ? '20px' : '40px'};bottom:${narrow ? '18px' : '36px'};font-family:'Space Grotesk','Manrope',sans-serif;font-weight:700;letter-spacing:.2em;font-size:12px;color:#17191C;">01 / 06 — INTRO</div>
+          <div data-anno style="display:${narrow ? 'none' : 'block'};position:absolute;right:40px;top:20%;opacity:0;transition:opacity .5s;border:1px solid ${ACCS};background:rgba(245,245,242,.85);backdrop-filter:blur(6px);padding:14px 18px;font-family:'Manrope',sans-serif;">
             <div style="font-size:11px;font-weight:800;letter-spacing:.2em;color:${ACCS};">CHARPENTE ACIER — 01</div>
             <div style="font-size:12.5px;color:#3a3f45;margin-top:6px;">Portiques &amp; pannes — construction métallique</div>
             <div style="width:1px;height:60px;background:${ACCS};position:absolute;left:50%;top:100%;"></div>
           </div>
-          <div data-dims style="position:absolute;left:50%;bottom:14%;transform:translateX(-50%);opacity:0;transition:opacity .5s;font-family:'Space Grotesk',monospace,sans-serif;font-size:12px;letter-spacing:.3em;color:${ACCS};white-space:nowrap;">←──── 44.00 m (illustratif) ────→</div>
+          <div data-dims style="display:${narrow ? 'none' : 'block'};position:absolute;left:50%;bottom:14%;transform:translateX(-50%);opacity:0;transition:opacity .5s;font-family:'Space Grotesk',monospace,sans-serif;font-size:12px;letter-spacing:.3em;color:${ACCS};white-space:nowrap;">←──── 44.00 m (illustratif) ────→</div>
         </div>`;
       const ov = this.querySelector('[data-overlay]');
       this._chapEls = CHAPTERS.map((c, i) => {
         const d = document.createElement('div');
-        d.style.cssText = 'position:absolute;left:40px;top:50%;transform:translateY(-50%);max-width:560px;opacity:0;transition:opacity .4s,transform .6s;font-family:\'Manrope\',sans-serif;color:#17191C;';
+        d.style.cssText = narrow
+          ? 'position:absolute;left:20px;right:20px;bottom:98px;max-width:none;opacity:0;transition:opacity .4s,transform .6s;font-family:\'Manrope\',sans-serif;color:#fff;'
+          : 'position:absolute;left:40px;top:50%;transform:translateY(-50%);max-width:560px;opacity:0;transition:opacity .4s,transform .6s;font-family:\'Manrope\',sans-serif;color:#17191C;';
         d.innerHTML = `<p style="margin:0 0 14px;font-size:12.5px;font-weight:800;letter-spacing:.26em;color:${ACCS};">${c.t1}</p>
-          <h2 style="margin:0;font-family:'Space Grotesk','Manrope',sans-serif;font-size:clamp(2.2rem,4.6vw,4.6rem);line-height:.98;font-weight:700;letter-spacing:-0.02em;white-space:pre-line;">${c.t2}</h2>
-          ${c.sub ? `<p style="margin:18px 0 0;font-size:15px;color:#565e66;">${c.sub}</p>` : ''}
-          ${i === CHAPTERS.length - 1 ? `<a href="#projets" style="pointer-events:auto;display:inline-flex;align-items:center;gap:12px;margin-top:26px;background:${ACCS};color:#fff;padding:16px 26px;font-size:12px;font-weight:800;letter-spacing:.16em;text-decoration:none;">${this.getAttribute('data-lang') === 'en' ? 'EXPLORE OUR PROJECTS' : 'EXPLORER NOS PROJETS'} →</a>` : ''}`;
+          <h2 style="margin:0;font-family:'Space Grotesk','Manrope',sans-serif;font-size:${narrow ? 'clamp(1.9rem,7.5vw,2.6rem)' : 'clamp(2.2rem,4.6vw,4.6rem)'};line-height:${narrow ? '1.02' : '.98'};font-weight:700;letter-spacing:-0.02em;white-space:pre-line;">${c.t2}</h2>
+          ${c.sub ? `<p style="margin:${narrow ? '12px' : '18px'} 0 0;font-size:${narrow ? '14px' : '15px'};color:${narrow ? '#c4cad0' : '#565e66'};">${c.sub}</p>` : ''}
+          ${i === CHAPTERS.length - 1 ? `<a href="#projets" style="pointer-events:auto;display:inline-flex;align-items:center;gap:12px;margin-top:${narrow ? '18px' : '26px'};background:${ACCS};color:#fff;padding:16px 26px;font-size:12px;font-weight:800;letter-spacing:.16em;text-decoration:none;">${this.getAttribute('data-lang') === 'en' ? 'EXPLORE OUR PROJECTS' : 'EXPLORER NOS PROJETS'} →</a>` : ''}`;
         ov.appendChild(d);
         return d;
       });
@@ -334,11 +341,11 @@
           const c = CHAPTERS[ci];
           const on = p >= c.s && p < c.e;
           el.style.opacity = on ? 1 : 0;
-          el.style.transform = 'translateY(' + (on ? '-50%' : '-46%') + ')';
+          if (!this._narrow) el.style.transform = 'translateY(' + (on ? '-50%' : '-46%') + ')';
           const light = night > 0.5 && ci >= 4;
-          el.querySelector('h2').style.color = light ? '#fff' : '#17191C';
+          el.querySelector('h2').style.color = this._narrow || light ? '#fff' : '#17191C';
         });
-        this.querySelector('[data-ind]').style.color = night > 0.5 ? '#fff' : '#17191C';
+        this.querySelector('[data-ind]').style.color = this._narrow || night > 0.5 ? '#fff' : '#17191C';
         this.setIndicator(p);
         // particules
         dust.rotation.y = t * 0.00002;
