@@ -1,4 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
+import { useI18n } from '../../../i18n/LanguageProvider';
 import { ACCENT, headingFont, container } from '../../../components/ui/mcctTheme';
 import { img } from '../../../data/gallery';
 
@@ -24,6 +25,8 @@ const shouldPlayVideo = () => {
 };
 
 const HomeHero = () => {
+  const { t } = useI18n();
+  const title = t('home.heroTitle');
   const videoRef = useRef(null);
   const [isScrolled, setIsScrolled] = useState(false);
   const [withVideo, setWithVideo] = useState(false);
@@ -51,7 +54,7 @@ const HomeHero = () => {
     <section id="top" className="relative flex min-h-[100svh] items-end overflow-hidden bg-[#0D0F10]">
       <img
         src={HERO_IMAGE}
-        alt="Charpente métallique MCCT sous ciel dégagé"
+        alt={t('home.heroImageAlt')}
         fetchpriority="high"
         className="absolute inset-0 h-full w-full animate-mcct-hero-zoom object-cover"
       />
@@ -80,17 +83,17 @@ const HomeHero = () => {
           className="mb-5 animate-mcct-rise text-[12.5px] font-bold tracking-[0.28em] text-[#cfd6dc]"
           style={{ animationDelay: '0.15s' }}
         >
-          INGÉNIERIE INDUSTRIELLE — FABRICATION · CONSTRUCTION
+          {t('home.heroEyebrow')}
         </p>
         <h1
           className="animate-mcct-rise text-[clamp(2.8rem,7vw,7.2rem)] font-extrabold leading-[0.96] tracking-[-0.03em]"
           style={{ ...headingFont, animationDelay: '0.3s' }}
         >
-          CONSTRUIRE
+          {title?.[0]}
           <br />
-          L&apos;INDUSTRIE
+          {title?.[1]}
           <br />
-          DE DEMAIN
+          {title?.[2]}
           <span style={{ color: ACCENT }}>.</span>
         </h1>
 
@@ -99,8 +102,7 @@ const HomeHero = () => {
             className="max-w-[460px] animate-mcct-rise text-[17px] leading-[1.65] text-[#d8dde1]"
             style={{ animationDelay: '0.5s' }}
           >
-            MCCT Industrie accompagne les acteurs industriels dans la conception, la fabrication et la réalisation de
-            solutions techniques à forte valeur ajoutée.
+            {t('home.heroText')}
           </p>
           <div
             className="flex w-full animate-mcct-rise flex-col flex-wrap gap-3 min-[900px]:w-auto min-[900px]:flex-row min-[900px]:gap-4"
@@ -110,7 +112,7 @@ const HomeHero = () => {
               href="#activites"
               className="relative inline-flex min-h-[54px] shrink-0 animate-mcct-pulse items-center justify-center gap-3 overflow-hidden whitespace-nowrap bg-[#2478BE] px-6 text-[12.5px] font-extrabold tracking-[0.16em] text-white transition-colors hover:bg-white hover:text-[#17191C] min-[900px]:min-h-0 min-[900px]:justify-start min-[900px]:px-7 min-[900px]:py-[17px]"
             >
-              DÉCOUVRIR NOS ACTIVITÉS <span aria-hidden="true">→</span>
+              {t('home.heroCta1')} <span aria-hidden="true">→</span>
               <span
                 aria-hidden="true"
                 className="pointer-events-none absolute top-0 h-full w-[45%] animate-mcct-shine bg-[linear-gradient(100deg,transparent,rgba(255,255,255,0.45),transparent)]"
@@ -120,7 +122,7 @@ const HomeHero = () => {
               href="#projets"
               className="inline-flex min-h-[54px] items-center justify-center gap-3 border border-[rgba(255,255,255,0.4)] px-6 text-[12.5px] font-extrabold tracking-[0.16em] text-white transition-colors hover:border-white hover:bg-[rgba(255,255,255,0.08)] min-[900px]:min-h-0 min-[900px]:justify-start min-[900px]:px-7 min-[900px]:py-4"
             >
-              NOS PROJETS
+              {t('home.heroCta2')}
             </a>
           </div>
         </div>
@@ -130,7 +132,7 @@ const HomeHero = () => {
           className="pointer-events-none mt-10 text-center transition-opacity duration-500"
           style={{ opacity: isScrolled ? 0 : 1 }}
         >
-          <span className="text-[11px] font-extrabold tracking-[0.28em] text-[#cfd6dc]">SCROLL</span>
+          <span className="text-[11px] font-extrabold tracking-[0.28em] text-[#cfd6dc]">{t('home.scroll')}</span>
           <span className="mx-auto mt-3 block h-[42px] w-px bg-[linear-gradient(180deg,#2478BE,transparent)]" />
         </div>
       </div>

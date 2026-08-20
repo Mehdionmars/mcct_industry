@@ -2,14 +2,23 @@
 (function () {
   const ACC = 0x2478be, ACCS = '#2478BE';
   const FALLBACK_IMG = '/assets/gallery/IMG_7861.webp';
-  const CHAPTERS = [
-    { s: 0.00, e: 0.15, num: '', label: 'INTRO', t1: 'MCCT INDUSTRIE', t2: "L'INGÉNIERIE\nAU SERVICE\nDE L'INDUSTRIE.", sub: 'Faites défiler pour explorer notre univers industriel' },
+  const CHAPTERS_FR = [
+    { s: 0.00, e: 0.15, num: '', label: 'INTRO', t1: 'MCCT INDUSTRIE', t2: 'L’INGÉNIERIE\nAU SERVICE\nDE L’INDUSTRIE.', sub: 'Faites défiler pour explorer notre univers industriel' },
     { s: 0.15, e: 0.30, num: '01', label: 'APPROCHE', t1: '01 — ENGINEERING', t2: 'DU CONCEPT\nÀ LA RÉALITÉ\nINDUSTRIELLE.', sub: 'Études, dimensionnement, plans d’exécution' },
     { s: 0.30, e: 0.50, num: '02', label: 'ENGINEERING', t1: '02 — STRUCTURE', t2: 'LA PRÉCISION\nÀ CHAQUE\nÉTAPE.', sub: 'Charpente acier — mode plan technique' },
     { s: 0.50, e: 0.70, num: '03', label: 'FABRICATION', t1: '03 — FABRICATION', t2: 'CONÇU POUR\nPERFORMER.', sub: 'Découpe, soudure, assemblage en atelier' },
-    { s: 0.70, e: 0.85, num: '04', label: 'ASSEMBLAGE', t1: '04 — ASSEMBLAGE', t2: "DE L'ATELIER\nAU CHANTIER.", sub: 'Vue éclatée : fondation, ossature, couverture' },
+    { s: 0.70, e: 0.85, num: '04', label: 'ASSEMBLAGE', t1: '04 — ASSEMBLAGE', t2: 'DE L’ATELIER\nAU CHANTIER.', sub: 'Vue éclatée : fondation, ossature, couverture' },
     { s: 0.85, e: 1.01, num: '05', label: 'MCCT', t1: 'MCCT INDUSTRIE', t2: 'CONSTRUIRE\nL’INDUSTRIE\nDE DEMAIN.', sub: '' }
   ];
+  const CHAPTERS_EN = [
+    { s: 0.00, e: 0.15, num: '', label: 'INTRO', t1: 'MCCT INDUSTRIE', t2: 'ENGINEERING\nAT THE SERVICE\nOF INDUSTRY.', sub: 'Scroll to explore our industrial world' },
+    { s: 0.15, e: 0.30, num: '01', label: 'APPROACH', t1: '01 — ENGINEERING', t2: 'FROM CONCEPT\nTO INDUSTRIAL\nREALITY.', sub: 'Studies, sizing and shop drawings' },
+    { s: 0.30, e: 0.50, num: '02', label: 'ENGINEERING', t1: '02 — STRUCTURE', t2: 'PRECISION\nAT EVERY\nSTAGE.', sub: 'Steel frame — technical drawing mode' },
+    { s: 0.50, e: 0.70, num: '03', label: 'FABRICATION', t1: '03 — FABRICATION', t2: 'BUILT TO\nPERFORM.', sub: 'Cutting, welding and assembly in the workshop' },
+    { s: 0.70, e: 0.85, num: '04', label: 'ASSEMBLY', t1: '04 — ASSEMBLY', t2: 'FROM WORKSHOP\nTO SITE.', sub: 'Exploded view: foundation, frame, roofing' },
+    { s: 0.85, e: 1.01, num: '05', label: 'MCCT', t1: 'MCCT INDUSTRIE', t2: 'BUILDING\nTOMORROW’S\nINDUSTRY.', sub: '' }
+  ];
+  let CHAPTERS = CHAPTERS_FR;
   const KEYS = [
     { p: 0.00, pos: [30, 9, 44], tgt: [0, 4, 0] },
     { p: 0.15, pos: [16, 5, 28], tgt: [0, 4, 0] },
@@ -25,6 +34,7 @@
   class IndustrialExperience extends HTMLElement {
     connectedCallback() {
       if (this._init) return; this._init = true;
+      CHAPTERS = this.getAttribute('data-lang') === 'en' ? CHAPTERS_EN : CHAPTERS_FR;
       const coarsePtr = window.matchMedia('(pointer: coarse)').matches || window.innerWidth < 768;
       const lowEnd = coarsePtr && ((navigator.deviceMemory && navigator.deviceMemory <= 4) || (navigator.hardwareConcurrency && navigator.hardwareConcurrency <= 4));
       this.style.cssText = 'display:block;height:' + (coarsePtr ? '340vh' : '500vh') + ';position:relative;background:#dfe3e6;';
@@ -50,7 +60,7 @@
         d.innerHTML = `<p style="margin:0 0 14px;font-size:12.5px;font-weight:800;letter-spacing:.26em;color:${ACCS};">${c.t1}</p>
           <h2 style="margin:0;font-family:'Space Grotesk','Manrope',sans-serif;font-size:clamp(2.2rem,4.6vw,4.6rem);line-height:.98;font-weight:700;letter-spacing:-0.02em;white-space:pre-line;">${c.t2}</h2>
           ${c.sub ? `<p style="margin:18px 0 0;font-size:15px;color:#565e66;">${c.sub}</p>` : ''}
-          ${i === CHAPTERS.length - 1 ? `<a href="#projets" style="pointer-events:auto;display:inline-flex;align-items:center;gap:12px;margin-top:26px;background:${ACCS};color:#fff;padding:16px 26px;font-size:12px;font-weight:800;letter-spacing:.16em;text-decoration:none;">EXPLORER NOS PROJETS →</a>` : ''}`;
+          ${i === CHAPTERS.length - 1 ? `<a href="#projets" style="pointer-events:auto;display:inline-flex;align-items:center;gap:12px;margin-top:26px;background:${ACCS};color:#fff;padding:16px 26px;font-size:12px;font-weight:800;letter-spacing:.16em;text-decoration:none;">${this.getAttribute('data-lang') === 'en' ? 'EXPLORE OUR PROJECTS' : 'EXPLORER NOS PROJETS'} →</a>` : ''}`;
         ov.appendChild(d);
         return d;
       });

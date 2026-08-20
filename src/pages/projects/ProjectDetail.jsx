@@ -7,14 +7,16 @@ import WhatsAppFab from '../../components/ui/WhatsAppFab';
 import Lightbox from '../../components/ui/Lightbox';
 import Reveal from '../../components/ui/Reveal';
 import NotFound from '../NotFound';
+import { useI18n } from '../../i18n/LanguageProvider';
 import { ACCENT, bodyFont, headingFont, container } from '../../components/ui/mcctTheme';
-import { projects, projectBySlug } from '../../data/mcct';
+import { getProjects, getProjectBySlug } from '../../data/mcct';
 
 const ProjectDetail = () => {
   const { id } = useParams();
+  const { lang, t } = useI18n();
   const [index, setIndex] = useState(-1);
 
-  const project = useMemo(() => projectBySlug(id), [id]);
+  const project = useMemo(() => getProjectBySlug(id, lang), [id, lang]);
   const gallery = project?.gallery ?? [];
 
   const step = useCallback(
@@ -35,15 +37,16 @@ const ProjectDetail = () => {
     : '';
 
   // Seules les informations réellement disponibles sont affichées.
+  const specLabels = t('projects.specs');
   const specs = [
-    { key: 'CATÉGORIE', value: project?.category },
-    { key: 'LOCALISATION', value: project?.location },
-    project?.year ? { key: 'ANNÉE', value: project?.year } : null,
-    project?.client ? { key: 'CLIENT', value: project?.client } : null,
-    project?.services?.length ? { key: 'PRESTATIONS', value: project?.services?.join(' · ') } : null
+    { key: specLabels?.category, value: project?.categoryLabel },
+    { key: specLabels?.location, value: project?.location },
+    project?.year ? { key: specLabels?.year, value: project?.year } : null,
+    project?.client ? { key: specLabels?.client, value: project?.client } : null,
+    project?.services?.length ? { key: specLabels?.services, value: project?.services?.join(' · ') } : null
   ]?.filter(Boolean);
 
-  const related = projects
+  const related = getProjects(lang)
     ?.filter((item) => item?.slug !== project?.slug)
     ?.sort((a, b) => (b?.category === project?.category) - (a?.category === project?.category))
     ?.slice(0, 3);
@@ -54,7 +57,7 @@ const ProjectDetail = () => {
   return (
     <div className="min-h-screen bg-[#F5F5F2] text-[#17191C] antialiased" style={bodyFont}>
       <PageMeta
-        title={`${project?.title} — ${project?.category?.toLowerCase()} | MCCT Industrie`}
+        title={`${project?.title} — ${project?.categoryLabel?.toLowerCase()} | MCCT Industrie`}
         description={project?.introduction}
         image={project?.src}
       />
@@ -70,10 +73,10 @@ const ProjectDetail = () => {
             to="/projects"
             className="mb-[26px] inline-flex items-center gap-2.5 text-[12px] font-extrabold tracking-[0.18em] text-[#c4cad0] transition-colors hover:text-white"
           >
-            ← TOUS LES PROJETS
+            {t('projects.back')}
           </Link>
           <p className="mb-4 text-[13px] font-extrabold tracking-[0.26em]" style={{ color: ACCENT }}>
-            {project?.category}
+            {project?.categoryLabel}
           </p>
           <h1
             className="text-[clamp(2.4rem,5.6vw,5rem)] font-bold uppercase leading-[0.98] tracking-[-0.02em]"
@@ -143,7 +146,7 @@ const ProjectDetail = () => {
       {project?.materials?.length ? (
         <section className="pb-[90px]">
           <div className={container}>
-            <p className="mb-4 text-[12px] font-extrabold tracking-[0.24em] text-[#565e66]">MATÉRIAUX</p>
+            <p className="mb-4 text-[12px] font-extrabold tracking-[0.24em] text-[#565e66]">{t('projects.materials')}</p>
             <div className="flex flex-wrap gap-2.5">
               {project?.materials?.map((material) => (
                 <span
@@ -177,7 +180,7 @@ const ProjectDetail = () => {
               className="mb-10 text-[clamp(1.8rem,3.4vw,2.8rem)] font-bold leading-none tracking-[-0.02em]"
               style={headingFont}
             >
-              GALERIE DU PROJET
+              {t('projects.gallery')}
               <span style={{ color: ACCENT }}>.</span>
             </Reveal>
 
@@ -217,7 +220,7 @@ const ProjectDetail = () => {
       <section className="bg-[#E7E7E4] py-[100px]">
         <div className={container}>
           <p className="mb-9 text-[13px] font-extrabold tracking-[0.24em]" style={{ color: ACCENT }}>
-            AUTRES PROJETS
+            {t('projects.related')}
           </p>
           <div className="grid gap-6 [grid-template-columns:repeat(auto-fit,minmax(min(100%,280px),1fr))]">
             {related?.map((item) => (
@@ -231,7 +234,7 @@ const ProjectDetail = () => {
                   />
                 </span>
                 <span className="mt-3.5 block text-[11.5px] font-extrabold tracking-[0.18em]" style={{ color: ACCENT }}>
-                  {item?.category}
+                  {item?.categoryLabel}
                 </span>
                 <span className="mt-1.5 block text-[19px] font-extrabold tracking-[-0.01em]">{item?.title}</span>
               </Link>
@@ -240,7 +243,7 @@ const ProjectDetail = () => {
         </div>
       </section>
 
-      <SiteCTA title="VOTRE PROJET, NOTRE PROCHAIN CHANTIER" accentSuffix="." />
+      <SiteCTA titleKey="cta.nextSite" accentSuffix="." />
     </div>
   );
 };

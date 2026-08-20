@@ -1,15 +1,19 @@
 import React, { useMemo, useState } from 'react';
 import { Link } from 'react-router-dom';
 import Reveal from '../../../components/ui/Reveal';
+import { useI18n } from '../../../i18n/LanguageProvider';
 import { ACCENT, headingFont, container } from '../../../components/ui/mcctTheme';
-import { homeProjects, projectCategories } from '../../../data/mcct';
+import { getHomeProjects, projectCategories } from '../../../data/mcct';
 
 const HomeProjects = () => {
-  const [filter, setFilter] = useState('TOUS');
+  const { lang, t, tx } = useI18n();
+  const [filter, setFilter] = useState('ALL');
+  const homeProjects = useMemo(() => getHomeProjects(lang), [lang]);
+  const title = t('home.projectsTitle');
 
   const visibleProjects = useMemo(
-    () => (filter === 'TOUS' ? homeProjects : homeProjects?.filter((project) => project?.category === filter)),
-    [filter]
+    () => (filter === 'ALL' ? homeProjects : homeProjects?.filter((project) => project?.category === filter)),
+    [filter, homeProjects]
   );
 
   return (
@@ -17,32 +21,32 @@ const HomeProjects = () => {
       <div className={container}>
         <Reveal className="mb-11">
           <p className="mb-[18px] text-[13px] font-extrabold tracking-[0.24em]" style={{ color: ACCENT }}>
-            05 — PROJETS SÉLECTIONNÉS
+            {t('home.projectsEyebrow')}
           </p>
           <h2
             className="text-[clamp(2.4rem,4.6vw,4.4rem)] font-extrabold leading-none tracking-[-0.03em]"
             style={headingFont}
           >
-            DES RÉALISATIONS
+            {title?.[0]}
             <br />
-            QUI PARLENT
+            {title?.[1]}
             <br />
-            D&apos;ELLES-MÊMES
+            {title?.[2]}
             <span style={{ color: ACCENT }}>.</span>
           </h2>
         </Reveal>
 
         {/* Mobile : liste déroulante — desktop : pastilles */}
         <label className="mb-9 flex flex-col gap-2 text-[11.5px] font-extrabold tracking-[0.18em] text-[#565e66] min-[900px]:hidden">
-          FILTRER
+          {t('common.filter')}
           <select
             value={filter}
             onChange={(e) => setFilter(e?.target?.value)}
             className="min-h-[48px] border border-[#c6c6c1] bg-white px-4 py-3.5 text-[15px] font-bold text-[#17191C]"
           >
             {projectCategories?.map((category) => (
-              <option key={category} value={category}>
-                {category}
+              <option key={category?.key} value={category?.key}>
+                {tx(category?.label)}
               </option>
             ))}
           </select>
@@ -50,12 +54,12 @@ const HomeProjects = () => {
 
         <div className="mb-12 hidden flex-wrap gap-2.5 min-[900px]:flex">
           {projectCategories?.map((category) => {
-            const isActive = filter === category;
+            const isActive = filter === category?.key;
             return (
               <button
-                key={category}
+                key={category?.key}
                 type="button"
-                onClick={() => setFilter(category)}
+                onClick={() => setFilter(category?.key)}
                 aria-pressed={isActive}
                 className={`min-h-[44px] cursor-pointer border px-5 py-3 text-[12px] font-extrabold tracking-[0.14em] transition-all [transition-duration:250ms] ${
                   isActive
@@ -63,18 +67,18 @@ const HomeProjects = () => {
                     : 'border-[#c6c6c1] bg-transparent text-[#565e66] hover:border-[#2478BE] hover:text-[#2478BE]'
                 }`}
               >
-                {category}
+                {tx(category?.label)}
               </button>
             );
           })}
         </div>
 
         <div
-          key={filter}
+          key={`${filter}-${lang}`}
           className="grid animate-galerie-fade gap-7 [grid-template-columns:repeat(auto-fill,minmax(min(100%,300px),1fr))]"
         >
           {visibleProjects?.map((project) => (
-            <figure key={project?.title} className="group m-0">
+            <figure key={project?.slug} className="group m-0">
               <Link to={`/projects/${project?.slug}`} className="block overflow-hidden bg-[#0D0F10]">
                 <img
                   src={project?.thumbSrc}
@@ -86,7 +90,7 @@ const HomeProjects = () => {
               <figcaption className="flex items-baseline justify-between gap-4 pt-4">
                 <Link to={`/projects/${project?.slug}`} className="hover:text-[#2478BE]">
                   <span className="block text-[11.5px] font-extrabold tracking-[0.18em]" style={{ color: ACCENT }}>
-                    {project?.category}
+                    {project?.categoryLabel}
                   </span>
                   <span className="mt-1.5 block text-[19px] font-extrabold tracking-[-0.01em]">{project?.title}</span>
                 </Link>

@@ -3,20 +3,23 @@ import PageMeta from '../../components/ui/PageMeta';
 import SiteHeader from '../../components/ui/SiteHeader';
 import SiteCTA from '../../components/ui/SiteCTA';
 import WhatsAppFab from '../../components/ui/WhatsAppFab';
+import { useI18n } from '../../i18n/LanguageProvider';
 import { bodyFont, container } from '../../components/ui/mcctTheme';
 import GalleryHero from './components/GalleryHero';
 import GalleryFilters from './components/GalleryFilters';
 import GalleryGrid from './components/GalleryGrid';
 import Lightbox from '../../components/ui/Lightbox';
-import { galleryItems } from '../../data/gallery';
+import { getGalleryItems, categoryLabel } from '../../data/gallery';
 
 const Galerie = () => {
-  const [filter, setFilter] = useState('TOUT');
+  const { lang, t } = useI18n();
+  const [filter, setFilter] = useState('ALL');
   const [index, setIndex] = useState(-1);
+  const galleryItems = useMemo(() => getGalleryItems(lang), [lang]);
 
   const visibleItems = useMemo(
-    () => (filter === 'TOUT' ? galleryItems : galleryItems?.filter((item) => item?.category === filter)),
-    [filter]
+    () => (filter === 'ALL' ? galleryItems : galleryItems?.filter((item) => item?.category === filter)),
+    [filter, galleryItems]
   );
 
   const handleFilter = useCallback((next) => {
@@ -44,7 +47,7 @@ const Galerie = () => {
 
   return (
     <div className="min-h-screen bg-[#F5F5F2] text-[#17191C] antialiased" style={bodyFont}>
-      <PageMeta title="Galerie chantiers et atelier | MCCT Industrie" description="Galerie MCCT Industrie : une sélection de nos environnements industriels, chantiers et réalisations en construction métallique." />
+      <PageMeta title={t('meta.gallery.title')} description={t('meta.gallery.description')} />
 
       <WhatsAppFab />
       <SiteHeader />
@@ -55,7 +58,7 @@ const Galerie = () => {
           <GalleryFilters value={filter} onChange={handleFilter} />
           <GalleryGrid items={visibleItems} onOpen={setIndex} />
           <p className="mt-9 text-[12.5px] tracking-[0.1em] text-[#8a9096]">
-            {`${visibleItems?.length} VISUELS — ${filter}`}
+            {t('gallery.count')(visibleItems?.length, categoryLabel(filter, lang))}
           </p>
         </div>
       </section>

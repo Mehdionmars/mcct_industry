@@ -11,7 +11,9 @@ export default defineConfig({
   outDir: "dist",
     chunkSizeWarningLimit: 2000,
   },
-  base: "./",
+  // Chemins absolus : avec "./", une URL de profondeur >= 1 (/projects/mon-projet)
+  // resolvait les assets en /projects/assets/... -> page blanche au chargement direct.
+  base: "/",
   plugins: [tsconfigPaths(), react(), tagger()],
   server: {
     port: "4028",

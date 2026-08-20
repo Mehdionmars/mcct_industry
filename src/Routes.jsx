@@ -33,7 +33,6 @@ const Routes = () => {
           </>
         )}
       </RouterRoutes>
-      </ErrorBoundary>
     </BrowserRouter>
   );
 };

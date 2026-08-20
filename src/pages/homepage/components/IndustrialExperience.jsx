@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { useI18n } from '../../../i18n/LanguageProvider';
 
 const SCRIPT_SRC = '/industrial-experience.js';
 
@@ -8,6 +9,7 @@ const SCRIPT_SRC = '/industrial-experience.js';
  * seule fois pour toute l'application.
  */
 const IndustrialExperience = ({ model = '' }) => {
+  const { lang, t } = useI18n();
   const [isReady, setIsReady] = useState(
     () => typeof window !== 'undefined' && !!window.customElements?.get('industrial-experience')
   );
@@ -27,8 +29,8 @@ const IndustrialExperience = ({ model = '' }) => {
   }, [isReady]);
 
   return (
-    <section aria-label="Expérience 3D — hangar industriel" className="bg-[#dfe3e6]">
-      {isReady ? <industrial-experience model={model || undefined} /> : <div className="h-[60vh]" />}
+    <section aria-label={t('home.experienceLabel')} className="bg-[#dfe3e6]">
+      {isReady ? <industrial-experience key={lang} data-lang={lang} model={model || undefined} /> : <div className="h-[60vh]" />}
     </section>
   );
 };

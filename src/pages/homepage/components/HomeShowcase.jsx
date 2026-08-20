@@ -1,47 +1,58 @@
 import React from 'react';
 import Reveal from '../../../components/ui/Reveal';
+import { useI18n } from '../../../i18n/LanguageProvider';
 import { ACCENT, headingFont, container } from '../../../components/ui/mcctTheme';
-import { sectors } from '../../../data/mcct';
+import { getSectors } from '../../../data/mcct';
 import { img } from '../../../data/gallery';
 
-export const FeaturedProject = () => (
+export const FeaturedProject = () => {
+  const { t } = useI18n();
+  const title = t('home.featuredTitle');
+
+  return (
   <section className="relative flex min-h-[78vh] items-end overflow-hidden bg-[#0D0F10]">
     <img
       src={img('IMG_7866')}
-      alt="Hangar industriel livré par MCCT Industrie"
+      alt={t('home.featuredAlt')}
       loading="lazy"
       className="absolute inset-0 h-full w-full object-cover"
     />
     <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(13,15,16,0.2)_0%,rgba(13,15,16,0.85)_100%)]" />
     <Reveal className={`${container} relative pb-[72px] pt-[120px] text-white`}>
-      <p className="mb-4 text-[13px] font-extrabold tracking-[0.24em] text-[#cfd6dc]">04 — PROJET À LA UNE</p>
+      <p className="mb-4 text-[13px] font-extrabold tracking-[0.24em] text-[#cfd6dc]">{t('home.featuredEyebrow')}</p>
       <h2
         className="text-[clamp(2.2rem,4.5vw,4.2rem)] font-extrabold leading-none tracking-[-0.03em]"
         style={headingFont}
       >
-        HANGAR INDUSTRIEL
+        {title?.[0]}
         <br />
-        CLÉ EN MAIN
+        {title?.[1]}
         <span style={{ color: ACCENT }}>.</span>
       </h2>
       <div className="mt-6 flex flex-wrap items-center justify-between gap-6">
-        <p className="text-[15px] tracking-[0.08em] text-[#c4cad0]">CONSTRUCTION MÉTALLIQUE — MAROC</p>
+        <p className="text-[15px] tracking-[0.08em] text-[#c4cad0]">{t('home.featuredMeta')}</p>
         <a
           href="#projets"
           className="inline-flex items-center gap-3 border border-[rgba(255,255,255,0.4)] px-[26px] py-[15px] text-[12.5px] font-extrabold tracking-[0.16em] text-white transition-colors hover:border-white hover:bg-white hover:text-[#17191C]"
         >
-          VOIR LE PROJET <span aria-hidden="true">→</span>
+          {t('home.featuredLink')} <span aria-hidden="true">→</span>
         </a>
       </div>
     </Reveal>
-  </section>
-);
+    </section>
+  );
+};
 
-export const EngagementSection = () => (
+export const EngagementSection = () => {
+  const { t } = useI18n();
+  const title = t('home.commitmentTitle');
+  const circle = t('home.commitmentCircle');
+
+  return (
   <section className="relative flex min-h-[80vh] items-center overflow-hidden bg-[#0D0F10]">
     <img
       src={img('IMG_7887')}
-      alt="Montage d'une structure métallique sur site"
+      alt={t('home.commitmentAlt')}
       loading="lazy"
       className="absolute inset-0 h-full w-full object-cover opacity-50"
     />
@@ -49,54 +60,59 @@ export const EngagementSection = () => (
     <Reveal className={`${container} relative flex flex-wrap items-center justify-between gap-12 py-[90px] text-white`}>
       <div className="min-w-0 max-w-[640px]">
         <p className="mb-[18px] text-[13px] font-extrabold tracking-[0.26em]" style={{ color: ACCENT }}>
-          NOTRE ENGAGEMENT
+          {t('home.commitmentEyebrow')}
         </p>
         <h2
           className="text-[clamp(2.2rem,5vw,4.4rem)] font-bold leading-none tracking-[-0.02em]"
           style={headingFont}
         >
-          CONSTRUIRE AVEC PRÉCISION.
+          {title?.[0]}
           <br />
-          LIVRER AVEC EXIGENCE
+          {title?.[1]}
           <span style={{ color: ACCENT }}>.</span>
         </h2>
         <p className="mt-[26px] max-w-[480px] text-[17px] leading-[1.7] text-[#c4cad0]">
-          Chaque projet est piloté par une équipe technique dédiée, de l&apos;étude d&apos;exécution à la réception sur
-          site.
+          {t('home.commitmentText')}
         </p>
       </div>
       <a
         href="#projets"
-        aria-label="Voir nos réalisations"
+        aria-label={t('home.commitmentAria')}
         className="flex h-[168px] w-[168px] shrink-0 flex-col items-center justify-center gap-2 rounded-full border border-[rgba(255,255,255,0.45)] text-center text-[11.5px] font-extrabold tracking-[0.2em] text-white transition-all [transition-duration:400ms] hover:scale-[1.06] hover:border-[#2478BE] hover:bg-[#2478BE]"
       >
         <span aria-hidden="true" className="text-[22px]">
           →
         </span>
         <span>
-          NOS
+          {circle?.[0]}
           <br />
-          RÉALISATIONS
+          {circle?.[1]}
         </span>
       </a>
     </Reveal>
-  </section>
-);
+    </section>
+  );
+};
 
-export const SectorsSection = () => (
+export const SectorsSection = () => {
+  const { lang, t } = useI18n();
+  const sectors = getSectors(lang);
+  const title = t('home.sectorsTitle');
+
+  return (
   <section className="bg-[#17191C] py-[120px] text-white">
     <div className={container}>
       <Reveal className="mb-14">
         <p className="mb-[18px] text-[13px] font-extrabold tracking-[0.24em]" style={{ color: ACCENT }}>
-          SECTEURS D&apos;INTERVENTION
+          {t('home.sectorsEyebrow')}
         </p>
         <h2
           className="text-[clamp(2.2rem,4.6vw,4rem)] font-bold leading-none tracking-[-0.02em]"
           style={headingFont}
         >
-          UNE EXPERTISE
+          {title?.[0]}
           <br />
-          MULTI-SECTORIELLE
+          {title?.[1]}
           <span style={{ color: ACCENT }}>.</span>
         </h2>
       </Reveal>
@@ -120,5 +136,6 @@ export const SectorsSection = () => (
         ))}
       </div>
     </div>
-  </section>
-);
+    </section>
+  );
+};

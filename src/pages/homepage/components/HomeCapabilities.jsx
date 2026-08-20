@@ -1,10 +1,14 @@
 import React, { useState } from 'react';
 import Reveal from '../../../components/ui/Reveal';
+import { useI18n } from '../../../i18n/LanguageProvider';
 import { ACCENT, headingFont, container } from '../../../components/ui/mcctTheme';
-import { capabilities, values, clients } from '../../../data/mcct';
+import { getCapabilities, getValues, clients } from '../../../data/mcct';
 import { img } from '../../../data/gallery';
 
 export const CapabilitiesSection = () => {
+  const { lang, t } = useI18n();
+  const capabilities = getCapabilities(lang);
+  const title = t('home.capabilitiesTitle');
   const [openIndex, setOpenIndex] = useState(0);
 
   return (
@@ -12,23 +16,23 @@ export const CapabilitiesSection = () => {
       <div className={`${container} grid items-start gap-16 [grid-template-columns:repeat(auto-fit,minmax(320px,1fr))]`}>
         <Reveal>
           <p className="mb-[18px] text-[13px] font-extrabold tracking-[0.24em]" style={{ color: ACCENT }}>
-            06 — CAPACITÉS INDUSTRIELLES
+            {t('home.capabilitiesEyebrow')}
           </p>
           <h2
             className="mb-9 text-[clamp(2.2rem,4.2vw,3.8rem)] font-extrabold leading-none tracking-[-0.03em]"
             style={headingFont}
           >
-            CONÇUS POUR
+            {title?.[0]}
             <br />
-            LES PROJETS
+            {title?.[1]}
             <br />
-            COMPLEXES
+            {title?.[2]}
             <span style={{ color: ACCENT }}>.</span>
           </h2>
           <div className="overflow-hidden">
             <img
               src={img('IMG_7916')}
-              alt="Soudure en atelier MCCT"
+              alt={t('home.capabilitiesAlt')}
               loading="lazy"
               className="block h-[380px] w-full object-cover"
             />
@@ -75,6 +79,8 @@ export const CapabilitiesSection = () => {
 
 // Affichée seulement quand des logos clients sont fournis (voir `clients` dans data/mcct).
 export const ClientsSection = () => {
+  const { t } = useI18n();
+  const title = t('home.clientsTitle');
   if (!clients?.length) return null;
 
   return (
@@ -82,12 +88,12 @@ export const ClientsSection = () => {
       <div className={container}>
         <Reveal className="mb-12">
           <p className="mb-[18px] text-[13px] font-extrabold tracking-[0.24em]" style={{ color: ACCENT }}>
-            RÉFÉRENCES
+            {t('home.clientsEyebrow')}
           </p>
           <h2 className="text-[clamp(2rem,4.2vw,3.6rem)] font-bold leading-none tracking-[-0.02em]" style={headingFont}>
-            LA CONFIANCE DE
+            {title?.[0]}
             <br />
-            PARTENAIRES INDUSTRIELS
+            {title?.[1]}
             <span style={{ color: ACCENT }}>.</span>
           </h2>
         </Reveal>
@@ -106,32 +112,41 @@ export const ClientsSection = () => {
   );
 };
 
-export const QualitySection = () => (
+export const QualitySection = () => {
+  const { t } = useI18n();
+  const title = t('home.qualityTitle');
+
+  return (
   <section id="qualite" className="bg-[#F5F5F2] py-[120px]">
     <div className={container}>
       <Reveal>
         <p className="mb-[18px] text-[13px] font-extrabold tracking-[0.24em]" style={{ color: ACCENT }}>
-          07 — QUALITÉ &amp; HSE
+          {t('home.qualityEyebrow')}
         </p>
         <h2
           className="text-[clamp(2.4rem,9vw,122px)] font-extrabold leading-none tracking-[-0.03em]"
           style={headingFont}
         >
-          LA PERFORMANCE
+          {title?.[0]}
           <br />
-          SANS COMPROMIS
+          {title?.[1]}
           <span style={{ color: ACCENT }}>.</span>
         </h2>
       </Reveal>
     </div>
-  </section>
-);
+    </section>
+  );
+};
 
-export const ValuesSection = () => (
+export const ValuesSection = () => {
+  const { lang, t } = useI18n();
+  const values = getValues(lang);
+
+  return (
   <section className="bg-[#E7E7E4] py-[120px]">
     <div className={container}>
       <Reveal as="p" className="mb-10 text-[13px] font-extrabold tracking-[0.24em]" style={{ color: ACCENT }}>
-        08 — CE QUI NOUS ANIME
+        {t('home.valuesEyebrow')}
       </Reveal>
       <div className="flex flex-col">
         {values?.map((value) => (
@@ -150,5 +165,6 @@ export const ValuesSection = () => (
         ))}
       </div>
     </div>
-  </section>
-);
+    </section>
+  );
+};

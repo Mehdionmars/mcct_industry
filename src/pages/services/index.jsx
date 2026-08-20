@@ -4,8 +4,9 @@ import SiteHeader from '../../components/ui/SiteHeader';
 import SiteCTA from '../../components/ui/SiteCTA';
 import WhatsAppFab from '../../components/ui/WhatsAppFab';
 import Reveal from '../../components/ui/Reveal';
+import { useI18n } from '../../i18n/LanguageProvider';
 import { ACCENT, bodyFont, headingFont, container } from '../../components/ui/mcctTheme';
-import { activities } from '../../data/mcct';
+import { getActivities } from '../../data/mcct';
 import { img } from '../../data/gallery';
 
 const ActivitySection = ({ activity, index }) => {
@@ -58,9 +59,14 @@ const ActivitySection = ({ activity, index }) => {
   );
 };
 
-const Activites = () => (
+const Activites = () => {
+  const { lang, t } = useI18n();
+  const activities = getActivities(lang);
+  const title = t('services.title');
+
+  return (
   <div className="min-h-screen bg-[#F5F5F2] text-[#17191C] antialiased" style={bodyFont}>
-    <PageMeta title="Charpente, chaudronnerie et tuyauterie industrielle | MCCT Industrie" description="Construction métallique, chaudronnerie, tuyauterie industrielle, montage, maintenance et équipements : les activités de MCCT Industrie." />
+    <PageMeta title={t('meta.services.title')} description={t('meta.services.description')} />
 
     <WhatsAppFab />
     <SiteHeader />
@@ -68,21 +74,21 @@ const Activites = () => (
     <section className="relative flex min-h-[62vh] items-end overflow-hidden bg-[#0D0F10]">
       <img
         src={img('IMG_7905')}
-        alt="Convoyeur industriel réalisé par MCCT"
+        alt={t('services.heroAlt')}
         className="absolute inset-0 h-full w-full object-cover"
       />
       <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(13,15,16,0.4),rgba(13,15,16,0.85))]" />
       <div className={`${container} relative pb-16 pt-[140px] text-white`}>
-        <p className="mb-4 text-[13px] font-extrabold tracking-[0.26em] text-[#cfd6dc]">NOS ACTIVITÉS</p>
+        <p className="mb-4 text-[13px] font-extrabold tracking-[0.26em] text-[#cfd6dc]">{t('services.eyebrow')}</p>
         <h1
           className="text-[clamp(2.6rem,6vw,5.6rem)] font-bold leading-[0.98] tracking-[-0.02em]"
           style={headingFont}
         >
-          DES SOLUTIONS
+          {title?.[0]}
           <br />
-          CONÇUES POUR
+          {title?.[1]}
           <br />
-          L&apos;INDUSTRIE
+          {title?.[2]}
           <span style={{ color: ACCENT }}>.</span>
         </h1>
       </div>
@@ -92,8 +98,9 @@ const Activites = () => (
       <ActivitySection key={activity?.num} activity={activity} index={index} />
     ))}
 
-    <SiteCTA title="BESOIN D'UNE EXPERTISE" ctaLabel="DEMANDER UN DEVIS" />
+    <SiteCTA titleKey="cta.expertise" ctaKey="cta.quote" />
   </div>
-);
+  );
+};
 
 export default Activites;

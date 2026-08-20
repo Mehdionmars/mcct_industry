@@ -21,7 +21,7 @@ const GalleryGrid = ({ items, onOpen }) => (
         <span className="absolute inset-0 bg-[linear-gradient(180deg,rgba(13,15,16,0)_45%,rgba(13,15,16,0.8)_100%)] opacity-0 transition-opacity [transition-duration:400ms] group-hover:opacity-100 group-focus-visible:opacity-100" />
         <span className="absolute bottom-4 left-[18px] right-[18px] translate-y-2 text-left opacity-0 transition-all [transition-duration:400ms] group-hover:translate-y-0 group-hover:opacity-100 group-focus-visible:translate-y-0 group-focus-visible:opacity-100">
           <span className="block text-[10.5px] font-extrabold tracking-[0.2em] text-[#2478BE]">
-            {item?.category}
+            {item?.categoryLabel}
           </span>
           <span className="mt-[5px] block text-[15px] font-bold text-white">{item?.alt}</span>
         </span>

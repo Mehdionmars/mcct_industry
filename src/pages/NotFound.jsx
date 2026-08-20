@@ -4,15 +4,17 @@ import PageMeta from '../components/ui/PageMeta';
 import SiteHeader from '../components/ui/SiteHeader';
 import SiteCTA from '../components/ui/SiteCTA';
 import WhatsAppFab from '../components/ui/WhatsAppFab';
+import { useI18n } from '../i18n/LanguageProvider';
 import { ACCENT, bodyFont, headingFont, container, navLinks } from '../components/ui/mcctTheme';
 import { img } from '../data/gallery';
 
-const NotFound = () => (
+const NotFound = () => {
+  const { t } = useI18n();
+  const title = t('notFound.title');
+
+  return (
   <div className="min-h-screen bg-[#F5F5F2] text-[#17191C] antialiased" style={bodyFont}>
-    <PageMeta
-      title="Page introuvable — MCCT Industrie"
-      description="Cette page n’existe pas. Retrouvez les activités, projets et coordonnées de MCCT Industrie."
-    />
+    <PageMeta title={t('meta.notFound.title')} description={t('meta.notFound.description')} />
 
     <WhatsAppFab />
     <SiteHeader />
@@ -20,23 +22,23 @@ const NotFound = () => (
     <section className="relative flex min-h-[72vh] items-end overflow-hidden bg-[#0D0F10]">
       <img
         src={img('IMG_7873')}
-        alt="Structure métallique en cours de montage"
+        alt={t('notFound.heroAlt')}
         className="absolute inset-0 h-full w-full object-cover opacity-70"
       />
       <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(13,15,16,0.45),rgba(13,15,16,0.9))]" />
       <div className={`${container} relative pb-16 pt-[140px] text-white`}>
-        <p className="mb-4 text-[13px] font-extrabold tracking-[0.26em] text-[#cfd6dc]">ERREUR 404</p>
+        <p className="mb-4 text-[13px] font-extrabold tracking-[0.26em] text-[#cfd6dc]">{t('notFound.eyebrow')}</p>
         <h1
           className="text-[clamp(2.6rem,6vw,5.6rem)] font-bold leading-[0.98] tracking-[-0.02em]"
           style={headingFont}
         >
-          CETTE PAGE
+          {title?.[0]}
           <br />
-          N&apos;EXISTE PAS
+          {title?.[1]}
           <span style={{ color: ACCENT }}>.</span>
         </h1>
         <p className="mt-[22px] max-w-[520px] text-[16.5px] leading-[1.7] text-[#c4cad0]">
-          Le lien est peut-être obsolète ou mal saisi. Reprenez depuis l’une des pages ci-dessous.
+          {t('notFound.text')}
         </p>
       </div>
     </section>
@@ -44,9 +46,9 @@ const NotFound = () => (
     <section className="py-[90px]">
       <div className={container}>
         <p className="mb-8 text-[13px] font-extrabold tracking-[0.24em]" style={{ color: ACCENT }}>
-          OÙ ALLER
+          {t('notFound.where')}
         </p>
-        <nav aria-label="Pages du site" className="flex flex-col">
+        <nav aria-label={t('notFound.pagesNav')} className="flex flex-col">
           <Link
             to="/"
             className="flex items-baseline gap-7 border-t border-[#c6c6c1] py-6 transition-colors duration-300 hover:text-[#2478BE]"
@@ -56,7 +58,7 @@ const NotFound = () => (
               className="text-[clamp(1.6rem,3.4vw,2.8rem)] font-extrabold leading-none tracking-[-0.02em]"
               style={headingFont}
             >
-              ACCUEIL
+              {t('nav.home')}
             </span>
           </Link>
           {navLinks?.map((link) => (
@@ -70,7 +72,7 @@ const NotFound = () => (
                 className="text-[clamp(1.6rem,3.4vw,2.8rem)] font-extrabold leading-none tracking-[-0.02em]"
                 style={headingFont}
               >
-                {link?.label}
+                {t(`nav.${link?.key}`)}
               </span>
             </Link>
           ))}
@@ -78,8 +80,9 @@ const NotFound = () => (
       </div>
     </section>
 
-    <SiteCTA title="BESOIN D'UN RENSEIGNEMENT" ctaLabel="NOUS ÉCRIRE" />
-  </div>
-);
+    <SiteCTA titleKey="cta.info" ctaKey="cta.writeUs" />
+    </div>
+  );
+};
 
 export default NotFound;

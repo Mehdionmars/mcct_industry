@@ -2,6 +2,7 @@ import React from 'react';
 import PageMeta from '../../components/ui/PageMeta';
 import SiteHeader from '../../components/ui/SiteHeader';
 import WhatsAppFab from '../../components/ui/WhatsAppFab';
+import { useI18n } from '../../i18n/LanguageProvider';
 import { bodyFont, navLinks } from '../../components/ui/mcctTheme';
 import HomeHero from './components/HomeHero';
 import IndustrialExperience from './components/IndustrialExperience';
@@ -16,15 +17,18 @@ import HomeContact from './components/HomeContact';
 const homeNavLinks = [
   navLinks?.[0],
   navLinks?.[1],
-  { num: '03', label: 'SAVOIR-FAIRE', href: '#savoirfaire' },
+  { num: '03', key: 'expertise', href: '#savoirfaire' },
   { ...navLinks?.[2], num: '04' },
   { ...navLinks?.[3], num: '05' },
   { ...navLinks?.[4], num: '06' }
 ];
 
-const Homepage = () => (
+const Homepage = () => {
+  const { t } = useI18n();
+
+  return (
   <div className="min-h-screen bg-[#F5F5F2] text-[#17191C] antialiased" style={bodyFont}>
-    <PageMeta title="MCCT Industrie — charpente métallique et ingénierie industrielle à Casablanca" description="MCCT Industrie accompagne les acteurs industriels marocains dans la conception, la fabrication et la réalisation de solutions métalliques à forte valeur ajoutée." />
+    <PageMeta title={t('meta.home.title')} description={t('meta.home.description')} />
 
     <WhatsAppFab />
     <SiteHeader variant="hero" links={homeNavLinks} />
@@ -43,7 +47,8 @@ const Homepage = () => (
     <QualitySection />
     <ValuesSection />
     <HomeContact />
-  </div>
-);
+    </div>
+  );
+};
 
 export default Homepage;

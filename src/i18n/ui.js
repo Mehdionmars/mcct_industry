@@ -56,6 +56,7 @@ export const ui = {
       next: 'Image suivante'
     },
     home: {
+      experienceLabel: 'Expérience 3D — hangar industriel',
       heroEyebrow: 'INGÉNIERIE INDUSTRIELLE — FABRICATION · CONSTRUCTION',
       heroTitle: ['CONSTRUIRE', "L'INDUSTRIE", 'DE DEMAIN'],
       heroText:
@@ -293,6 +294,7 @@ export const ui = {
       next: 'Next image'
     },
     home: {
+      experienceLabel: '3D experience — industrial building',
       heroEyebrow: 'INDUSTRIAL ENGINEERING — FABRICATION · CONSTRUCTION',
       heroTitle: ['BUILDING', "TOMORROW'S", 'INDUSTRY'],
       heroText:

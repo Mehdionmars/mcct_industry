@@ -1,31 +1,37 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import Reveal from '../../../components/ui/Reveal';
+import { useI18n } from '../../../i18n/LanguageProvider';
 import { ACCENT, headingFont, container } from '../../../components/ui/mcctTheme';
-import { activities, processSteps } from '../../../data/mcct';
+import { getActivities, getProcessSteps } from '../../../data/mcct';
 
-export const ActivitiesSection = () => (
+export const ActivitiesSection = () => {
+  const { lang, t } = useI18n();
+  const activities = getActivities(lang);
+  const title = t('home.activitiesTitle');
+
+  return (
   <section id="activites" className="bg-[#F5F5F2] py-[120px]">
     <div className={container}>
       <Reveal className="mb-16 flex flex-wrap items-end justify-between gap-6">
         <div>
           <p className="mb-[18px] text-[13px] font-extrabold tracking-[0.24em]" style={{ color: ACCENT }}>
-            02 — NOS ACTIVITÉS
+            {t('home.activitiesEyebrow')}
           </p>
           <h2
             className="text-[clamp(2.4rem,4.6vw,4.4rem)] font-extrabold leading-none tracking-[-0.03em]"
             style={headingFont}
           >
-            DES SOLUTIONS
+            {title?.[0]}
             <br />
-            CONÇUES POUR
+            {title?.[1]}
             <br />
-            L&apos;INDUSTRIE
+            {title?.[2]}
             <span style={{ color: ACCENT }}>.</span>
           </h2>
         </div>
         <p className="max-w-[380px] text-[16px] leading-[1.65] text-[#3a3f45]">
-          Un périmètre d&apos;intervention complet, de la charpente métallique aux équipements industriels.
+          {t('home.activitiesText')}
         </p>
       </Reveal>
 
@@ -69,23 +75,29 @@ export const ActivitiesSection = () => (
         ))}
       </div>
     </div>
-  </section>
-);
+    </section>
+  );
+};
 
-export const SavoirFaireSection = () => (
+export const SavoirFaireSection = () => {
+  const { lang, t } = useI18n();
+  const processSteps = getProcessSteps(lang);
+  const title = t('home.processTitle');
+
+  return (
   <section id="savoirfaire" className="bg-[#E7E7E4] py-[120px]">
     <div className={container}>
       <Reveal className="mb-16">
         <p className="mb-[18px] text-[13px] font-extrabold tracking-[0.24em]" style={{ color: ACCENT }}>
-          03 — NOTRE SAVOIR-FAIRE
+          {t('home.processEyebrow')}
         </p>
         <h2
           className="text-[clamp(2.4rem,4.6vw,4.4rem)] font-extrabold leading-none tracking-[-0.03em]"
           style={headingFont}
         >
-          DE L&apos;IDÉE
+          {title?.[0]}
           <br />
-          À LA RÉALISATION
+          {title?.[1]}
           <span style={{ color: ACCENT }}>.</span>
         </h2>
       </Reveal>
@@ -102,5 +114,6 @@ export const SavoirFaireSection = () => (
         ))}
       </div>
     </div>
-  </section>
-);
+    </section>
+  );
+};
