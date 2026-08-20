@@ -1,4 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
+import { useI18n } from '../../i18n/LanguageProvider';
 
 const MIN_VISIBLE = 1100; // laisse le temps de lire la signature
 const MAX_VISIBLE = 2400; // ne bloque jamais l'accès au site
@@ -10,6 +11,7 @@ const FADE = 520;
  * fois par session, et s'efface immédiatement si l'utilisateur refuse les animations.
  */
 const SplashScreen = ({ onDone }) => {
+  const { t } = useI18n();
   const [isLeaving, setIsLeaving] = useState(false);
   const doneRef = useRef(false);
 
@@ -56,7 +58,7 @@ const SplashScreen = ({ onDone }) => {
   return (
     <div
       role="status"
-      aria-label="Chargement du site MCCT Industrie"
+      aria-label={t('common.loading')}
       className="fixed inset-0 z-[400] flex flex-col items-center justify-center gap-[clamp(20px,4vw,36px)] bg-[#0D0F10] px-6 text-center"
       style={{
         opacity: isLeaving ? 0 : 1,

@@ -1,8 +1,10 @@
 import React, { useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
-import { projectBySlug } from '../../data/mcct';
+import { getProjectBySlug } from '../../data/mcct';
+import { useI18n } from '../../i18n/LanguageProvider';
 
 const Lightbox = ({ item, counter, onClose, onPrev, onNext, showProjectLink = true }) => {
+  const { lang, t } = useI18n();
   const touchStartX = useRef(null);
   const closeRef = useRef(null);
 
@@ -47,13 +49,13 @@ const Lightbox = ({ item, counter, onClose, onPrev, onNext, showProjectLink = tr
     };
   }, []);
 
-  const linkedProject = item?.projectSlug ? projectBySlug(item?.projectSlug) : null;
+  const linkedProject = item?.projectSlug ? getProjectBySlug(item?.projectSlug, lang) : null;
 
   return (
     <div
       role="dialog"
       aria-modal="true"
-      aria-label="Visionneuse"
+      aria-label={t('lightbox.dialog')}
       onClick={(e) => {
         if (e?.target === e?.currentTarget) onClose();
       }}
@@ -65,7 +67,7 @@ const Lightbox = ({ item, counter, onClose, onPrev, onNext, showProjectLink = tr
           ref={closeRef}
           type="button"
           onClick={onClose}
-          aria-label="Fermer"
+          aria-label={t('lightbox.close')}
           className="min-h-[48px] min-w-[48px] cursor-pointer border border-[#2c3136] px-[18px] text-[13px] font-extrabold tracking-[0.16em] text-white transition-colors hover:border-[#2478BE] hover:text-[#2478BE]"
         >
           ✕
@@ -88,7 +90,7 @@ const Lightbox = ({ item, counter, onClose, onPrev, onNext, showProjectLink = tr
             e?.stopPropagation();
             onPrev();
           }}
-          aria-label="Image précédente"
+          aria-label={t('lightbox.prev')}
           className="min-h-[48px] min-w-[56px] cursor-pointer border border-[#2c3136] text-[15px] text-white transition-colors hover:border-[#2478BE] hover:text-[#2478BE]"
         >
           ←
@@ -101,7 +103,7 @@ const Lightbox = ({ item, counter, onClose, onPrev, onNext, showProjectLink = tr
               onClick={(e) => e?.stopPropagation()}
               className="mt-1.5 block text-[12px] font-extrabold tracking-[0.16em] text-[#2478BE] hover:text-white"
             >
-              VOIR LE PROJET : {linkedProject?.title?.toUpperCase()} →
+              {t('common.viewProject')} : {linkedProject?.title?.toUpperCase()} →
             </Link>
           ) : null}
         </span>
@@ -111,7 +113,7 @@ const Lightbox = ({ item, counter, onClose, onPrev, onNext, showProjectLink = tr
             e?.stopPropagation();
             onNext();
           }}
-          aria-label="Image suivante"
+          aria-label={t('lightbox.next')}
           className="min-h-[48px] min-w-[56px] cursor-pointer border border-[#2c3136] text-[15px] text-white transition-colors hover:border-[#2478BE] hover:text-[#2478BE]"
         >
           →

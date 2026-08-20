@@ -9,12 +9,13 @@ export const headingFont = { fontFamily: "'Space Grotesk', 'Manrope', sans-serif
 
 // Le point de rupture de la maquette (900px) ne fait pas partie de l'échelle Tailwind :
 // les composants utilisent les variantes arbitraires min-[900px]: / max-[899px]:.
+// `key` renvoie vers ui.nav.<key> pour le libellé traduit.
 export const navLinks = [
-  { num: '01', label: 'À PROPOS', to: '/about' },
-  { num: '02', label: 'ACTIVITÉS', to: '/services' },
-  { num: '03', label: 'PROJETS', to: '/projects' },
-  { num: '04', label: 'GALERIE', to: '/galerie' },
-  { num: '05', label: 'CONTACT', to: '/contact' }
+  { key: 'about', num: '01', to: '/about' },
+  { key: 'services', num: '02', to: '/services' },
+  { key: 'projects', num: '03', to: '/projects' },
+  { key: 'gallery', num: '04', to: '/galerie' },
+  { key: 'contact', num: '05', to: '/contact' }
 ];
 
 export const PHONE = '+212 666 149 4761';

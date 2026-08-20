@@ -2,8 +2,11 @@
 // Deux tailles : `thumb` (640px) pour les grilles, la version pleine (1400px) pour
 // la visionneuse et les images de fond.
 //
-// Légendes et catégories vérifiées photo par photo (août 2026) : elles décrivent
-// ce que l'image montre réellement, car elles servent aussi de texte alternatif.
+// Légendes vérifiées photo par photo (août 2026) : elles décrivent ce que l'image
+// montre réellement, car elles servent aussi de texte alternatif. Chaque légende
+// existe en français et en anglais.
+import { localize } from '../i18n/LanguageProvider';
+
 const BASE = '/assets/gallery';
 
 /** Image pleine taille (1400px de large). */
@@ -11,59 +14,201 @@ export const img = (id) => `${BASE}/${id}.webp`;
 /** Vignette 640px, à utiliser dès qu'une image est affichée en petit format. */
 export const thumb = (id) => `${BASE}/thumb/${id}.webp`;
 
+/** Catégories : `key` est stable (filtrage), `label` est traduit (affichage). */
 export const galleryCategories = [
-  'TOUT',
-  'CHARPENTE',
-  'CHANTIER',
-  'ATELIER',
-  'CHAUDRONNERIE',
-  'ÉQUIPEMENTS',
-  'MAINTENANCE'
+  { key: 'ALL', label: { fr: 'TOUT', en: 'ALL' } },
+  { key: 'CHARPENTE', label: { fr: 'CHARPENTE', en: 'STEELWORK' } },
+  { key: 'CHANTIER', label: { fr: 'CHANTIER', en: 'ON SITE' } },
+  { key: 'ATELIER', label: { fr: 'ATELIER', en: 'WORKSHOP' } },
+  { key: 'CHAUDRONNERIE', label: { fr: 'CHAUDRONNERIE', en: 'BOILERMAKING' } },
+  { key: 'EQUIPEMENTS', label: { fr: 'ÉQUIPEMENTS', en: 'EQUIPMENT' } },
+  { key: 'MAINTENANCE', label: { fr: 'MAINTENANCE', en: 'MAINTENANCE' } }
 ];
 
-// [ identifiant, description, catégorie, hauteur (1 = normale, 2 = double), projet lié ]
+export const categoryLabel = (key, lang) =>
+  localize(galleryCategories?.find((category) => category?.key === key)?.label, lang) ?? key;
+
+// [ identifiant, légende { fr, en }, catégorie, hauteur (1 = normale, 2 = double), projet lié ]
 const rawItems = [
-  ['IMG_7847', 'Aménagement intérieur en cours sous ossature de plafond', 'CHANTIER', 1, null],
-  ['IMG_7861', 'Auvent en charpente acier à couverture translucide', 'CHARPENTE', 2, 'auvent-en-charpente-acier'],
-  ['IMG_7864', 'Intérieur d’un hangar métallique livré', 'CHARPENTE', 1, 'hangar-livre-cle-en-main'],
-  ['IMG_7866', 'Hangar industriel livré, bardage et portes sectionnelles', 'CHARPENTE', 1, 'hangar-livre-cle-en-main'],
-  ['IMG_7871', 'Façade bardée éclairée de nuit', 'CHARPENTE', 1, null],
-  ['IMG_7873', 'Pose de la couverture depuis une nacelle élévatrice', 'CHANTIER', 2, null],
-  ['IMG_7876', 'Finitions intérieures d’un bâtiment métallique', 'CHANTIER', 1, null],
-  ['IMG_7882', 'Bâtiment métallique en cours de finition', 'CHARPENTE', 1, null],
-  ['IMG_7886', 'Montage d’une paroi de cuve métallique', 'CHAUDRONNERIE', 1, 'reservoir-metallique'],
-  ['IMG_7887', 'Levage d’une paroi de cuve à la grue', 'CHAUDRONNERIE', 2, 'reservoir-metallique'],
-  ['IMG_7890', 'Ossature acier en élévation', 'CHARPENTE', 1, 'ossature-acier-chantier'],
-  ['IMG_7894', 'Pose de couverture en bac acier', 'CHANTIER', 1, null],
-  ['IMG_7897', 'Charpente métallique en cours de montage', 'CHARPENTE', 1, 'hangar-metallique'],
-  ['IMG_7898', 'Ossature de hangar et profilés en attente de levage', 'CHARPENTE', 2, 'hangar-metallique'],
-  ['IMG_7905', 'Convoyeur à bande sous couverture', 'ÉQUIPEMENTS', 1, 'convoyeur-industriel'],
-  ['IMG_7907', 'Supports de process assemblés sur site', 'ÉQUIPEMENTS', 1, 'structure-de-process'],
-  ['IMG_7912', 'Coulage des massifs de fondation', 'CHANTIER', 1, null],
-  ['IMG_7916', 'Soudure d’assemblages en atelier', 'ATELIER', 2, null],
-  ['IMG_7918', 'Trémie chaudronnée chargée à l’atelier', 'ATELIER', 1, 'ensembles-chaudronnes'],
-  ['IMG_7924', 'Tronçon de tuyauterie grand diamètre en préparation', 'ATELIER', 1, 'tuyauterie-grand-diametre'],
-  ['IMG_7938', 'Intervention sur un réservoir métallique', 'MAINTENANCE', 1, 'maintenance-de-station'],
-  ['IMG_7939', 'Levage d’un module technique', 'MAINTENANCE', 2, 'levage-d-equipements'],
-  ['IMG_7941', 'Intervention sur une ligne de tuyauterie', 'MAINTENANCE', 1, null],
-  ['IMG_7943', 'Poste de détente gaz — tuyauterie et robinetterie', 'MAINTENANCE', 1, 'installations-gaz'],
-  ['IMG_7947', 'Montage de charpente au chariot télescopique', 'CHANTIER', 1, null],
-  ['IMG_7955', 'Local industriel livré, bardage intérieur', 'CHARPENTE', 1, null]
+  [
+    'IMG_7847',
+    { fr: 'Aménagement intérieur en cours sous ossature de plafond', en: 'Interior fit-out under a ceiling frame' },
+    'CHANTIER',
+    1,
+    null
+  ],
+  [
+    'IMG_7861',
+    { fr: 'Auvent en charpente acier à couverture translucide', en: 'Steel canopy with translucent roofing' },
+    'CHARPENTE',
+    2,
+    'auvent-en-charpente-acier'
+  ],
+  [
+    'IMG_7864',
+    { fr: 'Intérieur d’un hangar métallique livré', en: 'Interior of a completed steel warehouse' },
+    'CHARPENTE',
+    1,
+    'hangar-livre-cle-en-main'
+  ],
+  [
+    'IMG_7866',
+    {
+      fr: 'Hangar industriel livré, bardage et portes sectionnelles',
+      en: 'Completed industrial building with cladding and sectional doors'
+    },
+    'CHARPENTE',
+    1,
+    'hangar-livre-cle-en-main'
+  ],
+  ['IMG_7871', { fr: 'Façade bardée éclairée de nuit', en: 'Clad façade lit at night' }, 'CHARPENTE', 1, null],
+  [
+    'IMG_7873',
+    { fr: 'Pose de la couverture depuis une nacelle élévatrice', en: 'Roof sheeting installed from a scissor lift' },
+    'CHANTIER',
+    2,
+    null
+  ],
+  [
+    'IMG_7876',
+    { fr: 'Finitions intérieures d’un bâtiment métallique', en: 'Interior finishing of a steel building' },
+    'CHANTIER',
+    1,
+    null
+  ],
+  [
+    'IMG_7882',
+    { fr: 'Bâtiment métallique en cours de finition', en: 'Steel building being finished' },
+    'CHARPENTE',
+    1,
+    null
+  ],
+  [
+    'IMG_7886',
+    { fr: 'Montage d’une paroi de cuve métallique', en: 'Assembling a steel tank wall' },
+    'CHAUDRONNERIE',
+    1,
+    'reservoir-metallique'
+  ],
+  [
+    'IMG_7887',
+    { fr: 'Levage d’une paroi de cuve à la grue', en: 'Craning a tank wall into position' },
+    'CHAUDRONNERIE',
+    2,
+    'reservoir-metallique'
+  ],
+  [
+    'IMG_7890',
+    { fr: 'Ossature acier en élévation', en: 'Steel frame going up' },
+    'CHARPENTE',
+    1,
+    'ossature-acier-chantier'
+  ],
+  ['IMG_7894', { fr: 'Pose de couverture en bac acier', en: 'Installing profiled steel roofing' }, 'CHANTIER', 1, null],
+  [
+    'IMG_7897',
+    { fr: 'Charpente métallique en cours de montage', en: 'Steel structure being erected' },
+    'CHARPENTE',
+    1,
+    'hangar-metallique'
+  ],
+  [
+    'IMG_7898',
+    { fr: 'Ossature de hangar et profilés en attente de levage', en: 'Building frame with sections awaiting lifting' },
+    'CHARPENTE',
+    2,
+    'hangar-metallique'
+  ],
+  [
+    'IMG_7905',
+    { fr: 'Convoyeur à bande sous couverture', en: 'Belt conveyor under a roof structure' },
+    'EQUIPEMENTS',
+    1,
+    'convoyeur-industriel'
+  ],
+  [
+    'IMG_7907',
+    { fr: 'Supports de process assemblés sur site', en: 'Process supports assembled on site' },
+    'EQUIPEMENTS',
+    1,
+    'structure-de-process'
+  ],
+  ['IMG_7912', { fr: 'Coulage des massifs de fondation', en: 'Pouring the foundation blocks' }, 'CHANTIER', 1, null],
+  ['IMG_7916', { fr: 'Soudure d’assemblages en atelier', en: 'Welding assemblies in the workshop' }, 'ATELIER', 2, null],
+  [
+    'IMG_7918',
+    { fr: 'Trémie chaudronnée chargée à l’atelier', en: 'Fabricated hopper loaded at the workshop' },
+    'ATELIER',
+    1,
+    'ensembles-chaudronnes'
+  ],
+  [
+    'IMG_7924',
+    { fr: 'Tronçon de tuyauterie grand diamètre en préparation', en: 'Large-diameter pipe spool being prepared' },
+    'ATELIER',
+    1,
+    'tuyauterie-grand-diametre'
+  ],
+  [
+    'IMG_7938',
+    { fr: 'Intervention sur un réservoir métallique', en: 'Intervention on a steel tank' },
+    'MAINTENANCE',
+    1,
+    'maintenance-de-station'
+  ],
+  [
+    'IMG_7939',
+    { fr: 'Levage d’un module technique', en: 'Lifting a technical module' },
+    'MAINTENANCE',
+    2,
+    'levage-d-equipements'
+  ],
+  [
+    'IMG_7941',
+    { fr: 'Intervention sur une ligne de tuyauterie', en: 'Work on a piping line' },
+    'MAINTENANCE',
+    1,
+    null
+  ],
+  [
+    'IMG_7943',
+    { fr: 'Poste de détente gaz — tuyauterie et robinetterie', en: 'Gas pressure-reduction skid — piping and valves' },
+    'MAINTENANCE',
+    1,
+    'installations-gaz'
+  ],
+  [
+    'IMG_7947',
+    { fr: 'Montage de charpente au chariot télescopique', en: 'Erecting steelwork with a telehandler' },
+    'CHANTIER',
+    1,
+    null
+  ],
+  [
+    'IMG_7955',
+    { fr: 'Local industriel livré, bardage intérieur', en: 'Completed industrial unit with interior cladding' },
+    'CHARPENTE',
+    1,
+    null
+  ]
 ];
 
-export const galleryItems = rawItems?.map(([id, alt, category, span, projectSlug]) => ({
-  id,
-  src: img(id),
-  thumbSrc: thumb(id),
-  alt,
-  category,
-  span,
-  projectSlug
-}));
+/** Visuels de la galerie, légendes et catégories dans la langue demandée. */
+export const getGalleryItems = (lang = 'fr') =>
+  rawItems?.map(([id, alt, category, span, projectSlug]) => ({
+    id,
+    src: img(id),
+    thumbSrc: thumb(id),
+    alt: localize(alt, lang),
+    category,
+    categoryLabel: categoryLabel(category, lang),
+    span,
+    projectSlug
+  }));
 
-/** Légende de référence d'une image, réutilisée comme texte alternatif ailleurs. */
-export const captionOf = (id) => galleryItems?.find((item) => item?.id === id)?.alt ?? '';
+/** Légende de référence d'une image (texte alternatif réutilisable). */
+export const captionOf = (id, lang = 'fr') => localize(rawItems?.find((item) => item?.[0] === id)?.[1], lang) ?? '';
 
 export const galleryHeroImage = img('IMG_7890');
 
-export default galleryItems;
+export default getGalleryItems;

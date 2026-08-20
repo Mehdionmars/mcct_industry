@@ -1,6 +1,40 @@
 import React, { useEffect, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
+import { useI18n } from '../../i18n/LanguageProvider';
 import { ACCENT, headingFont, navLinks, EMAIL, EMAIL_HREF, PHONE, PHONE_HREF, container } from './mcctTheme';
+
+/** Sélecteur de langue : deux libellés courts, l'actif est signalé par aria-pressed. */
+const LanguageSwitch = ({ onDark, className = '' }) => {
+  const { lang, setLang, t } = useI18n();
+
+  return (
+    <div
+      role="group"
+      aria-label={t('langSwitch.label')}
+      className={`flex items-center gap-1 text-[11.5px] font-extrabold tracking-[0.14em] ${className}`}
+    >
+      {['fr', 'en']?.map((code, index) => (
+        <React.Fragment key={code}>
+          {index === 1 ? (
+            <span aria-hidden="true" className={onDark ? 'text-[#565e66]' : 'text-[#c6c6c1]'}>
+              /
+            </span>
+          ) : null}
+          <button
+            type="button"
+            lang={code}
+            onClick={() => setLang(code)}
+            aria-pressed={lang === code}
+            className="min-h-[32px] cursor-pointer bg-transparent px-1 transition-colors"
+            style={{ color: lang === code ? ACCENT : 'inherit', opacity: lang === code ? 1 : 0.65 }}
+          >
+            {code?.toUpperCase()}
+          </button>
+        </React.Fragment>
+      ))}
+    </div>
+  );
+};
 
 /**
  * En-tête commun aux pages MCCT.
@@ -15,6 +49,7 @@ const SiteHeader = ({ variant = 'light', links = navLinks }) => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [progress, setProgress] = useState(0);
   const location = useLocation();
+  const { t } = useI18n();
 
   const isHero = variant === 'hero';
   const isDark = variant === 'dark';
@@ -49,6 +84,7 @@ const SiteHeader = ({ variant = 'light', links = navLinks }) => {
 
   const solid = !isHero || isScrolled;
   const onDarkSurface = isDark || (isHero && !isScrolled);
+  const label = (link) => (link?.label ? link?.label : t(`nav.${link?.key}`));
 
   const headerClass = [
     'z-[100] flex items-center py-2.5 transition-all duration-500',
@@ -67,30 +103,33 @@ const SiteHeader = ({ variant = 'light', links = navLinks }) => {
     <>
       <header className={headerClass}>
         <div className={`${container} flex items-center justify-between gap-6`}>
-          <Link to="/" className="flex items-center" aria-label="MCCT Industrie — accueil">
+          <Link to="/" className="flex items-center" aria-label={t('nav.logoHome')}>
             <img
               src="/logo1.png"
-              alt="Logo MCCT"
+              alt="MCCT Industrie"
               className={`block h-[34px] w-auto ${onDarkSurface ? 'brightness-0 invert' : ''}`}
             />
           </Link>
 
-          <button
-            type="button"
-            onClick={() => setIsMenuOpen(true)}
-            aria-label="Ouvrir le menu"
-            aria-expanded={isMenuOpen}
-            className={`inline-flex h-[46px] cursor-pointer items-center justify-center border px-[18px] text-[12px] font-extrabold tracking-[0.18em] transition-colors min-[900px]:hidden ${
-              onDarkSurface
-                ? 'border-[rgba(255,255,255,0.45)] text-white hover:border-white'
-                : 'border-[#c6c6c1] text-[#17191C] hover:border-[#2478BE] hover:text-[#2478BE]'
-            }`}
-          >
-            MENU
-          </button>
+          <div className="flex items-center gap-3 min-[900px]:hidden">
+            <LanguageSwitch onDark={onDarkSurface} className={linkColor} />
+            <button
+              type="button"
+              onClick={() => setIsMenuOpen(true)}
+              aria-label={t('nav.open')}
+              aria-expanded={isMenuOpen}
+              className={`inline-flex h-[46px] cursor-pointer items-center justify-center border px-[18px] text-[12px] font-extrabold tracking-[0.18em] transition-colors ${
+                onDarkSurface
+                  ? 'border-[rgba(255,255,255,0.45)] text-white hover:border-white'
+                  : 'border-[#c6c6c1] text-[#17191C] hover:border-[#2478BE] hover:text-[#2478BE]'
+              }`}
+            >
+              {t('nav.menu')}
+            </button>
+          </div>
 
           <nav
-            aria-label="Navigation principale"
+            aria-label={t('nav.main')}
             className={`hidden flex-wrap items-center gap-[22px] text-[12.5px] font-bold tracking-[0.14em] transition-colors duration-500 min-[900px]:flex ${linkColor}`}
           >
             {links
@@ -99,7 +138,7 @@ const SiteHeader = ({ variant = 'light', links = navLinks }) => {
                 if (link?.href) {
                   return (
                     <a key={link?.href} href={link?.href} className="transition-colors hover:text-[#2478BE]">
-                      {link?.label}
+                      {label(link)}
                     </a>
                   );
                 }
@@ -112,19 +151,19 @@ const SiteHeader = ({ variant = 'light', links = navLinks }) => {
                     style={isActive ? { color: ACCENT } : undefined}
                     aria-current={isActive ? 'page' : undefined}
                   >
-                    {link?.label}
+                    {label(link)}
                   </Link>
                 );
               })}
+            <LanguageSwitch onDark={onDarkSurface} />
             <Link
               to="/contact"
               className="whitespace-nowrap bg-[#2478BE] px-[22px] py-3 text-white transition-colors hover:bg-[#17191C] hover:text-white"
             >
-              CONTACT
+              {t('nav.contact')}
             </Link>
           </nav>
         </div>
-
       </header>
 
       {isHero ? (
@@ -139,28 +178,28 @@ const SiteHeader = ({ variant = 'light', links = navLinks }) => {
         <div
           role="dialog"
           aria-modal="true"
-          aria-label="Navigation"
+          aria-label={t('nav.dialog')}
           className="fixed inset-0 z-[250] flex flex-col justify-between overflow-y-auto bg-[#0D0F10] px-5 pb-8 pt-6 text-white"
         >
           <div className="flex items-center justify-between">
-            <img src="/logo1.png" alt="Logo MCCT" className="h-8 w-auto brightness-0 invert" />
+            <img src="/logo1.png" alt="MCCT Industrie" className="h-8 w-auto brightness-0 invert" />
             <button
               type="button"
               onClick={closeMenu}
-              aria-label="Fermer le menu"
+              aria-label={t('nav.close')}
               className="min-h-[48px] cursor-pointer border border-[#2c3136] px-[18px] py-[14px] text-[12px] font-extrabold tracking-[0.16em] text-white transition-colors hover:border-[#2478BE] hover:text-[#2478BE]"
             >
-              FERMER ✕
+              {t('nav.closeLabel')}
             </button>
           </div>
 
-          <nav aria-label="Navigation mobile" className="flex flex-col gap-1 py-8">
+          <nav aria-label={t('nav.mobile')} className="flex flex-col gap-1 py-8">
             {links?.map((link) => {
               const inner = (
                 <>
                   <span className="text-[11px] font-extrabold tracking-[0.2em] text-[#2478BE]">{link?.num}</span>
                   <span className="text-[30px] font-bold tracking-[-0.01em] text-white" style={headingFont}>
-                    {link?.label}
+                    {label(link)}
                   </span>
                 </>
               );
@@ -178,7 +217,8 @@ const SiteHeader = ({ variant = 'light', links = navLinks }) => {
           </nav>
 
           <div className="text-[14px] leading-[1.9] text-[#9aa2a9]">
-            <p className="font-extrabold tracking-[0.14em] text-white">CASABLANCA · MAROC</p>
+            <LanguageSwitch onDark className="mb-4 text-white" />
+            <p className="font-extrabold tracking-[0.14em] text-white">{t('common.city')}</p>
             <p className="mt-1.5">
               <a href={PHONE_HREF} className="text-[#c4cad0] hover:text-[#2478BE]">
                 {PHONE}

@@ -1,6 +1,7 @@
 import React, { useCallback, useState } from "react";
 import Routes from "./Routes";
 import SplashScreen from "./components/ui/SplashScreen";
+import LanguageProvider from "./i18n/LanguageProvider";
 
 const SPLASH_KEY = "mcct-splash-seen";
 
@@ -16,10 +17,10 @@ function App() {
   }, []);
 
   return (
-    <>
+    <LanguageProvider>
       {showSplash ? <SplashScreen onDone={dismissSplash} /> : null}
       <Routes />
-    </>
+    </LanguageProvider>
   );
 }
 
