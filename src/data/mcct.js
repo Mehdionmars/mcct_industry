@@ -25,7 +25,7 @@ const rawActivities = [
       fr: 'Charpentes, hangars industriels, auvents et ossatures acier : nous concevons, fabriquons et montons des structures métalliques complètes, de l’étude d’exécution au levage sur site.',
       en: 'Frames, industrial warehouses, canopies and steel structures: we design, fabricate and erect complete steel structures, from shop drawings to lifting on site.'
     },
-    image: 'IMG_7897',
+    image: 'charpente-montage-telescopique',
     tags: {
       fr: ['Charpente', 'Hangars', 'Bardage', 'Couverture'],
       en: ['Steelwork', 'Warehouses', 'Cladding', 'Roofing']
@@ -205,7 +205,7 @@ const rawProjects = [
     title: { fr: 'Hangar métallique', en: 'Steel warehouse' },
     category: 'CONSTRUCTION',
     location: LOCATIONS?.maroc,
-    image: 'IMG_7898',
+    image: 'charpente-profiles-attente',
     introduction: {
       fr: 'Ossature complète d’un hangar industriel : portiques, pannes et contreventements, préparés en atelier puis levés sur site.',
       en: 'Complete frame for an industrial warehouse: portal frames, purlins and bracing, prepared in the workshop then lifted on site.'
@@ -271,7 +271,7 @@ const rawProjects = [
     title: { fr: 'Hangar livré clé en main', en: 'Turnkey warehouse' },
     category: 'CONSTRUCTION',
     location: LOCATIONS?.maroc,
-    image: 'IMG_7866',
+    image: 'IMG_7951',
     introduction: {
       fr: 'Bâtiment industriel livré prêt à l’exploitation : ossature, bardage, couverture, portes et finitions intérieures.',
       en: 'Industrial building handed over ready to use: frame, cladding, roofing, doors and interior finishing.'
@@ -309,7 +309,7 @@ const rawProjects = [
     title: { fr: 'Ossature acier — chantier', en: 'Steel frame — site' },
     category: 'CONSTRUCTION',
     location: LOCATIONS?.maroc,
-    image: 'IMG_7890',
+    image: 'charpente-ossature-elevation',
     introduction: {
       fr: 'Suivi d’une ossature acier en cours d’élévation, du premier portique au contreventement définitif.',
       en: 'Following a steel frame as it goes up, from the first portal to the final bracing.'
@@ -601,7 +601,7 @@ export const getProjects = (lang = 'fr') => {
 export const getProjectBySlug = (slug, lang = 'fr') => getProjects(lang)?.find((project) => project?.slug === slug);
 
 /** Projets mis en avant sur l'accueil (sous-ensemble de la page Projets). */
-const HOME_PROJECT_IMAGES = ['IMG_7898', 'IMG_7861', 'IMG_7905', 'IMG_7907', 'IMG_7943', 'IMG_7938', 'IMG_7918', 'IMG_7924'];
+const HOME_PROJECT_IMAGES = ['charpente-profiles-attente', 'IMG_7861', 'IMG_7905', 'IMG_7907', 'IMG_7943', 'IMG_7938', 'IMG_7918', 'IMG_7924'];
 export const getHomeProjects = (lang = 'fr') =>
   getProjects(lang)?.filter((project) => HOME_PROJECT_IMAGES?.includes(project?.image));
 
@@ -612,7 +612,7 @@ const rawSectors = [
       fr: 'Hangars, ateliers et unités de production en charpente métallique.',
       en: 'Warehouses, workshops and production units in structural steel.'
     },
-    image: 'IMG_7898'
+    image: 'charpente-profiles-attente'
   },
   {
     title: { fr: 'STRUCTURES COMMERCIALES', en: 'COMMERCIAL STRUCTURES' },

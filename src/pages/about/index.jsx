@@ -23,7 +23,7 @@ const About = () => {
       <SiteHeader />
 
       <section className="relative flex min-h-[62vh] items-end overflow-hidden bg-[#0D0F10]">
-        <img src={img('IMG_7894')} alt={t('about.heroAlt')} className="absolute inset-0 h-full w-full object-cover" />
+        <img src={img('IMG_7940')} alt={t('about.heroAlt')} className="absolute inset-0 h-full w-full object-cover" />
         <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(13,15,16,0.4),rgba(13,15,16,0.85))]" />
         <div className={`${container} relative pb-16 pt-[140px] text-white`}>
           <p className="mb-4 text-[13px] font-extrabold tracking-[0.26em] text-[#cfd6dc]">{t('about.eyebrow')}</p>

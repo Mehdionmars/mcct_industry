@@ -77,7 +77,6 @@ const HomeContact = () => {
               {t('common.addressLine1')}
               <br />
               {t('common.addressLine2')}
-              <sup>{t('common.addressLine2Suffix')}</sup>
               <br />
               {t('common.addressCity')}
             </p>
@@ -157,7 +156,8 @@ const HomeContact = () => {
             {t('common.addressLine1')}
             <br />
             {t('common.addressLine2')}
-            <sup>{t('common.addressLine2Short')}</sup>
+            <br />
+            {t('common.addressCity')}
           </p>
           <p className="mt-2">
             <a href={PHONE_HREF} className="text-[#c4cad0] hover:text-[#2478BE]">

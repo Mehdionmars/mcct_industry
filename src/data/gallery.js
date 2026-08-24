@@ -52,10 +52,10 @@ const rawItems = [
     'hangar-livre-cle-en-main'
   ],
   [
-    'IMG_7866',
+    'IMG_7951',
     {
-      fr: 'Hangar industriel livré, bardage et portes sectionnelles',
-      en: 'Completed industrial building with cladding and sectional doors'
+      fr: 'Hangar industriel livré, bardage métallique',
+      en: 'Completed industrial building with steel cladding'
     },
     'CHARPENTE',
     1,
@@ -98,22 +98,28 @@ const rawItems = [
     'reservoir-metallique'
   ],
   [
-    'IMG_7890',
+    'charpente-ossature-elevation',
     { fr: 'Ossature acier en élévation', en: 'Steel frame going up' },
     'CHARPENTE',
     1,
     'ossature-acier-chantier'
   ],
-  ['IMG_7894', { fr: 'Pose de couverture en bac acier', en: 'Installing profiled steel roofing' }, 'CHANTIER', 1, null],
   [
-    'IMG_7897',
+    'IMG_7940',
+    { fr: 'Levage d’un module à la grue sur chantier', en: 'Craning a modular unit into place on site' },
+    'CHANTIER',
+    1,
+    null
+  ],
+  [
+    'charpente-montage-telescopique',
     { fr: 'Charpente métallique en cours de montage', en: 'Steel structure being erected' },
     'CHARPENTE',
     1,
     'hangar-metallique'
   ],
   [
-    'IMG_7898',
+    'charpente-profiles-attente',
     { fr: 'Ossature de hangar et profilés en attente de levage', en: 'Building frame with sections awaiting lifting' },
     'CHARPENTE',
     2,
@@ -209,6 +215,6 @@ export const getGalleryItems = (lang = 'fr') =>
 /** Légende de référence d'une image (texte alternatif réutilisable). */
 export const captionOf = (id, lang = 'fr') => localize(rawItems?.find((item) => item?.[0] === id)?.[1], lang) ?? '';
 
-export const galleryHeroImage = img('IMG_7890');
+export const galleryHeroImage = img('charpente-ossature-elevation');
 
 export default getGalleryItems;

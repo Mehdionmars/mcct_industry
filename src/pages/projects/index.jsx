@@ -29,7 +29,7 @@ const Projects = () => {
 
       <section className="relative flex min-h-[62vh] items-end overflow-hidden bg-[#0D0F10]">
         <img
-          src={img('IMG_7866')}
+          src={img('IMG_7951')}
           alt={t('projects.heroAlt')}
           className="absolute inset-0 h-full w-full object-cover"
         />

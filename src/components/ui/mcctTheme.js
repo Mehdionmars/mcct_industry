@@ -20,13 +20,13 @@ export const navLinks = [
 
 export const PHONE = '+212 666 149 4761';
 export const PHONE_HREF = 'tel:+2126661494761';
-export const EMAIL = 'contact@mcct-industry.ma';
-export const EMAIL_HREF = 'mailto:contact@mcct-industry.ma';
+export const EMAIL = 'mcctindustry@gmail.com';
+export const EMAIL_HREF = 'mailto:mcctindustry@gmail.com';
 export const WHATSAPP_HREF = 'https://wa.me/2126661494761';
 export const ADDRESS_LINES = [
-  '13, rue Ahmed El Mejatti — ex Alpes,',
-  'rés. les Alpes, 1er étage',
-  'Casablanca — Maroc'
+  'Route 310, km 6,',
+  'Chellalate',
+  'Aïn Harrouda — Maroc'
 ];
 
 

@@ -143,10 +143,10 @@ export default function UnderConstruction() {
             <div className="inline-flex flex-col px-8 bg-white/10 backdrop-blur-md rounded-2xl border border-white/20 text-chart-1 gap-3 py-[30px]">
               <p className="text-white/90 text-sm font-medium">Pour toute question, contactez-nous:</p>
               <a
-                href="mailto:contact@mcct-industry.ma"
+                href="mailto:mcctindustry@gmail.com"
                 className="text-white font-semibold text-lg hover:text-white/80 transition-colors"
               >
-                contact@mcct-industry.ma
+                mcctindustry@gmail.com
               </a>
             </div>
           </div>

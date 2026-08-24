@@ -12,7 +12,7 @@ export const FeaturedProject = () => {
   return (
   <section className="relative flex min-h-[78vh] items-end overflow-hidden bg-[#0D0F10]">
     <img
-      src={img('IMG_7866')}
+      src={img('IMG_7951')}
       alt={t('home.featuredAlt')}
       loading="lazy"
       className="absolute inset-0 h-full w-full object-cover"

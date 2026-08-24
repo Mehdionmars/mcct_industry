@@ -34,11 +34,9 @@ export const ui = {
       loading: 'Chargement du site MCCT Industrie',
       filter: 'FILTRER',
       viewProject: 'VOIR LE PROJET',
-      addressLine1: '13, rue Ahmed El Mejatti — ex Alpes,',
-      addressLine2: 'rés. les Alpes, 1',
-      addressLine2Suffix: ' étage',
-      addressLine2Short: ' étg.',
-      addressCity: 'Casablanca — Maroc'
+      addressLine1: 'Route 310, km 6,',
+      addressLine2: 'Chellalate',
+      addressCity: 'Aïn Harrouda — Maroc'
     },
     cta: {
       defaultTitle: 'UN PROJET INDUSTRIEL',
@@ -113,7 +111,7 @@ export const ui = {
     about: {
       eyebrow: 'À PROPOS',
       title: ['UNE ENTREPRISE', "D'INGÉNIEURS", 'ET DE BÂTISSEURS'],
-      heroAlt: 'Équipe MCCT sur un chantier de couverture',
+      heroAlt: 'Équipe MCCT sur un chantier de levage',
       whoEyebrow: '01 — QUI SOMMES-NOUS',
       whoTitle: 'MOROCCAN COMPANY OF CONSTRUCTION TECHNOLOGY',
       p1:
@@ -169,7 +167,7 @@ export const ui = {
     },
     contact: {
       title: ['CONSTRUISONS', 'QUELQUE CHOSE', 'ENSEMBLE'],
-      mapTitle: 'Carte — MCCT Industrie, Casablanca',
+      mapTitle: 'Carte — MCCT Industrie, Aïn Harrouda',
       form: {
         name: 'NOM',
         company: 'ENTREPRISE',
@@ -272,11 +270,9 @@ export const ui = {
       loading: 'Loading the MCCT Industrie website',
       filter: 'FILTER',
       viewProject: 'VIEW PROJECT',
-      addressLine1: '13, rue Ahmed El Mejatti — ex Alpes,',
-      addressLine2: 'rés. les Alpes, 1',
-      addressLine2Suffix: 'st floor',
-      addressLine2Short: 'st fl.',
-      addressCity: 'Casablanca — Morocco'
+      addressLine1: 'Route 310, km 6,',
+      addressLine2: 'Chellalate',
+      addressCity: 'Aïn Harrouda — Morocco'
     },
     cta: {
       defaultTitle: 'AN INDUSTRIAL PROJECT',
@@ -350,7 +346,7 @@ export const ui = {
     about: {
       eyebrow: 'ABOUT',
       title: ['A COMPANY OF', 'ENGINEERS', 'AND BUILDERS'],
-      heroAlt: 'MCCT team on a roofing site',
+      heroAlt: 'MCCT team on a lifting site',
       whoEyebrow: '01 — WHO WE ARE',
       whoTitle: 'MOROCCAN COMPANY OF CONSTRUCTION TECHNOLOGY',
       p1:
@@ -405,7 +401,7 @@ export const ui = {
     },
     contact: {
       title: ["LET'S BUILD", 'SOMETHING', 'TOGETHER'],
-      mapTitle: 'Map — MCCT Industrie, Casablanca',
+      mapTitle: 'Map — MCCT Industrie, Aïn Harrouda',
       form: {
         name: 'NAME',
         company: 'COMPANY',

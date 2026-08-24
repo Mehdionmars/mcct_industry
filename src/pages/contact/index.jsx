@@ -49,7 +49,6 @@ const ContactPage = () => {
                 {t('common.addressLine1')}
                 <br />
                 {t('common.addressLine2')}
-                <sup>{t('common.addressLine2Suffix')}</sup>
                 <br />
                 {t('common.addressCity')}
               </p>
@@ -78,7 +77,7 @@ const ContactPage = () => {
             <div className="mt-10 overflow-hidden border border-[#23272b]">
               <iframe
                 title={t('contact.mapTitle')}
-                src="https://www.google.com/maps?q=13+rue+Ahmed+El+Mejatti+Casablanca&output=embed"
+                src="https://www.google.com/maps?q=Route+310+km+6+Chellalate+Ain+Harrouda&output=embed"
                 loading="lazy"
                 className="block h-[300px] w-full border-0 grayscale contrast-[1.05]"
               />
