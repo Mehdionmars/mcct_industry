@@ -4,9 +4,9 @@ import SiteHeader from '../../components/ui/SiteHeader';
 import SiteCTA from '../../components/ui/SiteCTA';
 import WhatsAppFab from '../../components/ui/WhatsAppFab';
 import Reveal from '../../components/ui/Reveal';
-import { useI18n } from '../../i18n/LanguageProvider';
+import { useI18n, localize } from '../../i18n/LanguageProvider';
 import { ACCENT, bodyFont, headingFont, container } from '../../components/ui/mcctTheme';
-import { getKeyFigures } from '../../data/mcct';
+import { getKeyFigures, signatureQuote } from '../../data/mcct';
 import { img } from '../../data/gallery';
 
 const About = () => {
@@ -14,6 +14,7 @@ const About = () => {
   const keyFigures = getKeyFigures(lang);
   const title = t('about.title');
   const pillars = t('about.pillars');
+  const signature = localize(signatureQuote, lang);
 
   return (
     <div className="min-h-screen bg-[#F5F5F2] text-[#17191C] antialiased" style={bodyFont}>
@@ -57,9 +58,22 @@ const About = () => {
           </Reveal>
           <Reveal className="max-w-[520px] pt-3">
             <p className="mb-5 text-[17px] leading-[1.7] text-[#3a3f45]">{t('about.p1')}</p>
-            <p className="text-[17px] leading-[1.7] text-[#3a3f45]">{t('about.p2')}</p>
+            <p className="mb-5 text-[17px] leading-[1.7] text-[#3a3f45]">{t('about.p2')}</p>
+            <p className="text-[17px] leading-[1.7] text-[#3a3f45]">{t('about.p3')}</p>
           </Reveal>
         </div>
+
+        <Reveal className={`${container} mt-16 border-t border-[#d7d7d2] pt-12`}>
+          <blockquote
+            className="max-w-[900px] text-[clamp(1.35rem,3vw,2.3rem)] font-medium leading-[1.35] tracking-[-0.02em] text-[#17191C]"
+            style={headingFont}
+          >
+            <span style={{ color: ACCENT }}>«&nbsp;</span>
+            {signature}
+            <span style={{ color: ACCENT }}>&nbsp;»</span>
+          </blockquote>
+          <p className="mt-6 text-[12px] font-bold tracking-[0.22em] text-[#8a9096]">{t('about.signatureLabel')}</p>
+        </Reveal>
       </section>
 
       <section className="bg-[#0D0F10] py-[110px] text-white">

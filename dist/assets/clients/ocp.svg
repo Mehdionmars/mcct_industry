@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 80" width="200" height="80">
+  <g transform="translate(6, 0)">
+    <!-- OCP Interlocking Rosette / Star Symbol -->
+    <g transform="translate(26, 40)">
+      <!-- 8 Outer Rosette Petals -->
+      <g fill="#00843D">
+        <circle cx="0" cy="-10.5" r="5.8"/>
+        <circle cx="7.42" cy="-7.42" r="5.8"/>
+        <circle cx="10.5" cy="0" r="5.8"/>
+        <circle cx="7.42" cy="7.42" r="5.8"/>
+        <circle cx="0" cy="10.5" r="5.8"/>
+        <circle cx="-7.42" cy="7.42" r="5.8"/>
+        <circle cx="-10.5" cy="0" r="5.8"/>
+        <circle cx="-7.42" cy="-7.42" r="5.8"/>
+        <circle cx="0" cy="0" r="7.5"/>
+      </g>
+      <!-- Central 8-Pointed Star Cutout -->
+      <polygon points="0,-5.5 1.6,-1.6 5.5,0 1.6,1.6 0,5.5 -1.6,1.6 -5.5,0 -1.6,-1.6" fill="#FFFFFF"/>
+      <polygon points="0,-5.5 1.6,-1.6 5.5,0 1.6,1.6 0,5.5 -1.6,1.6 -5.5,0 -1.6,-1.6" fill="#FFFFFF" transform="rotate(45)"/>
+    </g>
+    <!-- Brand typography -->
+    <text x="56" y="42" font-family="'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="26" font-weight="900" fill="#00843D" letter-spacing="2">OCP</text>
+    <line x1="57" y1="48" x2="178" y2="48" stroke="#00843D" stroke-width="1.5"/>
+    <text x="57" y="59" font-family="'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="8" font-weight="800" fill="#1A1A1A" letter-spacing="4">GROUP</text>
+  </g>
+</svg>

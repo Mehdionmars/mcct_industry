@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 80" width="200" height="80">
+  <g transform="translate(6, 0)">
+    <!-- Africa Outline with Industrial Gear -->
+    <g transform="translate(26, 40)">
+      <!-- Gear Teeth in Gold -->
+      <circle cx="0" cy="0" r="18" fill="none" stroke="#D4A843" stroke-width="3.5"/>
+      <g fill="#D4A843">
+        <rect x="-2.5" y="-22" width="5" height="5" rx="1"/>
+        <rect x="-2.5" y="17" width="5" height="5" rx="1"/>
+        <rect x="-22" y="-2.5" width="5" height="5" rx="1"/>
+        <rect x="17" y="-2.5" width="5" height="5" rx="1"/>
+        <rect x="-2.5" y="-22" width="5" height="5" rx="1" transform="rotate(45)"/>
+        <rect x="-2.5" y="17" width="5" height="5" rx="1" transform="rotate(45)"/>
+        <rect x="-22" y="-2.5" width="5" height="5" rx="1" transform="rotate(45)"/>
+        <rect x="17" y="-2.5" width="5" height="5" rx="1" transform="rotate(45)"/>
+      </g>
+      <!-- Inner Background -->
+      <circle cx="0" cy="0" r="14.5" fill="#F4F8F4"/>
+      <!-- Africa Continent Silhouette -->
+      <path d="M -6 -10 C -3 -11 4 -11 7 -7 C 9 -4 7 0 5 3 C 3 6 2 9 0 12 C -1 13 -2 12 -2 10 C -3 8 -5 6 -7 5 C -9 4 -9 1 -8 -2 C -7 -4 -5 -5 -6 -7 C -7 -8 -7 -9 -6 -10 Z" fill="#2E7D32"/>
+      <!-- Wheat grain accent -->
+      <path d="M 4 -3 C 6 -5 8 -4 8 -2 C 8 0 6 1 4 -1 Z" fill="#D4A843"/>
+    </g>
+    <!-- Brand typography -->
+    <text x="56" y="36" font-family="'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="16" font-weight="900" fill="#2E7D32" letter-spacing="1.2">ALF</text>
+    <text x="56" y="53" font-family="'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="16" font-weight="900" fill="#D4A843" letter-spacing="1.2">AFRIQUIA</text>
+    <text x="57" y="64" font-family="'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="5.5" font-weight="700" fill="#666666" letter-spacing="1.8">NUTRITION ANIMALE</text>
+  </g>
+</svg>

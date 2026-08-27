@@ -5,12 +5,15 @@ import WhatsAppFab from '../../components/ui/WhatsAppFab';
 import { useI18n } from '../../i18n/LanguageProvider';
 import { bodyFont, navLinks } from '../../components/ui/mcctTheme';
 import HomeHero from './components/HomeHero';
-import IndustrialExperience from './components/IndustrialExperience';
+import HomeJourney from './components/HomeJourney';
+import HomeBaseline from './components/HomeBaseline';
 import HomeIntro from './components/HomeIntro';
 import { ActivitiesSection, SavoirFaireSection } from './components/HomeActivities';
 import { FeaturedProject, EngagementSection, SectorsSection } from './components/HomeShowcase';
 import HomeProjects from './components/HomeProjects';
-import { CapabilitiesSection, ClientsSection, QualitySection, ValuesSection } from './components/HomeCapabilities';
+import HomeQuality from './components/HomeQuality';
+import HomeReviews from './components/HomeReviews';
+import HomeValues from './components/HomeValues';
 import HomeContact from './components/HomeContact';
 
 // L'accueil ajoute l'ancre « savoir-faire » à la navigation partagée.
@@ -33,19 +36,35 @@ const Homepage = () => {
     <WhatsAppFab />
     <SiteHeader variant="hero" links={homeNavLinks} />
 
+    {/*
+      Ordre pensé pour le rythme, pas seulement pour la logique éditoriale.
+      Deux règles tiennent la séquence :
+
+      1. Alternance des fonds — jamais plus de deux sections sombres de suite,
+         et quand il y en a deux, leurs formats s'opposent (plein cadre puis
+         bandeau typographique, photo puis carrousel, etc.).
+      2. Alternance des formats — deux sections voisines n'emploient jamais le
+         même dispositif. « Projet à la une » et « Notre engagement » sont tous
+         deux des photos plein cadre avec un gros titre : ils sont désormais
+         séparés par six sections.
+
+      Le récit épinglé (3 240 px) est descendu au milieu de page : en deuxième
+      position il imposait un très long défilement avant qu'on sache seulement
+      ce que fait MCCT.
+    */}
     <HomeHero />
-    <IndustrialExperience />
+    <HomeBaseline />
     <HomeIntro />
-    <ActivitiesSection />
-    <SavoirFaireSection />
     <FeaturedProject />
-    <EngagementSection />
     <SectorsSection />
+    <ActivitiesSection />
+    <HomeJourney />
+    <SavoirFaireSection />
+    <EngagementSection />
     <HomeProjects />
-    <CapabilitiesSection />
-    <ClientsSection />
-    <QualitySection />
-    <ValuesSection />
+    <HomeReviews />
+    <HomeQuality />
+    <HomeValues />
     <HomeContact />
     </div>
   );

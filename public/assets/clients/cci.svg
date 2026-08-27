@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 80" width="200" height="80">
+  <g transform="translate(8, 0)">
+    <!-- Industrial Geometric Accent & Monogram Mark -->
+    <g transform="translate(24, 40)">
+      <!-- Heavy industrial hex base -->
+      <polygon points="0,-20 18,-10 18,10 0,20 -18,10 -18,-10" fill="#2B2B2B"/>
+      <!-- Inner cutout -->
+      <polygon points="0,-14 13,-7 13,7 0,14 -13,7 -13,-7" fill="#FFFFFF"/>
+      <!-- Red geometric precision chevron -->
+      <polygon points="-7,-10 4,-10 9,0 4,10 -7,10 -2,0" fill="#CC0000"/>
+      <!-- Center industrial bolt circle -->
+      <circle cx="0" cy="0" r="3.5" fill="#2B2B2B"/>
+    </g>
+    <!-- Brand typography -->
+    <text x="56" y="43" font-family="'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="28" font-weight="900" fill="#222222" letter-spacing="3">CCI</text>
+    <line x1="57" y1="49" x2="178" y2="49" stroke="#CC0000" stroke-width="2"/>
+    <text x="57" y="60" font-family="'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="6.5" font-weight="800" fill="#555555" letter-spacing="2.5">INGÉNIERIE INDUSTRIELLE</text>
+  </g>
+</svg>

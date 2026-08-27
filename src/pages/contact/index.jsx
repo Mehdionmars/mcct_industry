@@ -3,7 +3,9 @@ import PageMeta from '../../components/ui/PageMeta';
 import SiteHeader from '../../components/ui/SiteHeader';
 import WhatsAppFab from '../../components/ui/WhatsAppFab';
 import McctContactForm from '../../components/ui/McctContactForm';
+import useParallax from '../../hooks/useParallax';
 import { useI18n } from '../../i18n/LanguageProvider';
+import { img } from '../../data/gallery';
 import {
   ACCENT,
   bodyFont,
@@ -19,6 +21,7 @@ import {
 const ContactPage = () => {
   const { t } = useI18n();
   const title = t('contact.title');
+  const { ref: parallaxRef, offset } = useParallax(50);
 
   return (
   <div className="min-h-screen bg-[#111315] text-white antialiased" style={bodyFont}>
@@ -27,8 +30,23 @@ const ContactPage = () => {
     <WhatsAppFab />
     <SiteHeader variant="dark" />
 
-    <section className="pb-[120px] pt-[110px]">
-      <div className={container}>
+    <section ref={parallaxRef} className="relative overflow-hidden pb-[120px] pt-[110px]">
+      {/*
+        Fond de page : un technicien MCCT en gilet, décalé en parallaxe.
+        Le voile en dégradé garantit le contraste du titre et du formulaire.
+      */}
+      <div aria-hidden="true" className="pointer-events-none absolute inset-x-0 top-0 h-[780px] overflow-hidden">
+        <img
+          src={img('IMG_7941')}
+          alt=""
+          fetchpriority="high"
+          className="absolute left-0 top-[-10%] h-[120%] w-full object-cover object-center will-change-transform"
+          style={{ transform: `translate3d(0, ${offset}px, 0)` }}
+        />
+        <span className="absolute inset-0 bg-[linear-gradient(180deg,rgba(17,19,21,0.78)_0%,rgba(17,19,21,0.86)_45%,#111315_100%)]" />
+      </div>
+
+      <div className={`${container} relative`}>
         <h1
           className="mb-16 text-[clamp(2.8rem,7vw,6.4rem)] font-bold leading-[0.96] tracking-[-0.02em]"
           style={headingFont}

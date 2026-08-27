@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 80" width="200" height="80">
+  <g transform="translate(6, 0)">
+    <!-- Stylized Seal / Marine icon with water elements -->
+    <g transform="translate(28, 40)">
+      <!-- Pure water drop played with seal -->
+      <path d="M 2 -18 C 2 -18 -1 -13 -1 -10 C -1 -8.3 0.3 -7 2 -7 C 3.7 -7 5 -8.3 5 -10 C 5 -13 2 -18 2 -18 Z" fill="#00A3E0"/>
+      <!-- Seal silhouette -->
+      <path d="M -8 -5 C -5 -9 2 -9 6 -6 C 8 -4 7 0 4 3 C 8 7 11 13 10 18 C 10 19 13 21 15 20 C 12 23 8 22 5 18 C 2 15 -2 16 -5 19 C -7 21 -9 20 -8 18 C -6 16 -4 14 -4 11 C -4 7 -7 3 -12 0 C -15 -2 -13 -6 -10 -7 C -9 -7 -8 -6 -8 -5 Z" fill="#0066B3"/>
+      <!-- Seal flipper accent -->
+      <path d="M 1 6 C 4 8 7 13 5 15 C 3 15 0 13 -1 9 Z" fill="#004D87"/>
+      <!-- Water wave -->
+      <path d="M -16 19 C -8 16 0 22 8 18 C 14 15 18 19 22 18" stroke="#00A3E0" stroke-width="2" fill="none" stroke-linecap="round"/>
+    </g>
+    <!-- Brand typography -->
+    <text x="60" y="42" font-family="'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="20" font-weight="800" fill="#0066B3" letter-spacing="-0.3">technopure</text>
+    <path d="M 61 47 L 175 47" stroke="#00A3E0" stroke-width="1.2" stroke-opacity="0.6"/>
+    <text x="61" y="58" font-family="'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="8.5" font-weight="700" fill="#003B6F" letter-spacing="4">MAROC</text>
+  </g>
+</svg>

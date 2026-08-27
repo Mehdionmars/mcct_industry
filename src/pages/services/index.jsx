@@ -29,9 +29,24 @@ const ActivitySection = ({ activity, index }) => {
           >
             {activity?.title}
           </h2>
-          <p className={`mb-6 text-[16.5px] leading-[1.7] ${isDark ? 'text-[#c4cad0]' : 'text-[#3a3f45]'}`}>
+          <p className={`mb-7 text-[16.5px] leading-[1.7] ${isDark ? 'text-[#c4cad0]' : 'text-[#3a3f45]'}`}>
             {activity?.description}
           </p>
+          {activity?.bullets?.length ? (
+            <ul className="mb-8 list-none space-y-3.5">
+              {activity?.bullets?.map((bullet) => (
+                <li key={bullet} className="flex gap-3.5">
+                  <span
+                    aria-hidden="true"
+                    className="mt-[9px] h-[2px] w-4 shrink-0 bg-[#2478BE]"
+                  />
+                  <span className={`text-[15.5px] leading-[1.6] ${isDark ? 'text-[#d8dde1]' : 'text-[#3a3f45]'}`}>
+                    {bullet}
+                  </span>
+                </li>
+              ))}
+            </ul>
+          ) : null}
           <div className="flex flex-wrap gap-2.5">
             {activity?.tags?.map((tag) => (
               <span

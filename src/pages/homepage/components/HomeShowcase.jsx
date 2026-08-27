@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import Reveal from '../../../components/ui/Reveal';
 import { useI18n } from '../../../i18n/LanguageProvider';
 import { ACCENT, headingFont, container } from '../../../components/ui/mcctTheme';
@@ -98,9 +98,42 @@ export const SectorsSection = () => {
   const { lang, t } = useI18n();
   const sectors = getSectors(lang);
   const title = t('home.sectorsTitle');
+  const railRef = useRef(null);
+  const [active, setActive] = useState(0);
+
+  // Repère actif déduit de la position du rail (mobile uniquement).
+  //
+  // La position est rapportée à la course totale, et non à la largeur d'une
+  // carte : les cartes ne font que 78% de l'écran, la dernière ne peut donc
+  // jamais s'aligner à gauche. Rapporter à la course fait correspondre
+  // exactement la fin du rail au dernier repère — dans les deux sens.
+  const lastIndex = Math.max(1, (sectors?.length || 1) - 1);
+
+  useEffect(() => {
+    const rail = railRef?.current;
+    if (!rail) return undefined;
+    const read = () => {
+      const max = rail.scrollWidth - rail.clientWidth;
+      setActive(max > 0 ? Math.round((rail.scrollLeft / max) * lastIndex) : 0);
+    };
+    read();
+    rail.addEventListener('scroll', read, { passive: true });
+    window.addEventListener('resize', read, { passive: true });
+    return () => {
+      rail.removeEventListener('scroll', read);
+      window.removeEventListener('resize', read);
+    };
+  }, [lastIndex]);
+
+  const scrollToCard = (index) => {
+    const rail = railRef?.current;
+    if (!rail) return;
+    const max = rail.scrollWidth - rail.clientWidth;
+    rail.scrollTo({ left: (max * index) / lastIndex, behavior: 'smooth' });
+  };
 
   return (
-  <section className="bg-[#17191C] py-[120px] text-white">
+  <section id="secteurs" className="bg-[#17191C] py-[120px] text-white">
     <div className={container}>
       <Reveal className="mb-14">
         <p className="mb-[18px] text-[13px] font-extrabold tracking-[0.24em]" style={{ color: ACCENT }}>
@@ -117,9 +150,19 @@ export const SectorsSection = () => {
         </h2>
       </Reveal>
 
-      <div className="grid snap-x snap-mandatory grid-flow-col auto-cols-[78%] gap-4 overflow-x-auto pb-3 min-[900px]:auto-cols-auto min-[900px]:grid-flow-row min-[900px]:gap-6 min-[900px]:overflow-visible min-[900px]:pb-0 min-[900px]:[grid-template-columns:repeat(auto-fit,minmax(280px,1fr))]">
-        {sectors?.map((sector) => (
-          <Reveal key={sector?.title} className="group relative min-h-[420px] snap-start overflow-hidden">
+      {/* `mcct-rail` masque la barre de défilement native : sur mobile elle
+          barrait le bas des cartes. Les repères ci-dessous la remplacent. */}
+      <div
+        ref={railRef}
+        className="mcct-rail grid snap-x snap-mandatory grid-flow-col auto-cols-[78%] gap-4 overflow-x-auto min-[900px]:auto-cols-auto min-[900px]:grid-flow-row min-[900px]:gap-6 min-[900px]:overflow-visible min-[900px]:[grid-template-columns:repeat(auto-fit,minmax(280px,1fr))]"
+      >
+        {sectors?.map((sector, index) => (
+          <Reveal
+            key={sector?.title}
+            delay={index * 90}
+            data-card
+            className="group relative min-h-[420px] snap-start overflow-hidden"
+          >
             <img
               src={sector?.thumbSrc}
               alt={sector?.title}
@@ -128,11 +171,31 @@ export const SectorsSection = () => {
             />
             <span className="absolute inset-0 bg-[linear-gradient(180deg,rgba(23,25,28,0)_35%,rgba(23,25,28,0.9)_100%)]" />
             <span className="relative flex min-h-[420px] flex-col justify-end p-7">
-              <span className="mb-4 block h-[3px] w-10 bg-[#2478BE]" />
+              <span className="mb-4 block h-[3px] w-10 origin-left bg-[#2478BE] transition-transform [transition-duration:500ms] [transition-timing-function:cubic-bezier(0.22,1,0.36,1)] group-hover:scale-x-[2.6] motion-reduce:transition-none" />
               <span className="block text-[23px] font-extrabold tracking-[-0.01em]">{sector?.title}</span>
-              <span className="mt-2.5 block text-[14.5px] leading-[1.55] text-[#c4cad0]">{sector?.desc}</span>
+              <span className="mt-2.5 block text-[14.5px] leading-[1.55] text-[#c4cad0] transition-transform [transition-duration:500ms] [transition-timing-function:cubic-bezier(0.22,1,0.36,1)] group-hover:-translate-y-0.5 motion-reduce:transition-none">
+                {sector?.desc}
+              </span>
             </span>
           </Reveal>
+        ))}
+      </div>
+
+      {/* Repères de position, mobile uniquement (la grille reprend dès 900px). */}
+      <div className="mt-6 flex justify-center gap-2 min-[900px]:hidden">
+        {sectors?.map((sector, index) => (
+          <button
+            key={sector?.title}
+            type="button"
+            onClick={() => scrollToCard(index)}
+            aria-label={sector?.title}
+            aria-current={index === active}
+            className="h-1.5 cursor-pointer rounded-full border-none p-0 transition-all [transition-duration:400ms]"
+            style={{
+              width: index === active ? 28 : 10,
+              backgroundColor: index === active ? ACCENT : 'rgba(255,255,255,0.28)'
+            }}
+          />
         ))}
       </div>
     </div>

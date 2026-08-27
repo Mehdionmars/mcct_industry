@@ -2,29 +2,22 @@ import React from 'react';
 import { useI18n } from '../../../i18n/LanguageProvider';
 import { galleryCategories } from '../../../data/gallery';
 
+/**
+ * Filtres en pastilles, à toutes les largeurs.
+ *
+ * Sous 900px le groupe défile horizontalement (barre masquée, débord jusqu'aux
+ * bords de l'écran) au lieu de s'empiler : les sept catégories tiennent sur une
+ * seule ligne et restent toutes visibles d'un coup d'œil.
+ */
 const GalleryFilters = ({ value, onChange }) => {
   const { t, tx } = useI18n();
 
   return (
-  <>
-    {/* Mobile : liste déroulante compacte */}
-    <label className="mb-8 flex flex-col gap-2 text-[11.5px] font-extrabold tracking-[0.18em] text-[#565e66] min-[900px]:hidden">
-      {t('common.filter')}
-      <select
-        value={value}
-        onChange={(e) => onChange(e?.target?.value)}
-        className="min-h-[48px] border border-[#c6c6c1] bg-white px-4 py-3.5 text-[15px] font-bold text-[#17191C]"
-      >
-        {galleryCategories?.map((category) => (
-          <option key={category?.key} value={category?.key}>
-            {tx(category?.label)}
-          </option>
-        ))}
-      </select>
-    </label>
-
-    {/* Desktop : filtres en pastilles */}
-    <div className="mb-11 hidden flex-wrap gap-2.5 min-[900px]:flex">
+    <div
+      role="group"
+      aria-label={t('common.filter')}
+      className="mcct-rail mb-11 -mx-5 flex gap-2.5 overflow-x-auto px-5 min-[900px]:mx-0 min-[900px]:flex-wrap min-[900px]:overflow-visible min-[900px]:px-0"
+    >
       {galleryCategories?.map((category) => {
         const isActive = value === category?.key;
         return (
@@ -33,7 +26,7 @@ const GalleryFilters = ({ value, onChange }) => {
             type="button"
             onClick={() => onChange(category?.key)}
             aria-pressed={isActive}
-            className={`min-h-[44px] cursor-pointer border px-5 py-3 text-[12px] font-extrabold tracking-[0.14em] transition-all [transition-duration:250ms] ${
+            className={`min-h-[44px] shrink-0 cursor-pointer whitespace-nowrap rounded-full border px-5 py-3 text-[12px] font-extrabold tracking-[0.14em] transition-all [transition-duration:250ms] ${
               isActive
                 ? 'border-[#2478BE] bg-[#2478BE] text-white'
                 : 'border-[#c6c6c1] bg-transparent text-[#565e66] hover:border-[#2478BE] hover:text-[#2478BE]'
@@ -44,7 +37,6 @@ const GalleryFilters = ({ value, onChange }) => {
         );
       })}
     </div>
-    </>
   );
 };
 

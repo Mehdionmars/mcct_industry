@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 80" width="200" height="80">
+  <g transform="translate(6, 0)">
+    <!-- Wheat / Sugar cane motif -->
+    <g transform="translate(28, 40)">
+      <!-- Central stem -->
+      <path d="M 0 22 L 0 -22" stroke="#D4A843" stroke-width="2" stroke-linecap="round"/>
+      <!-- Top spike -->
+      <path d="M 0 -24 C -2 -20 0 -17 0 -15 C 0 -17 2 -20 0 -24 Z" fill="#D4A843"/>
+      <!-- Leaves pair 1 -->
+      <path d="M 0 -15 C -8 -18 -12 -13 -10 -8 C -7 -8 -2 -11 0 -13 Z" fill="#003DA5"/>
+      <path d="M 0 -13 C 2 -11 7 -8 10 -8 C 12 -13 8 -18 0 -15 Z" fill="#D4A843"/>
+      <!-- Leaves pair 2 -->
+      <path d="M 0 -6 C -10 -9 -15 -3 -12 3 C -8 3 -3 -1 0 -4 Z" fill="#D4A843"/>
+      <path d="M 0 -4 C 3 -1 8 3 12 3 C 15 -3 10 -9 0 -6 Z" fill="#003DA5"/>
+      <!-- Leaves pair 3 -->
+      <path d="M 0 3 C -10 0 -14 6 -11 12 C -7 12 -2 8 0 5 Z" fill="#003DA5"/>
+      <path d="M 0 5 C 2 8 7 12 11 12 C 14 6 10 0 0 3 Z" fill="#D4A843"/>
+      <!-- Base nodes -->
+      <circle cx="0" cy="14" r="1.5" fill="#D4A843"/>
+      <circle cx="0" cy="19" r="1.5" fill="#003DA5"/>
+    </g>
+    <!-- Brand typography -->
+    <text x="56" y="42" font-family="'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="20" font-weight="900" fill="#003DA5" letter-spacing="1.5">COSUMAR</text>
+    <line x1="57" y1="47" x2="168" y2="47" stroke="#D4A843" stroke-width="1.2" stroke-opacity="0.85"/>
+    <text x="57" y="58" font-family="'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="7.5" font-weight="700" fill="#D4A843" letter-spacing="3.8">DEPUIS 1929</text>
+  </g>
+</svg>

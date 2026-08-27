@@ -143,6 +143,17 @@
 }
 
 @layer utilities {
+  /* Piste de carrousel : on masque la barre de défilement native, la position
+     étant déjà indiquée par la barre de progression et les flèches. */
+  .mcct-rail {
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+
+  .mcct-rail::-webkit-scrollbar {
+    display: none;
+  }
+
   .animation-delay-200 {
     animation-delay: 0.2s;
   }

@@ -18,11 +18,11 @@ export const navLinks = [
   { key: 'contact', num: '05', to: '/contact' }
 ];
 
-export const PHONE = '+212 666 149 4761';
-export const PHONE_HREF = 'tel:+2126661494761';
+export const PHONE = '+212 661 49 47 61';
+export const PHONE_HREF = 'tel:+212661494761';
 export const EMAIL = 'mcctindustry@gmail.com';
 export const EMAIL_HREF = 'mailto:mcctindustry@gmail.com';
-export const WHATSAPP_HREF = 'https://wa.me/2126661494761';
+export const WHATSAPP_HREF = 'https://wa.me/212661494761';
 export const ADDRESS_LINES = [
   'Route 310, km 6,',
   'Chellalate',

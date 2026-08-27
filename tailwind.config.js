@@ -123,6 +123,7 @@ module.exports = {
         "mcct-rise": "mcct-rise 0.8s cubic-bezier(0.22, 1, 0.36, 1) both",
         "mcct-hero-zoom": "mcct-hero-zoom 1.6s cubic-bezier(0.22, 1, 0.36, 1) both",
         "mcct-load": "mcct-load 1.6s cubic-bezier(0.4, 0, 0.2, 1) both",
+        "mcct-marquee": "mcct-marquee 46s linear infinite",
       },
       keyframes: {
         "accordion-down": {
@@ -193,6 +194,12 @@ module.exports = {
         "mcct-load": {
           from: { transform: "scaleX(0)" },
           to: { transform: "scaleX(1)" },
+        },
+        // Défilement continu des avis : la piste contient deux copies de la
+        // liste, translater de -50% ramène donc exactement au point de départ.
+        "mcct-marquee": {
+          from: { transform: "translate3d(0, 0, 0)" },
+          to: { transform: "translate3d(-50%, 0, 0)" },
         },
       },
       transitionTimingFunction: {

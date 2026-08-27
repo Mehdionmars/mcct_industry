@@ -36,23 +36,16 @@ const HomeProjects = () => {
           </h2>
         </Reveal>
 
-        {/* Mobile : liste déroulante — desktop : pastilles */}
-        <label className="mb-9 flex flex-col gap-2 text-[11.5px] font-extrabold tracking-[0.18em] text-[#565e66] min-[900px]:hidden">
-          {t('common.filter')}
-          <select
-            value={filter}
-            onChange={(e) => setFilter(e?.target?.value)}
-            className="min-h-[48px] border border-[#c6c6c1] bg-white px-4 py-3.5 text-[15px] font-bold text-[#17191C]"
-          >
-            {projectCategories?.map((category) => (
-              <option key={category?.key} value={category?.key}>
-                {tx(category?.label)}
-              </option>
-            ))}
-          </select>
-        </label>
-
-        <div className="mb-12 hidden flex-wrap gap-2.5 min-[900px]:flex">
+        {/*
+          Pastilles à toutes les largeurs. Sous 900px elles défilent
+          horizontalement (barre masquée, débord jusqu'aux bords de l'écran)
+          plutôt que de s'empiler sur trois lignes.
+        */}
+        <div
+          role="group"
+          aria-label={t('common.filter')}
+          className="mcct-rail mb-12 -mx-5 flex gap-2.5 overflow-x-auto px-5 min-[900px]:mx-0 min-[900px]:flex-wrap min-[900px]:overflow-visible min-[900px]:px-0"
+        >
           {projectCategories?.map((category) => {
             const isActive = filter === category?.key;
             return (
@@ -61,7 +54,7 @@ const HomeProjects = () => {
                 type="button"
                 onClick={() => setFilter(category?.key)}
                 aria-pressed={isActive}
-                className={`min-h-[44px] cursor-pointer border px-5 py-3 text-[12px] font-extrabold tracking-[0.14em] transition-all [transition-duration:250ms] ${
+                className={`min-h-[44px] shrink-0 cursor-pointer whitespace-nowrap rounded-full border px-5 py-3 text-[12px] font-extrabold tracking-[0.14em] transition-all [transition-duration:250ms] ${
                   isActive
                     ? 'border-[#2478BE] bg-[#2478BE] text-white'
                     : 'border-[#c6c6c1] bg-transparent text-[#565e66] hover:border-[#2478BE] hover:text-[#2478BE]'

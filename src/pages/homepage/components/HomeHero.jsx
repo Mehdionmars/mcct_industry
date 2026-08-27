@@ -30,6 +30,9 @@ const HomeHero = () => {
   const videoRef = useRef(null);
   const [isScrolled, setIsScrolled] = useState(false);
   const [withVideo, setWithVideo] = useState(false);
+  // La vidéo n'est révélée qu'une fois réellement jouable : sur une connexion
+  // lente, l'élément restait visible et noir par-dessus l'image de fond.
+  const [isVideoReady, setIsVideoReady] = useState(false);
 
   useEffect(() => {
     const onScroll = () => setIsScrolled(window.scrollY > 80);
@@ -56,7 +59,9 @@ const HomeHero = () => {
         src={HERO_IMAGE}
         alt={t('home.heroImageAlt')}
         fetchpriority="high"
-        className="absolute inset-0 h-full w-full animate-mcct-hero-zoom object-cover"
+        className={`absolute inset-0 h-full w-full object-cover ${
+          isVideoReady ? '' : 'animate-mcct-hero-zoom'
+        }`}
       />
 
       {withVideo ? (
@@ -70,7 +75,15 @@ const HomeHero = () => {
           poster={HERO_IMAGE}
           aria-hidden="true"
           tabIndex={-1}
-          className="absolute inset-0 h-full w-full object-cover"
+          onCanPlay={() => setIsVideoReady(true)}
+          // Réseau coupé, format refusé, fichier absent : on retire la vidéo et
+          // l'image de fond reprend seule la main, sans écran noir.
+          onError={() => {
+            setIsVideoReady(false);
+            setWithVideo(false);
+          }}
+          className="absolute inset-0 h-full w-full object-cover transition-opacity duration-700"
+          style={{ opacity: isVideoReady ? 1 : 0 }}
         >
           <source src={HERO_VIDEO} type="video/mp4" />
         </video>

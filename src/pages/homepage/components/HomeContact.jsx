@@ -1,8 +1,10 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import Reveal from '../../../components/ui/Reveal';
+import useParallax from '../../../hooks/useParallax';
 import McctContactForm from '../../../components/ui/McctContactForm';
 import { brochureUrl } from '../../../data/mcct';
+import { img } from '../../../data/gallery';
 import { useI18n } from '../../../i18n/LanguageProvider';
 import {
   ACCENT,
@@ -21,10 +23,26 @@ const HomeContact = () => {
   const title = t('home.contactTitle');
   const subtitle = t('home.contactSubtitle');
   const brochure = t('home.brochureCta');
+  const { ref: parallaxRef, offset } = useParallax(50);
 
   return (
-  <section id="contact" className="bg-[#111315] pt-[130px] text-white">
-    <div className={container}>
+  <section ref={parallaxRef} id="contact" className="relative overflow-hidden bg-[#111315] pt-[130px] text-white">
+    {/*
+      Fond de section : un technicien MCCT en gilet, décalé en parallaxe.
+      Le voile en dégradé garantit le contraste du texte par-dessus la photo.
+    */}
+    <div aria-hidden="true" className="pointer-events-none absolute inset-x-0 top-0 h-[860px] overflow-hidden">
+      <img
+        src={img('IMG_7941')}
+        alt=""
+        loading="lazy"
+        className="absolute left-0 top-[-10%] h-[120%] w-full object-cover object-center will-change-transform"
+        style={{ transform: `translate3d(0, ${offset}px, 0)` }}
+      />
+      <span className="absolute inset-0 bg-[linear-gradient(180deg,rgba(17,19,21,0.82)_0%,rgba(17,19,21,0.88)_45%,#111315_100%)]" />
+    </div>
+
+    <div className={`${container} relative`}>
       <Reveal className="flex flex-wrap items-end justify-between gap-10 border-b border-[#23272b] pb-[90px]">
         <h2
           className="text-[clamp(2.6rem,6vw,6rem)] font-extrabold leading-[0.98] tracking-[-0.03em]"
@@ -104,7 +122,7 @@ const HomeContact = () => {
         </Reveal>
 
         <Reveal>
-          <McctContactForm rows={5} longNote />
+          <McctContactForm rows={5} />
         </Reveal>
       </div>
 

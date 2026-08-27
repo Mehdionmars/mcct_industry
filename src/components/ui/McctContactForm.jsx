@@ -9,10 +9,10 @@ const labelClass =
   'flex min-w-0 flex-col gap-2 text-[11.5px] font-extrabold tracking-[0.16em] text-[#9aa2a9]';
 
 /**
- * Formulaire de contact : aucune donnée n'est stockée, la demande part par
- * messagerie (mailto) ou WhatsApp avec le message pré-rempli, dans la langue active.
+ * Formulaire de contact : la demande part par messagerie (mailto) ou WhatsApp
+ * avec le message pré-rempli, dans la langue active. Rien n'est stocké côté page.
  */
-const McctContactForm = ({ rows = 6, longNote = false }) => {
+const McctContactForm = ({ rows = 6 }) => {
   const { lang, t } = useI18n();
   // Les types de projet reprennent les activités, traduites elles aussi.
   const projectTypes = useMemo(
@@ -107,9 +107,6 @@ const McctContactForm = ({ rows = 6, longNote = false }) => {
         </button>
       </div>
 
-      <p className="m-0 text-[12.5px] leading-[1.6] text-[#565e66] [grid-column:1/-1]">
-        {longNote ? t('contact.form.noteLong')(EMAIL) : t('contact.form.note')(EMAIL)}
-      </p>
     </form>
   );
 };
