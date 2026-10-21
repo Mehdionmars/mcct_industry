@@ -6,12 +6,11 @@ import WhatsAppFab from '../../components/ui/WhatsAppFab';
 import Reveal from '../../components/ui/Reveal';
 import { useI18n, localize } from '../../i18n/LanguageProvider';
 import { ACCENT, bodyFont, headingFont, container } from '../../components/ui/mcctTheme';
-import { getKeyFigures, signatureQuote } from '../../data/mcct';
+import { signatureQuote } from '../../data/mcct';
 import { img } from '../../data/gallery';
 
 const About = () => {
   const { lang, t } = useI18n();
-  const keyFigures = getKeyFigures(lang);
   const title = t('about.title');
   const pillars = t('about.pillars');
   const signature = localize(signatureQuote, lang);
@@ -90,19 +89,6 @@ const About = () => {
       </section>
 
       <section className="py-[110px]">
-        <div className={`${container} grid gap-10 [grid-template-columns:repeat(auto-fit,minmax(220px,1fr))]`}>
-          {keyFigures?.map((figure) => (
-            <Reveal key={figure?.label}>
-              <p className="text-[clamp(3rem,5vw,4.6rem)] font-extrabold tracking-[-0.03em]" style={{ color: ACCENT }}>
-                {figure?.value}+
-              </p>
-              <p className="mt-2 text-[12.5px] font-bold tracking-[0.2em] text-[#565e66]">{figure?.label}</p>
-            </Reveal>
-          ))}
-        </div>
-      </section>
-
-      <section className="pb-[110px]">
         <div className={`${container} grid gap-6 min-[900px]:[grid-template-columns:2fr_1fr]`}>
           <Reveal className="overflow-hidden">
             <img
