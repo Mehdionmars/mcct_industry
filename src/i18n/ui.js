@@ -158,8 +158,8 @@ export const ui = {
           text: 'Excellence, sécurité, innovation, engagement — à chaque étape, en atelier comme sur chantier.'
         }
       ],
-      imageAlt1: 'Montage d’une charpente métallique MCCT au chariot télescopique',
-      imageAlt2: 'Technicien MCCT sur une installation gaz'
+      imageAlt1: 'Levage d’une poutre au chariot télescopique sur une charpente MCCT en cours de montage',
+      imageAlt2: 'Coulage des massifs de fondation sur un chantier MCCT'
     },
     services: {
       eyebrow: 'NOS ACTIVITÉS',
@@ -380,8 +380,8 @@ export const ui = {
           text: 'Excellence, safety, innovation, commitment — at every stage, in the workshop and on site.'
         }
       ],
-      imageAlt1: 'MCCT steel frame erection with a telehandler',
-      imageAlt2: 'MCCT technician working on a gas installation'
+      imageAlt1: 'Telehandler lifting a beam on an MCCT steel frame under construction',
+      imageAlt2: 'Pouring foundation footings on an MCCT site'
     },
     services: {
       eyebrow: 'OUR SERVICES',

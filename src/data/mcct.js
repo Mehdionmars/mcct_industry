@@ -923,7 +923,7 @@ const rawValues = [
       fr: 'Plans de levage, balisage, équipements de protection : sur nos chantiers, la sécurité conditionne le planning, jamais l’inverse. Nos équipes rentrent entières.',
       en: 'Lifting plans, exclusion zones, protective equipment: on our sites safety drives the schedule, never the other way round. Our crews go home whole.'
     },
-    image: 'IMG_7941'
+    image: 'IMG_7940'
   },
   {
     num: '03',
