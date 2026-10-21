@@ -132,10 +132,10 @@ const HomeHero = () => {
               />
             </a>
             <a
-              href="#projets"
+              href="#contact"
               className="inline-flex min-h-[54px] items-center justify-center gap-3 border border-[rgba(255,255,255,0.4)] px-6 text-[12.5px] font-extrabold tracking-[0.16em] text-white transition-colors hover:border-white hover:bg-[rgba(255,255,255,0.08)] min-[900px]:min-h-0 min-[900px]:justify-start min-[900px]:px-7 min-[900px]:py-4"
             >
-              {t('home.heroCta2')}
+              {t('cta.defaultLabel')}
             </a>
           </div>
         </div>

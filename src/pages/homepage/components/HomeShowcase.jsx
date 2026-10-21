@@ -29,15 +29,7 @@ export const FeaturedProject = () => {
         {title?.[1]}
         <span style={{ color: ACCENT }}>.</span>
       </h2>
-      <div className="mt-6 flex flex-wrap items-center justify-between gap-6">
-        <p className="text-[15px] tracking-[0.08em] text-[#c4cad0]">{t('home.featuredMeta')}</p>
-        <a
-          href="#projets"
-          className="inline-flex items-center gap-3 border border-[rgba(255,255,255,0.4)] px-[26px] py-[15px] text-[12.5px] font-extrabold tracking-[0.16em] text-white transition-colors hover:border-white hover:bg-white hover:text-[#17191C]"
-        >
-          {t('home.featuredLink')} <span aria-hidden="true">→</span>
-        </a>
-      </div>
+      <p className="mt-6 text-[15px] tracking-[0.08em] text-[#c4cad0]">{t('home.featuredMeta')}</p>
     </Reveal>
     </section>
   );
@@ -46,7 +38,6 @@ export const FeaturedProject = () => {
 export const EngagementSection = () => {
   const { t } = useI18n();
   const title = t('home.commitmentTitle');
-  const circle = t('home.commitmentCircle');
 
   return (
   <section className="relative flex min-h-[80vh] items-center overflow-hidden bg-[#0D0F10]">
@@ -76,18 +67,13 @@ export const EngagementSection = () => {
         </p>
       </div>
       <a
-        href="#projets"
-        aria-label={t('home.commitmentAria')}
+        href="#contact"
         className="flex h-[168px] w-[168px] shrink-0 flex-col items-center justify-center gap-2 rounded-full border border-[rgba(255,255,255,0.45)] text-center text-[11.5px] font-extrabold tracking-[0.2em] text-white transition-all [transition-duration:400ms] hover:scale-[1.06] hover:border-[#2478BE] hover:bg-[#2478BE]"
       >
         <span aria-hidden="true" className="text-[22px]">
           →
         </span>
-        <span>
-          {circle?.[0]}
-          <br />
-          {circle?.[1]}
-        </span>
+        <span>{t('cta.defaultLabel')}</span>
       </a>
     </Reveal>
     </section>

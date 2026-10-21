@@ -10,7 +10,6 @@ import HomeBaseline from './components/HomeBaseline';
 import HomeIntro from './components/HomeIntro';
 import { ActivitiesSection, SavoirFaireSection } from './components/HomeActivities';
 import { FeaturedProject, EngagementSection, SectorsSection } from './components/HomeShowcase';
-import HomeProjects from './components/HomeProjects';
 import HomeQuality from './components/HomeQuality';
 import HomeReviews from './components/HomeReviews';
 import HomeValues from './components/HomeValues';
@@ -59,7 +58,6 @@ const Homepage = () => {
     <HomeJourney />
     <SavoirFaireSection />
     <EngagementSection />
-    <HomeProjects />
     <HomeReviews />
     <HomeQuality />
     <HomeValues />
