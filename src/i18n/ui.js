@@ -30,8 +30,6 @@ export const ui = {
       whatsapp: 'Écrire sur WhatsApp →',
       whatsappAria: 'Contacter MCCT sur WhatsApp',
       loading: 'Chargement du site MCCT Industrie',
-      filter: 'Filtrer',
-      viewProject: 'Voir le projet',
       addressLine1: 'Route 310, km 6,',
       addressLine2: 'Chellalate',
       addressCity: 'Aïn Harrouda — Maroc'
@@ -59,7 +57,6 @@ export const ui = {
       heroText:
         'MCCT Industrie accompagne les acteurs industriels dans la conception, la fabrication et la réalisation de solutions techniques à forte valeur ajoutée.',
       heroCta1: 'Découvrir nos activités',
-      heroCta2: 'Nos projets',
       scroll: 'Scroll',
       heroImageAlt: 'Charpente métallique MCCT sous ciel dégagé',
       baselineEyebrow: 'Excellence — Rapidité — Satisfaction',
@@ -80,19 +77,14 @@ export const ui = {
       featuredEyebrow: '02 — Projet à la une',
       featuredTitle: ['Hangar industriel', 'clé en main'],
       featuredMeta: 'Construction métallique — Maroc',
-      featuredLink: 'Voir le projet',
       featuredAlt: 'Hangar industriel livré par MCCT Industrie',
       commitmentEyebrow: 'Notre engagement',
       commitmentTitle: ['Construire avec précision.', 'Livrer avec exigence'],
       commitmentText:
         "Chaque projet est piloté par une équipe technique dédiée, de l'étude d'exécution à la réception sur site.",
-      commitmentCircle: ['Nos', 'réalisations'],
-      commitmentAria: 'Voir nos réalisations',
       commitmentAlt: "Montage d'une structure métallique sur site",
       sectorsEyebrow: "Secteurs d'intervention",
       sectorsTitle: ['Une expertise', 'multi-sectorielle'],
-      projectsEyebrow: '05 — Projets sélectionnés',
-      projectsTitle: ['Des réalisations', 'qui parlent', "d'elles-mêmes"],
       reviewsEyebrow: '06 — Ce qu’ils en disent',
       reviewsTitle: ['Des donneurs d’ordre', 'qui nous rappellent'],
       reviewsText:
@@ -261,8 +253,6 @@ export const ui = {
       whatsapp: 'Message us on WhatsApp →',
       whatsappAria: 'Contact MCCT on WhatsApp',
       loading: 'Loading the MCCT Industrie website',
-      filter: 'Filter',
-      viewProject: 'View project',
       addressLine1: 'Route 310, km 6,',
       addressLine2: 'Chellalate',
       addressCity: 'Aïn Harrouda — Morocco'
@@ -290,7 +280,6 @@ export const ui = {
       heroText:
         'MCCT Industrie supports industrial clients through the design, fabrication and delivery of high-value technical solutions.',
       heroCta1: 'Explore our services',
-      heroCta2: 'Our projects',
       scroll: 'Scroll',
       heroImageAlt: 'MCCT steel canopy against open sky',
       baselineEyebrow: 'Excellence — Speed — Satisfaction',
@@ -310,19 +299,14 @@ export const ui = {
       featuredEyebrow: '02 — Featured project',
       featuredTitle: ['Turnkey industrial', 'building'],
       featuredMeta: 'Steel construction — Morocco',
-      featuredLink: 'View project',
       featuredAlt: 'Industrial building delivered by MCCT Industrie',
       commitmentEyebrow: 'Our commitment',
       commitmentTitle: ['Built with precision.', 'Delivered with rigour'],
       commitmentText:
         'Every project is run by a dedicated technical team, from shop drawings to handover on site.',
-      commitmentCircle: ['Our', 'work'],
-      commitmentAria: 'See our work',
       commitmentAlt: 'Erecting a steel structure on site',
       sectorsEyebrow: 'Sectors we serve',
       sectorsTitle: ['Cross-sector', 'expertise'],
-      projectsEyebrow: '05 — Selected projects',
-      projectsTitle: ['Work that', 'speaks for', 'itself'],
       reviewsEyebrow: '06 — What they say',
       reviewsTitle: ['Principals who', 'call us back'],
       reviewsText:

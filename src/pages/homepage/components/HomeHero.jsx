@@ -79,8 +79,8 @@ const HomeHero = () => {
             <a href="#activites" className={btnPrimary}>
               {t('home.heroCta1')} <span aria-hidden="true">→</span>
             </a>
-            <a href="#projets" className={btnSecondary}>
-              {t('home.heroCta2')}
+            <a href="#contact" className={btnSecondary}>
+              {t('cta.defaultLabel')}
             </a>
           </div>
         </div>

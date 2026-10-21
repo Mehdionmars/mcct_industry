@@ -3,7 +3,7 @@ import Reveal from '../../../components/ui/Reveal';
 import { useI18n } from '../../../i18n/LanguageProvider';
 import { Building2, Factory, Store } from 'lucide-react';
 import { ACCENT, container } from '../../../components/ui/mcctTheme';
-import { Eyebrow, SectionTitle, btnOnDark, card, joinTitle } from '../../../components/ui/Corporate';
+import { Eyebrow, SectionTitle, btnOnDark, card } from '../../../components/ui/Corporate';
 import { getSectors } from '../../../data/mcct';
 import { img } from '../../../data/gallery';
 
@@ -26,15 +26,8 @@ export const FeaturedProject = () => {
         <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(15,42,71,0)_30%,rgba(15,42,71,0.88)_100%)]" />
         <div className="relative w-full p-8 min-[900px]:p-12">
           <Eyebrow tone="dark">{t('home.featuredEyebrow')}</Eyebrow>
-          <div className="flex flex-wrap items-end justify-between gap-6">
-            <div>
-              <SectionTitle title={title} tone="dark" className="max-w-[620px]" />
-              <p className="mt-3 text-[16px] text-onnavy">{t('home.featuredMeta')}</p>
-            </div>
-            <a href="#projets" className={btnOnDark}>
-              {t('home.featuredLink')} <span aria-hidden="true">→</span>
-            </a>
-          </div>
+          <SectionTitle title={title} tone="dark" className="max-w-[620px]" />
+          <p className="mt-3 text-[16px] text-onnavy">{t('home.featuredMeta')}</p>
         </div>
       </Reveal>
     </div>
@@ -45,7 +38,6 @@ export const FeaturedProject = () => {
 export const EngagementSection = () => {
   const { t } = useI18n();
   const title = t('home.commitmentTitle');
-  const circle = t('home.commitmentCircle');
 
   return (
   <section className="bg-white py-24">
@@ -60,8 +52,8 @@ export const EngagementSection = () => {
             <Eyebrow tone="dark">{t('home.commitmentEyebrow')}</Eyebrow>
             <SectionTitle title={title} tone="dark" />
             <p className="mt-5 max-w-[480px] text-[17px] leading-[1.7] text-onnavy">{t('home.commitmentText')}</p>
-            <a href="#projets" aria-label={t('home.commitmentAria')} className={`${btnOnDark} mt-9`}>
-              {joinTitle(circle)} <span aria-hidden="true">→</span>
+            <a href="#contact" className={`${btnOnDark} mt-9`}>
+              {t('cta.defaultLabel')} <span aria-hidden="true">→</span>
             </a>
           </div>
         </div>
