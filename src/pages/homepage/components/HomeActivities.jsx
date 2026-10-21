@@ -3,9 +3,7 @@ import { Link } from 'react-router-dom';
 import Reveal from '../../../components/ui/Reveal';
 import ProcessIcon from '../../../components/ui/ProcessIcon';
 import { useI18n } from '../../../i18n/LanguageProvider';
-import { ArrowLeft, ArrowRight } from 'lucide-react';
-import { container } from '../../../components/ui/mcctTheme';
-import { Eyebrow, SectionTitle, card, roundBtn } from '../../../components/ui/Corporate';
+import { ACCENT, headingFont, container } from '../../../components/ui/mcctTheme';
 import { getActivities, getProcessSteps } from '../../../data/mcct';
 
 export const ActivitiesSection = () => {
@@ -51,39 +49,66 @@ export const ActivitiesSection = () => {
   };
 
   return (
-  <section id="activites" className="bg-white py-24">
+  <section id="activites" className="bg-[#F5F5F2] py-[120px]">
     <div className={container}>
-      <Reveal className="mb-12 flex flex-wrap items-end justify-between gap-8">
-        <div className="max-w-[640px]">
-          <Eyebrow>{t('home.activitiesEyebrow')}</Eyebrow>
-          <SectionTitle title={title} accentLast />
-          <p className="mt-5 text-[17px] leading-[1.7] text-copy">{t('home.activitiesText')}</p>
+      <Reveal className="mb-12 flex flex-wrap items-end justify-between gap-6">
+        <div>
+          <p className="mb-[18px] text-[13px] font-extrabold tracking-[0.24em]" style={{ color: ACCENT }}>
+            {t('home.activitiesEyebrow')}
+          </p>
+          <h2
+            className="text-[clamp(2.4rem,4.6vw,4.4rem)] font-extrabold leading-none tracking-[-0.03em]"
+            style={headingFont}
+          >
+            {title?.[0]}
+            <br />
+            {title?.[1]}
+            <br />
+            {title?.[2]}
+            <span style={{ color: ACCENT }}>.</span>
+          </h2>
         </div>
-        <div className="flex shrink-0 gap-3">
+        <p className="max-w-[380px] text-[16px] leading-[1.65] text-[#3a3f45]">
+          {t('home.activitiesText')}
+        </p>
+      </Reveal>
+
+      {/* Barre de progression + flèches : l'état du rail est reflété des deux côtés. */}
+      <Reveal className="mb-7 flex items-center gap-6">
+        <div className="h-[3px] flex-1 bg-[#dcdcd8]">
+          <div
+            className="h-full origin-left bg-[#2478BE] transition-transform duration-300"
+            style={{ transform: `scaleX(${Math.max(0.08, progress?.ratio)})` }}
+          />
+        </div>
+        <p className="shrink-0 text-[12px] font-bold tracking-[0.18em] text-[#565e66]">
+          {String(activities?.length)?.padStart(2, '0')} {t('home.activitiesCountLabel')}
+        </p>
+        <div className="flex shrink-0 gap-2.5">
           <button
             type="button"
             onClick={() => scrollByCard(-1)}
             disabled={progress?.atStart}
             aria-label={t('home.activitiesPrev')}
-            className={roundBtn()}
+            className="flex h-11 w-11 cursor-pointer items-center justify-center border border-[#c6c6c1] bg-transparent text-[18px] text-[#17191C] transition-colors hover:border-[#2478BE] hover:bg-[#2478BE] hover:text-white disabled:cursor-default disabled:opacity-35 disabled:hover:border-[#c6c6c1] disabled:hover:bg-transparent disabled:hover:text-[#17191C]"
           >
-            <ArrowLeft aria-hidden="true" className="h-5 w-5" />
+            <span aria-hidden="true">←</span>
           </button>
           <button
             type="button"
             onClick={() => scrollByCard(1)}
             disabled={progress?.atEnd}
             aria-label={t('home.activitiesNext')}
-            className={roundBtn()}
+            className="flex h-11 w-11 cursor-pointer items-center justify-center border border-[#c6c6c1] bg-transparent text-[18px] text-[#17191C] transition-colors hover:border-[#2478BE] hover:bg-[#2478BE] hover:text-white disabled:cursor-default disabled:opacity-35 disabled:hover:border-[#c6c6c1] disabled:hover:bg-transparent disabled:hover:text-[#17191C]"
           >
-            <ArrowRight aria-hidden="true" className="h-5 w-5" />
+            <span aria-hidden="true">→</span>
           </button>
         </div>
       </Reveal>
 
       <ul
         ref={railRef}
-        className="mcct-rail -mx-5 scroll-px-5 min-[900px]:scroll-px-0 flex list-none snap-x snap-mandatory gap-6 overflow-x-auto scroll-smooth px-5 pb-6 pt-1 min-[900px]:mx-0 min-[900px]:px-1"
+        className="mcct-rail flex list-none snap-x snap-mandatory gap-6 overflow-x-auto scroll-smooth"
       >
         {activities?.map((activity) => (
           <li
@@ -91,45 +116,42 @@ export const ActivitiesSection = () => {
             data-card
             className="w-[82%] shrink-0 snap-start min-[700px]:w-[calc((100%-24px)/2)] min-[1100px]:w-[calc((100%-48px)/3)]"
           >
-            <Link to="/services" className={`${card} group flex h-full flex-col overflow-hidden transition-transform duration-300 hover:-translate-y-1`}>
-              <span className="relative block h-[230px] overflow-hidden">
-                <img
-                  src={activity?.thumbSrc}
-                  alt={activity?.title}
-                  loading="lazy"
-                  className="absolute inset-0 h-full w-full object-cover transition-transform [transition-duration:600ms] group-hover:scale-[1.05]"
-                />
-                <span className="absolute left-4 top-4 rounded-full bg-white/95 px-3 py-1 text-[13px] font-semibold text-navy shadow-sm">
+            <Link
+              to="/services"
+              className="group relative block min-h-[420px] overflow-hidden bg-[#0D0F10] text-white"
+            >
+              <img
+                src={activity?.thumbSrc}
+                alt={activity?.title}
+                loading="lazy"
+                className="absolute inset-0 h-full w-full object-cover opacity-55 transition-all [transition-duration:600ms] [transition-timing-function:cubic-bezier(0.22,1,0.36,1)] group-hover:scale-[1.06] group-hover:opacity-40"
+              />
+              <span className="absolute inset-0 bg-[linear-gradient(180deg,rgba(13,15,16,0)_30%,rgba(13,15,16,0.85)_100%)]" />
+              <span className="relative flex min-h-[420px] flex-col justify-between p-7">
+                <span className="text-[13px] font-extrabold tracking-[0.2em]" style={{ color: ACCENT }}>
                   {activity?.num}
                 </span>
-              </span>
-              <span className="flex flex-1 flex-col justify-between gap-5 p-7">
                 <span>
-                  <span className="block font-display text-[21px] font-bold leading-[1.25] text-navy">{activity?.title}</span>
-                  <span className="mt-2.5 block text-[15px] leading-[1.6] text-copy">{activity?.short}</span>
-                </span>
-                <span className="inline-flex items-center gap-2 text-[15px] font-semibold text-brand">
-                  {t('footer.learnMore')}
-                  <ArrowRight aria-hidden="true" className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
+                  <span className="mb-4 block h-[3px] w-10 bg-[#2478BE]" />
+                  <span className="block text-[24px] font-extrabold leading-[1.1] tracking-[-0.01em]">
+                    {activity?.title}
+                  </span>
+                  <span className="mt-3 flex items-center justify-between gap-3">
+                    <span className="text-[14px] leading-[1.55] text-[#c4cad0]">{activity?.short}</span>
+                    <span
+                      aria-hidden="true"
+                      className="text-[20px] transition-transform duration-300 group-hover:translate-x-2"
+                      style={{ color: ACCENT }}
+                    >
+                      →
+                    </span>
+                  </span>
                 </span>
               </span>
             </Link>
           </li>
         ))}
       </ul>
-
-      {/* Progression du rail. */}
-      <div className="mt-2 flex items-center gap-5">
-        <div className="h-1 flex-1 overflow-hidden rounded-full bg-line">
-          <div
-            className="h-full origin-left rounded-full bg-brand transition-transform duration-300"
-            style={{ transform: `scaleX(${Math.max(0.08, progress?.ratio)})` }}
-          />
-        </div>
-        <p className="shrink-0 text-[14px] font-medium text-subtle">
-          {activities?.length} {t('home.activitiesCountLabel')?.toLowerCase()}
-        </p>
-      </div>
     </div>
     </section>
   );
@@ -141,27 +163,49 @@ export const SavoirFaireSection = () => {
   const title = t('home.processTitle');
 
   return (
-  <section id="savoirfaire" className="bg-mist py-24">
+  <section id="savoirfaire" className="bg-[#E7E7E4] py-[120px]">
     <div className={container}>
-      <Reveal className="mb-12 max-w-[720px]">
-        <Eyebrow>{t('home.processEyebrow')}</Eyebrow>
-        <SectionTitle title={title} accentLast />
+      <Reveal className="mb-16">
+        <p className="mb-[18px] text-[13px] font-extrabold tracking-[0.24em]" style={{ color: ACCENT }}>
+          {t('home.processEyebrow')}
+        </p>
+        <h2
+          className="text-[clamp(2.4rem,4.6vw,4.4rem)] font-extrabold leading-none tracking-[-0.03em]"
+          style={headingFont}
+        >
+          {title?.[0]}
+          <br />
+          {title?.[1]}
+          <span style={{ color: ACCENT }}>.</span>
+        </h2>
       </Reveal>
 
-      <ol className="grid list-none gap-5 min-[700px]:grid-cols-2 min-[1000px]:grid-cols-3">
+      <div className="grid gap-[2px] bg-[#cfcfcb] [grid-template-columns:repeat(auto-fit,minmax(min(100%,170px),1fr))]">
         {processSteps?.map((step, index) => (
-          <Reveal as="li" key={step?.num} delay={index * 70} className={`${card} group p-7 transition-transform duration-300 hover:-translate-y-1`}>
-            <div className="mb-6 flex items-center justify-between">
-              <span className="flex h-12 w-12 items-center justify-center rounded-xl bg-sky text-brand transition-colors duration-300 group-hover:bg-brand group-hover:text-white">
-                <ProcessIcon name={step?.icon} className="h-6 w-6" />
-              </span>
-              <span aria-hidden="true" className="font-display text-[28px] font-extrabold text-brand/20">{step?.num}</span>
+          <Reveal
+            key={step?.num}
+            delay={index * 70}
+            className="group relative bg-[#F5F5F2] px-[22px] pb-9 pt-7 transition-colors duration-300 hover:bg-white"
+          >
+            {/* Filet d'accent qui se déploie au survol. */}
+            <span
+              aria-hidden="true"
+              className="absolute inset-x-0 top-0 h-[3px] origin-left scale-x-0 bg-[#2478BE] transition-transform [transition-duration:450ms] [transition-timing-function:cubic-bezier(0.22,1,0.36,1)] group-hover:scale-x-100"
+            />
+            <div className="mb-8 flex items-start justify-between gap-3">
+              <ProcessIcon
+                name={step?.icon}
+                className="h-9 w-9 text-[#17191C] transition-all [transition-duration:450ms] [transition-timing-function:cubic-bezier(0.22,1,0.36,1)] group-hover:-translate-y-0.5 group-hover:text-[#2478BE] motion-reduce:transition-none motion-reduce:group-hover:translate-y-0"
+              />
+              <p className="text-[13px] font-extrabold tracking-[0.18em]" style={{ color: ACCENT }}>
+                {step?.num}
+              </p>
             </div>
-            <p className="font-display text-[19px] font-bold text-navy">{step?.title}</p>
-            <p className="mt-2 text-[15px] leading-[1.6] text-copy">{step?.desc}</p>
+            <p className="text-[16px] font-extrabold tracking-[0.06em]">{step?.title}</p>
+            <p className="mt-2.5 text-[13.5px] leading-[1.55] text-[#565e66]">{step?.desc}</p>
           </Reveal>
         ))}
-      </ol>
+      </div>
     </div>
     </section>
   );

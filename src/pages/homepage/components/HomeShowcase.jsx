@@ -1,73 +1,96 @@
 import React, { useEffect, useRef, useState } from 'react';
 import Reveal from '../../../components/ui/Reveal';
 import { useI18n } from '../../../i18n/LanguageProvider';
-import { Building2, Factory, Store } from 'lucide-react';
-import { ACCENT, container } from '../../../components/ui/mcctTheme';
-import { Eyebrow, SectionTitle, btnOnDark, card } from '../../../components/ui/Corporate';
+import { ACCENT, headingFont, container } from '../../../components/ui/mcctTheme';
 import { getSectors } from '../../../data/mcct';
 import { img } from '../../../data/gallery';
-
-const sectorIcons = [Factory, Store, Building2];
 
 export const FeaturedProject = () => {
   const { t } = useI18n();
   const title = t('home.featuredTitle');
 
   return (
-  <section className="bg-white pb-24">
-    <div className={container}>
-      <Reveal className="relative flex min-h-[clamp(440px,72vh,640px)] items-end overflow-hidden rounded-3xl bg-navy">
-        <img
-          src={img('IMG_7951')}
-          alt={t('home.featuredAlt')}
-          loading="lazy"
-          className="absolute inset-0 h-full w-full object-cover"
-        />
-        <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(15,42,71,0)_30%,rgba(15,42,71,0.88)_100%)]" />
-        <div className="relative w-full p-8 min-[900px]:p-12">
-          <Eyebrow tone="dark">{t('home.featuredEyebrow')}</Eyebrow>
-          <SectionTitle title={title} tone="dark" className="max-w-[620px]" />
-          <p className="mt-3 text-[16px] text-onnavy">{t('home.featuredMeta')}</p>
-        </div>
-      </Reveal>
-    </div>
-  </section>
+  <section className="relative flex min-h-[78vh] items-end overflow-hidden bg-[#0D0F10]">
+    <img
+      src={img('IMG_7951')}
+      alt={t('home.featuredAlt')}
+      loading="lazy"
+      className="absolute inset-0 h-full w-full object-cover"
+    />
+    <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(13,15,16,0.2)_0%,rgba(13,15,16,0.85)_100%)]" />
+    <Reveal className={`${container} relative pb-[72px] pt-[120px] text-white`}>
+      <p className="mb-4 text-[13px] font-extrabold tracking-[0.24em] text-[#cfd6dc]">{t('home.featuredEyebrow')}</p>
+      <h2
+        className="text-[clamp(2.2rem,4.5vw,4.2rem)] font-extrabold leading-none tracking-[-0.03em]"
+        style={headingFont}
+      >
+        {title?.[0]}
+        <br />
+        {title?.[1]}
+        <span style={{ color: ACCENT }}>.</span>
+      </h2>
+      <div className="mt-6 flex flex-wrap items-center justify-between gap-6">
+        <p className="text-[15px] tracking-[0.08em] text-[#c4cad0]">{t('home.featuredMeta')}</p>
+        <a
+          href="#projets"
+          className="inline-flex items-center gap-3 border border-[rgba(255,255,255,0.4)] px-[26px] py-[15px] text-[12.5px] font-extrabold tracking-[0.16em] text-white transition-colors hover:border-white hover:bg-white hover:text-[#17191C]"
+        >
+          {t('home.featuredLink')} <span aria-hidden="true">→</span>
+        </a>
+      </div>
+    </Reveal>
+    </section>
   );
 };
 
 export const EngagementSection = () => {
   const { t } = useI18n();
   const title = t('home.commitmentTitle');
+  const circle = t('home.commitmentCircle');
 
   return (
-  <section className="bg-white py-24">
-    <div className={container}>
-      <Reveal className="grid overflow-hidden rounded-3xl bg-navy min-[1000px]:grid-cols-2">
-        <div className="relative p-8 min-[900px]:p-14">
-          <div
-            aria-hidden="true"
-            className="pointer-events-none absolute -left-24 -top-24 h-[320px] w-[320px] rounded-full bg-[radial-gradient(circle,rgba(125,184,236,0.22),transparent_70%)]"
-          />
-          <div className="relative">
-            <Eyebrow tone="dark">{t('home.commitmentEyebrow')}</Eyebrow>
-            <SectionTitle title={title} tone="dark" />
-            <p className="mt-5 max-w-[480px] text-[17px] leading-[1.7] text-onnavy">{t('home.commitmentText')}</p>
-            <a href="#contact" className={`${btnOnDark} mt-9`}>
-              {t('cta.defaultLabel')} <span aria-hidden="true">→</span>
-            </a>
-          </div>
-        </div>
-        <div className="relative min-h-[300px]">
-          <img
-            src={img('IMG_7887')}
-            alt={t('home.commitmentAlt')}
-            loading="lazy"
-            className="absolute inset-0 h-full w-full object-cover"
-          />
-        </div>
-      </Reveal>
-    </div>
-  </section>
+  <section className="relative flex min-h-[80vh] items-center overflow-hidden bg-[#0D0F10]">
+    <img
+      src={img('IMG_7887')}
+      alt={t('home.commitmentAlt')}
+      loading="lazy"
+      className="absolute inset-0 h-full w-full object-cover opacity-50"
+    />
+    <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(13,15,16,0.92)_0%,rgba(13,15,16,0.45)_70%)]" />
+    <Reveal className={`${container} relative flex flex-wrap items-center justify-between gap-12 py-[90px] text-white`}>
+      <div className="min-w-0 max-w-[640px]">
+        <p className="mb-[18px] text-[13px] font-extrabold tracking-[0.26em]" style={{ color: ACCENT }}>
+          {t('home.commitmentEyebrow')}
+        </p>
+        <h2
+          className="text-[clamp(2.2rem,5vw,4.4rem)] font-bold leading-none tracking-[-0.02em]"
+          style={headingFont}
+        >
+          {title?.[0]}
+          <br />
+          {title?.[1]}
+          <span style={{ color: ACCENT }}>.</span>
+        </h2>
+        <p className="mt-[26px] max-w-[480px] text-[17px] leading-[1.7] text-[#c4cad0]">
+          {t('home.commitmentText')}
+        </p>
+      </div>
+      <a
+        href="#projets"
+        aria-label={t('home.commitmentAria')}
+        className="flex h-[168px] w-[168px] shrink-0 flex-col items-center justify-center gap-2 rounded-full border border-[rgba(255,255,255,0.45)] text-center text-[11.5px] font-extrabold tracking-[0.2em] text-white transition-all [transition-duration:400ms] hover:scale-[1.06] hover:border-[#2478BE] hover:bg-[#2478BE]"
+      >
+        <span aria-hidden="true" className="text-[22px]">
+          →
+        </span>
+        <span>
+          {circle?.[0]}
+          <br />
+          {circle?.[1]}
+        </span>
+      </a>
+    </Reveal>
+    </section>
   );
 };
 
@@ -110,50 +133,56 @@ export const SectorsSection = () => {
   };
 
   return (
-  <section id="secteurs" className="bg-mist py-24">
+  <section id="secteurs" className="bg-[#17191C] py-[120px] text-white">
     <div className={container}>
-      <Reveal className="mb-12 max-w-[720px]">
-        <Eyebrow>{t('home.sectorsEyebrow')}</Eyebrow>
-        <SectionTitle title={title} accentLast />
+      <Reveal className="mb-14">
+        <p className="mb-[18px] text-[13px] font-extrabold tracking-[0.24em]" style={{ color: ACCENT }}>
+          {t('home.sectorsEyebrow')}
+        </p>
+        <h2
+          className="text-[clamp(2.2rem,4.6vw,4rem)] font-bold leading-none tracking-[-0.02em]"
+          style={headingFont}
+        >
+          {title?.[0]}
+          <br />
+          {title?.[1]}
+          <span style={{ color: ACCENT }}>.</span>
+        </h2>
       </Reveal>
 
       {/* `mcct-rail` masque la barre de défilement native : sur mobile elle
           barrait le bas des cartes. Les repères ci-dessous la remplacent. */}
       <div
         ref={railRef}
-        className="mcct-rail -mx-5 scroll-px-5 min-[900px]:scroll-px-0 grid snap-x snap-mandatory grid-flow-col auto-cols-[82%] gap-5 overflow-x-auto px-5 pb-4 min-[900px]:mx-0 min-[900px]:auto-cols-auto min-[900px]:grid-flow-row min-[900px]:gap-6 min-[900px]:overflow-visible min-[900px]:px-0 min-[900px]:[grid-template-columns:repeat(auto-fit,minmax(280px,1fr))]"
+        className="mcct-rail grid snap-x snap-mandatory grid-flow-col auto-cols-[78%] gap-4 overflow-x-auto min-[900px]:auto-cols-auto min-[900px]:grid-flow-row min-[900px]:gap-6 min-[900px]:overflow-visible min-[900px]:[grid-template-columns:repeat(auto-fit,minmax(280px,1fr))]"
       >
-        {sectors?.map((sector, index) => {
-          const Icon = sectorIcons[index % sectorIcons.length];
-          return (
-            <Reveal
-              key={sector?.title}
-              delay={index * 90}
-              data-card
-              className={`${card} group snap-start overflow-hidden transition-transform duration-300 hover:-translate-y-1`}
-            >
-              <div className="relative h-[220px] overflow-hidden">
-                <img
-                  src={sector?.thumbSrc}
-                  alt={sector?.title}
-                  loading="lazy"
-                  className="absolute inset-0 h-full w-full object-cover transition-transform [transition-duration:700ms] group-hover:scale-[1.05]"
-                />
-              </div>
-              <div className="p-7">
-                <span className="relative z-10 -mt-14 mb-4 flex h-12 w-12 items-center justify-center rounded-xl bg-white text-brand shadow-md">
-                  <Icon aria-hidden="true" className="h-6 w-6" strokeWidth={1.8} />
-                </span>
-                <span className="block font-display text-[21px] font-bold text-navy">{sector?.title}</span>
-                <span className="mt-2 block text-[15.5px] leading-[1.65] text-copy">{sector?.desc}</span>
-              </div>
-            </Reveal>
-          );
-        })}
+        {sectors?.map((sector, index) => (
+          <Reveal
+            key={sector?.title}
+            delay={index * 90}
+            data-card
+            className="group relative min-h-[420px] snap-start overflow-hidden"
+          >
+            <img
+              src={sector?.thumbSrc}
+              alt={sector?.title}
+              loading="lazy"
+              className="absolute inset-0 h-full w-full object-cover opacity-60 transition-all [transition-duration:700ms] [transition-timing-function:cubic-bezier(0.22,1,0.36,1)] group-hover:scale-[1.07] group-hover:opacity-45"
+            />
+            <span className="absolute inset-0 bg-[linear-gradient(180deg,rgba(23,25,28,0)_35%,rgba(23,25,28,0.9)_100%)]" />
+            <span className="relative flex min-h-[420px] flex-col justify-end p-7">
+              <span className="mb-4 block h-[3px] w-10 origin-left bg-[#2478BE] transition-transform [transition-duration:500ms] [transition-timing-function:cubic-bezier(0.22,1,0.36,1)] group-hover:scale-x-[2.6] motion-reduce:transition-none" />
+              <span className="block text-[23px] font-extrabold tracking-[-0.01em]">{sector?.title}</span>
+              <span className="mt-2.5 block text-[14.5px] leading-[1.55] text-[#c4cad0] transition-transform [transition-duration:500ms] [transition-timing-function:cubic-bezier(0.22,1,0.36,1)] group-hover:-translate-y-0.5 motion-reduce:transition-none">
+                {sector?.desc}
+              </span>
+            </span>
+          </Reveal>
+        ))}
       </div>
 
       {/* Repères de position, mobile uniquement (la grille reprend dès 900px). */}
-      <div className="mt-4 flex justify-center gap-2 min-[900px]:hidden">
+      <div className="mt-6 flex justify-center gap-2 min-[900px]:hidden">
         {sectors?.map((sector, index) => (
           <button
             key={sector?.title}
@@ -161,16 +190,12 @@ export const SectorsSection = () => {
             onClick={() => scrollToCard(index)}
             aria-label={sector?.title}
             aria-current={index === active}
-            className="flex h-6 cursor-pointer items-center border-none bg-transparent p-0"
-          >
-            <span
-              className="block h-2 rounded-full transition-all [transition-duration:400ms]"
-              style={{
-                width: index === active ? 26 : 8,
-                backgroundColor: index === active ? ACCENT : 'rgba(15,42,71,0.2)'
-              }}
-            />
-          </button>
+            className="h-1.5 cursor-pointer rounded-full border-none p-0 transition-all [transition-duration:400ms]"
+            style={{
+              width: index === active ? 28 : 10,
+              backgroundColor: index === active ? ACCENT : 'rgba(255,255,255,0.28)'
+            }}
+          />
         ))}
       </div>
     </div>

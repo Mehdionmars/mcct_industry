@@ -1,7 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { useI18n } from '../../../i18n/LanguageProvider';
-import { container } from '../../../components/ui/mcctTheme';
-import { Eyebrow, btnPrimary, btnSecondary } from '../../../components/ui/Corporate';
+import { ACCENT, headingFont, container } from '../../../components/ui/mcctTheme';
 import { img } from '../../../data/gallery';
 
 // Vidéo hébergée localement (jamais de hotlink externe) : chantier de charpente
@@ -29,10 +28,17 @@ const HomeHero = () => {
   const { t } = useI18n();
   const title = t('home.heroTitle');
   const videoRef = useRef(null);
+  const [isScrolled, setIsScrolled] = useState(false);
   const [withVideo, setWithVideo] = useState(false);
   // La vidéo n'est révélée qu'une fois réellement jouable : sur une connexion
   // lente, l'élément restait visible et noir par-dessus l'image de fond.
   const [isVideoReady, setIsVideoReady] = useState(false);
+
+  useEffect(() => {
+    const onScroll = () => setIsScrolled(window.scrollY > 80);
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => window.removeEventListener('scroll', onScroll);
+  }, []);
 
   // Décidé après le premier rendu : l'image reste l'élément peint en premier.
   useEffect(() => {
@@ -48,77 +54,99 @@ const HomeHero = () => {
   }, [withVideo]);
 
   return (
-    <section id="top" className="relative overflow-hidden bg-mist">
-      <div
-        aria-hidden="true"
-        className="pointer-events-none absolute -right-48 -top-48 h-[620px] w-[620px] rounded-full bg-[radial-gradient(circle,rgba(31,106,174,0.14),transparent_70%)]"
+    <section id="top" className="relative flex min-h-[100svh] items-end overflow-hidden bg-[#0D0F10]">
+      <img
+        src={HERO_IMAGE}
+        alt={t('home.heroImageAlt')}
+        fetchpriority="high"
+        className={`absolute inset-0 h-full w-full object-cover ${
+          isVideoReady ? '' : 'animate-mcct-hero-zoom'
+        }`}
       />
-      <div className={`${container} relative grid items-center gap-14 pb-20 pt-[120px] min-[1000px]:grid-cols-12 min-[1000px]:pb-24 min-[1000px]:pt-[150px]`}>
-        <div className="min-w-0 min-[1000px]:col-span-6">
-          <div className="animate-mcct-rise" style={{ animationDelay: '0.1s' }}>
-            <Eyebrow>{t('home.heroEyebrow')}</Eyebrow>
-          </div>
-          <h1
-            className="animate-mcct-rise font-display text-[clamp(2.6rem,5.4vw,4.5rem)] font-extrabold leading-[1.06] tracking-[-0.03em] text-navy"
-            style={{ animationDelay: '0.25s' }}
-          >
-            {title?.[0]} <span className="text-brand">{title?.slice(1)?.join(' ')}</span>
-          </h1>
 
+      {withVideo ? (
+        <video
+          ref={videoRef}
+          autoPlay
+          muted
+          loop
+          playsInline
+          preload="metadata"
+          poster={HERO_IMAGE}
+          aria-hidden="true"
+          tabIndex={-1}
+          onCanPlay={() => setIsVideoReady(true)}
+          // Réseau coupé, format refusé, fichier absent : on retire la vidéo et
+          // l'image de fond reprend seule la main, sans écran noir.
+          onError={() => {
+            setIsVideoReady(false);
+            setWithVideo(false);
+          }}
+          className="absolute inset-0 h-full w-full object-cover transition-opacity duration-700"
+          style={{ opacity: isVideoReady ? 1 : 0 }}
+        >
+          <source src={HERO_VIDEO} type="video/mp4" />
+        </video>
+      ) : null}
+
+      <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(13,15,16,0.55)_0%,rgba(13,15,16,0.35)_40%,rgba(13,15,16,0.88)_100%)]" />
+
+      <div className={`${container} relative pb-[72px] pt-40 text-white`}>
+        <p
+          className="mb-5 animate-mcct-rise text-[12.5px] font-bold tracking-[0.28em] text-[#cfd6dc]"
+          style={{ animationDelay: '0.15s' }}
+        >
+          {t('home.heroEyebrow')}
+        </p>
+        <h1
+          className="animate-mcct-rise text-[clamp(2.8rem,7vw,7.2rem)] font-extrabold leading-[0.96] tracking-[-0.03em]"
+          style={{ ...headingFont, animationDelay: '0.3s' }}
+        >
+          {title?.[0]}
+          <br />
+          {title?.[1]}
+          <br />
+          {title?.[2]}
+          <span style={{ color: ACCENT }}>.</span>
+        </h1>
+
+        <div className="mt-9 flex flex-wrap items-end justify-between gap-8">
           <p
-            className="mt-6 max-w-[520px] animate-mcct-rise text-[18.5px] leading-[1.7] text-copy"
-            style={{ animationDelay: '0.4s' }}
+            className="max-w-[460px] animate-mcct-rise text-[17px] leading-[1.65] text-[#d8dde1]"
+            style={{ animationDelay: '0.5s' }}
           >
             {t('home.heroText')}
           </p>
-
           <div
-            className="mt-9 flex animate-mcct-rise flex-col gap-3 min-[520px]:flex-row min-[520px]:flex-wrap"
-            style={{ animationDelay: '0.55s' }}
+            className="flex w-full animate-mcct-rise flex-col flex-wrap gap-3 min-[900px]:w-auto min-[900px]:flex-row min-[900px]:gap-4"
+            style={{ animationDelay: '0.65s' }}
           >
-            <a href="#activites" className={btnPrimary}>
+            <a
+              href="#activites"
+              className="relative inline-flex min-h-[54px] shrink-0 animate-mcct-pulse items-center justify-center gap-3 overflow-hidden whitespace-nowrap bg-[#2478BE] px-6 text-[12.5px] font-extrabold tracking-[0.16em] text-white transition-colors hover:bg-white hover:text-[#17191C] min-[900px]:min-h-0 min-[900px]:justify-start min-[900px]:px-7 min-[900px]:py-[17px]"
+            >
               {t('home.heroCta1')} <span aria-hidden="true">→</span>
+              <span
+                aria-hidden="true"
+                className="pointer-events-none absolute top-0 h-full w-[45%] animate-mcct-shine bg-[linear-gradient(100deg,transparent,rgba(255,255,255,0.45),transparent)]"
+              />
             </a>
-            <a href="#contact" className={btnSecondary}>
-              {t('cta.defaultLabel')}
+            <a
+              href="#projets"
+              className="inline-flex min-h-[54px] items-center justify-center gap-3 border border-[rgba(255,255,255,0.4)] px-6 text-[12.5px] font-extrabold tracking-[0.16em] text-white transition-colors hover:border-white hover:bg-[rgba(255,255,255,0.08)] min-[900px]:min-h-0 min-[900px]:justify-start min-[900px]:px-7 min-[900px]:py-4"
+            >
+              {t('home.heroCta2')}
             </a>
           </div>
         </div>
 
-        <div className="relative min-w-0 animate-mcct-rise min-[1000px]:col-span-6" style={{ animationDelay: '0.35s' }}>
-          <div className="relative h-[clamp(320px,58vh,580px)] overflow-hidden rounded-[28px] bg-sky shadow-[0_30px_70px_-30px_rgba(15,42,71,0.45)]">
-            <img
-              src={HERO_IMAGE}
-              alt={t('home.heroImageAlt')}
-              fetchpriority="high"
-              className={`absolute inset-0 h-full w-full object-cover ${isVideoReady ? '' : 'animate-mcct-hero-zoom'}`}
-            />
-            {withVideo ? (
-              <video
-                ref={videoRef}
-                autoPlay
-                muted
-                loop
-                playsInline
-                preload="metadata"
-                poster={HERO_IMAGE}
-                aria-hidden="true"
-                tabIndex={-1}
-                onCanPlay={() => setIsVideoReady(true)}
-                // Réseau coupé, format refusé, fichier absent : on retire la vidéo et
-                // l'image reprend seule la main, sans écran noir.
-                onError={() => {
-                  setIsVideoReady(false);
-                  setWithVideo(false);
-                }}
-                className="absolute inset-0 h-full w-full object-cover transition-opacity duration-700"
-                style={{ opacity: isVideoReady ? 1 : 0 }}
-              >
-                <source src={HERO_VIDEO} type="video/mp4" />
-              </video>
-            ) : null}
-          </div>
-
+        <div
+          aria-hidden="true"
+          className="pointer-events-none mt-10 text-center transition-opacity duration-500"
+          style={{ opacity: isScrolled ? 0 : 1 }}
+        >
+          <span className="text-[11px] font-extrabold tracking-[0.28em] text-[#cfd6dc]">{t('home.scroll')}</span>
+          <span className="mx-auto mt-3 block h-[42px] w-px bg-[linear-gradient(180deg,#2478BE,transparent)]" />
         </div>
       </div>
     </section>

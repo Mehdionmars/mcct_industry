@@ -1,99 +1,206 @@
 import React from 'react';
-import { Mail, MapPin, MessageCircle, Phone } from 'lucide-react';
+import { Link } from 'react-router-dom';
 import Reveal from '../../../components/ui/Reveal';
+import useParallax from '../../../hooks/useParallax';
 import McctContactForm from '../../../components/ui/McctContactForm';
 import { brochureUrl } from '../../../data/mcct';
+import { img } from '../../../data/gallery';
 import { useI18n } from '../../../i18n/LanguageProvider';
 import {
+  ACCENT,
+  headingFont,
   container,
+  navLinks,
   EMAIL,
   EMAIL_HREF,
   PHONE,
   PHONE_HREF,
   WHATSAPP_HREF
 } from '../../../components/ui/mcctTheme';
-import { Eyebrow, SiteFooter, card, joinTitle } from '../../../components/ui/Corporate';
-
-/** Ligne de coordonnées : pastille d'icône + intitulé + valeur. */
-const InfoRow = ({ icon: Icon, label, children }) => (
-  <li className="flex gap-4">
-    <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-white text-brand shadow-sm">
-      <Icon aria-hidden="true" className="h-5 w-5" strokeWidth={1.8} />
-    </span>
-    <span className="min-w-0 text-[15.5px] leading-[1.6]">
-      <span className="block text-[13.5px] font-semibold text-subtle">{label}</span>
-      <span className="block text-navy">{children}</span>
-    </span>
-  </li>
-);
 
 const HomeContact = () => {
-  const { lang, t } = useI18n();
+  const { t } = useI18n();
   const title = t('home.contactTitle');
   const subtitle = t('home.contactSubtitle');
   const brochure = t('home.brochureCta');
+  const { ref: parallaxRef, offset } = useParallax(50);
 
   return (
-    <>
-      <section id="contact" className="bg-mist py-24">
-        <div className={`${container} grid gap-14 min-[1000px]:grid-cols-[1fr_1.15fr]`}>
-          <Reveal className="min-w-0">
-            <Eyebrow>{t('home.contactEyebrow')}</Eyebrow>
-            <h2 className="font-display text-[clamp(2.2rem,4.4vw,3.6rem)] font-extrabold leading-[1.08] tracking-[-0.025em] text-navy">
-              {joinTitle(title)}
-              {lang === 'fr' ? '\u00a0?' : '?'}
-            </h2>
-            <p className="mt-4 text-[20px] font-semibold text-brand">{joinTitle(subtitle)}.</p>
+  <section ref={parallaxRef} id="contact" className="relative overflow-hidden bg-[#111315] pt-[130px] text-white">
+    {/*
+      Fond de section : un technicien MCCT en gilet, décalé en parallaxe.
+      Le voile en dégradé garantit le contraste du texte par-dessus la photo.
+    */}
+    <div aria-hidden="true" className="pointer-events-none absolute inset-x-0 top-0 h-[860px] overflow-hidden">
+      <img
+        src={img('IMG_7941')}
+        alt=""
+        loading="lazy"
+        className="absolute left-0 top-[-10%] h-[120%] w-full object-cover object-center will-change-transform"
+        style={{ transform: `translate3d(0, ${offset}px, 0)` }}
+      />
+      <span className="absolute inset-0 bg-[linear-gradient(180deg,rgba(17,19,21,0.82)_0%,rgba(17,19,21,0.88)_45%,#111315_100%)]" />
+    </div>
 
-            <ul className="mt-10 flex list-none flex-col gap-5">
-              <InfoRow icon={MapPin} label={t('footer.address')}>
-                {t('common.addressLine1')} {t('common.addressLine2')}
-                <br />
-                {t('common.addressCity')}
-              </InfoRow>
-              <InfoRow icon={Phone} label={t('contact.form.phone')}>
-                <a href={PHONE_HREF} className="hover:text-brand">
-                  {PHONE}
-                </a>
-              </InfoRow>
-              <InfoRow icon={Mail} label={t('contact.form.email')}>
-                <a href={EMAIL_HREF} className="break-all hover:text-brand">
-                  {EMAIL}
-                </a>
-              </InfoRow>
-              <InfoRow icon={MessageCircle} label="WhatsApp">
-                <a
-                  href={WHATSAPP_HREF}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="font-semibold text-[#15803D] hover:text-navy"
-                >
-                  {t('common.whatsapp')}
-                </a>
-              </InfoRow>
-            </ul>
+    <div className={`${container} relative`}>
+      <Reveal className="flex flex-wrap items-end justify-between gap-10 border-b border-[#23272b] pb-[90px]">
+        <h2
+          className="text-[clamp(2.6rem,6vw,6rem)] font-extrabold leading-[0.98] tracking-[-0.03em]"
+          style={headingFont}
+        >
+          {title?.[0]}
+          <br />
+          {title?.[1]}
+          <span style={{ color: ACCENT }}> ?</span>
+        </h2>
+        <div className="flex flex-wrap gap-3.5">
+          <a
+            href={EMAIL_HREF}
+            className="relative inline-flex shrink-0 items-center gap-3.5 overflow-hidden whitespace-nowrap bg-[#2478BE] px-[34px] py-5 text-[13px] font-extrabold tracking-[0.16em] text-white transition-colors hover:bg-white hover:text-[#17191C]"
+          >
+            {t('cta.defaultLabel')} <span aria-hidden="true">→</span>
+            <span
+              aria-hidden="true"
+              className="pointer-events-none absolute top-0 h-full w-[45%] animate-mcct-shine bg-[linear-gradient(100deg,transparent,rgba(255,255,255,0.45),transparent)]"
+            />
+          </a>
+          <a
+            href={WHATSAPP_HREF}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-3 bg-[#25D366] px-[34px] py-5 text-[13px] font-extrabold tracking-[0.16em] text-white transition-colors hover:bg-white hover:text-[#17191C]"
+          >
+            WHATSAPP
+          </a>
+        </div>
+      </Reveal>
 
-            {brochureUrl ? (
+      <div className="grid gap-16 border-b border-[#23272b] py-20 [grid-template-columns:repeat(auto-fit,minmax(320px,1fr))]">
+        <Reveal>
+          <p className="mb-[18px] text-[13px] font-extrabold tracking-[0.24em]" style={{ color: ACCENT }}>
+            {t('home.contactEyebrow')}
+          </p>
+          <h3
+            className="mb-7 text-[clamp(1.8rem,3vw,2.6rem)] font-extrabold leading-[1.05] tracking-[-0.02em]"
+            style={headingFont}
+          >
+            {subtitle?.[0]}
+            <br />
+            {subtitle?.[1]}
+            <span style={{ color: ACCENT }}>.</span>
+          </h3>
+          <div className="text-[15px] leading-[2] text-[#9aa2a9]">
+            <p className="font-extrabold tracking-[0.1em] text-white">MCCT INDUSTRIE</p>
+            <p className="mt-2.5">
+              {t('common.addressLine1')}
+              <br />
+              {t('common.addressLine2')}
+              <br />
+              {t('common.addressCity')}
+            </p>
+            <p className="mt-3.5">
+              <a href={PHONE_HREF} className="text-[#c4cad0] hover:text-[#2478BE]">
+                {PHONE}
+              </a>
+            </p>
+            <p>
+              <a href={EMAIL_HREF} className="text-[#c4cad0] hover:text-[#2478BE]">
+                {EMAIL}
+              </a>
+            </p>
+            <p className="mt-3.5">
               <a
-                href={brochureUrl}
+                href={WHATSAPP_HREF}
                 target="_blank"
                 rel="noopener noreferrer"
-                className={`${card} mt-8 inline-flex items-center gap-4 px-5 py-4 text-[15px] font-semibold text-navy hover:text-brand`}
+                className="font-bold text-[#25D366] hover:text-white"
               >
-                <span aria-hidden="true" className="h-10 w-8 shrink-0 rounded-md bg-sky" />
-                {joinTitle(brochure)}
+                {t('common.whatsapp')}
               </a>
-            ) : null}
-          </Reveal>
+            </p>
+          </div>
+        </Reveal>
 
-          <Reveal className={`${card} min-w-0 p-6 min-[600px]:p-9`}>
-            <McctContactForm rows={5} />
-          </Reveal>
+        <Reveal>
+          <McctContactForm rows={5} />
+        </Reveal>
+      </div>
+
+      <footer className="grid gap-10 py-16 [grid-template-columns:repeat(auto-fit,minmax(min(100%,220px),1fr))]">
+        <div>
+          <img
+            src="/logo1.png"
+            alt="MCCT Industrie"
+            className="mb-[18px] block h-11 w-auto brightness-0 invert"
+          />
+          <p className="text-[14px] leading-[1.65] text-[#9aa2a9]">
+            {t('home.footerTagline')}
+          </p>
         </div>
-      </section>
 
-      <SiteFooter />
-    </>
+        <nav aria-label="Pied de page" className="flex flex-col gap-3 text-[13px] font-bold tracking-[0.12em]">
+          {navLinks?.map((link) => (
+            <Link key={link?.to} to={link?.to} className="text-[#c4cad0] hover:text-[#2478BE]">
+              {t(`nav.${link?.key}`)}
+            </Link>
+          ))}
+        </nav>
+
+        {brochureUrl ? (
+          <div>
+            <p className="mb-4 text-[13px] font-extrabold tracking-[0.14em] text-white">{t('home.brochure')}</p>
+            <a
+              href={brochureUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center gap-3.5 border border-[#23272b] p-4 transition-colors duration-300 hover:border-[#2478BE] hover:bg-[#16191c]"
+            >
+              <span
+                aria-hidden="true"
+                className="h-12 w-[38px] shrink-0 border-l-[3px] border-[#2478BE] bg-[linear-gradient(150deg,#2c3136,#1a1d20)] shadow-[3px_3px_0_rgba(0,0,0,0.35)]"
+              />
+              <span className="text-[12.5px] font-bold leading-[1.5] tracking-[0.12em] text-[#c4cad0]">
+                {brochure?.[0]}
+                <br />
+                {brochure?.[1]}
+              </span>
+            </a>
+          </div>
+        ) : null}
+
+        <div className="text-[14px] leading-[2] text-[#9aa2a9]">
+          <p className="font-extrabold tracking-[0.14em] text-white">{t('common.cityLine')}</p>
+          <p className="mt-2">
+            {t('common.addressLine1')}
+            <br />
+            {t('common.addressLine2')}
+            <br />
+            {t('common.addressCity')}
+          </p>
+          <p className="mt-2">
+            <a href={PHONE_HREF} className="text-[#c4cad0] hover:text-[#2478BE]">
+              {PHONE}
+            </a>
+          </p>
+          <p>
+            <a href={EMAIL_HREF} className="text-[#c4cad0] hover:text-[#2478BE]">
+              {EMAIL}
+            </a>
+          </p>
+          <p className="mt-2">
+            <a href={WHATSAPP_HREF} target="_blank" rel="noopener noreferrer" className="text-[#25D366]">
+              WhatsApp
+            </a>
+          </p>
+        </div>
+      </footer>
+
+      <div className="flex flex-wrap justify-between gap-4 border-t border-[#23272b] pb-[34px] pt-[22px] text-[12px] tracking-[0.08em] text-[#565e66]">
+        <span>{t('common.copyrightAll')}</span>
+        <span>{t('common.legal')}</span>
+      </div>
+    </div>
+    </section>
   );
 };
 

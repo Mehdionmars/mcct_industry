@@ -18,17 +18,6 @@ module.exports = {
     },
     extend: {
       colors: {
-        // Charte « corporate clair » (contrastes vérifiés AA pour le texte).
-        navy: "#0F2A47",    // titres, sections sombres
-        navy2: "#163A5F",   // cartes sur fond sombre
-        brand: "#1F6AAE",   // bleu MCCT : boutons, liens
-        sky: "#E8F1FA",     // aplats bleu très clair
-        skytext: "#7DB8EC", // bleu MCCT sur fond sombre
-        mist: "#F4F7FB",    // fond de section alterné
-        copy: "#475569",    // texte courant
-        subtle: "#5F6F82",  // texte secondaire
-        line: "#E2E8F0",    // filets et bordures
-        onnavy: "#B9C8DA",  // texte secondaire sur fond sombre
         border: "var(--color-border)",
         input: "var(--color-input)",
         ring: "var(--color-ring)",
@@ -88,10 +77,11 @@ module.exports = {
         md: "calc(var(--radius) - 2px)",
         sm: "calc(var(--radius) - 4px)",
       },
-      // Charte « corporate clair ».
       fontFamily: {
-        'display': ['Inter', 'system-ui', 'sans-serif'],
-        'inter': ['Inter', 'system-ui', 'sans-serif'],
+        'headline': ['Roboto Condensed', 'sans-serif'],
+        'body': ['Open Sans', 'sans-serif'],
+        'cta': ['Montserrat', 'sans-serif'],
+        'mono': ['JetBrains Mono', 'monospace'],
       },
       fontSize: {
         'hero': ['3.5rem', { lineHeight: '1.1', letterSpacing: '-0.02em' }],
@@ -190,8 +180,8 @@ module.exports = {
           "100%": { left: "130%" },
         },
         "mcct-pulse": {
-          "0%, 100%": { boxShadow: "0 0 0 0 rgba(31,106,174,.35)" },
-          "50%": { boxShadow: "0 0 0 10px rgba(31,106,174,0)" },
+          "0%, 100%": { boxShadow: "0 0 0 0 rgba(36,120,190,.45)" },
+          "50%": { boxShadow: "0 0 0 10px rgba(36,120,190,0)" },
         },
         "mcct-rise": {
           from: { opacity: "0", transform: "translateY(40px)" },

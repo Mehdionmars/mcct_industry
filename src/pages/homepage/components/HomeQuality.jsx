@@ -1,39 +1,50 @@
 import React from 'react';
 import Reveal from '../../../components/ui/Reveal';
 import { useI18n } from '../../../i18n/LanguageProvider';
-import { ClipboardCheck, FileCheck, HardHat, ScanSearch } from 'lucide-react';
-import { container } from '../../../components/ui/mcctTheme';
-import { Eyebrow, SectionTitle, card } from '../../../components/ui/Corporate';
+import { ACCENT, headingFont, container } from '../../../components/ui/mcctTheme';
 
 const QualitySection = () => {
   const { t } = useI18n();
   const title = t('home.qualityTitle');
   const points = t('home.qualityPoints');
 
-  const icons = [FileCheck, HardHat, ClipboardCheck, ScanSearch];
-
   return (
-  <section id="qualite" className="bg-mist py-24">
-    <div className={`${container} grid gap-14 min-[1000px]:grid-cols-[1fr_1.2fr] min-[1000px]:items-center`}>
+  <section id="qualite" className="bg-[#F5F5F2] py-[120px]">
+    <div className={container}>
       <Reveal>
-        <Eyebrow>{t('home.qualityEyebrow')}</Eyebrow>
-        <SectionTitle title={title} accentLast />
-        <p className="mt-6 max-w-[520px] text-[17px] leading-[1.75] text-copy">{t('home.qualityText')}</p>
+        <p className="mb-[18px] text-[13px] font-extrabold tracking-[0.24em]" style={{ color: ACCENT }}>
+          {t('home.qualityEyebrow')}
+        </p>
+        <h2
+          className="text-[clamp(2.4rem,9vw,122px)] font-extrabold leading-none tracking-[-0.03em]"
+          style={headingFont}
+        >
+          {title?.[0]}
+          <br />
+          {title?.[1]}
+          <span style={{ color: ACCENT }}>.</span>
+        </h2>
       </Reveal>
 
-      <ul className="grid list-none gap-5 min-[600px]:grid-cols-2">
-        {points?.map((point, index) => {
-          const Icon = icons[index % icons.length];
-          return (
-            <Reveal as="li" key={point?.label} delay={index * 80} className={`${card} p-7`}>
-              <span className="mb-5 flex h-12 w-12 items-center justify-center rounded-xl bg-sky text-brand">
-                <Icon aria-hidden="true" className="h-6 w-6" strokeWidth={1.8} />
-              </span>
-              <p className="font-display text-[18.5px] font-bold text-navy">{point?.label}</p>
-              <p className="mt-2 text-[15px] leading-[1.6] text-copy">{point?.text}</p>
-            </Reveal>
-          );
-        })}
+      <Reveal className="mt-14 max-w-[620px]">
+        <p className="text-[17px] leading-[1.7] text-[#3a3f45]">{t('home.qualityText')}</p>
+      </Reveal>
+
+      <ul className="mt-14 grid list-none gap-[2px] bg-[#d7d7d2] [grid-template-columns:repeat(auto-fit,minmax(min(100%,240px),1fr))]">
+        {points?.map((point, index) => (
+          <Reveal
+            as="li"
+            key={point?.label}
+            delay={index * 80}
+            className="bg-[#F5F5F2] px-[26px] pb-9 pt-7 transition-colors duration-300 hover:bg-white"
+          >
+            <p className="mb-9 text-[13px] font-extrabold tracking-[0.18em]" style={{ color: ACCENT }}>
+              {String(index + 1)?.padStart(2, '0')}
+            </p>
+            <p className="text-[16px] font-extrabold tracking-[0.06em]">{point?.label}</p>
+            <p className="mt-2.5 text-[13.5px] leading-[1.55] text-[#565e66]">{point?.text}</p>
+          </Reveal>
+        ))}
       </ul>
     </div>
     </section>

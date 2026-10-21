@@ -1,12 +1,11 @@
-// Jetons visuels partagés — charte « corporate clair ».
-// Les mêmes valeurs existent en classes Tailwind (bg-navy, text-brand, bg-mist…).
-export const ACCENT = '#1F6AAE'; // bleu MCCT
-export const ACCENT_DARK = '#7DB8EC'; // bleu MCCT sur fond sombre
-export const NAVY = '#0F2A47';
-export const MIST = '#F4F7FB';
+// Jetons visuels partagés par les pages issues de la maquette MCCT.
+export const ACCENT = '#2478BE';
+export const INK = '#17191C';
+export const PAPER = '#F5F5F2';
+export const NIGHT = '#0D0F10';
 
-export const bodyFont = { fontFamily: "'Inter', system-ui, sans-serif" };
-export const headingFont = { fontFamily: "'Inter', system-ui, sans-serif" };
+export const bodyFont = { fontFamily: "'Manrope', sans-serif" };
+export const headingFont = { fontFamily: "'Space Grotesk', 'Manrope', sans-serif" };
 
 // Le point de rupture de la maquette (900px) ne fait pas partie de l'échelle Tailwind :
 // les composants utilisent les variantes arbitraires min-[900px]: / max-[899px]:.
@@ -29,5 +28,5 @@ export const ADDRESS_LINES = [
 ];
 
 
-// Conteneur central commun à toutes les sections (1240px, marges latérales).
-export const container = 'mx-auto w-full max-w-[1240px] px-5 min-[900px]:px-10';
+// Conteneur central commun à toutes les sections de la maquette (1280px, 40px de marge).
+export const container = 'mx-auto w-full max-w-[1280px] px-5 min-[900px]:px-10';

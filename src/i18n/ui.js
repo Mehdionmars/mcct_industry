@@ -6,113 +6,114 @@ export const ui = {
   fr: {
     langSwitch: { label: 'Langue', fr: 'Français', en: 'Anglais' },
     nav: {
-      about: 'À propos',
-      services: 'Activités',
-      expertise: 'Savoir-faire',
-      contact: 'Contact',
-      home: 'Accueil',
+      about: 'À PROPOS',
+      services: 'ACTIVITÉS',
+      expertise: 'SAVOIR-FAIRE',
+      contact: 'CONTACT',
+      home: 'ACCUEIL',
       main: 'Navigation principale',
       mobile: 'Navigation mobile',
       footer: 'Pied de page',
       open: 'Ouvrir le menu',
       close: 'Fermer le menu',
-      menu: 'Menu',
-      closeLabel: 'Fermer ✕',
+      menu: 'MENU',
+      closeLabel: 'FERMER ✕',
       logoHome: 'MCCT Industrie — accueil',
       dialog: 'Navigation'
     },
     common: {
-      city: 'Casablanca · Maroc',
-      cityLine: 'Casablanca — Maroc',
-      copyright: '© 2026 MCCT Industrie — Casablanca, Maroc',
-      copyrightAll: '© 2026 MCCT Industrie — tous droits réservés',
-      legal: 'Mentions légales · Politique de confidentialité',
+      city: 'CASABLANCA · MAROC',
+      cityLine: 'CASABLANCA — MAROC',
+      copyright: '© 2026 MCCT INDUSTRIE — CASABLANCA, MAROC',
+      copyrightAll: '© 2026 MCCT INDUSTRIE — TOUS DROITS RÉSERVÉS',
+      legal: 'MENTIONS LÉGALES · POLITIQUE DE CONFIDENTIALITÉ',
       whatsapp: 'Écrire sur WhatsApp →',
       whatsappAria: 'Contacter MCCT sur WhatsApp',
       loading: 'Chargement du site MCCT Industrie',
+      filter: 'FILTRER',
+      viewProject: 'VOIR LE PROJET',
       addressLine1: 'Route 310, km 6,',
       addressLine2: 'Chellalate',
       addressCity: 'Aïn Harrouda — Maroc'
     },
     cta: {
-      defaultTitle: 'Un projet industriel',
-      defaultLabel: 'Parlons-en',
-      quote: 'Demander un devis',
-      expertise: "Besoin d'une expertise",
-      nextSite: 'Votre projet, notre prochain chantier',
-      info: "Besoin d'un renseignement",
-      writeUs: 'Nous écrire'
-    },
-    footer: {
-      nav: 'Navigation',
-      address: 'Adresse',
-      contact: 'Contact',
-      breadcrumb: 'Fil d’Ariane',
-      learnMore: 'En savoir plus'
+      defaultTitle: 'UN PROJET INDUSTRIEL',
+      defaultLabel: 'PARLONS-EN',
+      quote: 'DEMANDER UN DEVIS',
+      expertise: "BESOIN D'UNE EXPERTISE",
+      nextSite: 'VOTRE PROJET, NOTRE PROCHAIN CHANTIER',
+      info: "BESOIN D'UN RENSEIGNEMENT",
+      writeUs: 'NOUS ÉCRIRE'
     },
     home: {
       journeyLabel: 'De l’atelier à l’ouvrage livré',
-      heroEyebrow: 'Ingénierie industrielle — fabrication · construction',
-      heroTitle: ['Construire', "l'industrie", 'de demain'],
+      heroEyebrow: 'INGÉNIERIE INDUSTRIELLE — FABRICATION · CONSTRUCTION',
+      heroTitle: ['CONSTRUIRE', "L'INDUSTRIE", 'DE DEMAIN'],
       heroText:
         'MCCT Industrie accompagne les acteurs industriels dans la conception, la fabrication et la réalisation de solutions techniques à forte valeur ajoutée.',
-      heroCta1: 'Découvrir nos activités',
-      scroll: 'Scroll',
+      heroCta1: 'DÉCOUVRIR NOS ACTIVITÉS',
+      heroCta2: 'NOS PROJETS',
+      scroll: 'SCROLL',
       heroImageAlt: 'Charpente métallique MCCT sous ciel dégagé',
-      baselineEyebrow: 'Excellence — Rapidité — Satisfaction',
-      introEyebrow: "01 — L'entreprise",
-      introTitle: ["L'ingénierie", 'avec exigence'],
+      baselineEyebrow: 'EXCELLENCE — RAPIDITÉ — SATISFACTION',
+      introEyebrow: "01 — L'ENTREPRISE",
+      introTitle: ["L'INGÉNIERIE", 'AVEC EXIGENCE'],
       introP1:
         'MCCT Industrie est un acteur marocain spécialisé dans les solutions industrielles et la réalisation de projets à forte exigence technique.',
       introP2:
         "De l'étude à la fabrication, du montage à la maintenance, nous accompagnons nos clients sur l'ensemble du cycle de leurs projets.",
-      introLink: 'Notre savoir-faire',
+      introLink: 'NOTRE SAVOIR-FAIRE',
       introImageAlt: "Intérieur d'un hangar métallique réalisé par MCCT",
-      activitiesEyebrow: '03 — Nos activités',
-      activitiesTitle: ['Des solutions', 'conçues pour', "l'industrie"],
+      activitiesEyebrow: '03 — NOS ACTIVITÉS',
+      activitiesTitle: ['DES SOLUTIONS', 'CONÇUES POUR', "L'INDUSTRIE"],
       activitiesText:
         "Un périmètre d'intervention complet, de la charpente métallique aux équipements industriels.",
-      processEyebrow: '04 — Notre savoir-faire',
-      processTitle: ["De l'idée", 'à la réalisation'],
-      featuredEyebrow: '02 — Projet à la une',
-      featuredTitle: ['Hangar industriel', 'clé en main'],
-      featuredMeta: 'Construction métallique — Maroc',
+      processEyebrow: '04 — NOTRE SAVOIR-FAIRE',
+      processTitle: ["DE L'IDÉE", 'À LA RÉALISATION'],
+      featuredEyebrow: '02 — PROJET À LA UNE',
+      featuredTitle: ['HANGAR INDUSTRIEL', 'CLÉ EN MAIN'],
+      featuredMeta: 'CONSTRUCTION MÉTALLIQUE — MAROC',
+      featuredLink: 'VOIR LE PROJET',
       featuredAlt: 'Hangar industriel livré par MCCT Industrie',
-      commitmentEyebrow: 'Notre engagement',
-      commitmentTitle: ['Construire avec précision.', 'Livrer avec exigence'],
+      commitmentEyebrow: 'NOTRE ENGAGEMENT',
+      commitmentTitle: ['CONSTRUIRE AVEC PRÉCISION.', 'LIVRER AVEC EXIGENCE'],
       commitmentText:
         "Chaque projet est piloté par une équipe technique dédiée, de l'étude d'exécution à la réception sur site.",
+      commitmentCircle: ['NOS', 'RÉALISATIONS'],
+      commitmentAria: 'Voir nos réalisations',
       commitmentAlt: "Montage d'une structure métallique sur site",
-      sectorsEyebrow: "Secteurs d'intervention",
-      sectorsTitle: ['Une expertise', 'multi-sectorielle'],
-      reviewsEyebrow: '06 — Ce qu’ils en disent',
-      reviewsTitle: ['Des donneurs d’ordre', 'qui nous rappellent'],
+      sectorsEyebrow: "SECTEURS D'INTERVENTION",
+      sectorsTitle: ['UNE EXPERTISE', 'MULTI-SECTORIELLE'],
+      projectsEyebrow: '05 — PROJETS SÉLECTIONNÉS',
+      projectsTitle: ['DES RÉALISATIONS', 'QUI PARLENT', "D'ELLES-MÊMES"],
+      reviewsEyebrow: '06 — CE QU’ILS EN DISENT',
+      reviewsTitle: ['DES DONNEURS D’ORDRE', 'QUI NOUS RAPPELLENT'],
       reviewsText:
         'Retours recueillis auprès de nos clients industriels. Publiés de façon anonyme : seuls la fonction et le secteur sont indiqués.',
-      qualityEyebrow: '07 — Qualité & HSE',
-      qualityTitle: ['La performance', 'sans compromis'],
+      qualityEyebrow: '07 — QUALITÉ & HSE',
+      qualityTitle: ['LA PERFORMANCE', 'SANS COMPROMIS'],
       qualityText:
         'Nos réalisations respectent les normes de l’industrie, les réglementations de sécurité et les spécifications de nos clients. Le contrôle est intégré à chaque étape, de l’approvisionnement à la réception sur site.',
       qualityPoints: [
         {
-          label: 'Normes & codes',
+          label: 'NORMES & CODES',
           text: 'Fabrication conforme aux normes en vigueur et aux différents codes de construction.'
         },
         {
-          label: 'Sécurité au travail',
+          label: 'SÉCURITÉ AU TRAVAIL',
           text: 'Plans de levage, balisage et procédures appliqués sur chaque intervention.'
         },
         {
-          label: 'Contrôle qualité',
+          label: 'CONTRÔLE QUALITÉ',
           text: 'Contrôles dimensionnels et visuels documentés avant expédition et après montage.'
         },
         {
-          label: 'Traçabilité',
+          label: 'TRAÇABILITÉ',
           text: 'Suivi des matériaux, des soudures et des travaux associés tout au long du projet.'
         }
       ],
-      valuesEyebrow: '08 — Ce qui nous anime',
-      valuesTitle: ['Quatre principes', 'qui tiennent le chantier'],
+      valuesEyebrow: '08 — CE QUI NOUS ANIME',
+      valuesTitle: ['QUATRE PRINCIPES', 'QUI TIENNENT LE CHANTIER'],
       valuesText:
         'Ce ne sont pas des mots d’affiche : ce sont les quatre règles qui décident de la façon dont un projet MCCT est mené, de l’atelier à la réception.',
       valuesPrev: 'Valeur précédente',
@@ -120,40 +121,40 @@ export const ui = {
       activitiesPrev: 'Activité précédente',
       activitiesNext: 'Activité suivante',
       activitiesOf: 'sur',
-      activitiesCountLabel: 'Activités',
-      contactTitle: ['Un projet', 'industriel'],
-      contactEyebrow: '09 — Contact',
-      contactSubtitle: ['Construisons', 'ensemble'],
+      activitiesCountLabel: 'ACTIVITÉS',
+      contactTitle: ['UN PROJET', 'INDUSTRIEL'],
+      contactEyebrow: '09 — CONTACT',
+      contactSubtitle: ['CONSTRUISONS', 'ENSEMBLE'],
       footerTagline: 'Ingénierie, fabrication et construction métallique au Maroc.',
-      brochure: 'Brochure',
-      brochureCta: ['Télécharger', 'notre brochure →']
+      brochure: 'BROCHURE',
+      brochureCta: ['TÉLÉCHARGER', 'NOTRE BROCHURE →']
     },
     about: {
-      eyebrow: 'À propos',
-      title: ['Une entreprise', "d'ingénieurs", 'et de bâtisseurs'],
+      eyebrow: 'À PROPOS',
+      title: ['UNE ENTREPRISE', "D'INGÉNIEURS", 'ET DE BÂTISSEURS'],
       heroAlt: 'Équipe MCCT sur un chantier de levage',
-      whoEyebrow: '01 — Qui sommes-nous',
-      whoTitle: 'Moroccan Company of Construction Technology',
+      whoEyebrow: '01 — QUI SOMMES-NOUS',
+      whoTitle: 'MOROCCAN COMPANY OF CONSTRUCTION TECHNOLOGY',
       p1:
         "MCCT Industrie est une entreprise marocaine basée à Casablanca, spécialisée dans l'ingénierie, la fabrication et la construction métallique.",
       p2:
         "Nous intervenons sur l'ensemble du cycle des projets industriels : études, fabrication en atelier, montage sur site et maintenance des installations.",
       p3:
         "Grâce à notre solide expérience, à nos ressources techniques et humaines, MCCT Industry s'est forgé une réputation de leader dans le secteur de la construction métallique. Chaque jour, nos clients attestent que les projets qui nous sont confiés sont réalisés avec précision et expertise, en respectant les normes de l'industrie et en utilisant les techniques les plus avancées du domaine.",
-      signatureLabel: 'La signature MCCT Industry',
+      signatureLabel: 'LA SIGNATURE MCCT INDUSTRY',
       pillars: [
         {
-          label: 'Mission',
+          label: 'MISSION',
           text:
             "Réaliser des solutions industrielles fiables et précises, en accompagnant nos clients de l'étude à la mise en service."
         },
         {
-          label: 'Vision',
+          label: 'VISION',
           text:
             'Devenir un référent marocain de la construction métallique et des projets industriels à forte exigence technique.'
         },
         {
-          label: 'Valeurs',
+          label: 'VALEURS',
           text: 'Excellence, sécurité, innovation, engagement — à chaque étape, en atelier comme sur chantier.'
         }
       ],
@@ -161,22 +162,22 @@ export const ui = {
       imageAlt2: 'Coulage des massifs de fondation sur un chantier MCCT'
     },
     services: {
-      eyebrow: 'Nos activités',
-      title: ['Des solutions', 'conçues pour', "l'industrie"],
+      eyebrow: 'NOS ACTIVITÉS',
+      title: ['DES SOLUTIONS', 'CONÇUES POUR', "L'INDUSTRIE"],
       heroAlt: 'Convoyeur industriel réalisé par MCCT'
     },
     contact: {
-      title: ['Construisons', 'quelque chose', 'ensemble'],
+      title: ['CONSTRUISONS', 'QUELQUE CHOSE', 'ENSEMBLE'],
       mapTitle: 'Carte — MCCT Industrie, Aïn Harrouda',
       form: {
-        name: 'Nom',
-        company: 'Entreprise',
-        email: 'Email',
-        phone: 'Téléphone',
-        type: 'Type de projet',
-        message: 'Message',
-        submit: 'Envoyer la demande',
-        whatsapp: 'Envoyer par WhatsApp',
+        name: 'NOM',
+        company: 'ENTREPRISE',
+        email: 'EMAIL',
+        phone: 'TÉLÉPHONE',
+        type: 'TYPE DE PROJET',
+        message: 'MESSAGE',
+        submit: 'ENVOYER LA DEMANDE',
+        whatsapp: 'ENVOYER PAR WHATSAPP',
         other: 'Autre',
         mailSubject: 'Demande de projet',
         fields: {
@@ -191,10 +192,10 @@ export const ui = {
       }
     },
     notFound: {
-      eyebrow: 'Erreur 404',
-      title: ['Cette page', "n'existe pas"],
+      eyebrow: 'ERREUR 404',
+      title: ['CETTE PAGE', "N'EXISTE PAS"],
       text: "Le lien est peut-être obsolète ou mal saisi. Reprenez depuis l'une des pages ci-dessous.",
-      where: 'Où aller',
+      where: 'OÙ ALLER',
       heroAlt: 'Structure métallique en cours de montage',
       pagesNav: 'Pages du site'
     },
@@ -229,112 +230,113 @@ export const ui = {
   en: {
     langSwitch: { label: 'Language', fr: 'French', en: 'English' },
     nav: {
-      about: 'About',
-      services: 'Services',
-      expertise: 'Expertise',
-      contact: 'Contact',
-      home: 'Home',
+      about: 'ABOUT',
+      services: 'SERVICES',
+      expertise: 'EXPERTISE',
+      contact: 'CONTACT',
+      home: 'HOME',
       main: 'Main navigation',
       mobile: 'Mobile navigation',
       footer: 'Footer',
       open: 'Open menu',
       close: 'Close menu',
-      menu: 'Menu',
-      closeLabel: 'Close ✕',
+      menu: 'MENU',
+      closeLabel: 'CLOSE ✕',
       logoHome: 'MCCT Industrie — home',
       dialog: 'Navigation'
     },
     common: {
-      city: 'Casablanca · Morocco',
-      cityLine: 'Casablanca — Morocco',
-      copyright: '© 2026 MCCT Industrie — Casablanca, Morocco',
-      copyrightAll: '© 2026 MCCT Industrie — all rights reserved',
-      legal: 'Legal notice · Privacy policy',
+      city: 'CASABLANCA · MOROCCO',
+      cityLine: 'CASABLANCA — MOROCCO',
+      copyright: '© 2026 MCCT INDUSTRIE — CASABLANCA, MOROCCO',
+      copyrightAll: '© 2026 MCCT INDUSTRIE — ALL RIGHTS RESERVED',
+      legal: 'LEGAL NOTICE · PRIVACY POLICY',
       whatsapp: 'Message us on WhatsApp →',
       whatsappAria: 'Contact MCCT on WhatsApp',
       loading: 'Loading the MCCT Industrie website',
+      filter: 'FILTER',
+      viewProject: 'VIEW PROJECT',
       addressLine1: 'Route 310, km 6,',
       addressLine2: 'Chellalate',
       addressCity: 'Aïn Harrouda — Morocco'
     },
     cta: {
-      defaultTitle: 'An industrial project',
-      defaultLabel: "Let's talk",
-      quote: 'Request a quote',
-      expertise: 'Need an expert partner',
-      nextSite: 'Your project, our next site',
-      info: 'Need information',
-      writeUs: 'Contact us'
-    },
-    footer: {
-      nav: 'Navigation',
-      address: 'Address',
-      contact: 'Contact',
-      breadcrumb: 'Breadcrumb',
-      learnMore: 'Learn more'
+      defaultTitle: 'AN INDUSTRIAL PROJECT',
+      defaultLabel: "LET'S TALK",
+      quote: 'REQUEST A QUOTE',
+      expertise: 'NEED AN EXPERT PARTNER',
+      nextSite: 'YOUR PROJECT, OUR NEXT SITE',
+      info: 'NEED INFORMATION',
+      writeUs: 'CONTACT US'
     },
     home: {
       journeyLabel: 'From the workshop to the delivered structure',
-      heroEyebrow: 'Industrial engineering — fabrication · construction',
-      heroTitle: ['Building', "tomorrow's", 'industry'],
+      heroEyebrow: 'INDUSTRIAL ENGINEERING — FABRICATION · CONSTRUCTION',
+      heroTitle: ['BUILDING', "TOMORROW'S", 'INDUSTRY'],
       heroText:
         'MCCT Industrie supports industrial clients through the design, fabrication and delivery of high-value technical solutions.',
-      heroCta1: 'Explore our services',
-      scroll: 'Scroll',
+      heroCta1: 'EXPLORE OUR SERVICES',
+      heroCta2: 'OUR PROJECTS',
+      scroll: 'SCROLL',
       heroImageAlt: 'MCCT steel canopy against open sky',
-      baselineEyebrow: 'Excellence — Speed — Satisfaction',
-      introEyebrow: '01 — The company',
-      introTitle: ['Engineering', 'with rigour'],
+      baselineEyebrow: 'EXCELLENCE — SPEED — SATISFACTION',
+      introEyebrow: '01 — THE COMPANY',
+      introTitle: ['ENGINEERING', 'WITH RIGOUR'],
       introP1:
         'MCCT Industrie is a Moroccan company specialised in industrial solutions and technically demanding projects.',
       introP2:
         'From design to fabrication, from erection to maintenance, we support our clients across the full life cycle of their projects.',
-      introLink: 'Our expertise',
+      introLink: 'OUR EXPERTISE',
       introImageAlt: 'Interior of a steel warehouse built by MCCT',
-      activitiesEyebrow: '03 — Our services',
-      activitiesTitle: ['Solutions', 'engineered for', 'industry'],
+      activitiesEyebrow: '03 — OUR SERVICES',
+      activitiesTitle: ['SOLUTIONS', 'ENGINEERED FOR', 'INDUSTRY'],
       activitiesText: 'A complete scope of work, from steel structures to industrial equipment.',
-      processEyebrow: '04 — Our expertise',
-      processTitle: ['From idea', 'to delivery'],
-      featuredEyebrow: '02 — Featured project',
-      featuredTitle: ['Turnkey industrial', 'building'],
-      featuredMeta: 'Steel construction — Morocco',
+      processEyebrow: '04 — OUR EXPERTISE',
+      processTitle: ['FROM IDEA', 'TO DELIVERY'],
+      featuredEyebrow: '02 — FEATURED PROJECT',
+      featuredTitle: ['TURNKEY INDUSTRIAL', 'BUILDING'],
+      featuredMeta: 'STEEL CONSTRUCTION — MOROCCO',
+      featuredLink: 'VIEW PROJECT',
       featuredAlt: 'Industrial building delivered by MCCT Industrie',
-      commitmentEyebrow: 'Our commitment',
-      commitmentTitle: ['Built with precision.', 'Delivered with rigour'],
+      commitmentEyebrow: 'OUR COMMITMENT',
+      commitmentTitle: ['BUILT WITH PRECISION.', 'DELIVERED WITH RIGOUR'],
       commitmentText:
         'Every project is run by a dedicated technical team, from shop drawings to handover on site.',
+      commitmentCircle: ['OUR', 'WORK'],
+      commitmentAria: 'See our work',
       commitmentAlt: 'Erecting a steel structure on site',
-      sectorsEyebrow: 'Sectors we serve',
-      sectorsTitle: ['Cross-sector', 'expertise'],
-      reviewsEyebrow: '06 — What they say',
-      reviewsTitle: ['Principals who', 'call us back'],
+      sectorsEyebrow: 'SECTORS WE SERVE',
+      sectorsTitle: ['CROSS-SECTOR', 'EXPERTISE'],
+      projectsEyebrow: '05 — SELECTED PROJECTS',
+      projectsTitle: ['WORK THAT', 'SPEAKS FOR', 'ITSELF'],
+      reviewsEyebrow: '06 — WHAT THEY SAY',
+      reviewsTitle: ['PRINCIPALS WHO', 'CALL US BACK'],
       reviewsText:
         'Feedback gathered from our industrial clients. Published anonymously: only the role and the sector are given.',
-      qualityEyebrow: '07 — Quality & HSE',
-      qualityTitle: ['Performance', 'without compromise'],
+      qualityEyebrow: '07 — QUALITY & HSE',
+      qualityTitle: ['PERFORMANCE', 'WITHOUT COMPROMISE'],
       qualityText:
         'Our work meets industry standards, safety regulations and client specifications. Inspection is built into every stage, from procurement through to site handover.',
       qualityPoints: [
         {
-          label: 'Standards & codes',
+          label: 'STANDARDS & CODES',
           text: 'Fabrication compliant with current standards and the relevant construction codes.'
         },
         {
-          label: 'Safety at work',
+          label: 'SAFETY AT WORK',
           text: 'Lifting plans, exclusion zones and procedures applied on every intervention.'
         },
         {
-          label: 'Quality control',
+          label: 'QUALITY CONTROL',
           text: 'Documented dimensional and visual checks before shipping and after erection.'
         },
         {
-          label: 'Traceability',
+          label: 'TRACEABILITY',
           text: 'Materials, welds and associated works tracked throughout the project.'
         }
       ],
-      valuesEyebrow: '08 — What drives us',
-      valuesTitle: ['Four principles', 'that hold the site together'],
+      valuesEyebrow: '08 — WHAT DRIVES US',
+      valuesTitle: ['FOUR PRINCIPLES', 'THAT HOLD THE SITE TOGETHER'],
       valuesText:
         'Not poster words: these are the four rules that decide how an MCCT project is run, from the workshop through to handover.',
       valuesPrev: 'Previous value',
@@ -342,39 +344,39 @@ export const ui = {
       activitiesPrev: 'Previous service',
       activitiesNext: 'Next service',
       activitiesOf: 'of',
-      activitiesCountLabel: 'Services',
-      contactTitle: ['An industrial', 'project'],
-      contactEyebrow: '09 — Contact',
-      contactSubtitle: ["Let's build", 'together'],
+      activitiesCountLabel: 'SERVICES',
+      contactTitle: ['AN INDUSTRIAL', 'PROJECT'],
+      contactEyebrow: '09 — CONTACT',
+      contactSubtitle: ["LET'S BUILD", 'TOGETHER'],
       footerTagline: 'Engineering, fabrication and steel construction in Morocco.',
-      brochure: 'Brochure',
-      brochureCta: ['Download', 'our brochure →']
+      brochure: 'BROCHURE',
+      brochureCta: ['DOWNLOAD', 'OUR BROCHURE →']
     },
     about: {
-      eyebrow: 'About',
-      title: ['A company of', 'engineers', 'and builders'],
+      eyebrow: 'ABOUT',
+      title: ['A COMPANY OF', 'ENGINEERS', 'AND BUILDERS'],
       heroAlt: 'MCCT team on a lifting site',
-      whoEyebrow: '01 — Who we are',
-      whoTitle: 'Moroccan Company of Construction Technology',
+      whoEyebrow: '01 — WHO WE ARE',
+      whoTitle: 'MOROCCAN COMPANY OF CONSTRUCTION TECHNOLOGY',
       p1:
         'MCCT Industrie is a Moroccan company based in Casablanca, specialised in engineering, fabrication and steel construction.',
       p2:
         'We work across the full industrial project cycle: design, workshop fabrication, site erection and maintenance of installations.',
       p3:
         "Thanks to our solid experience and our technical and human resources, MCCT Industry has built a reputation as a leader in steel construction. Every day, our clients confirm that the projects entrusted to us are delivered with precision and expertise, meeting industry standards and using the most advanced techniques in the field.",
-      signatureLabel: 'The MCCT Industry signature',
+      signatureLabel: 'THE MCCT INDUSTRY SIGNATURE',
       pillars: [
         {
-          label: 'Mission',
+          label: 'MISSION',
           text:
             'Deliver reliable, precise industrial solutions, supporting our clients from design through to commissioning.'
         },
         {
-          label: 'Vision',
+          label: 'VISION',
           text: 'Become a Moroccan benchmark in steel construction and technically demanding industrial projects.'
         },
         {
-          label: 'Values',
+          label: 'VALUES',
           text: 'Excellence, safety, innovation, commitment — at every stage, in the workshop and on site.'
         }
       ],
@@ -382,22 +384,22 @@ export const ui = {
       imageAlt2: 'Pouring foundation footings on an MCCT site'
     },
     services: {
-      eyebrow: 'Our services',
-      title: ['Solutions', 'engineered for', 'industry'],
+      eyebrow: 'OUR SERVICES',
+      title: ['SOLUTIONS', 'ENGINEERED FOR', 'INDUSTRY'],
       heroAlt: 'Industrial conveyor built by MCCT'
     },
     contact: {
-      title: ["Let's build", 'something', 'together'],
+      title: ["LET'S BUILD", 'SOMETHING', 'TOGETHER'],
       mapTitle: 'Map — MCCT Industrie, Aïn Harrouda',
       form: {
-        name: 'Name',
-        company: 'Company',
-        email: 'Email',
-        phone: 'Phone',
-        type: 'Project type',
-        message: 'Message',
-        submit: 'Send request',
-        whatsapp: 'Send via WhatsApp',
+        name: 'NAME',
+        company: 'COMPANY',
+        email: 'EMAIL',
+        phone: 'PHONE',
+        type: 'PROJECT TYPE',
+        message: 'MESSAGE',
+        submit: 'SEND REQUEST',
+        whatsapp: 'SEND VIA WHATSAPP',
         other: 'Other',
         mailSubject: 'Project enquiry',
         fields: {
@@ -412,10 +414,10 @@ export const ui = {
       }
     },
     notFound: {
-      eyebrow: 'Error 404',
-      title: ['This page', "doesn't exist"],
+      eyebrow: 'ERROR 404',
+      title: ['THIS PAGE', "DOESN'T EXIST"],
       text: 'The link may be outdated or mistyped. Pick one of the pages below.',
-      where: 'Where to go',
+      where: 'WHERE TO GO',
       heroAlt: 'Steel structure being erected',
       pagesNav: 'Site pages'
     },

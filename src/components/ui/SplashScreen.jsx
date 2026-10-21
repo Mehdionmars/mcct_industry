@@ -59,7 +59,7 @@ const SplashScreen = ({ onDone }) => {
     <div
       role="status"
       aria-label={t('common.loading')}
-      className="fixed inset-0 z-[400] flex flex-col items-center justify-center gap-[clamp(20px,4vw,36px)] bg-white px-6 text-center"
+      className="fixed inset-0 z-[400] flex flex-col items-center justify-center gap-[clamp(20px,4vw,36px)] bg-[#0D0F10] px-6 text-center"
       style={{
         opacity: isLeaving ? 0 : 1,
         transform: isLeaving ? 'scale(1.04)' : 'scale(1)',
@@ -69,19 +69,19 @@ const SplashScreen = ({ onDone }) => {
       <img
         src="/logo1.png"
         alt="MCCT Industrie"
-        className="h-[clamp(38px,7vw,68px)] w-auto animate-mcct-rise"
+        className="h-[clamp(38px,7vw,68px)] w-auto animate-mcct-rise brightness-0 invert"
         style={{ animationDuration: '0.7s' }}
       />
 
       <img
-        src="/assets/brand/tagline-dark.webp"
+        src="/assets/brand/tagline-light.webp"
         alt="Your vision, our mission"
         className="w-[min(78vw,620px)] animate-mcct-rise"
         style={{ animationDelay: '0.18s', animationDuration: '0.8s' }}
       />
 
-      <span aria-hidden="true" className="block h-1 w-[min(60vw,320px)] overflow-hidden rounded-full bg-sky">
-        <span className="block h-full w-full origin-left animate-mcct-load rounded-full bg-brand" />
+      <span aria-hidden="true" className="block h-px w-[min(60vw,320px)] overflow-hidden bg-[#23272b]">
+        <span className="block h-full w-full origin-left animate-mcct-load bg-[#2478BE]" />
       </span>
     </div>
   );

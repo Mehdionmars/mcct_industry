@@ -2,12 +2,11 @@ import React, { useMemo, useState } from 'react';
 import { useI18n } from '../../i18n/LanguageProvider';
 import { getActivities } from '../../data/mcct';
 import { EMAIL, WHATSAPP_HREF } from './mcctTheme';
-import { btnPrimary } from './Corporate';
 
-// Champs clairs aux coins arrondis, anneau bleu au focus.
 const fieldClass =
-  'min-h-[48px] w-full rounded-xl border border-line bg-white px-4 py-3 text-[15px] font-normal text-navy outline-none transition-shadow placeholder:text-subtle focus:border-brand focus:ring-4 focus:ring-brand/15';
-const labelClass = 'flex min-w-0 flex-col gap-2 text-[14px] font-semibold text-navy';
+  'min-h-[44px] w-full border border-[#2c3136] bg-[#1a1d20] px-4 py-3.5 text-[15px] text-white outline-none transition-colors focus:border-[#2478BE] focus:ring-2 focus:ring-[#2478BE]/40';
+const labelClass =
+  'flex min-w-0 flex-col gap-2 text-[11.5px] font-extrabold tracking-[0.16em] text-[#9aa2a9]';
 
 /**
  * Formulaire de contact : la demande part par messagerie (mailto) ou WhatsApp
@@ -89,13 +88,20 @@ const McctContactForm = ({ rows = 6 }) => {
       </label>
 
       <div className="flex flex-wrap items-center gap-3.5 [grid-column:1/-1]">
-        <button type="submit" className={btnPrimary}>
+        <button
+          type="submit"
+          className="relative inline-flex cursor-pointer items-center gap-3 overflow-hidden border-none bg-[#2478BE] px-[30px] py-[18px] text-[12.5px] font-extrabold tracking-[0.16em] text-white transition-colors hover:bg-white hover:text-[#17191C]"
+        >
           {t('contact.form.submit')} <span aria-hidden="true">→</span>
+          <span
+            aria-hidden="true"
+            className="pointer-events-none absolute top-0 h-full w-[45%] animate-mcct-shine bg-[linear-gradient(100deg,transparent,rgba(255,255,255,0.45),transparent)]"
+          />
         </button>
         <button
           type="button"
           onClick={sendWhatsApp}
-          className="inline-flex min-h-[48px] cursor-pointer items-center gap-2 rounded-full border border-[#1F9D55] bg-white px-6 text-[15px] font-semibold text-[#15803D] transition-colors hover:bg-[#1F9D55] hover:text-white"
+          className="inline-flex cursor-pointer items-center gap-3 border border-[#25D366] bg-transparent px-[30px] py-[17px] text-[12.5px] font-extrabold tracking-[0.16em] text-[#25D366] transition-colors hover:bg-[#25D366] hover:text-white"
         >
           {t('contact.form.whatsapp')}
         </button>
