@@ -955,16 +955,6 @@ export const getValues = (lang = 'fr') =>
     thumbSrc: thumb(value?.image)
   }));
 
-const rawKeyFigures = [
-  { value: 15, label: { fr: 'Années d’expérience', en: 'Years of experience' } },
-  { value: 52, label: { fr: 'Projets réalisés', en: 'Projects delivered' } },
-  { value: 10, label: { fr: 'Collaborateurs', en: 'Team members' } },
-  { value: 30, label: { fr: 'Secteurs industriels', en: 'Industrial sectors' } }
-];
-
-export const getKeyFigures = (lang = 'fr') =>
-  rawKeyFigures?.map((figure) => ({ value: figure?.value, label: localize(figure?.label, lang) }));
-
 /** Baseline de marque (couverture brochure MCCT). */
 const rawBaseline = [
   {

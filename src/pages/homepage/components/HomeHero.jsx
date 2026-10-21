@@ -1,8 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { useI18n } from '../../../i18n/LanguageProvider';
 import { container } from '../../../components/ui/mcctTheme';
-import { Eyebrow, btnPrimary, btnSecondary, card } from '../../../components/ui/Corporate';
-import { getKeyFigures } from '../../../data/mcct';
+import { Eyebrow, btnPrimary, btnSecondary } from '../../../components/ui/Corporate';
 import { img } from '../../../data/gallery';
 
 // Vidéo hébergée localement (jamais de hotlink externe) : chantier de charpente
@@ -27,7 +26,7 @@ const shouldPlayVideo = () => {
 };
 
 const HomeHero = () => {
-  const { lang, t } = useI18n();
+  const { t } = useI18n();
   const title = t('home.heroTitle');
   const videoRef = useRef(null);
   const [withVideo, setWithVideo] = useState(false);
@@ -47,8 +46,6 @@ const HomeHero = () => {
   useEffect(() => {
     if (withVideo) videoRef?.current?.play()?.catch(() => {});
   }, [withVideo]);
-
-  const firstFigure = getKeyFigures(lang)?.[0];
 
   return (
     <section id="top" className="relative overflow-hidden bg-mist">
@@ -122,13 +119,6 @@ const HomeHero = () => {
             ) : null}
           </div>
 
-          {/* Chiffre clé en carte flottante. */}
-          {firstFigure ? (
-            <div className={`${card} absolute -bottom-6 left-4 flex items-center gap-4 px-5 py-4 min-[1000px]:-left-8`}>
-              <span className="font-display text-[34px] font-extrabold leading-none text-brand">{firstFigure?.value}+</span>
-              <span className="max-w-[130px] text-[14px] font-medium leading-[1.35] text-navy">{firstFigure?.label}</span>
-            </div>
-          ) : null}
         </div>
       </div>
     </section>
