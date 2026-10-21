@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useI18n } from '../../i18n/LanguageProvider';
 import { ACCENT, headingFont, navLinks, EMAIL, EMAIL_HREF, PHONE, PHONE_HREF, container } from './mcctTheme';
 
@@ -49,11 +49,22 @@ const SiteHeader = ({ variant = 'light', links = navLinks }) => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [progress, setProgress] = useState(0);
   const location = useLocation();
+  const navigate = useNavigate();
   const { t } = useI18n();
 
   const isHero = variant === 'hero';
   const isDark = variant === 'dark';
   const closeMenu = () => setIsMenuOpen(false);
+
+  // Déjà sur l'accueil, le lien du logo ne change pas de page : on remonte
+  // en haut nous-mêmes (et on retire une éventuelle ancre #contact de l'URL).
+  const goHome = (e) => {
+    if (location?.pathname !== '/') return;
+    e?.preventDefault();
+    if (location?.hash) navigate('/', { replace: true });
+    const reduced = window.matchMedia('(prefers-reduced-motion: reduce)')?.matches;
+    window.scrollTo({ top: 0, behavior: reduced ? 'auto' : 'smooth' });
+  };
 
   useEffect(() => {
     if (!isHero) return undefined;
@@ -103,7 +114,7 @@ const SiteHeader = ({ variant = 'light', links = navLinks }) => {
     <>
       <header className={headerClass}>
         <div className={`${container} flex items-center justify-between gap-6`}>
-          <Link to="/" className="flex items-center" aria-label={t('nav.logoHome')}>
+          <Link to="/" onClick={goHome} className="flex items-center" aria-label={t('nav.logoHome')}>
             <img
               src="/logo1.png"
               alt="MCCT Industrie"
