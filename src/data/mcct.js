@@ -253,37 +253,37 @@ export const getActivities = (lang = 'fr') =>
 const rawProcessSteps = [
   {
     num: '01',
-    title: { fr: 'ENGINEERING', en: 'ENGINEERING' },
+    title: { fr: 'Engineering', en: 'Engineering' },
     icon: 'engineering',
     desc: { fr: 'Études techniques et dimensionnement.', en: 'Technical studies and sizing.' }
   },
   {
     num: '02',
-    title: { fr: 'CONCEPTION', en: 'DESIGN' },
+    title: { fr: 'Conception', en: 'Design' },
     icon: 'design',
     desc: { fr: 'Plans d’exécution et préparation.', en: 'Shop drawings and preparation.' }
   },
   {
     num: '03',
-    title: { fr: 'FABRICATION', en: 'FABRICATION' },
+    title: { fr: 'Fabrication', en: 'Fabrication' },
     icon: 'fabrication',
     desc: { fr: 'Découpe, soudure et assemblage en atelier.', en: 'Cutting, welding and assembly in the workshop.' }
   },
   {
     num: '04',
-    title: { fr: 'ASSEMBLAGE', en: 'ASSEMBLY' },
+    title: { fr: 'Assemblage', en: 'Assembly' },
     icon: 'assembly',
     desc: { fr: 'Pré-montage et contrôle des ensembles.', en: 'Pre-assembly and inspection of the units.' }
   },
   {
     num: '05',
-    title: { fr: 'INSTALLATION', en: 'ERECTION' },
+    title: { fr: 'Installation', en: 'Erection' },
     icon: 'installation',
     desc: { fr: 'Levage et montage sur site.', en: 'Lifting and erection on site.' }
   },
   {
     num: '06',
-    title: { fr: 'MAINTENANCE', en: 'MAINTENANCE' },
+    title: { fr: 'Maintenance', en: 'Maintenance' },
     icon: 'maintenance',
     desc: { fr: 'Suivi et interventions en exploitation.', en: 'Follow-up and work during operation.' }
   }
@@ -299,11 +299,11 @@ export const getProcessSteps = (lang = 'fr') =>
 
 /** Catégories de projets : `key` stable pour le filtrage, `label` traduit. */
 export const projectCategories = [
-  { key: 'ALL', label: { fr: 'TOUS', en: 'ALL' } },
-  { key: 'CONSTRUCTION', label: { fr: 'CONSTRUCTION', en: 'CONSTRUCTION' } },
-  { key: 'INDUSTRIE', label: { fr: 'INDUSTRIE', en: 'INDUSTRY' } },
-  { key: 'ENERGIE', label: { fr: 'ÉNERGIE', en: 'ENERGY' } },
-  { key: 'EQUIPEMENTS', label: { fr: 'ÉQUIPEMENTS', en: 'EQUIPMENT' } }
+  { key: 'ALL', label: { fr: 'Tous', en: 'All' } },
+  { key: 'CONSTRUCTION', label: { fr: 'Construction', en: 'Construction' } },
+  { key: 'INDUSTRIE', label: { fr: 'Industrie', en: 'Industry' } },
+  { key: 'ENERGIE', label: { fr: 'Énergie', en: 'Energy' } },
+  { key: 'EQUIPEMENTS', label: { fr: 'Équipements', en: 'Equipment' } }
 ];
 
 export const projectCategoryLabel = (key, lang) =>
@@ -339,21 +339,21 @@ const rawProjects = [
     },
     sections: [
       {
-        title: { fr: 'L’OUVRAGE', en: 'THE BUILDING' },
+        title: { fr: 'L’ouvrage', en: 'The building' },
         body: {
           fr: 'Un bâtiment à portiques acier de grande portée, conçu pour libérer un volume intérieur sans poteau intermédiaire.',
           en: 'A long-span steel portal building, designed to free the interior volume of any intermediate column.'
         }
       },
       {
-        title: { fr: 'EN ATELIER', en: 'IN THE WORKSHOP' },
+        title: { fr: 'En atelier', en: 'In the workshop' },
         body: {
           fr: 'Débit des profilés, percements et soudures d’assemblage réalisés en atelier, où chaque ensemble est contrôlé avant expédition.',
           en: 'Sections cut, drilled and welded in the workshop, where every assembly is checked before dispatch.'
         }
       },
       {
-        title: { fr: 'SUR SITE', en: 'ON SITE' },
+        title: { fr: 'Sur site', en: 'On site' },
         body: {
           fr: 'Levage file par file : poteaux, arbalétriers, puis pannes et contreventements avant la pose de la couverture.',
           en: 'Bay-by-bay lifting: columns, rafters, then purlins and bracing before the roofing goes on.'
@@ -377,14 +377,14 @@ const rawProjects = [
     },
     sections: [
       {
-        title: { fr: 'LE BESOIN', en: 'THE BRIEF' },
+        title: { fr: 'Le besoin', en: 'The brief' },
         body: {
           fr: 'Couvrir une zone extérieure en conservant la lumière naturelle et une structure visuellement légère.',
           en: 'Cover an outdoor area while keeping natural light and a visually light structure.'
         }
       },
       {
-        title: { fr: 'LA RÉPONSE', en: 'THE ANSWER' },
+        title: { fr: 'La réponse', en: 'The answer' },
         body: {
           fr: 'Une ossature acier peinte, à trame régulière, recevant des panneaux de couverture translucides entre pannes.',
           en: 'A painted steel frame on a regular grid, carrying translucent roofing panels between purlins.'
@@ -405,21 +405,21 @@ const rawProjects = [
     },
     sections: [
       {
-        title: { fr: 'PÉRIMÈTRE', en: 'SCOPE' },
+        title: { fr: 'Périmètre', en: 'Scope' },
         body: {
           fr: 'Un lot unique, de la structure aux fermetures, pour un interlocuteur technique unique jusqu’à la réception.',
           en: 'A single package, from structure to closures, with one technical contact through to handover.'
         }
       },
       {
-        title: { fr: 'ENVELOPPE', en: 'ENVELOPE' },
+        title: { fr: 'Enveloppe', en: 'Envelope' },
         body: {
           fr: 'Bardage et couverture posés après montage de l’ossature, avec portes sectionnelles et accès de service.',
           en: 'Cladding and roofing installed after the frame is up, with sectional doors and service access.'
         }
       },
       {
-        title: { fr: 'INTÉRIEUR', en: 'INTERIOR' },
+        title: { fr: 'Intérieur', en: 'Interior' },
         body: {
           fr: 'Traitement du sol et finitions réalisés avant remise des clés, le volume restant entièrement dégagé.',
           en: 'Floor treatment and finishing completed before handover, leaving the volume entirely clear.'
@@ -443,14 +443,14 @@ const rawProjects = [
     },
     sections: [
       {
-        title: { fr: 'SÉQUENCE DE LEVAGE', en: 'LIFTING SEQUENCE' },
+        title: { fr: 'Séquence de levage', en: 'Lifting sequence' },
         body: {
           fr: 'Les portiques sont dressés dans l’ordre du calepinage, stabilisés provisoirement, puis reliés par les pannes.',
           en: 'Portal frames are raised in setting-out order, temporarily stabilised, then tied together by the purlins.'
         }
       },
       {
-        title: { fr: 'STABILITÉ', en: 'STABILITY' },
+        title: { fr: 'Stabilité', en: 'Stability' },
         body: {
           fr: 'Contreventements de long pan et de versant posés au fur et à mesure pour figer la géométrie de l’ossature.',
           en: 'Wall and roof bracing installed as work progresses to lock in the geometry of the frame.'
@@ -470,21 +470,21 @@ const rawProjects = [
     },
     sections: [
       {
-        title: { fr: 'FONCTION', en: 'PURPOSE' },
+        title: { fr: 'Fonction', en: 'Purpose' },
         body: {
           fr: 'Assurer un transfert continu de matière entre deux postes, avec un accès de maintenance sur toute la longueur.',
           en: 'Provide continuous material transfer between two stations, with maintenance access along its full length.'
         }
       },
       {
-        title: { fr: 'STRUCTURE SUPPORT', en: 'SUPPORT STRUCTURE' },
+        title: { fr: 'Structure support', en: 'Support structure' },
         body: {
           fr: 'Châssis et stations à rouleaux alignés sur une ossature dédiée, réglée pour garantir le suivi de bande.',
           en: 'Frames and idler stations aligned on a dedicated structure, set to keep the belt tracking true.'
         }
       },
       {
-        title: { fr: 'INSTALLATION', en: 'INSTALLATION' },
+        title: { fr: 'Installation', en: 'Installation' },
         body: {
           fr: 'Montage par tronçons préfabriqués, raccordement et réglages réalisés sur site par nos équipes.',
           en: 'Installed in prefabricated sections, connected and adjusted on site by our teams.'
@@ -508,14 +508,14 @@ const rawProjects = [
     },
     sections: [
       {
-        title: { fr: 'CONCEPTION', en: 'DESIGN' },
+        title: { fr: 'Conception', en: 'Design' },
         body: {
           fr: 'Des supports dimensionnés pour les charges et les accès d’exploitation, avec platines de fixation repérées.',
           en: 'Supports sized for the loads and for operating access, with fixing plates individually marked.'
         }
       },
       {
-        title: { fr: 'MISE EN PLACE', en: 'SETTING OUT' },
+        title: { fr: 'Mise en place', en: 'Setting out' },
         body: {
           fr: 'Assemblage au sol puis mise en position à la grue, avec réglage des niveaux avant scellement.',
           en: 'Assembled at ground level then craned into position, with levels adjusted before grouting.'
@@ -536,14 +536,14 @@ const rawProjects = [
     },
     sections: [
       {
-        title: { fr: 'CHAUDRONNERIE', en: 'FABRICATION' },
+        title: { fr: 'Chaudronnerie', en: 'Fabrication' },
         body: {
           fr: 'Roulage et soudure des viroles en atelier, contrôlées avant transport vers le site.',
           en: 'Shell courses rolled and welded in the workshop, inspected before transport to site.'
         }
       },
       {
-        title: { fr: 'LEVAGE', en: 'LIFTING' },
+        title: { fr: 'Levage', en: 'Lifting' },
         body: {
           fr: 'Chaque panneau est présenté à la grue, maintenu le temps de l’assemblage, puis soudé en position.',
           en: 'Each panel is presented by crane, held while it is assembled, then welded in position.'
@@ -567,14 +567,14 @@ const rawProjects = [
     },
     sections: [
       {
-        title: { fr: 'INTERVENTION', en: 'THE INTERVENTION' },
+        title: { fr: 'Intervention', en: 'The intervention' },
         body: {
           fr: 'Travaux menés sur un site en service, avec balisage, consignation et plan de prévention préalables.',
           en: 'Work carried out on a live site, with prior barriering, lock-out and a safety plan in place.'
         }
       },
       {
-        title: { fr: 'TUYAUTERIE', en: 'PIPING' },
+        title: { fr: 'Tuyauterie', en: 'Piping' },
         body: {
           fr: 'Lignes préfabriquées puis raccordées sur place, avec reprise des supports et de la robinetterie.',
           en: 'Lines prefabricated then connected in place, with supports and valves reworked as needed.'
@@ -594,14 +594,14 @@ const rawProjects = [
     },
     sections: [
       {
-        title: { fr: 'DIAGNOSTIC', en: 'SURVEY' },
+        title: { fr: 'Diagnostic', en: 'Survey' },
         body: {
           fr: 'Relevé de l’état de la capacité et de ses piquages avant définition du périmètre d’intervention.',
           en: 'Condition survey of the vessel and its nozzles before the scope of work is set.'
         }
       },
       {
-        title: { fr: 'REMISE EN ÉTAT', en: 'REPAIR' },
+        title: { fr: 'Remise en état', en: 'Repair' },
         body: {
           fr: 'Reprises métalliques et accessoires traités sur place, avec accès sécurisé pour les équipes.',
           en: 'Steel repairs and fittings dealt with in place, with safe access for the teams.'
@@ -621,14 +621,14 @@ const rawProjects = [
     },
     sections: [
       {
-        title: { fr: 'PRÉPARATION', en: 'PREPARATION' },
+        title: { fr: 'Préparation', en: 'Preparation' },
         body: {
           fr: 'Étude des points d’élingage, choix du moyen de levage et balisage de la zone avant manœuvre.',
           en: 'Sling points studied, lifting gear selected and the area barriered before the lift.'
         }
       },
       {
-        title: { fr: 'MANŒUVRE', en: 'THE LIFT' },
+        title: { fr: 'Manœuvre', en: 'The lift' },
         body: {
           fr: 'Le module est repris du camion, orienté, puis posé sur ses appuis sous la conduite d’un chef de manœuvre.',
           en: 'The module is taken off the truck, turned, then set on its bearings under a lift supervisor.'
@@ -648,14 +648,14 @@ const rawProjects = [
     },
     sections: [
       {
-        title: { fr: 'FABRICATION', en: 'FABRICATION' },
+        title: { fr: 'Fabrication', en: 'Fabrication' },
         body: {
           fr: 'Découpe, pliage et soudure des tôles sur gabarit, avec reprise des angles et des raidisseurs.',
           en: 'Plates cut, folded and welded on jigs, with corners and stiffeners finished by hand.'
         }
       },
       {
-        title: { fr: 'CONTRÔLE ET EXPÉDITION', en: 'INSPECTION AND DISPATCH' },
+        title: { fr: 'Contrôle et expédition', en: 'Inspection and dispatch' },
         body: {
           fr: 'Vérification dimensionnelle et visuelle avant chargement au pont roulant pour le transport.',
           en: 'Dimensional and visual checks before loading by overhead crane for transport.'
@@ -679,14 +679,14 @@ const rawProjects = [
     },
     sections: [
       {
-        title: { fr: 'PRÉFABRICATION', en: 'PREFABRICATION' },
+        title: { fr: 'Préfabrication', en: 'Prefabrication' },
         body: {
           fr: 'Débit, préparation des chanfreins et pointage des tronçons sur berceaux avant soudure définitive.',
           en: 'Cutting, bevel preparation and tack welding on cradles before the final weld.'
         }
       },
       {
-        title: { fr: 'POURQUOI EN ATELIER', en: 'WHY IN THE WORKSHOP' },
+        title: { fr: 'Pourquoi en atelier', en: 'Why in the workshop' },
         body: {
           fr: 'Travailler au sol et à poste fixe améliore la qualité des soudures et réduit la durée d’intervention sur site.',
           en: 'Working at ground level in a fixed position improves weld quality and shortens time spent on site.'
@@ -821,8 +821,8 @@ export const getReviews = (lang = 'fr') =>
 const rawJourney = [
   {
     num: '01',
-    label: { fr: 'ATELIER', en: 'WORKSHOP' },
-    title: { fr: 'TOUT PART\nDE L’ATELIER.', en: 'IT ALL STARTS\nIN THE WORKSHOP.' },
+    label: { fr: 'Atelier', en: 'Workshop' },
+    title: { fr: 'Tout part\nde l’atelier.', en: 'It all starts\nin the workshop.' },
     desc: {
       fr: 'Découpe, soudure, assemblage. Chaque profilé est préparé et contrôlé avant de quitter nos ateliers.',
       en: 'Cutting, welding, assembly. Every section is prepared and inspected before it leaves our workshops.'
@@ -831,8 +831,8 @@ const rawJourney = [
   },
   {
     num: '02',
-    label: { fr: 'CHAUDRONNERIE', en: 'BOILERMAKING' },
-    title: { fr: 'DES ENSEMBLES\nTAILLÉS SUR MESURE.', en: 'ASSEMBLIES BUILT\nTO MEASURE.' },
+    label: { fr: 'Chaudronnerie', en: 'Boilermaking' },
+    title: { fr: 'Des ensembles\ntaillés sur mesure.', en: 'Assemblies built\nto measure.' },
     desc: {
       fr: 'Trémies, goulottes, capotages : des pièces lourdes fabriquées pour un site et un process précis.',
       en: 'Hoppers, chutes, enclosures: heavy parts fabricated for one specific site and process.'
@@ -841,8 +841,8 @@ const rawJourney = [
   },
   {
     num: '03',
-    label: { fr: 'LEVAGE', en: 'LIFTING' },
-    title: { fr: 'PUIS TOUT SE JOUE\nSUR LE CHANTIER.', en: 'THEN EVERYTHING\nHAPPENS ON SITE.' },
+    label: { fr: 'Levage', en: 'Lifting' },
+    title: { fr: 'Puis tout se joue\nsur le chantier.', en: 'Then everything\nhappens on site.' },
     desc: {
       fr: 'Plans de levage, coordination des équipes, montage au millimètre. C’est là que la préparation paie.',
       en: 'Lifting plans, crew coordination, millimetre-accurate erection. This is where the preparation pays off.'
@@ -851,8 +851,8 @@ const rawJourney = [
   },
   {
     num: '04',
-    label: { fr: 'OUVRAGE', en: 'DELIVERED' },
-    title: { fr: 'ET L’OUVRAGE\nRESTE DEBOUT.', en: 'AND THE STRUCTURE\nSTANDS.' },
+    label: { fr: 'Ouvrage', en: 'Delivered' },
+    title: { fr: 'Et l’ouvrage\nreste debout.', en: 'And the structure\nstands.' },
     desc: {
       fr: 'Un bâtiment livré, conforme aux normes, prêt à encaisser trente ans d’exploitation industrielle.',
       en: 'A completed building, compliant with the standards, ready for thirty years of industrial service.'
@@ -873,7 +873,7 @@ export const getJourney = (lang = 'fr') =>
 
 const rawSectors = [
   {
-    title: { fr: 'BÂTIMENTS INDUSTRIELS', en: 'INDUSTRIAL BUILDINGS' },
+    title: { fr: 'Bâtiments industriels', en: 'Industrial buildings' },
     desc: {
       fr: 'Hangars, ateliers et unités de production en charpente métallique.',
       en: 'Warehouses, workshops and production units in structural steel.'
@@ -881,7 +881,7 @@ const rawSectors = [
     image: 'charpente-profiles-attente'
   },
   {
-    title: { fr: 'STRUCTURES COMMERCIALES', en: 'COMMERCIAL STRUCTURES' },
+    title: { fr: 'Structures commerciales', en: 'Commercial structures' },
     desc: {
       fr: 'Auvents, halls et ossatures pour sites recevant du public.',
       en: 'Canopies, halls and frames for sites open to the public.'
@@ -889,7 +889,7 @@ const rawSectors = [
     image: 'IMG_7861'
   },
   {
-    title: { fr: 'INSTALLATIONS SPÉCIALISÉES', en: 'SPECIALISED INSTALLATIONS' },
+    title: { fr: 'Installations spécialisées', en: 'Specialised installations' },
     desc: {
       fr: 'Équipements de process, tuyauterie et structures techniques.',
       en: 'Process equipment, piping and technical structures.'
@@ -909,7 +909,7 @@ export const getSectors = (lang = 'fr') =>
 const rawValues = [
   {
     num: '01',
-    title: { fr: 'EXCELLENCE', en: 'EXCELLENCE' },
+    title: { fr: 'Excellence', en: 'Excellence' },
     desc: {
       fr: 'Chaque pièce sort de l’atelier contrôlée. Les normes de l’industrie et les spécifications du client ne sont pas négociables — c’est ce qui fait qu’un ouvrage tient trente ans.',
       en: 'Every part leaves the workshop inspected. Industry standards and client specifications are not negotiable — that is what makes a structure last thirty years.'
@@ -918,7 +918,7 @@ const rawValues = [
   },
   {
     num: '02',
-    title: { fr: 'SÉCURITÉ', en: 'SAFETY' },
+    title: { fr: 'Sécurité', en: 'Safety' },
     desc: {
       fr: 'Plans de levage, balisage, équipements de protection : sur nos chantiers, la sécurité conditionne le planning, jamais l’inverse. Nos équipes rentrent entières.',
       en: 'Lifting plans, exclusion zones, protective equipment: on our sites safety drives the schedule, never the other way round. Our crews go home whole.'
@@ -927,7 +927,7 @@ const rawValues = [
   },
   {
     num: '03',
-    title: { fr: 'INNOVATION', en: 'INNOVATION' },
+    title: { fr: 'Innovation', en: 'Innovation' },
     desc: {
       fr: 'Techniques de fabrication avancées, préfabrication en atelier, pré-assemblage : nous cherchons en permanence la méthode qui réduit les risques et les délais sur site.',
       en: 'Advanced fabrication techniques, workshop prefabrication, pre-assembly: we constantly look for the method that cuts risk and time on site.'
@@ -936,7 +936,7 @@ const rawValues = [
   },
   {
     num: '04',
-    title: { fr: 'ENGAGEMENT', en: 'COMMITMENT' },
+    title: { fr: 'Engagement', en: 'Commitment' },
     desc: {
       fr: 'Un interlocuteur technique dédié du premier chiffrage à la réception. Nous tenons les délais annoncés, et nous le disons quand une contrainte apparaît.',
       en: 'A dedicated technical contact from first estimate to handover. We hold the deadlines we announce — and we say so when a constraint appears.'
@@ -956,10 +956,10 @@ export const getValues = (lang = 'fr') =>
   }));
 
 const rawKeyFigures = [
-  { value: 15, label: { fr: 'ANNÉES D’EXPÉRIENCE', en: 'YEARS OF EXPERIENCE' } },
-  { value: 52, label: { fr: 'PROJETS RÉALISÉS', en: 'PROJECTS DELIVERED' } },
-  { value: 10, label: { fr: 'COLLABORATEURS', en: 'TEAM MEMBERS' } },
-  { value: 30, label: { fr: 'SECTEURS INDUSTRIELS', en: 'INDUSTRIAL SECTORS' } }
+  { value: 15, label: { fr: 'Années d’expérience', en: 'Years of experience' } },
+  { value: 52, label: { fr: 'Projets réalisés', en: 'Projects delivered' } },
+  { value: 10, label: { fr: 'Collaborateurs', en: 'Team members' } },
+  { value: 30, label: { fr: 'Secteurs industriels', en: 'Industrial sectors' } }
 ];
 
 export const getKeyFigures = (lang = 'fr') =>
@@ -969,7 +969,7 @@ export const getKeyFigures = (lang = 'fr') =>
 const rawBaseline = [
   {
     key: 'excellence',
-    title: { fr: 'EXCELLENCE', en: 'EXCELLENCE' },
+    title: { fr: 'Excellence', en: 'Excellence' },
     desc: {
       fr: 'Des réalisations conformes aux normes de l’industrie, contrôlées à chaque étape.',
       en: 'Work that meets industry standards, checked at every stage.'
@@ -977,7 +977,7 @@ const rawBaseline = [
   },
   {
     key: 'rapidite',
-    title: { fr: 'RAPIDITÉ', en: 'SPEED' },
+    title: { fr: 'Rapidité', en: 'Speed' },
     desc: {
       fr: 'Des délais tenus, de l’étude d’exécution à la réception sur site.',
       en: 'Deadlines held, from shop drawings to site handover.'
@@ -985,7 +985,7 @@ const rawBaseline = [
   },
   {
     key: 'satisfaction',
-    title: { fr: 'SATISFACTION', en: 'SATISFACTION' },
+    title: { fr: 'Satisfaction', en: 'Satisfaction' },
     desc: {
       fr: 'Un interlocuteur technique dédié et un service personnalisé sur toute la durée du projet.',
       en: 'A dedicated technical contact and personalised service for the whole project.'

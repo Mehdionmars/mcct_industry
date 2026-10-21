@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { useI18n } from '../../i18n/LanguageProvider';
-import { headingFont, navLinks, EMAIL, EMAIL_HREF, PHONE, PHONE_HREF, container } from './mcctTheme';
+import { navLinks, EMAIL, EMAIL_HREF, PHONE, PHONE_HREF, container } from './mcctTheme';
+import { btnPrimary } from './Corporate';
 
-/** Sélecteur de langue : deux libellés courts, l'actif est signalé par aria-pressed. */
+/** Sélecteur de langue : bascule FR / EN en pastille, l'actif est signalé par aria-pressed. */
 const LanguageSwitch = ({ onDark, className = '' }) => {
   const { lang, setLang, t } = useI18n();
 
@@ -11,38 +12,40 @@ const LanguageSwitch = ({ onDark, className = '' }) => {
     <div
       role="group"
       aria-label={t('langSwitch.label')}
-      className={`flex items-center gap-1 font-mono text-[12px] font-semibold tracking-[0.1em] ${className}`}
+      className={`inline-flex items-center rounded-full border p-0.5 text-[12.5px] font-semibold ${
+        onDark ? 'border-white/25' : 'border-line'
+      } ${className}`}
     >
-      {['fr', 'en']?.map((code, index) => (
-        <React.Fragment key={code}>
-          {index === 1 ? (
-            <span aria-hidden="true" className={onDark ? 'text-nightrule' : 'text-rule'}>
-              /
-            </span>
-          ) : null}
-          <button
-            type="button"
-            lang={code}
-            onClick={() => setLang(code)}
-            aria-pressed={lang === code}
-            className={`min-h-[32px] cursor-pointer bg-transparent px-1 transition-colors ${
-              lang === code ? (onDark ? 'text-brandlt' : 'text-brand') : 'opacity-70 hover:opacity-100'
-            }`}
-          >
-            {code?.toUpperCase()}
-          </button>
-        </React.Fragment>
+      {['fr', 'en']?.map((code) => (
+        <button
+          key={code}
+          type="button"
+          lang={code}
+          onClick={() => setLang(code)}
+          aria-pressed={lang === code}
+          className={`min-h-[30px] min-w-[38px] cursor-pointer rounded-full px-2.5 transition-colors ${
+            lang === code
+              ? onDark
+                ? 'bg-white text-navy'
+                : 'bg-navy text-white'
+              : onDark
+                ? 'text-white/80 hover:text-white'
+                : 'text-subtle hover:text-navy'
+          }`}
+        >
+          {code?.toUpperCase()}
+        </button>
       ))}
     </div>
   );
 };
 
 /**
- * En-tête commun aux pages MCCT, façon bandeau de plan.
+ * En-tête commun aux pages MCCT.
  * variant :
- *  - 'light' (défaut) : barre papier collée en haut
- *  - 'dark'           : barre bleu de plan, pour les pages sombres (Contact)
- *  - 'hero'           : posée sur le quadrillage de l'accueil, devient pleine au
+ *  - 'light' (défaut) : barre blanche collée en haut
+ *  - 'dark'           : barre bleu marine
+ *  - 'hero'           : transparente au-dessus du haut de l'accueil, blanche au
  *                       défilement, avec barre de progression de lecture
  */
 const SiteHeader = ({ variant = 'light', links = navLinks }) => {
@@ -88,34 +91,24 @@ const SiteHeader = ({ variant = 'light', links = navLinks }) => {
   const headerClass = [
     'z-[100] flex items-center transition-all duration-300',
     isHero ? 'fixed inset-x-0 top-0' : 'sticky top-0',
-    isHero && !isScrolled ? 'min-h-[88px]' : 'min-h-[72px]',
+    isHero && !isScrolled ? 'min-h-[84px]' : 'min-h-[72px]',
     isDark
-      ? 'border-b border-nightrule bg-night/95 text-snow backdrop-blur-md'
+      ? 'border-b border-white/10 bg-navy/95 text-white backdrop-blur-md'
       : isHero && !isScrolled
-        ? 'border-b border-transparent bg-transparent text-ink'
-        : 'border-b border-ink/15 bg-paper/95 text-ink backdrop-blur-md'
+        ? 'border-b border-transparent bg-transparent text-navy'
+        : 'border-b border-line bg-white/95 text-navy shadow-[0_4px_20px_-12px_rgba(15,42,71,0.25)] backdrop-blur-md'
   ]?.join(' ');
 
   return (
     <>
       <header className={headerClass}>
         <div className={`${container} flex items-center justify-between gap-6`}>
-          <Link to="/" className="flex items-center gap-4" aria-label={t('nav.logoHome')}>
+          <Link to="/" className="flex items-center" aria-label={t('nav.logoHome')}>
             <img
               src="/logo1.png"
               alt="MCCT Industrie"
-              className={`block h-[34px] w-auto ${isDark ? 'brightness-0 invert' : ''}`}
+              className={`block h-[36px] w-auto ${isDark ? 'brightness-0 invert' : ''}`}
             />
-            <span
-              aria-hidden="true"
-              className={`hidden border-l pl-4 font-mono text-[10.5px] uppercase leading-[1.4] tracking-[0.14em] min-[1100px]:block ${
-                isDark ? 'border-nightrule text-fog' : 'border-rule text-steel'
-              }`}
-            >
-              {t('bp.ref')} MCCT-IND
-              <br />
-              {t('common.city')}
-            </span>
           </Link>
 
           <div className="flex items-center gap-3 min-[900px]:hidden">
@@ -125,61 +118,48 @@ const SiteHeader = ({ variant = 'light', links = navLinks }) => {
               onClick={() => setIsMenuOpen(true)}
               aria-label={t('nav.open')}
               aria-expanded={isMenuOpen}
-              className={`inline-flex h-[44px] cursor-pointer items-center justify-center gap-2 border px-4 font-mono text-[12px] font-semibold tracking-[0.12em] transition-colors ${
-                isDark
-                  ? 'border-snow/60 text-snow hover:border-snow'
-                  : 'border-ink text-ink hover:bg-ink hover:text-paper'
+              className={`inline-flex h-[44px] w-[44px] cursor-pointer items-center justify-center rounded-full border transition-colors ${
+                isDark ? 'border-white/30 text-white' : 'border-line bg-white text-navy hover:border-brand'
               }`}
             >
-              <span aria-hidden="true" className="flex flex-col gap-[3px]">
-                <span className="block h-px w-3.5 bg-current" />
-                <span className="block h-px w-3.5 bg-current" />
-                <span className="block h-px w-3.5 bg-current" />
+              <span aria-hidden="true" className="flex flex-col gap-[4px]">
+                <span className="block h-[2px] w-[18px] rounded bg-current" />
+                <span className="block h-[2px] w-[18px] rounded bg-current" />
+                <span className="block h-[2px] w-[18px] rounded bg-current" />
               </span>
-              {t('nav.menu')}
             </button>
           </div>
 
-          <nav
-            aria-label={t('nav.main')}
-            className="hidden items-center gap-7 font-mono text-[12.5px] font-medium uppercase tracking-[0.1em] min-[900px]:flex"
-          >
+          <nav aria-label={t('nav.main')} className="hidden items-center gap-8 text-[15px] font-medium min-[900px]:flex">
             {links
               ?.filter((link) => link?.to !== '/contact')
               ?.map((link) => {
-                const inner = (
-                  <>
-                    <span className={isDark ? 'text-brandlt' : 'text-brand'}>{link?.num}</span>
-                    <span>{label(link)}</span>
-                  </>
-                );
-                const linkClass = 'group relative flex items-baseline gap-2 py-2 transition-colors';
+                const base = `transition-colors ${isDark ? 'hover:text-skytext' : 'hover:text-brand'}`;
                 if (link?.href) {
                   return (
-                    <a key={link?.href} href={link?.href} className={linkClass}>
-                      {inner}
-                      <span className="absolute inset-x-0 -bottom-0.5 h-[2px] origin-left scale-x-0 bg-safety transition-transform duration-300 group-hover:scale-x-100" />
+                    <a key={link?.href} href={link?.href} className={base}>
+                      {label(link)}
                     </a>
                   );
                 }
                 const isActive = location?.pathname === link?.to;
                 return (
-                  <Link key={link?.to} to={link?.to} className={linkClass} aria-current={isActive ? 'page' : undefined}>
-                    {inner}
-                    <span
-                      className={`absolute inset-x-0 -bottom-0.5 h-[2px] origin-left bg-safety transition-transform duration-300 group-hover:scale-x-100 ${
-                        isActive ? 'scale-x-100' : 'scale-x-0'
-                      }`}
-                    />
+                  <Link
+                    key={link?.to}
+                    to={link?.to}
+                    className={`${base} relative ${isActive ? (isDark ? 'text-skytext' : 'text-brand') : ''}`}
+                    aria-current={isActive ? 'page' : undefined}
+                  >
+                    {label(link)}
+                    {isActive ? (
+                      <span aria-hidden="true" className="absolute -bottom-2 left-1/2 h-1 w-1 -translate-x-1/2 rounded-full bg-current" />
+                    ) : null}
                   </Link>
                 );
               })}
             <LanguageSwitch onDark={isDark} />
-            <Link
-              to="/contact"
-              className="inline-flex min-h-[44px] items-center gap-2 border border-ink bg-safety px-5 font-mono text-[12.5px] font-semibold tracking-[0.1em] text-ink transition-colors hover:bg-ink hover:text-safety"
-            >
-              {t('nav.contact')} <span aria-hidden="true">→</span>
+            <Link to="/contact" className={`${btnPrimary} min-h-[44px] px-5 text-[14.5px]`}>
+              {t('nav.contact')}
             </Link>
           </nav>
         </div>
@@ -188,7 +168,7 @@ const SiteHeader = ({ variant = 'light', links = navLinks }) => {
       {isHero ? (
         <span
           aria-hidden="true"
-          className="fixed left-0 top-0 z-[200] h-[3px] bg-safety"
+          className="fixed left-0 top-0 z-[200] h-[3px] rounded-r-full bg-brand"
           style={{ width: `${progress}%` }}
         />
       ) : null}
@@ -198,15 +178,15 @@ const SiteHeader = ({ variant = 'light', links = navLinks }) => {
           role="dialog"
           aria-modal="true"
           aria-label={t('nav.dialog')}
-          className="bp-grid-dark fixed inset-0 z-[250] flex flex-col justify-between overflow-y-auto bg-night px-5 pb-8 pt-6 text-snow"
+          className="fixed inset-0 z-[250] flex flex-col justify-between overflow-y-auto bg-white px-5 pb-8 pt-5 text-navy"
         >
           <div className="flex items-center justify-between">
-            <img src="/logo1.png" alt="MCCT Industrie" className="h-8 w-auto brightness-0 invert" />
+            <img src="/logo1.png" alt="MCCT Industrie" className="h-9 w-auto" />
             <button
               type="button"
               onClick={closeMenu}
               aria-label={t('nav.close')}
-              className="min-h-[48px] cursor-pointer border border-nightrule px-[18px] py-[14px] font-mono text-[12px] font-semibold tracking-[0.12em] text-snow transition-colors hover:border-safety hover:text-safety"
+              className="min-h-[44px] cursor-pointer rounded-full border border-line px-4 text-[14px] font-semibold text-navy transition-colors hover:border-brand hover:text-brand"
             >
               {t('nav.closeLabel')}
             </button>
@@ -216,16 +196,13 @@ const SiteHeader = ({ variant = 'light', links = navLinks }) => {
             {links?.map((link) => {
               const inner = (
                 <>
-                  <span className="font-mono text-[12px] tracking-[0.14em] text-brandlt">{link?.num}</span>
-                  <span className="text-[32px] font-bold uppercase leading-none text-snow" style={headingFont}>
-                    {label(link)}
-                  </span>
-                  <span aria-hidden="true" className="ml-auto font-mono text-[18px] text-safety">
+                  <span className="font-display text-[28px] font-bold tracking-[-0.01em]">{label(link)}</span>
+                  <span aria-hidden="true" className="text-[20px] text-brand">
                     →
                   </span>
                 </>
               );
-              const className = 'flex min-h-[56px] items-center gap-5 border-b border-nightrule py-4';
+              const className = 'flex min-h-[56px] items-center justify-between border-b border-line py-4';
               return link?.href ? (
                 <a key={link?.href} href={link?.href} onClick={closeMenu} className={className}>
                   {inner}
@@ -238,16 +215,16 @@ const SiteHeader = ({ variant = 'light', links = navLinks }) => {
             })}
           </nav>
 
-          <div className="border-t border-nightrule pt-5 text-[14px] leading-[1.9] text-fog">
-            <LanguageSwitch onDark className="mb-4 text-snow" />
-            <p className="font-mono text-[12px] tracking-[0.14em] text-snow">{t('common.city')}</p>
-            <p className="mt-1.5">
-              <a href={PHONE_HREF} className="text-snow hover:text-safety">
+          <div className="rounded-2xl bg-mist p-5 text-[15px] leading-[1.8] text-copy">
+            <LanguageSwitch className="mb-4" />
+            <p className="font-semibold text-navy">{t('common.city')}</p>
+            <p>
+              <a href={PHONE_HREF} className="hover:text-brand">
                 {PHONE}
               </a>
             </p>
             <p>
-              <a href={EMAIL_HREF} className="text-snow hover:text-safety">
+              <a href={EMAIL_HREF} className="hover:text-brand">
                 {EMAIL}
               </a>
             </p>

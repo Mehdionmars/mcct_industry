@@ -3,8 +3,9 @@ import { Link } from 'react-router-dom';
 import Reveal from '../../../components/ui/Reveal';
 import ProcessIcon from '../../../components/ui/ProcessIcon';
 import { useI18n } from '../../../i18n/LanguageProvider';
-import { headingFont, container } from '../../../components/ui/mcctTheme';
-import { DimLine, Eyebrow, Mark, Ruler, squareBtn } from '../../../components/ui/Blueprint';
+import { ArrowLeft, ArrowRight } from 'lucide-react';
+import { container } from '../../../components/ui/mcctTheme';
+import { Eyebrow, SectionTitle, card, roundBtn } from '../../../components/ui/Corporate';
 import { getActivities, getProcessSteps } from '../../../data/mcct';
 
 export const ActivitiesSection = () => {
@@ -50,65 +51,39 @@ export const ActivitiesSection = () => {
   };
 
   return (
-  <section id="activites" className="bp-grid bg-paper py-[110px] text-ink">
+  <section id="activites" className="bg-white py-24">
     <div className={container}>
-      <Reveal className="mb-12 flex flex-wrap items-end justify-between gap-6">
-        <div>
+      <Reveal className="mb-12 flex flex-wrap items-end justify-between gap-8">
+        <div className="max-w-[640px]">
           <Eyebrow>{t('home.activitiesEyebrow')}</Eyebrow>
-          <h2
-            className="text-[clamp(2.6rem,5vw,4.8rem)] font-bold uppercase leading-[1.02] tracking-[-0.01em]"
-            style={headingFont}
-          >
-            {title?.[0]}
-            <br />
-            {title?.[1]}
-            <br />
-            {title?.[2]}
-            <Mark />
-          </h2>
+          <SectionTitle title={title} accentLast />
+          <p className="mt-5 text-[17px] leading-[1.7] text-copy">{t('home.activitiesText')}</p>
         </div>
-        <p className="max-w-[380px] border-l border-ink/20 pl-6 text-[16px] leading-[1.65] text-ink2">
-          {t('home.activitiesText')}
-        </p>
-      </Reveal>
-
-      {/* Barre de progression + flèches : l'état du rail est reflété des deux côtés. */}
-      <Reveal className="mb-8 flex items-center gap-6">
-        <div className="relative h-[14px] flex-1">
-          <Ruler className="absolute inset-0" />
-          <div
-            className="absolute bottom-0 left-0 h-[3px] w-full origin-left bg-brand transition-transform duration-300"
-            style={{ transform: `scaleX(${Math.max(0.08, progress?.ratio)})` }}
-          />
-        </div>
-        <p className="shrink-0 font-mono text-[12px] font-medium uppercase tracking-[0.12em] text-steel">
-          {String(activities?.length)?.padStart(2, '0')} {t('home.activitiesCountLabel')}
-        </p>
-        <div className="flex shrink-0 gap-2.5">
+        <div className="flex shrink-0 gap-3">
           <button
             type="button"
             onClick={() => scrollByCard(-1)}
             disabled={progress?.atStart}
             aria-label={t('home.activitiesPrev')}
-            className={squareBtn()}
+            className={roundBtn()}
           >
-            <span aria-hidden="true">←</span>
+            <ArrowLeft aria-hidden="true" className="h-5 w-5" />
           </button>
           <button
             type="button"
             onClick={() => scrollByCard(1)}
             disabled={progress?.atEnd}
             aria-label={t('home.activitiesNext')}
-            className={squareBtn()}
+            className={roundBtn()}
           >
-            <span aria-hidden="true">→</span>
+            <ArrowRight aria-hidden="true" className="h-5 w-5" />
           </button>
         </div>
       </Reveal>
 
       <ul
         ref={railRef}
-        className="mcct-rail flex list-none snap-x snap-mandatory gap-6 overflow-x-auto scroll-smooth pb-2"
+        className="mcct-rail -mx-5 scroll-px-5 min-[900px]:scroll-px-0 flex list-none snap-x snap-mandatory gap-6 overflow-x-auto scroll-smooth px-5 pb-6 pt-1 min-[900px]:mx-0 min-[900px]:px-1"
       >
         {activities?.map((activity) => (
           <li
@@ -116,39 +91,45 @@ export const ActivitiesSection = () => {
             data-card
             className="w-[82%] shrink-0 snap-start min-[700px]:w-[calc((100%-24px)/2)] min-[1100px]:w-[calc((100%-48px)/3)]"
           >
-            <Link
-              to="/services"
-              className="group flex h-full flex-col border border-ink bg-paper transition-colors duration-300 hover:bg-white"
-            >
-              <span className="relative block h-[250px] overflow-hidden border-b border-ink">
+            <Link to="/services" className={`${card} group flex h-full flex-col overflow-hidden transition-transform duration-300 hover:-translate-y-1`}>
+              <span className="relative block h-[230px] overflow-hidden">
                 <img
                   src={activity?.thumbSrc}
                   alt={activity?.title}
                   loading="lazy"
-                  className="absolute inset-0 h-full w-full object-cover transition-transform [transition-duration:600ms] [transition-timing-function:cubic-bezier(0.22,1,0.36,1)] group-hover:scale-[1.06]"
+                  className="absolute inset-0 h-full w-full object-cover transition-transform [transition-duration:600ms] group-hover:scale-[1.05]"
                 />
-                <span className="absolute left-0 top-0 border-b border-r border-ink bg-safety px-3 py-1.5 font-mono text-[11.5px] font-semibold tracking-[0.12em] text-ink">
-                  A-{activity?.num}
+                <span className="absolute left-4 top-4 rounded-full bg-white/95 px-3 py-1 text-[13px] font-semibold text-navy shadow-sm">
+                  {activity?.num}
                 </span>
               </span>
-              <span className="flex flex-1 flex-col justify-between gap-6 p-7">
+              <span className="flex flex-1 flex-col justify-between gap-5 p-7">
                 <span>
-                  <span className="block text-[26px] font-bold uppercase leading-[1.14]" style={headingFont}>
-                    {activity?.title}
-                  </span>
-                  <span className="mt-3 block text-[14.5px] leading-[1.6] text-ink2">{activity?.short}</span>
+                  <span className="block font-display text-[21px] font-bold leading-[1.25] text-navy">{activity?.title}</span>
+                  <span className="mt-2.5 block text-[15px] leading-[1.6] text-copy">{activity?.short}</span>
                 </span>
-                <span className="flex items-center justify-between border-t border-ink/15 pt-4 font-mono text-[12px] font-medium uppercase tracking-[0.12em] text-brand">
-                  {t('nav.services')}
-                  <span aria-hidden="true" className="text-[18px] transition-transform duration-300 group-hover:translate-x-2">
-                    →
-                  </span>
+                <span className="inline-flex items-center gap-2 text-[15px] font-semibold text-brand">
+                  {t('footer.learnMore')}
+                  <ArrowRight aria-hidden="true" className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
                 </span>
               </span>
             </Link>
           </li>
         ))}
       </ul>
+
+      {/* Progression du rail. */}
+      <div className="mt-2 flex items-center gap-5">
+        <div className="h-1 flex-1 overflow-hidden rounded-full bg-line">
+          <div
+            className="h-full origin-left rounded-full bg-brand transition-transform duration-300"
+            style={{ transform: `scaleX(${Math.max(0.08, progress?.ratio)})` }}
+          />
+        </div>
+        <p className="shrink-0 text-[14px] font-medium text-subtle">
+          {activities?.length} {t('home.activitiesCountLabel')?.toLowerCase()}
+        </p>
+      </div>
     </div>
     </section>
   );
@@ -160,47 +141,27 @@ export const SavoirFaireSection = () => {
   const title = t('home.processTitle');
 
   return (
-  <section id="savoirfaire" className="bg-paper2 py-[110px] text-ink">
+  <section id="savoirfaire" className="bg-mist py-24">
     <div className={container}>
-      <Reveal className="mb-14">
+      <Reveal className="mb-12 max-w-[720px]">
         <Eyebrow>{t('home.processEyebrow')}</Eyebrow>
-        <h2
-          className="text-[clamp(2.6rem,5vw,4.8rem)] font-bold uppercase leading-[1.02] tracking-[-0.01em]"
-          style={headingFont}
-        >
-          {title?.[0]}
-          <br />
-          {title?.[1]}
-          <Mark />
-        </h2>
+        <SectionTitle title={title} accentLast />
       </Reveal>
 
-      <DimLine label={`P-01 → P-${String(processSteps?.length)?.padStart(2, '0')}`} className="mb-6" />
-
-      <div className="grid border-l border-t border-ink [grid-template-columns:repeat(auto-fit,minmax(min(100%,170px),1fr))]">
+      <ol className="grid list-none gap-5 min-[700px]:grid-cols-2 min-[1000px]:grid-cols-3">
         {processSteps?.map((step, index) => (
-          <Reveal
-            key={step?.num}
-            delay={index * 70}
-            className="group relative border-b border-r border-ink bg-paper2 px-[22px] pb-9 pt-6 transition-colors duration-300 hover:bg-paper"
-          >
-            {/* Filet jaune qui se déploie au survol. */}
-            <span
-              aria-hidden="true"
-              className="absolute inset-x-0 top-0 h-[4px] origin-left scale-x-0 bg-safety transition-transform [transition-duration:450ms] [transition-timing-function:cubic-bezier(0.22,1,0.36,1)] group-hover:scale-x-100"
-            />
-            <p className="mb-8 font-mono text-[11.5px] tracking-[0.14em] text-steel">P-{step?.num}</p>
-            <ProcessIcon
-              name={step?.icon}
-              className="mb-6 h-10 w-10 text-ink transition-all [transition-duration:450ms] [transition-timing-function:cubic-bezier(0.22,1,0.36,1)] group-hover:-translate-y-0.5 group-hover:text-brand motion-reduce:transition-none motion-reduce:group-hover:translate-y-0"
-            />
-            <p className="text-[19px] font-bold uppercase tracking-[0.01em]" style={headingFont}>
-              {step?.title}
-            </p>
-            <p className="mt-2 text-[14px] leading-[1.55] text-ink2">{step?.desc}</p>
+          <Reveal as="li" key={step?.num} delay={index * 70} className={`${card} group p-7 transition-transform duration-300 hover:-translate-y-1`}>
+            <div className="mb-6 flex items-center justify-between">
+              <span className="flex h-12 w-12 items-center justify-center rounded-xl bg-sky text-brand transition-colors duration-300 group-hover:bg-brand group-hover:text-white">
+                <ProcessIcon name={step?.icon} className="h-6 w-6" />
+              </span>
+              <span aria-hidden="true" className="font-display text-[28px] font-extrabold text-brand/20">{step?.num}</span>
+            </div>
+            <p className="font-display text-[19px] font-bold text-navy">{step?.title}</p>
+            <p className="mt-2 text-[15px] leading-[1.6] text-copy">{step?.desc}</p>
           </Reveal>
         ))}
-      </div>
+      </ol>
     </div>
     </section>
   );

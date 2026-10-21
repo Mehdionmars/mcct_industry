@@ -5,9 +5,9 @@
 @layer base {
   :root {
     /* Core System Colors */
-    --color-background: #F2F4F6; /* papier */
-    --color-foreground: #0E2235; /* encre */
-    --color-border: #C3CDD7; /* filet */
+    --color-background: #FFFFFF; /* blanc */
+    --color-foreground: #0F2A47; /* marine */
+    --color-border: #E2E8F0; /* filet */
     --color-input: #FFFFFF; /* white */
     --color-ring: #E67E22; /* orange-600 */
     --color-card: #FFFFFF; /* white */
@@ -50,11 +50,11 @@
 
   body {
     @apply bg-background text-foreground;
-    font-family: 'IBM Plex Sans', system-ui, sans-serif;
+    font-family: 'Inter', system-ui, sans-serif;
   }
 
   h1, h2, h3, h4, h5, h6 {
-    font-family: 'IBM Plex Sans Condensed', 'Arial Narrow', sans-serif;
+    font-family: 'Inter', system-ui, sans-serif;
     font-weight: 700;
   }
 }

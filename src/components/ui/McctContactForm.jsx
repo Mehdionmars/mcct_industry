@@ -2,13 +2,12 @@ import React, { useMemo, useState } from 'react';
 import { useI18n } from '../../i18n/LanguageProvider';
 import { getActivities } from '../../data/mcct';
 import { EMAIL, WHATSAPP_HREF } from './mcctTheme';
-import { btnPrimaryDark } from './Blueprint';
+import { btnPrimary } from './Corporate';
 
-// Champs façon case de cartouche : filet fin, fond bleu de plan, focus jaune.
+// Champs clairs aux coins arrondis, anneau bleu au focus.
 const fieldClass =
-  'min-h-[48px] w-full rounded-none border border-nightrule bg-night2 px-4 py-3.5 font-plex text-[15px] font-normal normal-case tracking-normal text-snow outline-none transition-colors focus:border-safety focus:ring-1 focus:ring-safety';
-const labelClass =
-  'flex min-w-0 flex-col gap-2 font-mono text-[11.5px] font-medium uppercase tracking-[0.14em] text-fog';
+  'min-h-[48px] w-full rounded-xl border border-line bg-white px-4 py-3 text-[15px] font-normal text-navy outline-none transition-shadow placeholder:text-subtle focus:border-brand focus:ring-4 focus:ring-brand/15';
+const labelClass = 'flex min-w-0 flex-col gap-2 text-[14px] font-semibold text-navy';
 
 /**
  * Formulaire de contact : la demande part par messagerie (mailto) ou WhatsApp
@@ -90,13 +89,13 @@ const McctContactForm = ({ rows = 6 }) => {
       </label>
 
       <div className="flex flex-wrap items-center gap-3.5 [grid-column:1/-1]">
-        <button type="submit" className={btnPrimaryDark}>
+        <button type="submit" className={btnPrimary}>
           {t('contact.form.submit')} <span aria-hidden="true">→</span>
         </button>
         <button
           type="button"
           onClick={sendWhatsApp}
-          className="inline-flex min-h-[52px] cursor-pointer items-center gap-3 border border-[#3BD16F] bg-transparent px-6 font-mono text-[13px] font-semibold uppercase tracking-[0.1em] text-[#3BD16F] transition-colors hover:bg-[#3BD16F] hover:text-night"
+          className="inline-flex min-h-[48px] cursor-pointer items-center gap-2 rounded-full border border-[#1F9D55] bg-white px-6 text-[15px] font-semibold text-[#15803D] transition-colors hover:bg-[#1F9D55] hover:text-white"
         >
           {t('contact.form.whatsapp')}
         </button>

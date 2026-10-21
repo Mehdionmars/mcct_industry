@@ -28,7 +28,7 @@ const Homepage = () => {
   const { t } = useI18n();
 
   return (
-  <div className="min-h-screen bg-paper text-ink antialiased" style={bodyFont}>
+  <div className="min-h-screen bg-white text-navy antialiased" style={bodyFont}>
     <PageMeta title={t('meta.home.title')} description={t('meta.home.description')} />
 
     <WhatsAppFab />

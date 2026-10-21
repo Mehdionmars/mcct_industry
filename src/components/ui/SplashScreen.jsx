@@ -59,7 +59,7 @@ const SplashScreen = ({ onDone }) => {
     <div
       role="status"
       aria-label={t('common.loading')}
-      className="bp-grid-dark fixed inset-0 z-[400] flex flex-col items-center justify-center gap-[clamp(20px,4vw,36px)] bg-night px-6 text-center"
+      className="fixed inset-0 z-[400] flex flex-col items-center justify-center gap-[clamp(20px,4vw,36px)] bg-white px-6 text-center"
       style={{
         opacity: isLeaving ? 0 : 1,
         transform: isLeaving ? 'scale(1.04)' : 'scale(1)',
@@ -69,21 +69,19 @@ const SplashScreen = ({ onDone }) => {
       <img
         src="/logo1.png"
         alt="MCCT Industrie"
-        className="h-[clamp(38px,7vw,68px)] w-auto animate-mcct-rise brightness-0 invert"
+        className="h-[clamp(38px,7vw,68px)] w-auto animate-mcct-rise"
         style={{ animationDuration: '0.7s' }}
       />
 
       <img
-        src="/assets/brand/tagline-light.webp"
+        src="/assets/brand/tagline-dark.webp"
         alt="Your vision, our mission"
         className="w-[min(78vw,620px)] animate-mcct-rise"
         style={{ animationDelay: '0.18s', animationDuration: '0.8s' }}
       />
 
-      {/* Barre de chargement graduée comme un réglet. */}
-      <span aria-hidden="true" className="relative block w-[min(60vw,320px)]">
-        <span className="bp-ruler block text-nightrule" />
-        <span className="absolute inset-x-0 bottom-0 block h-[3px] origin-left animate-mcct-load bg-safety" />
+      <span aria-hidden="true" className="block h-1 w-[min(60vw,320px)] overflow-hidden rounded-full bg-sky">
+        <span className="block h-full w-full origin-left animate-mcct-load rounded-full bg-brand" />
       </span>
     </div>
   );

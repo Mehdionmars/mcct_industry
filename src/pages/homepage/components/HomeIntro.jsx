@@ -1,8 +1,8 @@
 import React, { useEffect, useRef, useState } from 'react';
 import Reveal from '../../../components/ui/Reveal';
 import { useI18n } from '../../../i18n/LanguageProvider';
-import { headingFont, container } from '../../../components/ui/mcctTheme';
-import { Eyebrow, Figure, Mark } from '../../../components/ui/Blueprint';
+import { container } from '../../../components/ui/mcctTheme';
+import { Eyebrow, SectionTitle } from '../../../components/ui/Corporate';
 import { getKeyFigures } from '../../../data/mcct';
 import { img } from '../../../data/gallery';
 
@@ -51,59 +51,45 @@ const HomeIntro = () => {
   const title = t('home.introTitle');
 
   return (
-  <section id="apropos" className="bg-paper pb-[110px] pt-[110px] text-ink">
+  <section id="apropos" className="bg-white py-24">
     <div className={container}>
-      <div className="grid items-start gap-14 [grid-template-columns:repeat(auto-fit,minmax(min(100%,320px),1fr))]">
-        <Reveal>
-          <Eyebrow>{t('home.introEyebrow')}</Eyebrow>
-          <h2
-            className="text-[clamp(2.6rem,5vw,4.8rem)] font-bold uppercase leading-[1.02] tracking-[-0.01em]"
-            style={headingFont}
-          >
-            {title?.[0]}
-            <br />
-            {title?.[1]}
-            <Mark />
-          </h2>
+      <div className="grid items-center gap-14 min-[1000px]:grid-cols-2">
+        <Reveal className="relative min-w-0">
+          <div className="overflow-hidden rounded-3xl shadow-[0_30px_70px_-30px_rgba(15,42,71,0.4)]">
+            <img
+              src={img('IMG_7864')}
+              alt={t('home.introImageAlt')}
+              loading="lazy"
+              className="block h-[clamp(320px,50vh,520px)] w-full object-cover transition-transform [transition-duration:800ms] hover:scale-[1.03]"
+            />
+          </div>
+          <div
+            aria-hidden="true"
+            className="absolute -bottom-5 -right-5 -z-10 hidden h-40 w-40 rounded-3xl bg-sky min-[1000px]:block"
+          />
         </Reveal>
-        <Reveal className="max-w-[540px] border-l border-ink/20 pl-7 min-[900px]:mt-12">
-          <p className="mb-5 text-[17px] leading-[1.7] text-ink2">{t('home.introP1')}</p>
-          <p className="mb-8 text-[17px] leading-[1.7] text-ink2">{t('home.introP2')}</p>
+        <Reveal className="min-w-0">
+          <Eyebrow>{t('home.introEyebrow')}</Eyebrow>
+          <SectionTitle title={title} accentLast />
+          <p className="mt-6 text-[17px] leading-[1.75] text-copy">{t('home.introP1')}</p>
+          <p className="mt-4 text-[17px] leading-[1.75] text-copy">{t('home.introP2')}</p>
           <a
             href="#savoirfaire"
-            className="inline-flex items-center gap-2.5 border-b-2 border-safety pb-1.5 font-mono text-[13px] font-semibold uppercase tracking-[0.1em] text-ink transition-colors hover:text-brand"
+            className="mt-7 inline-flex items-center gap-2 text-[15.5px] font-semibold text-brand transition-colors hover:text-navy"
           >
             {t('home.introLink')} <span aria-hidden="true">→</span>
           </a>
         </Reveal>
       </div>
 
-      <Reveal className="mt-[72px]">
-        <Figure
-          src={img('IMG_7864')}
-          alt={t('home.introImageAlt')}
-          fig="02"
-          caption={t('home.introImageAlt')}
-          frameClassName="h-[clamp(300px,52vh,600px)]"
-          imgClassName="h-full w-full object-cover transition-transform [transition-duration:800ms] [transition-timing-function:cubic-bezier(0.22,1,0.36,1)] hover:scale-[1.03]"
-        />
-      </Reveal>
-
-      {/* Chiffres clés présentés comme un tableau de caractéristiques. */}
-      <div className="mt-16 grid grid-cols-2 border-l border-t border-ink min-[900px]:grid-cols-4">
-        {keyFigures?.map((figure, index) => (
-          <Reveal key={figure?.label} className="min-w-0 border-b border-r border-ink bg-paper p-5 min-[600px]:p-7">
-            <p className="font-mono text-[11px] tracking-[0.16em] text-steel">
-              {t('bp.ref')} K-{String(index + 1)?.padStart(2, '0')}
+      {/* Chiffres clés en cartes. */}
+      <div className="mt-20 grid grid-cols-2 gap-4 min-[900px]:grid-cols-4 min-[900px]:gap-6">
+        {keyFigures?.map((figure) => (
+          <Reveal key={figure?.label} className="min-w-0 rounded-2xl bg-mist p-6 min-[600px]:p-8">
+            <p className="font-display text-[clamp(2.4rem,4.4vw,3.4rem)] font-extrabold leading-none tracking-[-0.02em] text-brand">
+              <Counter value={figure?.value} />+
             </p>
-            <p
-              className="mt-6 text-[clamp(2.6rem,5.4vw,5rem)] font-bold leading-none tracking-[-0.02em] text-ink"
-              style={headingFont}
-            >
-              <Counter value={figure?.value} />
-              <span className="text-brand">+</span>
-            </p>
-            <p className="mt-3 font-mono text-[12px] font-medium uppercase tracking-[0.12em] text-ink2">{figure?.label}</p>
+            <p className="mt-3 text-[15px] font-medium leading-[1.4] text-navy">{figure?.label}</p>
           </Reveal>
         ))}
       </div>

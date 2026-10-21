@@ -5,18 +5,19 @@ import SiteHeader from '../components/ui/SiteHeader';
 import SiteCTA from '../components/ui/SiteCTA';
 import WhatsAppFab from '../components/ui/WhatsAppFab';
 import { useI18n } from '../i18n/LanguageProvider';
-import { bodyFont, headingFont, container, navLinks } from '../components/ui/mcctTheme';
-import { Eyebrow, PageHero } from '../components/ui/Blueprint';
+import { ArrowRight } from 'lucide-react';
+import { bodyFont, container, navLinks } from '../components/ui/mcctTheme';
+import { Eyebrow, PageHero, card } from '../components/ui/Corporate';
 import { img } from '../data/gallery';
 
 const NotFound = () => {
   const { t } = useI18n();
   const title = t('notFound.title');
 
-  const rows = [{ key: 'home', num: '00', to: '/' }, ...(navLinks || [])];
+  const rows = [{ key: 'home', to: '/' }, ...(navLinks || [])];
 
   return (
-    <div className="min-h-screen bg-paper text-ink antialiased" style={bodyFont}>
+    <div className="min-h-screen bg-white text-navy antialiased" style={bodyFont}>
       <PageMeta title={t('meta.notFound.title')} description={t('meta.notFound.description')} />
 
       <WhatsAppFab />
@@ -28,40 +29,28 @@ const NotFound = () => {
         text={t('notFound.text')}
         image={img('IMG_7873')}
         imageAlt={t('notFound.heroAlt')}
-        fig="404"
+        crumb={t('notFound.eyebrow')}
       />
 
-      <section className="py-[90px]">
+      <section className="py-20">
         <div className={container}>
           <Eyebrow>{t('notFound.where')}</Eyebrow>
-          {/* Renvois vers les pages du site, en lignes de nomenclature. */}
-          <nav aria-label={t('notFound.pagesNav')} className="flex flex-col border-t border-ink">
+          <nav aria-label={t('notFound.pagesNav')} className="grid gap-4 [grid-template-columns:repeat(auto-fit,minmax(min(100%,240px),1fr))]">
             {rows?.map((link) => (
               <Link
                 key={link?.to}
                 to={link?.to}
-                className="group flex items-center gap-7 border-b border-ink py-6 transition-colors duration-300 hover:bg-paper2"
+                className={`${card} group flex items-center justify-between gap-4 px-6 py-5 transition-colors hover:border-brand`}
               >
-                <span className="w-10 shrink-0 font-mono text-[12px] tracking-[0.14em] text-brand">{link?.num}</span>
-                <span
-                  className="text-[clamp(1.8rem,3.6vw,3rem)] font-bold uppercase leading-none"
-                  style={headingFont}
-                >
-                  {t(`nav.${link?.key}`)}
-                </span>
-                <span
-                  aria-hidden="true"
-                  className="ml-auto pr-2 font-mono text-[22px] text-ink transition-transform duration-300 group-hover:translate-x-2"
-                >
-                  →
-                </span>
+                <span className="font-display text-[19px] font-bold text-navy">{t(`nav.${link?.key}`)}</span>
+                <ArrowRight aria-hidden="true" className="h-5 w-5 text-brand transition-transform duration-300 group-hover:translate-x-1" />
               </Link>
             ))}
           </nav>
         </div>
       </section>
 
-      <SiteCTA titleKey="cta.info" ctaKey="cta.writeUs" sheet={null} />
+      <SiteCTA titleKey="cta.info" ctaKey="cta.writeUs" />
     </div>
   );
 };

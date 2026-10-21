@@ -1,8 +1,7 @@
 import React from 'react';
 import useScrollProgress from '../../../hooks/useScrollProgress';
 import { useI18n } from '../../../i18n/LanguageProvider';
-import { headingFont, container } from '../../../components/ui/mcctTheme';
-import { Mark } from '../../../components/ui/Blueprint';
+import { container } from '../../../components/ui/mcctTheme';
 import { getJourney } from '../../../data/mcct';
 
 /**
@@ -28,7 +27,7 @@ const HomeJourney = () => {
     <section
       ref={ref}
       aria-label={t('home.journeyLabel')}
-      className="relative h-[300vh] bg-night min-[900px]:h-[360vh]"
+      className="relative h-[300vh] bg-navy min-[900px]:h-[360vh]"
     >
       <div className="sticky top-0 h-[100svh] overflow-hidden">
         {/* Photos empilées : seule l'active est opaque, avec un lent recadrage. */}
@@ -54,15 +53,14 @@ const HomeJourney = () => {
         */}
         <span
           aria-hidden="true"
-          className="absolute inset-0 bg-[linear-gradient(180deg,rgba(11,27,44,0.75)_0%,rgba(11,27,44,0.42)_38%,rgba(11,27,44,0.93)_100%)]"
+          className="absolute inset-0 bg-[linear-gradient(180deg,rgba(15,42,71,0.7)_0%,rgba(15,42,71,0.35)_38%,rgba(15,42,71,0.9)_100%)]"
         />
         <span
           aria-hidden="true"
-          className="absolute inset-0 bg-[linear-gradient(90deg,rgba(11,27,44,0.92)_0%,rgba(11,27,44,0.72)_38%,rgba(11,27,44,0.2)_72%,transparent_100%)]"
+          className="absolute inset-0 bg-[linear-gradient(90deg,rgba(15,42,71,0.92)_0%,rgba(15,42,71,0.7)_38%,rgba(15,42,71,0.15)_72%,transparent_100%)]"
         />
-        <span aria-hidden="true" className="bp-grid-dark absolute inset-0" />
 
-        <div className={`${container} relative flex h-full flex-col justify-between pb-10 pt-[128px] text-snow`}>
+        <div className={`${container} relative flex h-full flex-col justify-between pb-10 pt-[128px] text-white`}>
           {/* ------------------------------------------------------- chapitre */}
           <div className="relative flex-1">
             {chapters?.map((chapter, i) => (
@@ -81,20 +79,15 @@ const HomeJourney = () => {
                   par les sur-titres numérotés 03 et 04, un simple « 01 » se
                   lirait comme un numéro de section.
                 */}
-                <p className="mb-6 flex items-center gap-3 font-mono text-[12.5px] font-medium uppercase tracking-[0.14em] text-brandlt">
-                  <span className="inline-flex h-7 items-center border border-current px-2">
-                    {chapter?.num} / {String(chapters?.length)?.padStart(2, '0')}
-                  </span>
+                <p className="mb-6 inline-flex w-fit items-center gap-2 rounded-full bg-white/10 px-3.5 py-1.5 text-[13px] font-semibold text-skytext">
+                  {chapter?.num} / {String(chapters?.length)?.padStart(2, '0')}
+                  <span aria-hidden="true" className="h-1 w-1 rounded-full bg-current" />
                   {chapter?.label}
                 </p>
-                <h2
-                  className="max-w-[15ch] whitespace-pre-line text-[clamp(2.6rem,7vw,6rem)] font-bold uppercase leading-[1.02] tracking-[-0.01em]"
-                  style={headingFont}
-                >
-                  {chapter?.title?.replace(/\.$/, '')}
-                  <Mark />
+                <h2 className="max-w-[16ch] whitespace-pre-line font-display text-[clamp(2.4rem,6vw,5rem)] font-extrabold leading-[1.06] tracking-[-0.03em]">
+                  {chapter?.title}
                 </h2>
-                <p className="mt-7 max-w-[500px] text-[17px] leading-[1.65] text-snow/85">{chapter?.desc}</p>
+                <p className="mt-6 max-w-[500px] text-[17.5px] leading-[1.7] text-white/85">{chapter?.desc}</p>
               </div>
             ))}
           </div>
@@ -104,18 +97,17 @@ const HomeJourney = () => {
           <ul className="grid list-none grid-cols-4 gap-2.5 min-[700px]:gap-3">
             {chapters?.map((chapter, i) => (
               <li key={chapter?.num} className="flex flex-col gap-2.5">
-                <span aria-hidden="true" className="relative block h-[14px] w-full">
-                  <span className="bp-ruler absolute inset-0 text-snow/25" />
+                <span aria-hidden="true" className="block h-1 w-full overflow-hidden rounded-full bg-white/20">
                   <span
-                    className="absolute bottom-0 left-0 block h-[4px] w-full origin-left bg-safety transition-transform [transition-duration:600ms] [transition-timing-function:cubic-bezier(0.22,1,0.36,1)] motion-reduce:transition-none"
+                    className="block h-full w-full origin-left rounded-full bg-skytext transition-transform [transition-duration:600ms] [transition-timing-function:cubic-bezier(0.22,1,0.36,1)] motion-reduce:transition-none"
                     style={{ transform: `scaleX(${i <= index ? 1 : 0})` }}
                   />
                 </span>
                 <span
-                  className="hidden font-mono text-[11.5px] font-medium uppercase tracking-[0.14em] transition-colors duration-500 min-[700px]:block"
-                  style={{ color: i === index ? '#E9EFF5' : 'rgba(233,239,245,0.5)' }}
+                  className="hidden text-[14px] font-medium transition-colors duration-500 min-[700px]:block"
+                  style={{ color: i === index ? '#FFFFFF' : 'rgba(255,255,255,0.55)' }}
                 >
-                  {chapter?.num} · {chapter?.label}
+                  {chapter?.label}
                 </span>
               </li>
             ))}

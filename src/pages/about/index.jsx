@@ -1,14 +1,17 @@
 import React from 'react';
+import { Eye, Gem, Quote, Target } from 'lucide-react';
 import PageMeta from '../../components/ui/PageMeta';
 import SiteHeader from '../../components/ui/SiteHeader';
 import SiteCTA from '../../components/ui/SiteCTA';
 import WhatsAppFab from '../../components/ui/WhatsAppFab';
 import Reveal from '../../components/ui/Reveal';
 import { useI18n, localize } from '../../i18n/LanguageProvider';
-import { bodyFont, headingFont, container } from '../../components/ui/mcctTheme';
-import { Eyebrow, Figure, Mark, PageHero } from '../../components/ui/Blueprint';
+import { bodyFont, container } from '../../components/ui/mcctTheme';
+import { Eyebrow, PageHero, SectionTitle, card } from '../../components/ui/Corporate';
 import { signatureQuote } from '../../data/mcct';
 import { img } from '../../data/gallery';
+
+const pillarIcons = [Target, Eye, Gem];
 
 const About = () => {
   const { lang, t } = useI18n();
@@ -17,7 +20,7 @@ const About = () => {
   const signature = localize(signatureQuote, lang);
 
   return (
-    <div className="min-h-screen bg-paper text-ink antialiased" style={bodyFont}>
+    <div className="min-h-screen bg-white text-navy antialiased" style={bodyFont}>
       <PageMeta title={t('meta.about.title')} description={t('meta.about.description')} />
 
       <WhatsAppFab />
@@ -28,91 +31,73 @@ const About = () => {
         title={title}
         image={img('IMG_7940')}
         imageAlt={t('about.heroAlt')}
-        fig="01"
-        sheet="02"
+        crumb={t('nav.about')}
       />
 
-      <section className="py-[110px]">
-        <div className={`${container} grid items-start gap-14 [grid-template-columns:repeat(auto-fit,minmax(min(100%,320px),1fr))]`}>
-          <Reveal>
+      <section className="py-24">
+        <div className={`${container} grid items-start gap-14 min-[1000px]:grid-cols-2`}>
+          <Reveal className="min-w-0">
             <Eyebrow>{t('about.whoEyebrow')}</Eyebrow>
-            <h2
-              className="text-[clamp(2.4rem,4.6vw,4.2rem)] font-bold uppercase leading-[1.02] tracking-[-0.01em]"
-              style={headingFont}
-            >
-              {t('about.whoTitle')}
-              <Mark />
-            </h2>
+            <SectionTitle title={t('about.whoTitle')} />
           </Reveal>
-          <Reveal className="max-w-[540px] border-l border-ink/20 pl-7 min-[900px]:mt-12">
-            <p className="mb-5 text-[17px] leading-[1.7] text-ink2">{t('about.p1')}</p>
-            <p className="mb-5 text-[17px] leading-[1.7] text-ink2">{t('about.p2')}</p>
-            <p className="text-[17px] leading-[1.7] text-ink2">{t('about.p3')}</p>
+          <Reveal className="min-w-0 min-[1000px]:pt-14">
+            <p className="text-[17px] leading-[1.75] text-copy">{t('about.p1')}</p>
+            <p className="mt-4 text-[17px] leading-[1.75] text-copy">{t('about.p2')}</p>
+            <p className="mt-4 text-[17px] leading-[1.75] text-copy">{t('about.p3')}</p>
           </Reveal>
         </div>
 
-        {/* Citation de la direction, encadrée comme une note de plan. */}
+        {/* Citation de la direction. */}
         <Reveal className={`${container} mt-16`}>
-          <div className="relative border border-ink bg-paper2 p-8 min-[900px]:p-12">
-            <span className="absolute -top-3 left-8 bg-safety px-2.5 py-0.5 font-mono text-[11px] font-semibold tracking-[0.14em] text-ink">
-              NOTE
-            </span>
-            <blockquote
-              className="max-w-[920px] text-[clamp(1.4rem,3vw,2.3rem)] font-medium leading-[1.3] tracking-[-0.01em] text-ink"
-              style={headingFont}
-            >
-              <span className="text-brand">«&nbsp;</span>
+          <figure className="relative m-0 overflow-hidden rounded-3xl bg-mist px-8 py-12 min-[900px]:px-14">
+            <Quote aria-hidden="true" className="mb-6 h-10 w-10 text-brand" fill="currentColor" strokeWidth={0} />
+            <blockquote className="max-w-[900px] font-display text-[clamp(1.5rem,3vw,2.2rem)] font-semibold leading-[1.35] tracking-[-0.01em] text-navy">
               {signature}
-              <span className="text-brand">&nbsp;»</span>
             </blockquote>
-            <p className="mt-6 font-mono text-[12px] font-medium uppercase tracking-[0.14em] text-steel">
-              — {t('about.signatureLabel')}
-            </p>
-          </div>
+            <figcaption className="mt-6 text-[15px] font-semibold text-brand">{t('about.signatureLabel')}</figcaption>
+          </figure>
         </Reveal>
       </section>
 
-      <section className="bp-grid-dark bg-night py-[110px] text-snow">
-        <div className={container}>
-        <div className="grid border-l border-t border-nightrule [grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr))]">
-          {pillars?.map((pillar, index) => (
-            <Reveal key={pillar?.label} className="border-b border-r border-nightrule p-8 min-[900px]:p-10">
-              <p className="mb-8 flex items-center justify-between font-mono text-[12px] uppercase tracking-[0.16em] text-brandlt">
-                <span>{pillar?.label}</span>
-                <span className="text-fog">0{index + 1}</span>
-              </p>
-              <p className="text-[19px] leading-[1.6] text-snow/90">{pillar?.text}</p>
-            </Reveal>
-          ))}
-        </div>
-        </div>
+      <section className="bg-mist py-24">
+        <ul className={`${container} grid list-none gap-6 [grid-template-columns:repeat(auto-fit,minmax(min(100%,280px),1fr))]`}>
+          {pillars?.map((pillar, index) => {
+            const Icon = pillarIcons[index % pillarIcons.length];
+            return (
+              <Reveal as="li" key={pillar?.label} delay={index * 90} className={`${card} p-8`}>
+                <span className="mb-6 flex h-12 w-12 items-center justify-center rounded-xl bg-sky text-brand">
+                  <Icon aria-hidden="true" className="h-6 w-6" strokeWidth={1.8} />
+                </span>
+                <p className="font-display text-[22px] font-bold text-navy">{pillar?.label}</p>
+                <p className="mt-3 text-[16px] leading-[1.7] text-copy">{pillar?.text}</p>
+              </Reveal>
+            );
+          })}
+        </ul>
       </section>
 
-      <section className="py-[110px]">
-        <div className={`${container} grid grid-cols-1 gap-10 min-[900px]:[grid-template-columns:2fr_1fr]`}>
-          <Reveal>
-            <Figure
+      <section className="pt-24">
+        <div className={`${container} grid grid-cols-1 gap-6 min-[900px]:[grid-template-columns:2fr_1fr]`}>
+          <Reveal className="min-w-0 overflow-hidden rounded-3xl">
+            <img
               src={img('IMG_7947')}
               alt={t('about.imageAlt1')}
-              fig="02"
-              caption={t('about.imageAlt1')}
-              frameClassName="h-[420px]"
-              imgClassName="h-full w-full object-cover transition-transform [transition-duration:600ms] hover:scale-[1.04]"
+              loading="lazy"
+              className="block h-[420px] w-full object-cover transition-transform [transition-duration:600ms] hover:scale-[1.03]"
             />
           </Reveal>
-          <Reveal>
-            <Figure
+          <Reveal className="min-w-0 overflow-hidden rounded-3xl">
+            <img
               src={img('IMG_7912')}
               alt={t('about.imageAlt2')}
-              fig="03"
-              frameClassName="h-[420px]"
-              imgClassName="h-full w-full object-cover transition-transform [transition-duration:600ms] hover:scale-[1.04]"
+              loading="lazy"
+              className="block h-[420px] w-full object-cover transition-transform [transition-duration:600ms] hover:scale-[1.03]"
             />
           </Reveal>
         </div>
       </section>
 
-      <SiteCTA sheet="02" />
+      <SiteCTA />
     </div>
   );
 };

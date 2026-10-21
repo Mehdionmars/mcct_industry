@@ -3,8 +3,9 @@ import Reveal from '../../../components/ui/Reveal';
 import useCarousel from '../../../hooks/useCarousel';
 import useParallax from '../../../hooks/useParallax';
 import { useI18n } from '../../../i18n/LanguageProvider';
-import { SAFETY, headingFont, container } from '../../../components/ui/mcctTheme';
-import { Eyebrow, Mark, squareBtn } from '../../../components/ui/Blueprint';
+import { ArrowDown, ArrowUp } from 'lucide-react';
+import { ACCENT_DARK, container } from '../../../components/ui/mcctTheme';
+import { Eyebrow, SectionTitle, roundBtn } from '../../../components/ui/Corporate';
 import { getValues } from '../../../data/mcct';
 
 /**
@@ -26,7 +27,7 @@ const HomeValues = () => {
   const active = values?.[index];
 
   return (
-    <section ref={parallaxRef} className="relative overflow-hidden bg-night py-[110px] text-snow">
+    <section ref={parallaxRef} className="relative overflow-hidden bg-navy py-24 text-white">
       {/* Couche parallaxe : surdimensionnée pour ne jamais laisser de bord nu. */}
       <div aria-hidden="true" className="pointer-events-none absolute inset-0 overflow-hidden">
         <img
@@ -36,25 +37,16 @@ const HomeValues = () => {
           className="absolute left-0 top-[-12%] h-[124%] w-full object-cover opacity-[0.16] will-change-transform"
           style={{ transform: `translate3d(0, ${offset}px, 0)` }}
         />
-        <span className="absolute inset-0 bg-[linear-gradient(180deg,#0B1B2C_0%,rgba(11,27,44,0.72)_45%,#0B1B2C_100%)]" />
-        <span className="bp-grid-dark absolute inset-0" />
+        <span className="absolute inset-0 bg-[linear-gradient(180deg,#0F2A47_0%,rgba(15,42,71,0.78)_45%,#0F2A47_100%)]" />
       </div>
 
       <div className={`${container} relative`}>
         <Reveal className="mb-16 flex flex-wrap items-end justify-between gap-8">
           <div>
             <Eyebrow tone="dark">{t('home.valuesEyebrow')}</Eyebrow>
-            <h2
-              className="text-[clamp(2.4rem,5vw,4.4rem)] font-bold uppercase leading-[1.02] tracking-[-0.01em]"
-              style={headingFont}
-            >
-              {t('home.valuesTitle')?.[0]}
-              <br />
-              {t('home.valuesTitle')?.[1]}
-              <Mark />
-            </h2>
+            <SectionTitle title={t('home.valuesTitle')} tone="dark" accentLast className="max-w-[640px]" />
           </div>
-          <p className="max-w-[360px] border-l border-nightrule pl-6 text-[16px] leading-[1.65] text-fog">{t('home.valuesText')}</p>
+          <p className="max-w-[380px] text-[16px] leading-[1.65] text-onnavy">{t('home.valuesText')}</p>
         </Reveal>
 
         <div
@@ -63,7 +55,7 @@ const HomeValues = () => {
           role="group"
           aria-roledescription="carrousel"
           aria-label={t('home.valuesEyebrow')}
-          className="grid gap-12 outline-none focus-visible:ring-2 focus-visible:ring-safety/70 min-[900px]:[grid-template-columns:1fr_minmax(280px,420px)]"
+          className="grid gap-12 rounded-2xl outline-none focus-visible:ring-2 focus-visible:ring-skytext/70 min-[900px]:[grid-template-columns:1fr_minmax(280px,440px)]"
         >
           {/* ------------------------------------------------ carrousel vertical */}
           <div className="flex gap-7">
@@ -78,10 +70,10 @@ const HomeValues = () => {
                   className="group relative flex h-16 w-3 cursor-pointer items-center justify-center border-none bg-transparent p-0"
                 >
                   <span
-                    className="block w-[4px] transition-all duration-500"
+                    className="block w-[4px] rounded-full transition-all duration-500"
                     style={{
                       height: i === index ? '100%' : '38%',
-                      backgroundColor: i === index ? SAFETY : '#24405C'
+                      backgroundColor: i === index ? ACCENT_DARK : 'rgba(255,255,255,0.2)'
                     }}
                   />
                 </button>
@@ -105,14 +97,11 @@ const HomeValues = () => {
                     className="flex h-[290px] flex-col justify-center transition-opacity duration-500 min-[900px]:h-[270px]"
                     style={{ opacity: i === index ? 1 : 0 }}
                   >
-                    <p className="mb-4 font-mono text-[12px] tracking-[0.14em] text-brandlt">V-{value?.num}</p>
-                    <p
-                      className="text-[clamp(2.4rem,5.6vw,4.4rem)] font-bold uppercase leading-[1.02] tracking-[-0.01em]"
-                      style={headingFont}
-                    >
+                    <p className="mb-3 text-[14px] font-semibold text-skytext">{value?.num}</p>
+                    <p className="font-display text-[clamp(2.2rem,4.8vw,3.6rem)] font-extrabold leading-[1.05] tracking-[-0.02em]">
                       {value?.title}
                     </p>
-                    <p className="mt-5 max-w-[520px] text-[16px] leading-[1.7] text-snow/85">{value?.desc}</p>
+                    <p className="mt-5 max-w-[520px] text-[16.5px] leading-[1.7] text-white/85">{value?.desc}</p>
                   </div>
                 ))}
               </div>
@@ -122,8 +111,7 @@ const HomeValues = () => {
           {/* ------------------------------------------------ visuel + commandes */}
           <div className="flex flex-col gap-5">
             <div className="relative">
-            <span aria-hidden="true" className="bp-corners z-10 text-brandlt" />
-            <div className="relative h-[270px] overflow-hidden min-[900px]:h-[330px]">
+            <div className="relative h-[270px] overflow-hidden rounded-2xl min-[900px]:h-[330px]">
               {values?.map((value, i) => (
                 <img
                   key={value?.num}
@@ -137,31 +125,31 @@ const HomeValues = () => {
               ))}
               <span
                 aria-hidden="true"
-                className="pointer-events-none absolute inset-x-0 bottom-0 h-1/3 bg-[linear-gradient(180deg,transparent,rgba(11,27,44,0.6))]"
+                className="pointer-events-none absolute inset-x-0 bottom-0 h-1/3 bg-[linear-gradient(180deg,transparent,rgba(15,42,71,0.5))]"
               />
             </div>
             </div>
 
             <div className="flex items-center justify-between">
-              <p className="font-mono text-[12px] tracking-[0.14em] text-fog">
-                <span className="text-snow">{active?.num}</span> / {String(values?.length)?.padStart(2, '0')}
+              <p className="text-[14px] font-medium text-onnavy">
+                <span className="text-white">{active?.num}</span> / {String(values?.length)?.padStart(2, '0')}
               </p>
               <div className="flex gap-2.5">
                 <button
                   type="button"
                   onClick={prev}
                   aria-label={t('home.valuesPrev')}
-                  className={squareBtn('dark')}
+                  className={roundBtn('dark')}
                 >
-                  <span aria-hidden="true">↑</span>
+                  <ArrowUp aria-hidden="true" className="h-5 w-5" />
                 </button>
                 <button
                   type="button"
                   onClick={next}
                   aria-label={t('home.valuesNext')}
-                  className={squareBtn('dark')}
+                  className={roundBtn('dark')}
                 >
-                  <span aria-hidden="true">↓</span>
+                  <ArrowDown aria-hidden="true" className="h-5 w-5" />
                 </button>
               </div>
             </div>

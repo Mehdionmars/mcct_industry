@@ -1,15 +1,12 @@
-// Jetons visuels partagés — charte « plan technique ».
-// Les mêmes valeurs existent en classes Tailwind (bg-paper, text-ink, bg-safety…).
-export const ACCENT = '#1F6AAE'; // bleu MCCT sur fond clair
-export const ACCENT_DARK = '#5AA7EA'; // bleu MCCT sur fond sombre
-export const SAFETY = '#F2B705'; // jaune sécurité
-export const INK = '#0E2235';
-export const PAPER = '#F2F4F6';
-export const NIGHT = '#0B1B2C';
+// Jetons visuels partagés — charte « corporate clair ».
+// Les mêmes valeurs existent en classes Tailwind (bg-navy, text-brand, bg-mist…).
+export const ACCENT = '#1F6AAE'; // bleu MCCT
+export const ACCENT_DARK = '#7DB8EC'; // bleu MCCT sur fond sombre
+export const NAVY = '#0F2A47';
+export const MIST = '#F4F7FB';
 
-export const bodyFont = { fontFamily: "'IBM Plex Sans', system-ui, sans-serif" };
-export const headingFont = { fontFamily: "'IBM Plex Sans Condensed', 'Arial Narrow', sans-serif" };
-export const monoFont = { fontFamily: "'IBM Plex Mono', ui-monospace, monospace" };
+export const bodyFont = { fontFamily: "'Inter', system-ui, sans-serif" };
+export const headingFont = { fontFamily: "'Inter', system-ui, sans-serif" };
 
 // Le point de rupture de la maquette (900px) ne fait pas partie de l'échelle Tailwind :
 // les composants utilisent les variantes arbitraires min-[900px]: / max-[899px]:.
@@ -32,5 +29,5 @@ export const ADDRESS_LINES = [
 ];
 
 
-// Conteneur central commun à toutes les sections de la maquette (1280px, 40px de marge).
-export const container = 'mx-auto w-full max-w-[1280px] px-5 min-[900px]:px-10';
+// Conteneur central commun à toutes les sections (1240px, marges latérales).
+export const container = 'mx-auto w-full max-w-[1240px] px-5 min-[900px]:px-10';
