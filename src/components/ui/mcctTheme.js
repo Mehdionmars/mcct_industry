@@ -13,9 +13,7 @@ export const headingFont = { fontFamily: "'Space Grotesk', 'Manrope', sans-serif
 export const navLinks = [
   { key: 'about', num: '01', to: '/about' },
   { key: 'services', num: '02', to: '/services' },
-  { key: 'projects', num: '03', to: '/projects' },
-  { key: 'gallery', num: '04', to: '/galerie' },
-  { key: 'contact', num: '05', to: '/contact' }
+  { key: 'contact', num: '03', to: '/contact' }
 ];
 
 export const PHONE = '+212 661 49 47 61';
