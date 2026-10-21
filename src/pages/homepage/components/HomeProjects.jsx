@@ -1,5 +1,4 @@
 import React, { useMemo, useState } from 'react';
-import { Link } from 'react-router-dom';
 import Reveal from '../../../components/ui/Reveal';
 import { useI18n } from '../../../i18n/LanguageProvider';
 import { ACCENT, headingFont, container } from '../../../components/ui/mcctTheme';
@@ -72,21 +71,21 @@ const HomeProjects = () => {
         >
           {visibleProjects?.map((project) => (
             <figure key={project?.slug} className="group m-0">
-              <Link to={`/projects/${project?.slug}`} className="block overflow-hidden bg-[#0D0F10]">
+              <div className="overflow-hidden bg-[#0D0F10]">
                 <img
                   src={project?.thumbSrc}
                   alt={project?.title}
                   loading="lazy"
                   className="block h-[300px] w-full object-cover transition-transform [transition-duration:600ms] [transition-timing-function:cubic-bezier(0.22,1,0.36,1)] group-hover:scale-[1.06]"
                 />
-              </Link>
+              </div>
               <figcaption className="flex items-baseline justify-between gap-4 pt-4">
-                <Link to={`/projects/${project?.slug}`} className="hover:text-[#2478BE]">
+                <div>
                   <span className="block text-[11.5px] font-extrabold tracking-[0.18em]" style={{ color: ACCENT }}>
                     {project?.categoryLabel}
                   </span>
                   <span className="mt-1.5 block text-[19px] font-extrabold tracking-[-0.01em]">{project?.title}</span>
-                </Link>
+                </div>
                 <span className="whitespace-nowrap text-[13px] tracking-[0.08em] text-[#565e66]">
                   {project?.location}
                 </span>

@@ -5,7 +5,7 @@ import { ACCENT, headingFont, container, EMAIL, EMAIL_HREF, PHONE, PHONE_HREF } 
 
 /**
  * Bandeau d'appel à l'action + bas de page, commun aux pages intérieures
- * (À propos, Activités, Projets, Galerie).
+ * (À propos, Activités).
  */
 const SiteCTA = ({ titleKey = 'cta.defaultTitle', accentSuffix = ' ?', ctaKey = 'cta.defaultLabel', ctaTo = '/contact' }) => {
   const { t } = useI18n();

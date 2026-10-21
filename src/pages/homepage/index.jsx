@@ -21,9 +21,7 @@ const homeNavLinks = [
   navLinks?.[0],
   navLinks?.[1],
   { num: '03', key: 'expertise', href: '#savoirfaire' },
-  { ...navLinks?.[2], num: '04' },
-  { ...navLinks?.[3], num: '05' },
-  { ...navLinks?.[4], num: '06' }
+  { ...navLinks?.[2], num: '04' }
 ];
 
 const Homepage = () => {

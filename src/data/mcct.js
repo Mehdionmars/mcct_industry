@@ -1,7 +1,7 @@
 // Contenus éditoriaux MCCT, français et anglais.
 // Chaque chaîne traduisible est un objet { fr, en } ; les getters ci-dessous
 // renvoient des objets déjà localisés pour la langue demandée.
-import { img, thumb, getGalleryItems } from './gallery';
+import { img, thumb } from './gallery';
 import { localize } from '../i18n/LanguageProvider';
 
 /** Identifiant d'URL lisible, toujours dérivé du titre français (URL stables). */
@@ -698,9 +698,8 @@ const rawProjects = [
   }
 ];
 
-export const getProjects = (lang = 'fr') => {
-  const gallery = getGalleryItems(lang);
-  return rawProjects?.map((project) => {
+export const getProjects = (lang = 'fr') =>
+  rawProjects?.map((project) => {
     const slug = slugify(project?.title?.fr);
     return {
       slug,
@@ -719,15 +718,11 @@ export const getProjects = (lang = 'fr') => {
         body: localize(section?.body, lang)
       })),
       services: localize(project?.services, lang),
-      materials: localize(project?.materials, lang),
-      gallery: gallery?.filter((item) => item?.projectSlug === slug)
+      materials: localize(project?.materials, lang)
     };
   });
-};
 
-export const getProjectBySlug = (slug, lang = 'fr') => getProjects(lang)?.find((project) => project?.slug === slug);
-
-/** Projets mis en avant sur l'accueil (sous-ensemble de la page Projets). */
+/** Projets mis en avant sur l'accueil. */
 const HOME_PROJECT_IMAGES = ['charpente-profiles-attente', 'IMG_7861', 'IMG_7905', 'IMG_7907', 'IMG_7943', 'IMG_7938', 'IMG_7918', 'IMG_7924'];
 export const getHomeProjects = (lang = 'fr') =>
   getProjects(lang)?.filter((project) => HOME_PROJECT_IMAGES?.includes(project?.image));

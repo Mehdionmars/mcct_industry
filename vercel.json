@@ -1,6 +1,11 @@
 {
   "buildCommand": "npm run build",
   "outputDirectory": "dist",
+  "redirects": [
+    { "source": "/projects", "destination": "/", "permanent": true },
+    { "source": "/projects/:slug*", "destination": "/", "permanent": true },
+    { "source": "/galerie", "destination": "/", "permanent": true }
+  ],
   "rewrites": [
     {
       "source": "/(.*)",

@@ -9,8 +9,6 @@ export const ui = {
       about: 'À PROPOS',
       services: 'ACTIVITÉS',
       expertise: 'SAVOIR-FAIRE',
-      projects: 'PROJETS',
-      gallery: 'GALERIE',
       contact: 'CONTACT',
       home: 'ACCUEIL',
       main: 'Navigation principale',
@@ -46,12 +44,6 @@ export const ui = {
       nextSite: 'VOTRE PROJET, NOTRE PROCHAIN CHANTIER',
       info: "BESOIN D'UN RENSEIGNEMENT",
       writeUs: 'NOUS ÉCRIRE'
-    },
-    lightbox: {
-      dialog: 'Visionneuse',
-      close: 'Fermer',
-      prev: 'Image précédente',
-      next: 'Image suivante'
     },
     home: {
       journeyLabel: 'De l’atelier à l’ouvrage livré',
@@ -166,36 +158,13 @@ export const ui = {
           text: 'Excellence, sécurité, innovation, engagement — à chaque étape, en atelier comme sur chantier.'
         }
       ],
-      imageAlt1: 'Hangar métallique MCCT',
-      imageAlt2: 'Atelier de soudure MCCT'
+      imageAlt1: 'Montage d’une charpente métallique MCCT au chariot télescopique',
+      imageAlt2: 'Technicien MCCT sur une installation gaz'
     },
     services: {
       eyebrow: 'NOS ACTIVITÉS',
       title: ['DES SOLUTIONS', 'CONÇUES POUR', "L'INDUSTRIE"],
       heroAlt: 'Convoyeur industriel réalisé par MCCT'
-    },
-    projects: {
-      eyebrow: 'NOS PROJETS',
-      title: ['DES RÉALISATIONS', 'QUI PARLENT', "D'ELLES-MÊMES"],
-      heroAlt: 'Hangar industriel livré par MCCT',
-      back: '← TOUS LES PROJETS',
-      specs: {
-        category: 'CATÉGORIE',
-        location: 'LOCALISATION',
-        year: 'ANNÉE',
-        client: 'CLIENT',
-        services: 'PRESTATIONS'
-      },
-      materials: 'MATÉRIAUX',
-      gallery: 'GALERIE DU PROJET',
-      related: 'AUTRES PROJETS'
-    },
-    gallery: {
-      eyebrow: 'GALERIE',
-      title: ['MCCT INDUSTRIE,', 'SUR LE TERRAIN'],
-      subtitle: 'Une sélection de nos environnements industriels, chantiers et réalisations.',
-      heroAlt: 'Chantier de construction métallique MCCT',
-      count: (n, category) => `${n} VISUELS — ${category}`
     },
     contact: {
       title: ['CONSTRUISONS', 'QUELQUE CHOSE', 'ENSEMBLE'],
@@ -246,16 +215,6 @@ export const ui = {
         description:
           'Construction métallique, chaudronnerie, tuyauterie industrielle, montage, maintenance et équipements : les activités de MCCT Industrie.'
       },
-      projects: {
-        title: 'Réalisations en construction métallique au Maroc | MCCT Industrie',
-        description:
-          'Réalisations MCCT Industrie : hangars et charpentes métalliques, équipements de process, installations énergie et ensembles chaudronnés.'
-      },
-      gallery: {
-        title: 'Galerie chantiers et atelier | MCCT Industrie',
-        description:
-          'Galerie MCCT Industrie : une sélection de nos environnements industriels, chantiers et réalisations en construction métallique.'
-      },
       contact: {
         title: 'Contact — MCCT Industrie, Casablanca',
         description:
@@ -274,8 +233,6 @@ export const ui = {
       about: 'ABOUT',
       services: 'SERVICES',
       expertise: 'EXPERTISE',
-      projects: 'PROJECTS',
-      gallery: 'GALLERY',
       contact: 'CONTACT',
       home: 'HOME',
       main: 'Main navigation',
@@ -311,12 +268,6 @@ export const ui = {
       nextSite: 'YOUR PROJECT, OUR NEXT SITE',
       info: 'NEED INFORMATION',
       writeUs: 'CONTACT US'
-    },
-    lightbox: {
-      dialog: 'Image viewer',
-      close: 'Close',
-      prev: 'Previous image',
-      next: 'Next image'
     },
     home: {
       journeyLabel: 'From the workshop to the delivered structure',
@@ -429,36 +380,13 @@ export const ui = {
           text: 'Excellence, safety, innovation, commitment — at every stage, in the workshop and on site.'
         }
       ],
-      imageAlt1: 'MCCT steel warehouse',
-      imageAlt2: 'MCCT welding workshop'
+      imageAlt1: 'MCCT steel frame erection with a telehandler',
+      imageAlt2: 'MCCT technician working on a gas installation'
     },
     services: {
       eyebrow: 'OUR SERVICES',
       title: ['SOLUTIONS', 'ENGINEERED FOR', 'INDUSTRY'],
       heroAlt: 'Industrial conveyor built by MCCT'
-    },
-    projects: {
-      eyebrow: 'OUR PROJECTS',
-      title: ['WORK THAT', 'SPEAKS FOR', 'ITSELF'],
-      heroAlt: 'Industrial building delivered by MCCT',
-      back: '← ALL PROJECTS',
-      specs: {
-        category: 'CATEGORY',
-        location: 'LOCATION',
-        year: 'YEAR',
-        client: 'CLIENT',
-        services: 'SCOPE'
-      },
-      materials: 'MATERIALS',
-      gallery: 'PROJECT GALLERY',
-      related: 'MORE PROJECTS'
-    },
-    gallery: {
-      eyebrow: 'GALLERY',
-      title: ['MCCT INDUSTRIE,', 'ON SITE'],
-      subtitle: 'A selection of our industrial environments, sites and completed work.',
-      heroAlt: 'MCCT steel construction site',
-      count: (n, category) => `${n} IMAGES — ${category}`
     },
     contact: {
       title: ["LET'S BUILD", 'SOMETHING', 'TOGETHER'],
@@ -508,16 +436,6 @@ export const ui = {
         title: 'Steelwork, boilermaking and industrial piping | MCCT Industrie',
         description:
           'Steel construction, boilermaking, industrial piping, erection, maintenance and equipment: the services of MCCT Industrie.'
-      },
-      projects: {
-        title: 'Steel construction projects in Morocco | MCCT Industrie',
-        description:
-          'MCCT Industrie projects: steel buildings and structures, process equipment, energy installations and fabricated assemblies.'
-      },
-      gallery: {
-        title: 'Site and workshop gallery | MCCT Industrie',
-        description:
-          'MCCT Industrie gallery: a selection of our industrial environments, construction sites and completed steelwork.'
       },
       contact: {
         title: 'Contact — MCCT Industrie, Casablanca',
