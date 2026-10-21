@@ -1,7 +1,8 @@
 import React, { useEffect, useRef, useState } from 'react';
 import Reveal from '../../../components/ui/Reveal';
 import { useI18n } from '../../../i18n/LanguageProvider';
-import { ACCENT, headingFont, container } from '../../../components/ui/mcctTheme';
+import { SAFETY, headingFont, container } from '../../../components/ui/mcctTheme';
+import { Eyebrow, Mark, btnGhostDark } from '../../../components/ui/Blueprint';
 import { getSectors } from '../../../data/mcct';
 import { img } from '../../../data/gallery';
 
@@ -10,33 +11,35 @@ export const FeaturedProject = () => {
   const title = t('home.featuredTitle');
 
   return (
-  <section className="relative flex min-h-[78vh] items-end overflow-hidden bg-[#0D0F10]">
+  <section className="relative flex min-h-[80vh] items-end overflow-hidden bg-night text-snow">
     <img
       src={img('IMG_7951')}
       alt={t('home.featuredAlt')}
       loading="lazy"
       className="absolute inset-0 h-full w-full object-cover"
     />
-    <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(13,15,16,0.2)_0%,rgba(13,15,16,0.85)_100%)]" />
-    <Reveal className={`${container} relative pb-[72px] pt-[120px] text-white`}>
-      <p className="mb-4 text-[13px] font-extrabold tracking-[0.24em] text-[#cfd6dc]">{t('home.featuredEyebrow')}</p>
-      <h2
-        className="text-[clamp(2.2rem,4.5vw,4.2rem)] font-extrabold leading-none tracking-[-0.03em]"
-        style={headingFont}
-      >
-        {title?.[0]}
-        <br />
-        {title?.[1]}
-        <span style={{ color: ACCENT }}>.</span>
-      </h2>
-      <div className="mt-6 flex flex-wrap items-center justify-between gap-6">
-        <p className="text-[15px] tracking-[0.08em] text-[#c4cad0]">{t('home.featuredMeta')}</p>
-        <a
-          href="#projets"
-          className="inline-flex items-center gap-3 border border-[rgba(255,255,255,0.4)] px-[26px] py-[15px] text-[12.5px] font-extrabold tracking-[0.16em] text-white transition-colors hover:border-white hover:bg-white hover:text-[#17191C]"
+    <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(11,27,44,0.1)_0%,rgba(11,27,44,0.55)_55%,rgba(11,27,44,0.92)_100%)]" />
+    <div aria-hidden="true" className="bp-grid-dark absolute inset-0" />
+    <Reveal className={`${container} relative pb-16 pt-[140px]`}>
+      {/* Fiche projet posée sur la photo, comme une étiquette de plan. */}
+      <div className="relative max-w-[720px] border border-nightrule bg-night/85 p-7 backdrop-blur-sm min-[900px]:p-10">
+        <span aria-hidden="true" className="bp-corners text-safety" />
+        <Eyebrow tone="dark">{t('home.featuredEyebrow')}</Eyebrow>
+        <h2
+          className="text-[clamp(2.4rem,5vw,4.6rem)] font-bold uppercase leading-[1.02] tracking-[-0.01em]"
+          style={headingFont}
         >
-          {t('home.featuredLink')} <span aria-hidden="true">→</span>
-        </a>
+          {title?.[0]}
+          <br />
+          {title?.[1]}
+          <Mark />
+        </h2>
+        <div className="mt-8 flex flex-wrap items-center justify-between gap-6 border-t border-nightrule pt-6">
+          <p className="font-mono text-[12px] uppercase tracking-[0.14em] text-fog">{t('home.featuredMeta')}</p>
+          <a href="#projets" className={btnGhostDark}>
+            {t('home.featuredLink')} <span aria-hidden="true">→</span>
+          </a>
+        </div>
       </div>
     </Reveal>
     </section>
@@ -49,38 +52,40 @@ export const EngagementSection = () => {
   const circle = t('home.commitmentCircle');
 
   return (
-  <section className="relative flex min-h-[80vh] items-center overflow-hidden bg-[#0D0F10]">
+  <section className="relative flex min-h-[80vh] items-center overflow-hidden bg-night text-snow">
     <img
       src={img('IMG_7887')}
       alt={t('home.commitmentAlt')}
       loading="lazy"
-      className="absolute inset-0 h-full w-full object-cover opacity-50"
+      className="absolute inset-0 h-full w-full object-cover opacity-45"
     />
-    <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(13,15,16,0.92)_0%,rgba(13,15,16,0.45)_70%)]" />
-    <Reveal className={`${container} relative flex flex-wrap items-center justify-between gap-12 py-[90px] text-white`}>
-      <div className="min-w-0 max-w-[640px]">
-        <p className="mb-[18px] text-[13px] font-extrabold tracking-[0.26em]" style={{ color: ACCENT }}>
-          {t('home.commitmentEyebrow')}
-        </p>
+    <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(11,27,44,0.95)_0%,rgba(11,27,44,0.6)_65%,rgba(11,27,44,0.35)_100%)]" />
+    <div aria-hidden="true" className="bp-grid-dark absolute inset-0" />
+    <Reveal className={`${container} relative flex flex-wrap items-center justify-between gap-12 py-[100px]`}>
+      <div className="min-w-0 max-w-[660px]">
+        <Eyebrow tone="dark">{t('home.commitmentEyebrow')}</Eyebrow>
         <h2
-          className="text-[clamp(2.2rem,5vw,4.4rem)] font-bold leading-none tracking-[-0.02em]"
+          className="text-[clamp(2.4rem,5.4vw,4.8rem)] font-bold uppercase leading-[1.02] tracking-[-0.01em]"
           style={headingFont}
         >
           {title?.[0]}
           <br />
           {title?.[1]}
-          <span style={{ color: ACCENT }}>.</span>
+          <Mark />
         </h2>
-        <p className="mt-[26px] max-w-[480px] text-[17px] leading-[1.7] text-[#c4cad0]">
-          {t('home.commitmentText')}
-        </p>
+        <p className="mt-[26px] max-w-[480px] text-[17px] leading-[1.7] text-snow/85">{t('home.commitmentText')}</p>
       </div>
+      {/* Mire de visée : cible carrée avec réticule, remplit en jaune au survol. */}
       <a
         href="#projets"
         aria-label={t('home.commitmentAria')}
-        className="flex h-[168px] w-[168px] shrink-0 flex-col items-center justify-center gap-2 rounded-full border border-[rgba(255,255,255,0.45)] text-center text-[11.5px] font-extrabold tracking-[0.2em] text-white transition-all [transition-duration:400ms] hover:scale-[1.06] hover:border-[#2478BE] hover:bg-[#2478BE]"
+        className="group relative flex h-[176px] w-[176px] shrink-0 flex-col items-center justify-center gap-2 border border-snow/60 text-center font-mono text-[12px] font-semibold uppercase tracking-[0.12em] text-snow transition-colors duration-300 hover:border-safety hover:bg-safety hover:text-ink"
       >
-        <span aria-hidden="true" className="text-[22px]">
+        <span aria-hidden="true" className="absolute left-1/2 top-0 h-5 w-px bg-current" />
+        <span aria-hidden="true" className="absolute bottom-0 left-1/2 h-5 w-px bg-current" />
+        <span aria-hidden="true" className="absolute left-0 top-1/2 h-px w-5 bg-current" />
+        <span aria-hidden="true" className="absolute right-0 top-1/2 h-px w-5 bg-current" />
+        <span aria-hidden="true" className="text-[22px] transition-transform duration-300 group-hover:translate-x-1">
           →
         </span>
         <span>
@@ -133,20 +138,18 @@ export const SectorsSection = () => {
   };
 
   return (
-  <section id="secteurs" className="bg-[#17191C] py-[120px] text-white">
+  <section id="secteurs" className="bp-grid-dark bg-night py-[110px] text-snow">
     <div className={container}>
       <Reveal className="mb-14">
-        <p className="mb-[18px] text-[13px] font-extrabold tracking-[0.24em]" style={{ color: ACCENT }}>
-          {t('home.sectorsEyebrow')}
-        </p>
+        <Eyebrow tone="dark">{t('home.sectorsEyebrow')}</Eyebrow>
         <h2
-          className="text-[clamp(2.2rem,4.6vw,4rem)] font-bold leading-none tracking-[-0.02em]"
+          className="text-[clamp(2.4rem,5vw,4.4rem)] font-bold uppercase leading-[1.02] tracking-[-0.01em]"
           style={headingFont}
         >
           {title?.[0]}
           <br />
           {title?.[1]}
-          <span style={{ color: ACCENT }}>.</span>
+          <Mark />
         </h2>
       </Reveal>
 
@@ -154,29 +157,32 @@ export const SectorsSection = () => {
           barrait le bas des cartes. Les repères ci-dessous la remplacent. */}
       <div
         ref={railRef}
-        className="mcct-rail grid snap-x snap-mandatory grid-flow-col auto-cols-[78%] gap-4 overflow-x-auto min-[900px]:auto-cols-auto min-[900px]:grid-flow-row min-[900px]:gap-6 min-[900px]:overflow-visible min-[900px]:[grid-template-columns:repeat(auto-fit,minmax(280px,1fr))]"
+        className="mcct-rail grid snap-x snap-mandatory grid-flow-col auto-cols-[82%] gap-5 overflow-x-auto px-2 py-2 min-[900px]:auto-cols-auto min-[900px]:grid-flow-row min-[900px]:gap-8 min-[900px]:overflow-visible min-[900px]:px-0 min-[900px]:[grid-template-columns:repeat(auto-fit,minmax(280px,1fr))]"
       >
         {sectors?.map((sector, index) => (
           <Reveal
             key={sector?.title}
             delay={index * 90}
             data-card
-            className="group relative min-h-[420px] snap-start overflow-hidden"
+            className="group snap-start border border-nightrule bg-night2 transition-colors duration-300 hover:border-brandlt"
           >
-            <img
-              src={sector?.thumbSrc}
-              alt={sector?.title}
-              loading="lazy"
-              className="absolute inset-0 h-full w-full object-cover opacity-60 transition-all [transition-duration:700ms] [transition-timing-function:cubic-bezier(0.22,1,0.36,1)] group-hover:scale-[1.07] group-hover:opacity-45"
-            />
-            <span className="absolute inset-0 bg-[linear-gradient(180deg,rgba(23,25,28,0)_35%,rgba(23,25,28,0.9)_100%)]" />
-            <span className="relative flex min-h-[420px] flex-col justify-end p-7">
-              <span className="mb-4 block h-[3px] w-10 origin-left bg-[#2478BE] transition-transform [transition-duration:500ms] [transition-timing-function:cubic-bezier(0.22,1,0.36,1)] group-hover:scale-x-[2.6] motion-reduce:transition-none" />
-              <span className="block text-[23px] font-extrabold tracking-[-0.01em]">{sector?.title}</span>
-              <span className="mt-2.5 block text-[14.5px] leading-[1.55] text-[#c4cad0] transition-transform [transition-duration:500ms] [transition-timing-function:cubic-bezier(0.22,1,0.36,1)] group-hover:-translate-y-0.5 motion-reduce:transition-none">
-                {sector?.desc}
+            <div className="relative h-[240px] overflow-hidden border-b border-nightrule">
+              <img
+                src={sector?.thumbSrc}
+                alt={sector?.title}
+                loading="lazy"
+                className="absolute inset-0 h-full w-full object-cover transition-transform [transition-duration:700ms] [transition-timing-function:cubic-bezier(0.22,1,0.36,1)] group-hover:scale-[1.06]"
+              />
+              <span className="absolute left-0 top-0 bg-night px-3 py-1.5 font-mono text-[11px] tracking-[0.14em] text-brandlt">
+                S-{String(index + 1)?.padStart(2, '0')}
               </span>
-            </span>
+            </div>
+            <div className="p-7">
+              <span className="block text-[26px] font-bold uppercase leading-[1.14]" style={headingFont}>
+                {sector?.title}
+              </span>
+              <span className="mt-3 block text-[15px] leading-[1.6] text-fog">{sector?.desc}</span>
+            </div>
           </Reveal>
         ))}
       </div>
@@ -190,12 +196,16 @@ export const SectorsSection = () => {
             onClick={() => scrollToCard(index)}
             aria-label={sector?.title}
             aria-current={index === active}
-            className="h-1.5 cursor-pointer rounded-full border-none p-0 transition-all [transition-duration:400ms]"
-            style={{
-              width: index === active ? 28 : 10,
-              backgroundColor: index === active ? ACCENT : 'rgba(255,255,255,0.28)'
-            }}
-          />
+            className="flex h-6 cursor-pointer items-center border-none bg-transparent p-0"
+          >
+            <span
+              className="block h-[6px] transition-all [transition-duration:400ms]"
+              style={{
+                width: index === active ? 28 : 10,
+                backgroundColor: index === active ? SAFETY : 'rgba(233,239,245,0.3)'
+              }}
+            />
+          </button>
         ))}
       </div>
     </div>

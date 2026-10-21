@@ -45,6 +45,19 @@ export const ui = {
       info: "BESOIN D'UN RENSEIGNEMENT",
       writeUs: 'NOUS ÉCRIRE'
     },
+    // Mentions du cartouche et des légendes, charte « plan technique ».
+    bp: {
+      fig: 'FIG.',
+      sheet: 'FEUILLE',
+      scale: 'ÉCHELLE',
+      date: 'DATE',
+      project: 'PROJET',
+      siteMap: 'PLAN DU SITE',
+      address: 'ADRESSE',
+      contact: 'CONTACT',
+      ref: 'RÉF.',
+      view: 'VUE'
+    },
     home: {
       journeyLabel: 'De l’atelier à l’ouvrage livré',
       heroEyebrow: 'INGÉNIERIE INDUSTRIELLE — FABRICATION · CONSTRUCTION',
@@ -268,6 +281,18 @@ export const ui = {
       nextSite: 'YOUR PROJECT, OUR NEXT SITE',
       info: 'NEED INFORMATION',
       writeUs: 'CONTACT US'
+    },
+    bp: {
+      fig: 'FIG.',
+      sheet: 'SHEET',
+      scale: 'SCALE',
+      date: 'DATE',
+      project: 'PROJECT',
+      siteMap: 'SITE MAP',
+      address: 'ADDRESS',
+      contact: 'CONTACT',
+      ref: 'REF.',
+      view: 'VIEW'
     },
     home: {
       journeyLabel: 'From the workshop to the delivered structure',

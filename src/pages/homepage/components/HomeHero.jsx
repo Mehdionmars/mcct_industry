@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { useI18n } from '../../../i18n/LanguageProvider';
-import { ACCENT, headingFont, container } from '../../../components/ui/mcctTheme';
+import { headingFont, container } from '../../../components/ui/mcctTheme';
+import { DimLine, Eyebrow, Figure, Mark, Ruler, btnGhost, btnPrimary } from '../../../components/ui/Blueprint';
 import { img } from '../../../data/gallery';
 
 // Vidéo hébergée localement (jamais de hotlink externe) : chantier de charpente
@@ -54,99 +55,117 @@ const HomeHero = () => {
   }, [withVideo]);
 
   return (
-    <section id="top" className="relative flex min-h-[100svh] items-end overflow-hidden bg-[#0D0F10]">
-      <img
-        src={HERO_IMAGE}
-        alt={t('home.heroImageAlt')}
-        fetchpriority="high"
-        className={`absolute inset-0 h-full w-full object-cover ${
-          isVideoReady ? '' : 'animate-mcct-hero-zoom'
-        }`}
-      />
-
-      {withVideo ? (
-        <video
-          ref={videoRef}
-          autoPlay
-          muted
-          loop
-          playsInline
-          preload="metadata"
-          poster={HERO_IMAGE}
-          aria-hidden="true"
-          tabIndex={-1}
-          onCanPlay={() => setIsVideoReady(true)}
-          // Réseau coupé, format refusé, fichier absent : on retire la vidéo et
-          // l'image de fond reprend seule la main, sans écran noir.
-          onError={() => {
-            setIsVideoReady(false);
-            setWithVideo(false);
-          }}
-          className="absolute inset-0 h-full w-full object-cover transition-opacity duration-700"
-          style={{ opacity: isVideoReady ? 1 : 0 }}
+    <section id="top" className="bp-grid relative overflow-hidden bg-paper text-ink">
+      <div className={`${container} relative pb-14 pt-[120px] min-[900px]:pb-16 min-[900px]:pt-[132px]`}>
+        {/* Bandeau de feuille : référence à gauche, localisation à droite. */}
+        <div
+          className="mb-10 flex animate-mcct-rise flex-wrap items-center justify-between gap-3 border-y border-ink/15 py-2.5 font-mono text-[11px] uppercase tracking-[0.14em] text-steel"
+          style={{ animationDelay: '0.05s' }}
         >
-          <source src={HERO_VIDEO} type="video/mp4" />
-        </video>
-      ) : null}
+          <span>
+            {t('bp.ref')} MCCT-IND — {t('bp.sheet')} 01 / 04
+          </span>
+          <span>{t('common.cityLine')}</span>
+        </div>
 
-      <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(13,15,16,0.55)_0%,rgba(13,15,16,0.35)_40%,rgba(13,15,16,0.88)_100%)]" />
-
-      <div className={`${container} relative pb-[72px] pt-40 text-white`}>
-        <p
-          className="mb-5 animate-mcct-rise text-[12.5px] font-bold tracking-[0.28em] text-[#cfd6dc]"
-          style={{ animationDelay: '0.15s' }}
-        >
-          {t('home.heroEyebrow')}
-        </p>
-        <h1
-          className="animate-mcct-rise text-[clamp(2.8rem,7vw,7.2rem)] font-extrabold leading-[0.96] tracking-[-0.03em]"
-          style={{ ...headingFont, animationDelay: '0.3s' }}
-        >
-          {title?.[0]}
-          <br />
-          {title?.[1]}
-          <br />
-          {title?.[2]}
-          <span style={{ color: ACCENT }}>.</span>
-        </h1>
-
-        <div className="mt-9 flex flex-wrap items-end justify-between gap-8">
-          <p
-            className="max-w-[460px] animate-mcct-rise text-[17px] leading-[1.65] text-[#d8dde1]"
-            style={{ animationDelay: '0.5s' }}
-          >
-            {t('home.heroText')}
-          </p>
-          <div
-            className="flex w-full animate-mcct-rise flex-col flex-wrap gap-3 min-[900px]:w-auto min-[900px]:flex-row min-[900px]:gap-4"
-            style={{ animationDelay: '0.65s' }}
-          >
-            <a
-              href="#activites"
-              className="relative inline-flex min-h-[54px] shrink-0 animate-mcct-pulse items-center justify-center gap-3 overflow-hidden whitespace-nowrap bg-[#2478BE] px-6 text-[12.5px] font-extrabold tracking-[0.16em] text-white transition-colors hover:bg-white hover:text-[#17191C] min-[900px]:min-h-0 min-[900px]:justify-start min-[900px]:px-7 min-[900px]:py-[17px]"
+        <div className="grid items-end gap-12 min-[1000px]:grid-cols-12 min-[1000px]:gap-10">
+          <div className="min-w-0 min-[1000px]:col-span-7">
+            <div className="animate-mcct-rise" style={{ animationDelay: '0.15s' }}>
+              <Eyebrow>{t('home.heroEyebrow')}</Eyebrow>
+            </div>
+            <h1
+              className="animate-mcct-rise text-[clamp(3.1rem,8.4vw,8.4rem)] font-bold uppercase leading-[1] tracking-[-0.015em]"
+              style={{ ...headingFont, animationDelay: '0.3s' }}
             >
-              {t('home.heroCta1')} <span aria-hidden="true">→</span>
-              <span
+              {title?.[0]}
+              <br />
+              <span className="text-brand">{title?.[1]}</span>
+              <br />
+              {title?.[2]}
+              <Mark />
+            </h1>
+
+            <p
+              className="mt-8 max-w-[520px] animate-mcct-rise text-[17.5px] leading-[1.65] text-ink2"
+              style={{ animationDelay: '0.5s' }}
+            >
+              {t('home.heroText')}
+            </p>
+
+            <div
+              className="mt-9 flex animate-mcct-rise flex-col gap-3 min-[560px]:flex-row min-[560px]:flex-wrap"
+              style={{ animationDelay: '0.65s' }}
+            >
+              <a href="#activites" className={`${btnPrimary} animate-mcct-pulse`}>
+                {t('home.heroCta1')} <span aria-hidden="true">→</span>
+              </a>
+              <a href="#projets" className={btnGhost}>
+                {t('home.heroCta2')}
+              </a>
+            </div>
+          </div>
+
+          {/* Vue du chantier : cotée et encadrée comme une figure de plan. */}
+          <div className="min-w-0 animate-mcct-rise min-[1000px]:col-span-5" style={{ animationDelay: '0.45s' }}>
+            <DimLine label={`${t('bp.view')} 01`} className="mb-4" />
+            <div className="flex gap-4">
+              <Figure
+                className="min-w-0 flex-1"
+                frameClassName="h-[clamp(300px,52vh,560px)]"
+                fig="01"
+                caption={t('home.heroImageAlt')}
+                loading="eager"
+                src={HERO_IMAGE}
+                alt={t('home.heroImageAlt')}
+                imgClassName={`h-full w-full object-cover ${isVideoReady ? '' : 'animate-mcct-hero-zoom'}`}
+                imgProps={{ fetchpriority: 'high' }}
+              >
+                {withVideo ? (
+                  <video
+                    ref={videoRef}
+                    autoPlay
+                    muted
+                    loop
+                    playsInline
+                    preload="metadata"
+                    poster={HERO_IMAGE}
+                    aria-hidden="true"
+                    tabIndex={-1}
+                    onCanPlay={() => setIsVideoReady(true)}
+                    // Réseau coupé, format refusé, fichier absent : on retire la vidéo et
+                    // l'image reprend seule la main, sans écran noir.
+                    onError={() => {
+                      setIsVideoReady(false);
+                      setWithVideo(false);
+                    }}
+                    className="absolute inset-0 h-full w-full object-cover transition-opacity duration-700"
+                    style={{ opacity: isVideoReady ? 1 : 0 }}
+                  >
+                    <source src={HERO_VIDEO} type="video/mp4" />
+                  </video>
+                ) : null}
+              </Figure>
+              {/* Cote verticale, grand écran seulement. */}
+              <div
                 aria-hidden="true"
-                className="pointer-events-none absolute top-0 h-full w-[45%] animate-mcct-shine bg-[linear-gradient(100deg,transparent,rgba(255,255,255,0.45),transparent)]"
-              />
-            </a>
-            <a
-              href="#projets"
-              className="inline-flex min-h-[54px] items-center justify-center gap-3 border border-[rgba(255,255,255,0.4)] px-6 text-[12.5px] font-extrabold tracking-[0.16em] text-white transition-colors hover:border-white hover:bg-[rgba(255,255,255,0.08)] min-[900px]:min-h-0 min-[900px]:justify-start min-[900px]:px-7 min-[900px]:py-4"
-            >
-              {t('home.heroCta2')}
-            </a>
+                className="hidden w-4 flex-col items-center text-steel min-[1000px]:flex"
+                style={{ height: 'clamp(300px,52vh,560px)' }}
+              >
+                <span className="h-px w-3 bg-current" />
+                <span className="w-px flex-1 bg-current" />
+                <span className="h-px w-3 bg-current" />
+              </div>
+            </div>
           </div>
         </div>
 
         <div
           aria-hidden="true"
-          className="pointer-events-none mt-10 text-center transition-opacity duration-500"
-          style={{ opacity: isScrolled ? 0 : 1 }}
+          className="mt-12 flex items-center gap-5 font-mono text-[11px] uppercase tracking-[0.16em] text-steel transition-opacity duration-500"
+          style={{ opacity: isScrolled ? 0.35 : 1 }}
         >
-          <span className="text-[11px] font-extrabold tracking-[0.28em] text-[#cfd6dc]">{t('home.scroll')}</span>
-          <span className="mx-auto mt-3 block h-[42px] w-px bg-[linear-gradient(180deg,#2478BE,transparent)]" />
+          <span className="shrink-0">{t('home.scroll')} ↓</span>
+          <Ruler className="flex-1" />
         </div>
       </div>
     </section>

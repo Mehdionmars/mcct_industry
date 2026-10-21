@@ -59,7 +59,7 @@ const SplashScreen = ({ onDone }) => {
     <div
       role="status"
       aria-label={t('common.loading')}
-      className="fixed inset-0 z-[400] flex flex-col items-center justify-center gap-[clamp(20px,4vw,36px)] bg-[#0D0F10] px-6 text-center"
+      className="bp-grid-dark fixed inset-0 z-[400] flex flex-col items-center justify-center gap-[clamp(20px,4vw,36px)] bg-night px-6 text-center"
       style={{
         opacity: isLeaving ? 0 : 1,
         transform: isLeaving ? 'scale(1.04)' : 'scale(1)',
@@ -80,8 +80,10 @@ const SplashScreen = ({ onDone }) => {
         style={{ animationDelay: '0.18s', animationDuration: '0.8s' }}
       />
 
-      <span aria-hidden="true" className="block h-px w-[min(60vw,320px)] overflow-hidden bg-[#23272b]">
-        <span className="block h-full w-full origin-left animate-mcct-load bg-[#2478BE]" />
+      {/* Barre de chargement graduée comme un réglet. */}
+      <span aria-hidden="true" className="relative block w-[min(60vw,320px)]">
+        <span className="bp-ruler block text-nightrule" />
+        <span className="absolute inset-x-0 bottom-0 block h-[3px] origin-left animate-mcct-load bg-safety" />
       </span>
     </div>
   );

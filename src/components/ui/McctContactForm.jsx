@@ -2,11 +2,13 @@ import React, { useMemo, useState } from 'react';
 import { useI18n } from '../../i18n/LanguageProvider';
 import { getActivities } from '../../data/mcct';
 import { EMAIL, WHATSAPP_HREF } from './mcctTheme';
+import { btnPrimaryDark } from './Blueprint';
 
+// Champs façon case de cartouche : filet fin, fond bleu de plan, focus jaune.
 const fieldClass =
-  'min-h-[44px] w-full border border-[#2c3136] bg-[#1a1d20] px-4 py-3.5 text-[15px] text-white outline-none transition-colors focus:border-[#2478BE] focus:ring-2 focus:ring-[#2478BE]/40';
+  'min-h-[48px] w-full rounded-none border border-nightrule bg-night2 px-4 py-3.5 font-plex text-[15px] font-normal normal-case tracking-normal text-snow outline-none transition-colors focus:border-safety focus:ring-1 focus:ring-safety';
 const labelClass =
-  'flex min-w-0 flex-col gap-2 text-[11.5px] font-extrabold tracking-[0.16em] text-[#9aa2a9]';
+  'flex min-w-0 flex-col gap-2 font-mono text-[11.5px] font-medium uppercase tracking-[0.14em] text-fog';
 
 /**
  * Formulaire de contact : la demande part par messagerie (mailto) ou WhatsApp
@@ -88,20 +90,13 @@ const McctContactForm = ({ rows = 6 }) => {
       </label>
 
       <div className="flex flex-wrap items-center gap-3.5 [grid-column:1/-1]">
-        <button
-          type="submit"
-          className="relative inline-flex cursor-pointer items-center gap-3 overflow-hidden border-none bg-[#2478BE] px-[30px] py-[18px] text-[12.5px] font-extrabold tracking-[0.16em] text-white transition-colors hover:bg-white hover:text-[#17191C]"
-        >
+        <button type="submit" className={btnPrimaryDark}>
           {t('contact.form.submit')} <span aria-hidden="true">→</span>
-          <span
-            aria-hidden="true"
-            className="pointer-events-none absolute top-0 h-full w-[45%] animate-mcct-shine bg-[linear-gradient(100deg,transparent,rgba(255,255,255,0.45),transparent)]"
-          />
         </button>
         <button
           type="button"
           onClick={sendWhatsApp}
-          className="inline-flex cursor-pointer items-center gap-3 border border-[#25D366] bg-transparent px-[30px] py-[17px] text-[12.5px] font-extrabold tracking-[0.16em] text-[#25D366] transition-colors hover:bg-[#25D366] hover:text-white"
+          className="inline-flex min-h-[52px] cursor-pointer items-center gap-3 border border-[#3BD16F] bg-transparent px-6 font-mono text-[13px] font-semibold uppercase tracking-[0.1em] text-[#3BD16F] transition-colors hover:bg-[#3BD16F] hover:text-night"
         >
           {t('contact.form.whatsapp')}
         </button>

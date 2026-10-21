@@ -3,7 +3,8 @@ import { Link } from 'react-router-dom';
 import Reveal from '../../../components/ui/Reveal';
 import ProcessIcon from '../../../components/ui/ProcessIcon';
 import { useI18n } from '../../../i18n/LanguageProvider';
-import { ACCENT, headingFont, container } from '../../../components/ui/mcctTheme';
+import { headingFont, container } from '../../../components/ui/mcctTheme';
+import { DimLine, Eyebrow, Mark, Ruler, squareBtn } from '../../../components/ui/Blueprint';
 import { getActivities, getProcessSteps } from '../../../data/mcct';
 
 export const ActivitiesSection = () => {
@@ -49,15 +50,13 @@ export const ActivitiesSection = () => {
   };
 
   return (
-  <section id="activites" className="bg-[#F5F5F2] py-[120px]">
+  <section id="activites" className="bp-grid bg-paper py-[110px] text-ink">
     <div className={container}>
       <Reveal className="mb-12 flex flex-wrap items-end justify-between gap-6">
         <div>
-          <p className="mb-[18px] text-[13px] font-extrabold tracking-[0.24em]" style={{ color: ACCENT }}>
-            {t('home.activitiesEyebrow')}
-          </p>
+          <Eyebrow>{t('home.activitiesEyebrow')}</Eyebrow>
           <h2
-            className="text-[clamp(2.4rem,4.6vw,4.4rem)] font-extrabold leading-none tracking-[-0.03em]"
+            className="text-[clamp(2.6rem,5vw,4.8rem)] font-bold uppercase leading-[1.02] tracking-[-0.01em]"
             style={headingFont}
           >
             {title?.[0]}
@@ -65,23 +64,24 @@ export const ActivitiesSection = () => {
             {title?.[1]}
             <br />
             {title?.[2]}
-            <span style={{ color: ACCENT }}>.</span>
+            <Mark />
           </h2>
         </div>
-        <p className="max-w-[380px] text-[16px] leading-[1.65] text-[#3a3f45]">
+        <p className="max-w-[380px] border-l border-ink/20 pl-6 text-[16px] leading-[1.65] text-ink2">
           {t('home.activitiesText')}
         </p>
       </Reveal>
 
       {/* Barre de progression + flèches : l'état du rail est reflété des deux côtés. */}
-      <Reveal className="mb-7 flex items-center gap-6">
-        <div className="h-[3px] flex-1 bg-[#dcdcd8]">
+      <Reveal className="mb-8 flex items-center gap-6">
+        <div className="relative h-[14px] flex-1">
+          <Ruler className="absolute inset-0" />
           <div
-            className="h-full origin-left bg-[#2478BE] transition-transform duration-300"
+            className="absolute bottom-0 left-0 h-[3px] w-full origin-left bg-brand transition-transform duration-300"
             style={{ transform: `scaleX(${Math.max(0.08, progress?.ratio)})` }}
           />
         </div>
-        <p className="shrink-0 text-[12px] font-bold tracking-[0.18em] text-[#565e66]">
+        <p className="shrink-0 font-mono text-[12px] font-medium uppercase tracking-[0.12em] text-steel">
           {String(activities?.length)?.padStart(2, '0')} {t('home.activitiesCountLabel')}
         </p>
         <div className="flex shrink-0 gap-2.5">
@@ -90,7 +90,7 @@ export const ActivitiesSection = () => {
             onClick={() => scrollByCard(-1)}
             disabled={progress?.atStart}
             aria-label={t('home.activitiesPrev')}
-            className="flex h-11 w-11 cursor-pointer items-center justify-center border border-[#c6c6c1] bg-transparent text-[18px] text-[#17191C] transition-colors hover:border-[#2478BE] hover:bg-[#2478BE] hover:text-white disabled:cursor-default disabled:opacity-35 disabled:hover:border-[#c6c6c1] disabled:hover:bg-transparent disabled:hover:text-[#17191C]"
+            className={squareBtn()}
           >
             <span aria-hidden="true">←</span>
           </button>
@@ -99,7 +99,7 @@ export const ActivitiesSection = () => {
             onClick={() => scrollByCard(1)}
             disabled={progress?.atEnd}
             aria-label={t('home.activitiesNext')}
-            className="flex h-11 w-11 cursor-pointer items-center justify-center border border-[#c6c6c1] bg-transparent text-[18px] text-[#17191C] transition-colors hover:border-[#2478BE] hover:bg-[#2478BE] hover:text-white disabled:cursor-default disabled:opacity-35 disabled:hover:border-[#c6c6c1] disabled:hover:bg-transparent disabled:hover:text-[#17191C]"
+            className={squareBtn()}
           >
             <span aria-hidden="true">→</span>
           </button>
@@ -108,7 +108,7 @@ export const ActivitiesSection = () => {
 
       <ul
         ref={railRef}
-        className="mcct-rail flex list-none snap-x snap-mandatory gap-6 overflow-x-auto scroll-smooth"
+        className="mcct-rail flex list-none snap-x snap-mandatory gap-6 overflow-x-auto scroll-smooth pb-2"
       >
         {activities?.map((activity) => (
           <li
@@ -118,33 +118,30 @@ export const ActivitiesSection = () => {
           >
             <Link
               to="/services"
-              className="group relative block min-h-[420px] overflow-hidden bg-[#0D0F10] text-white"
+              className="group flex h-full flex-col border border-ink bg-paper transition-colors duration-300 hover:bg-white"
             >
-              <img
-                src={activity?.thumbSrc}
-                alt={activity?.title}
-                loading="lazy"
-                className="absolute inset-0 h-full w-full object-cover opacity-55 transition-all [transition-duration:600ms] [transition-timing-function:cubic-bezier(0.22,1,0.36,1)] group-hover:scale-[1.06] group-hover:opacity-40"
-              />
-              <span className="absolute inset-0 bg-[linear-gradient(180deg,rgba(13,15,16,0)_30%,rgba(13,15,16,0.85)_100%)]" />
-              <span className="relative flex min-h-[420px] flex-col justify-between p-7">
-                <span className="text-[13px] font-extrabold tracking-[0.2em]" style={{ color: ACCENT }}>
-                  {activity?.num}
+              <span className="relative block h-[250px] overflow-hidden border-b border-ink">
+                <img
+                  src={activity?.thumbSrc}
+                  alt={activity?.title}
+                  loading="lazy"
+                  className="absolute inset-0 h-full w-full object-cover transition-transform [transition-duration:600ms] [transition-timing-function:cubic-bezier(0.22,1,0.36,1)] group-hover:scale-[1.06]"
+                />
+                <span className="absolute left-0 top-0 border-b border-r border-ink bg-safety px-3 py-1.5 font-mono text-[11.5px] font-semibold tracking-[0.12em] text-ink">
+                  A-{activity?.num}
                 </span>
+              </span>
+              <span className="flex flex-1 flex-col justify-between gap-6 p-7">
                 <span>
-                  <span className="mb-4 block h-[3px] w-10 bg-[#2478BE]" />
-                  <span className="block text-[24px] font-extrabold leading-[1.1] tracking-[-0.01em]">
+                  <span className="block text-[26px] font-bold uppercase leading-[1.14]" style={headingFont}>
                     {activity?.title}
                   </span>
-                  <span className="mt-3 flex items-center justify-between gap-3">
-                    <span className="text-[14px] leading-[1.55] text-[#c4cad0]">{activity?.short}</span>
-                    <span
-                      aria-hidden="true"
-                      className="text-[20px] transition-transform duration-300 group-hover:translate-x-2"
-                      style={{ color: ACCENT }}
-                    >
-                      →
-                    </span>
+                  <span className="mt-3 block text-[14.5px] leading-[1.6] text-ink2">{activity?.short}</span>
+                </span>
+                <span className="flex items-center justify-between border-t border-ink/15 pt-4 font-mono text-[12px] font-medium uppercase tracking-[0.12em] text-brand">
+                  {t('nav.services')}
+                  <span aria-hidden="true" className="text-[18px] transition-transform duration-300 group-hover:translate-x-2">
+                    →
                   </span>
                 </span>
               </span>
@@ -163,46 +160,44 @@ export const SavoirFaireSection = () => {
   const title = t('home.processTitle');
 
   return (
-  <section id="savoirfaire" className="bg-[#E7E7E4] py-[120px]">
+  <section id="savoirfaire" className="bg-paper2 py-[110px] text-ink">
     <div className={container}>
-      <Reveal className="mb-16">
-        <p className="mb-[18px] text-[13px] font-extrabold tracking-[0.24em]" style={{ color: ACCENT }}>
-          {t('home.processEyebrow')}
-        </p>
+      <Reveal className="mb-14">
+        <Eyebrow>{t('home.processEyebrow')}</Eyebrow>
         <h2
-          className="text-[clamp(2.4rem,4.6vw,4.4rem)] font-extrabold leading-none tracking-[-0.03em]"
+          className="text-[clamp(2.6rem,5vw,4.8rem)] font-bold uppercase leading-[1.02] tracking-[-0.01em]"
           style={headingFont}
         >
           {title?.[0]}
           <br />
           {title?.[1]}
-          <span style={{ color: ACCENT }}>.</span>
+          <Mark />
         </h2>
       </Reveal>
 
-      <div className="grid gap-[2px] bg-[#cfcfcb] [grid-template-columns:repeat(auto-fit,minmax(min(100%,170px),1fr))]">
+      <DimLine label={`P-01 → P-${String(processSteps?.length)?.padStart(2, '0')}`} className="mb-6" />
+
+      <div className="grid border-l border-t border-ink [grid-template-columns:repeat(auto-fit,minmax(min(100%,170px),1fr))]">
         {processSteps?.map((step, index) => (
           <Reveal
             key={step?.num}
             delay={index * 70}
-            className="group relative bg-[#F5F5F2] px-[22px] pb-9 pt-7 transition-colors duration-300 hover:bg-white"
+            className="group relative border-b border-r border-ink bg-paper2 px-[22px] pb-9 pt-6 transition-colors duration-300 hover:bg-paper"
           >
-            {/* Filet d'accent qui se déploie au survol. */}
+            {/* Filet jaune qui se déploie au survol. */}
             <span
               aria-hidden="true"
-              className="absolute inset-x-0 top-0 h-[3px] origin-left scale-x-0 bg-[#2478BE] transition-transform [transition-duration:450ms] [transition-timing-function:cubic-bezier(0.22,1,0.36,1)] group-hover:scale-x-100"
+              className="absolute inset-x-0 top-0 h-[4px] origin-left scale-x-0 bg-safety transition-transform [transition-duration:450ms] [transition-timing-function:cubic-bezier(0.22,1,0.36,1)] group-hover:scale-x-100"
             />
-            <div className="mb-8 flex items-start justify-between gap-3">
-              <ProcessIcon
-                name={step?.icon}
-                className="h-9 w-9 text-[#17191C] transition-all [transition-duration:450ms] [transition-timing-function:cubic-bezier(0.22,1,0.36,1)] group-hover:-translate-y-0.5 group-hover:text-[#2478BE] motion-reduce:transition-none motion-reduce:group-hover:translate-y-0"
-              />
-              <p className="text-[13px] font-extrabold tracking-[0.18em]" style={{ color: ACCENT }}>
-                {step?.num}
-              </p>
-            </div>
-            <p className="text-[16px] font-extrabold tracking-[0.06em]">{step?.title}</p>
-            <p className="mt-2.5 text-[13.5px] leading-[1.55] text-[#565e66]">{step?.desc}</p>
+            <p className="mb-8 font-mono text-[11.5px] tracking-[0.14em] text-steel">P-{step?.num}</p>
+            <ProcessIcon
+              name={step?.icon}
+              className="mb-6 h-10 w-10 text-ink transition-all [transition-duration:450ms] [transition-timing-function:cubic-bezier(0.22,1,0.36,1)] group-hover:-translate-y-0.5 group-hover:text-brand motion-reduce:transition-none motion-reduce:group-hover:translate-y-0"
+            />
+            <p className="text-[19px] font-bold uppercase tracking-[0.01em]" style={headingFont}>
+              {step?.title}
+            </p>
+            <p className="mt-2 text-[14px] leading-[1.55] text-ink2">{step?.desc}</p>
           </Reveal>
         ))}
       </div>

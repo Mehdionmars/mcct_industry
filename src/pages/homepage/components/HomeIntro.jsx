@@ -1,7 +1,8 @@
 import React, { useEffect, useRef, useState } from 'react';
 import Reveal from '../../../components/ui/Reveal';
 import { useI18n } from '../../../i18n/LanguageProvider';
-import { ACCENT, headingFont, container } from '../../../components/ui/mcctTheme';
+import { headingFont, container } from '../../../components/ui/mcctTheme';
+import { Eyebrow, Figure, Mark } from '../../../components/ui/Blueprint';
 import { getKeyFigures } from '../../../data/mcct';
 import { img } from '../../../data/gallery';
 
@@ -50,62 +51,59 @@ const HomeIntro = () => {
   const title = t('home.introTitle');
 
   return (
-  <section id="apropos" className="bg-[#F5F5F2] pt-[120px]">
+  <section id="apropos" className="bg-paper pb-[110px] pt-[110px] text-ink">
     <div className={container}>
-      <div className="grid items-start gap-14 [grid-template-columns:repeat(auto-fit,minmax(320px,1fr))]">
+      <div className="grid items-start gap-14 [grid-template-columns:repeat(auto-fit,minmax(min(100%,320px),1fr))]">
         <Reveal>
-          <p className="mb-[18px] text-[13px] font-extrabold tracking-[0.24em]" style={{ color: ACCENT }}>
-            {t('home.introEyebrow')}
-          </p>
+          <Eyebrow>{t('home.introEyebrow')}</Eyebrow>
           <h2
-            className="text-[clamp(2.4rem,4.6vw,4.4rem)] font-extrabold leading-none tracking-[-0.03em]"
+            className="text-[clamp(2.6rem,5vw,4.8rem)] font-bold uppercase leading-[1.02] tracking-[-0.01em]"
             style={headingFont}
           >
             {title?.[0]}
             <br />
             {title?.[1]}
-            <span style={{ color: ACCENT }}>.</span>
+            <Mark />
           </h2>
         </Reveal>
-        <Reveal className="max-w-[520px] pt-3">
-          <p className="mb-5 text-[17px] leading-[1.7] text-[#3a3f45]">
-            {t('home.introP1')}
-          </p>
-          <p className="mb-8 text-[17px] leading-[1.7] text-[#3a3f45]">
-            {t('home.introP2')}
-          </p>
+        <Reveal className="max-w-[540px] border-l border-ink/20 pl-7 min-[900px]:mt-12">
+          <p className="mb-5 text-[17px] leading-[1.7] text-ink2">{t('home.introP1')}</p>
+          <p className="mb-8 text-[17px] leading-[1.7] text-ink2">{t('home.introP2')}</p>
           <a
             href="#savoirfaire"
-            className="inline-flex items-center gap-2.5 border-b-2 border-[#2478BE] pb-2 text-[12.5px] font-extrabold tracking-[0.16em] text-[#17191C] transition-colors hover:text-[#2478BE]"
+            className="inline-flex items-center gap-2.5 border-b-2 border-safety pb-1.5 font-mono text-[13px] font-semibold uppercase tracking-[0.1em] text-ink transition-colors hover:text-brand"
           >
             {t('home.introLink')} <span aria-hidden="true">→</span>
           </a>
         </Reveal>
       </div>
-    </div>
 
-    <Reveal className={`${container} mt-[72px]`}>
-      <div className="overflow-hidden">
-        <img
+      <Reveal className="mt-[72px]">
+        <Figure
           src={img('IMG_7864')}
           alt={t('home.introImageAlt')}
-          loading="lazy"
-          className="block h-[clamp(320px,55vh,620px)] w-full object-cover transition-transform [transition-duration:800ms] [transition-timing-function:cubic-bezier(0.22,1,0.36,1)] hover:scale-[1.03]"
+          fig="02"
+          caption={t('home.introImageAlt')}
+          frameClassName="h-[clamp(300px,52vh,600px)]"
+          imgClassName="h-full w-full object-cover transition-transform [transition-duration:800ms] [transition-timing-function:cubic-bezier(0.22,1,0.36,1)] hover:scale-[1.03]"
         />
-      </div>
-    </Reveal>
+      </Reveal>
 
-    <div className="-mt-[120px] bg-[#0D0F10] pb-[88px] pt-[220px] text-white">
-      <div className={`${container} grid gap-10 [grid-template-columns:repeat(auto-fit,minmax(220px,1fr))]`}>
-        {keyFigures?.map((figure) => (
-          <Reveal key={figure?.label}>
-            <p
-              className="text-[clamp(3rem,5vw,4.6rem)] font-extrabold tracking-[-0.03em]"
-              style={{ color: ACCENT }}
-            >
-              <Counter value={figure?.value} />+
+      {/* Chiffres clés présentés comme un tableau de caractéristiques. */}
+      <div className="mt-16 grid grid-cols-2 border-l border-t border-ink min-[900px]:grid-cols-4">
+        {keyFigures?.map((figure, index) => (
+          <Reveal key={figure?.label} className="min-w-0 border-b border-r border-ink bg-paper p-5 min-[600px]:p-7">
+            <p className="font-mono text-[11px] tracking-[0.16em] text-steel">
+              {t('bp.ref')} K-{String(index + 1)?.padStart(2, '0')}
             </p>
-            <p className="mt-2 text-[12.5px] font-bold tracking-[0.2em] text-[#9aa2a9]">{figure?.label}</p>
+            <p
+              className="mt-6 text-[clamp(2.6rem,5.4vw,5rem)] font-bold leading-none tracking-[-0.02em] text-ink"
+              style={headingFont}
+            >
+              <Counter value={figure?.value} />
+              <span className="text-brand">+</span>
+            </p>
+            <p className="mt-3 font-mono text-[12px] font-medium uppercase tracking-[0.12em] text-ink2">{figure?.label}</p>
           </Reveal>
         ))}
       </div>

@@ -1,11 +1,15 @@
-// Jetons visuels partagés par les pages issues de la maquette MCCT.
-export const ACCENT = '#2478BE';
-export const INK = '#17191C';
-export const PAPER = '#F5F5F2';
-export const NIGHT = '#0D0F10';
+// Jetons visuels partagés — charte « plan technique ».
+// Les mêmes valeurs existent en classes Tailwind (bg-paper, text-ink, bg-safety…).
+export const ACCENT = '#1F6AAE'; // bleu MCCT sur fond clair
+export const ACCENT_DARK = '#5AA7EA'; // bleu MCCT sur fond sombre
+export const SAFETY = '#F2B705'; // jaune sécurité
+export const INK = '#0E2235';
+export const PAPER = '#F2F4F6';
+export const NIGHT = '#0B1B2C';
 
-export const bodyFont = { fontFamily: "'Manrope', sans-serif" };
-export const headingFont = { fontFamily: "'Space Grotesk', 'Manrope', sans-serif" };
+export const bodyFont = { fontFamily: "'IBM Plex Sans', system-ui, sans-serif" };
+export const headingFont = { fontFamily: "'IBM Plex Sans Condensed', 'Arial Narrow', sans-serif" };
+export const monoFont = { fontFamily: "'IBM Plex Mono', ui-monospace, monospace" };
 
 // Le point de rupture de la maquette (900px) ne fait pas partie de l'échelle Tailwind :
 // les composants utilisent les variantes arbitraires min-[900px]: / max-[899px]:.

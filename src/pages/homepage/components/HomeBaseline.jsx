@@ -1,7 +1,8 @@
 import React from 'react';
 import Reveal from '../../../components/ui/Reveal';
 import { useI18n } from '../../../i18n/LanguageProvider';
-import { ACCENT, headingFont, container } from '../../../components/ui/mcctTheme';
+import { headingFont, container } from '../../../components/ui/mcctTheme';
+import { Eyebrow, Mark } from '../../../components/ui/Blueprint';
 import { getBaseline } from '../../../data/mcct';
 
 /**
@@ -13,23 +14,24 @@ const HomeBaseline = () => {
   const baseline = getBaseline(lang);
 
   return (
-    <section aria-label={t('home.baselineEyebrow')} className="bg-[#0D0F10] py-[72px] text-white">
+    <section aria-label={t('home.baselineEyebrow')} className="bp-grid-dark bg-night py-[80px] text-snow">
       <div className={container}>
-        <Reveal as="p" className="mb-10 text-[13px] font-extrabold tracking-[0.24em]" style={{ color: ACCENT }}>
-          {t('home.baselineEyebrow')}
+        <Reveal>
+          <Eyebrow tone="dark">{t('home.baselineEyebrow')}</Eyebrow>
         </Reveal>
 
-        <ul className="grid list-none gap-x-12 gap-y-10 [grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr))]">
+        <ul className="grid list-none border-l border-t border-nightrule [grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr))]">
           {baseline?.map((item, index) => (
-            <Reveal as="li" key={item?.key} delay={index * 90} className="border-t-[3px] border-[#2478BE] pt-6">
+            <Reveal as="li" key={item?.key} delay={index * 90} className="border-b border-r border-nightrule p-7 min-[900px]:p-9">
+              <p className="mb-8 font-mono text-[11.5px] tracking-[0.16em] text-brandlt">B-{String(index + 1)?.padStart(2, '0')}</p>
               <p
-                className="text-[clamp(1.7rem,3vw,2.6rem)] font-extrabold leading-none tracking-[-0.02em]"
+                className="text-[clamp(2rem,3.4vw,3rem)] font-bold uppercase leading-none tracking-[-0.01em]"
                 style={headingFont}
               >
                 {item?.title}
-                <span style={{ color: ACCENT }}>.</span>
+                <Mark />
               </p>
-              <p className="mt-4 max-w-[340px] text-[15px] leading-[1.65] text-[#9aa2a9]">{item?.desc}</p>
+              <p className="mt-4 max-w-[340px] text-[15px] leading-[1.65] text-fog">{item?.desc}</p>
             </Reveal>
           ))}
         </ul>

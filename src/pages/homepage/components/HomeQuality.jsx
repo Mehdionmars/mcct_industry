@@ -1,7 +1,8 @@
 import React from 'react';
 import Reveal from '../../../components/ui/Reveal';
 import { useI18n } from '../../../i18n/LanguageProvider';
-import { ACCENT, headingFont, container } from '../../../components/ui/mcctTheme';
+import { headingFont, container } from '../../../components/ui/mcctTheme';
+import { Eyebrow, Mark } from '../../../components/ui/Blueprint';
 
 const QualitySection = () => {
   const { t } = useI18n();
@@ -9,40 +10,44 @@ const QualitySection = () => {
   const points = t('home.qualityPoints');
 
   return (
-  <section id="qualite" className="bg-[#F5F5F2] py-[120px]">
+  <section id="qualite" className="bp-grid bg-paper py-[110px] text-ink">
     <div className={container}>
       <Reveal>
-        <p className="mb-[18px] text-[13px] font-extrabold tracking-[0.24em]" style={{ color: ACCENT }}>
-          {t('home.qualityEyebrow')}
-        </p>
+        <Eyebrow>{t('home.qualityEyebrow')}</Eyebrow>
         <h2
-          className="text-[clamp(2.4rem,9vw,122px)] font-extrabold leading-none tracking-[-0.03em]"
+          className="text-[clamp(2.8rem,10vw,148px)] font-bold uppercase leading-[0.98] tracking-[-0.015em]"
           style={headingFont}
         >
           {title?.[0]}
           <br />
-          {title?.[1]}
-          <span style={{ color: ACCENT }}>.</span>
+          <span className="text-brand">{title?.[1]}</span>
+          <Mark />
         </h2>
       </Reveal>
 
-      <Reveal className="mt-14 max-w-[620px]">
-        <p className="text-[17px] leading-[1.7] text-[#3a3f45]">{t('home.qualityText')}</p>
+      <Reveal className="mt-12 max-w-[640px] border-l-4 border-safety pl-6">
+        <p className="text-[17px] leading-[1.7] text-ink2">{t('home.qualityText')}</p>
       </Reveal>
 
-      <ul className="mt-14 grid list-none gap-[2px] bg-[#d7d7d2] [grid-template-columns:repeat(auto-fit,minmax(min(100%,240px),1fr))]">
+      {/* Points de contrôle, présentés comme une liste de vérification. */}
+      <ul className="mt-14 grid list-none border-l border-t border-ink [grid-template-columns:repeat(auto-fit,minmax(min(100%,240px),1fr))]">
         {points?.map((point, index) => (
           <Reveal
             as="li"
             key={point?.label}
             delay={index * 80}
-            className="bg-[#F5F5F2] px-[26px] pb-9 pt-7 transition-colors duration-300 hover:bg-white"
+            className="border-b border-r border-ink bg-paper px-[26px] pb-9 pt-6 transition-colors duration-300 hover:bg-white"
           >
-            <p className="mb-9 text-[13px] font-extrabold tracking-[0.18em]" style={{ color: ACCENT }}>
-              {String(index + 1)?.padStart(2, '0')}
+            <div className="mb-8 flex items-center justify-between font-mono text-[11.5px] tracking-[0.14em] text-steel">
+              <span>Q-{String(index + 1)?.padStart(2, '0')}</span>
+              <span aria-hidden="true" className="flex h-6 w-6 items-center justify-center border border-ink text-[13px] text-brand">
+                ✓
+              </span>
+            </div>
+            <p className="text-[20px] font-bold uppercase leading-[1.1]" style={headingFont}>
+              {point?.label}
             </p>
-            <p className="text-[16px] font-extrabold tracking-[0.06em]">{point?.label}</p>
-            <p className="mt-2.5 text-[13.5px] leading-[1.55] text-[#565e66]">{point?.text}</p>
+            <p className="mt-2.5 text-[14px] leading-[1.55] text-ink2">{point?.text}</p>
           </Reveal>
         ))}
       </ul>

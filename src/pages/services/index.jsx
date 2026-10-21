@@ -5,54 +5,55 @@ import SiteCTA from '../../components/ui/SiteCTA';
 import WhatsAppFab from '../../components/ui/WhatsAppFab';
 import Reveal from '../../components/ui/Reveal';
 import { useI18n } from '../../i18n/LanguageProvider';
-import { ACCENT, bodyFont, headingFont, container } from '../../components/ui/mcctTheme';
+import { bodyFont, headingFont, container } from '../../components/ui/mcctTheme';
+import { Eyebrow, Figure, Mark, PageHero } from '../../components/ui/Blueprint';
 import { getActivities } from '../../data/mcct';
 import { img } from '../../data/gallery';
 
 const ActivitySection = ({ activity, index }) => {
   const isDark = index % 2 === 1;
+  const tone = isDark ? 'dark' : 'light';
 
   return (
     <section
-      className={`py-[100px] ${isDark ? 'bg-[#0D0F10] text-white' : 'bg-[#F5F5F2] text-[#17191C]'}`}
+      className={`py-[100px] ${isDark ? 'bp-grid-dark bg-night text-snow' : 'bg-paper text-ink'}`}
       aria-labelledby={`activite-${activity?.num}`}
     >
-      <div className={`${container} grid items-center gap-14 [grid-template-columns:repeat(auto-fit,minmax(320px,1fr))]`}>
+      <div className={`${container} grid items-center gap-14 [grid-template-columns:repeat(auto-fit,minmax(min(100%,320px),1fr))]`}>
         <Reveal className={isDark ? 'min-[900px]:order-2' : undefined}>
-          <p className="mb-4 text-[13px] font-extrabold tracking-[0.24em]" style={{ color: ACCENT }}>
-            {`${activity?.num} — ${activity?.title?.toUpperCase()}`}
-          </p>
+          <Eyebrow tone={tone}>{`${activity?.num} — ${activity?.title?.toUpperCase()}`}</Eyebrow>
           <h2
             id={`activite-${activity?.num}`}
-            className="mb-5 text-[clamp(1.9rem,3.4vw,3rem)] font-bold leading-[1.02] tracking-[-0.02em]"
+            className="mb-6 text-[clamp(2.2rem,4vw,3.6rem)] font-bold uppercase leading-[1.02] tracking-[-0.01em]"
             style={headingFont}
           >
             {activity?.title}
+            <Mark />
           </h2>
-          <p className={`mb-7 text-[16.5px] leading-[1.7] ${isDark ? 'text-[#c4cad0]' : 'text-[#3a3f45]'}`}>
+          <p className={`mb-8 text-[16.5px] leading-[1.7] ${isDark ? 'text-snow/85' : 'text-ink2'}`}>
             {activity?.description}
           </p>
           {activity?.bullets?.length ? (
-            <ul className="mb-8 list-none space-y-3.5">
-              {activity?.bullets?.map((bullet) => (
-                <li key={bullet} className="flex gap-3.5">
-                  <span
-                    aria-hidden="true"
-                    className="mt-[9px] h-[2px] w-4 shrink-0 bg-[#2478BE]"
-                  />
-                  <span className={`text-[15.5px] leading-[1.6] ${isDark ? 'text-[#d8dde1]' : 'text-[#3a3f45]'}`}>
-                    {bullet}
+            <ul className={`mb-8 list-none border-t ${isDark ? 'border-nightrule' : 'border-ink/20'}`}>
+              {activity?.bullets?.map((bullet, i) => (
+                <li
+                  key={bullet}
+                  className={`flex gap-4 border-b py-3 ${isDark ? 'border-nightrule' : 'border-ink/20'}`}
+                >
+                  <span className={`shrink-0 pt-0.5 font-mono text-[11.5px] tracking-[0.12em] ${isDark ? 'text-brandlt' : 'text-brand'}`}>
+                    {String(i + 1)?.padStart(2, '0')}
                   </span>
+                  <span className={`text-[15.5px] leading-[1.6] ${isDark ? 'text-snow/90' : 'text-ink2'}`}>{bullet}</span>
                 </li>
               ))}
             </ul>
           ) : null}
-          <div className="flex flex-wrap gap-2.5">
+          <div className="flex flex-wrap gap-2">
             {activity?.tags?.map((tag) => (
               <span
                 key={tag}
-                className={`border px-4 py-2.5 text-[11.5px] font-bold tracking-[0.14em] ${
-                  isDark ? 'border-[#2c3136] text-[#9aa2a9]' : 'border-[#c6c6c1] text-[#565e66]'
+                className={`border px-3 py-2 font-mono text-[11.5px] font-medium uppercase tracking-[0.1em] ${
+                  isDark ? 'border-nightrule text-fog' : 'border-ink/40 text-steel'
                 }`}
               >
                 {tag}
@@ -61,12 +62,15 @@ const ActivitySection = ({ activity, index }) => {
           </div>
         </Reveal>
 
-        <Reveal className="overflow-hidden">
-          <img
+        <Reveal>
+          <Figure
             src={activity?.src}
             alt={activity?.title}
-            loading="lazy"
-            className="block h-[400px] w-full object-cover transition-transform [transition-duration:600ms] [transition-timing-function:cubic-bezier(0.22,1,0.36,1)] hover:scale-105"
+            tone={tone}
+            fig={`A-${activity?.num}`}
+            caption={activity?.title}
+            frameClassName="h-[420px]"
+            imgClassName="h-full w-full object-cover transition-transform [transition-duration:600ms] [transition-timing-function:cubic-bezier(0.22,1,0.36,1)] hover:scale-105"
           />
         </Reveal>
       </div>
@@ -80,40 +84,26 @@ const Activites = () => {
   const title = t('services.title');
 
   return (
-  <div className="min-h-screen bg-[#F5F5F2] text-[#17191C] antialiased" style={bodyFont}>
+  <div className="min-h-screen bg-paper text-ink antialiased" style={bodyFont}>
     <PageMeta title={t('meta.services.title')} description={t('meta.services.description')} />
 
     <WhatsAppFab />
     <SiteHeader />
 
-    <section className="relative flex min-h-[62vh] items-end overflow-hidden bg-[#0D0F10]">
-      <img
-        src={img('IMG_7905')}
-        alt={t('services.heroAlt')}
-        className="absolute inset-0 h-full w-full object-cover"
-      />
-      <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(13,15,16,0.4),rgba(13,15,16,0.85))]" />
-      <div className={`${container} relative pb-16 pt-[140px] text-white`}>
-        <p className="mb-4 text-[13px] font-extrabold tracking-[0.26em] text-[#cfd6dc]">{t('services.eyebrow')}</p>
-        <h1
-          className="text-[clamp(2.6rem,6vw,5.6rem)] font-bold leading-[0.98] tracking-[-0.02em]"
-          style={headingFont}
-        >
-          {title?.[0]}
-          <br />
-          {title?.[1]}
-          <br />
-          {title?.[2]}
-          <span style={{ color: ACCENT }}>.</span>
-        </h1>
-      </div>
-    </section>
+    <PageHero
+      eyebrow={t('services.eyebrow')}
+      title={title}
+      image={img('IMG_7905')}
+      imageAlt={t('services.heroAlt')}
+      fig="01"
+      sheet="03"
+    />
 
     {activities?.map((activity, index) => (
       <ActivitySection key={activity?.num} activity={activity} index={index} />
     ))}
 
-    <SiteCTA titleKey="cta.expertise" ctaKey="cta.quote" />
+    <SiteCTA titleKey="cta.expertise" ctaKey="cta.quote" sheet="03" />
   </div>
   );
 };

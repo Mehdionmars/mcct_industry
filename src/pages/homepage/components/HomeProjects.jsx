@@ -1,7 +1,8 @@
 import React, { useMemo, useState } from 'react';
 import Reveal from '../../../components/ui/Reveal';
 import { useI18n } from '../../../i18n/LanguageProvider';
-import { ACCENT, headingFont, container } from '../../../components/ui/mcctTheme';
+import { headingFont, container } from '../../../components/ui/mcctTheme';
+import { Eyebrow, Figure, Mark } from '../../../components/ui/Blueprint';
 import { getHomeProjects, projectCategories } from '../../../data/mcct';
 
 const HomeProjects = () => {
@@ -16,14 +17,12 @@ const HomeProjects = () => {
   );
 
   return (
-    <section id="projets" className="bg-[#F5F5F2] py-[120px]">
+    <section id="projets" className="bg-paper py-[110px] text-ink">
       <div className={container}>
         <Reveal className="mb-11">
-          <p className="mb-[18px] text-[13px] font-extrabold tracking-[0.24em]" style={{ color: ACCENT }}>
-            {t('home.projectsEyebrow')}
-          </p>
+          <Eyebrow>{t('home.projectsEyebrow')}</Eyebrow>
           <h2
-            className="text-[clamp(2.4rem,4.6vw,4.4rem)] font-extrabold leading-none tracking-[-0.03em]"
+            className="text-[clamp(2.6rem,5vw,4.8rem)] font-bold uppercase leading-[1.02] tracking-[-0.01em]"
             style={headingFont}
           >
             {title?.[0]}
@@ -31,66 +30,63 @@ const HomeProjects = () => {
             {title?.[1]}
             <br />
             {title?.[2]}
-            <span style={{ color: ACCENT }}>.</span>
+            <Mark />
           </h2>
         </Reveal>
 
         {/*
-          Pastilles à toutes les largeurs. Sous 900px elles défilent
+          Onglets à toutes les largeurs. Sous 900px ils défilent
           horizontalement (barre masquée, débord jusqu'aux bords de l'écran)
-          plutôt que de s'empiler sur trois lignes.
+          plutôt que de s'empiler sur plusieurs lignes.
         */}
         <div
           role="group"
           aria-label={t('common.filter')}
-          className="mcct-rail mb-12 -mx-5 flex gap-2.5 overflow-x-auto px-5 min-[900px]:mx-0 min-[900px]:flex-wrap min-[900px]:overflow-visible min-[900px]:px-0"
+          className="mcct-rail -mx-5 mb-12 flex overflow-x-auto px-5 min-[900px]:mx-0 min-[900px]:flex-wrap min-[900px]:overflow-visible min-[900px]:px-0"
         >
-          {projectCategories?.map((category) => {
-            const isActive = filter === category?.key;
-            return (
-              <button
-                key={category?.key}
-                type="button"
-                onClick={() => setFilter(category?.key)}
-                aria-pressed={isActive}
-                className={`min-h-[44px] shrink-0 cursor-pointer whitespace-nowrap rounded-full border px-5 py-3 text-[12px] font-extrabold tracking-[0.14em] transition-all [transition-duration:250ms] ${
-                  isActive
-                    ? 'border-[#2478BE] bg-[#2478BE] text-white'
-                    : 'border-[#c6c6c1] bg-transparent text-[#565e66] hover:border-[#2478BE] hover:text-[#2478BE]'
-                }`}
-              >
-                {tx(category?.label)}
-              </button>
-            );
-          })}
+          <div className="flex border-l border-t border-ink">
+            {projectCategories?.map((category) => {
+              const isActive = filter === category?.key;
+              return (
+                <button
+                  key={category?.key}
+                  type="button"
+                  onClick={() => setFilter(category?.key)}
+                  aria-pressed={isActive}
+                  className={`min-h-[46px] shrink-0 cursor-pointer whitespace-nowrap border-b border-r border-ink px-5 py-3 font-mono text-[12px] font-semibold uppercase tracking-[0.1em] transition-colors duration-200 ${
+                    isActive ? 'bg-ink text-safety' : 'bg-transparent text-ink hover:bg-paper2'
+                  }`}
+                >
+                  {tx(category?.label)}
+                </button>
+              );
+            })}
+          </div>
         </div>
 
         <div
           key={`${filter}-${lang}`}
-          className="grid animate-galerie-fade gap-7 [grid-template-columns:repeat(auto-fill,minmax(min(100%,300px),1fr))]"
+          className="grid animate-galerie-fade gap-x-8 gap-y-12 [grid-template-columns:repeat(auto-fill,minmax(min(100%,300px),1fr))]"
         >
-          {visibleProjects?.map((project) => (
-            <figure key={project?.slug} className="group m-0">
-              <div className="overflow-hidden bg-[#0D0F10]">
-                <img
-                  src={project?.thumbSrc}
-                  alt={project?.title}
-                  loading="lazy"
-                  className="block h-[300px] w-full object-cover transition-transform [transition-duration:600ms] [transition-timing-function:cubic-bezier(0.22,1,0.36,1)] group-hover:scale-[1.06]"
-                />
+          {visibleProjects?.map((project, index) => (
+            <article key={project?.slug} className="group">
+              <Figure
+                src={project?.thumbSrc}
+                alt={project?.title}
+                frameClassName="h-[290px]"
+                imgClassName="h-full w-full object-cover transition-transform [transition-duration:600ms] [transition-timing-function:cubic-bezier(0.22,1,0.36,1)] group-hover:scale-[1.06]"
+              />
+              <div className="mt-5 grid grid-cols-[auto_1fr] border-l border-t border-ink/25 font-mono text-[11.5px] uppercase tracking-[0.1em]">
+                <span className="border-b border-r border-ink/25 px-3 py-2 text-steel">{t('bp.fig')} {String(index + 1)?.padStart(2, '0')}</span>
+                <span className="border-b border-r border-ink/25 px-3 py-2 text-brand">{project?.categoryLabel}</span>
               </div>
-              <figcaption className="flex items-baseline justify-between gap-4 pt-4">
-                <div>
-                  <span className="block text-[11.5px] font-extrabold tracking-[0.18em]" style={{ color: ACCENT }}>
-                    {project?.categoryLabel}
-                  </span>
-                  <span className="mt-1.5 block text-[19px] font-extrabold tracking-[-0.01em]">{project?.title}</span>
-                </div>
-                <span className="whitespace-nowrap text-[13px] tracking-[0.08em] text-[#565e66]">
-                  {project?.location}
-                </span>
-              </figcaption>
-            </figure>
+              <div className="mt-4 flex items-baseline justify-between gap-4">
+                <h3 className="text-[23px] font-bold uppercase leading-[1.14]" style={headingFont}>
+                  {project?.title}
+                </h3>
+                <span className="shrink-0 font-mono text-[12px] uppercase tracking-[0.08em] text-steel">{project?.location}</span>
+              </div>
+            </article>
           ))}
         </div>
       </div>
