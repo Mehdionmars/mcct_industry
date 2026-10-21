@@ -92,7 +92,7 @@ const About = () => {
         <div className={`${container} grid gap-6 min-[900px]:[grid-template-columns:2fr_1fr]`}>
           <Reveal className="overflow-hidden">
             <img
-              src={img('IMG_7864')}
+              src={img('IMG_7909')}
               alt={t('about.imageAlt1')}
               loading="lazy"
               className="block h-[420px] w-full object-cover transition-transform [transition-duration:600ms] hover:scale-[1.04]"
@@ -100,10 +100,10 @@ const About = () => {
           </Reveal>
           <Reveal className="overflow-hidden">
             <img
-              src={img('IMG_7916')}
+              src={img('IMG_7944')}
               alt={t('about.imageAlt2')}
               loading="lazy"
-              className="block h-[420px] w-full object-cover transition-transform [transition-duration:600ms] hover:scale-[1.04]"
+              className="block h-[420px] w-full object-cover object-left transition-transform [transition-duration:600ms] hover:scale-[1.04]"
             />
           </Reveal>
         </div>
