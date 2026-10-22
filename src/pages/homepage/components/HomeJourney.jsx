@@ -74,14 +74,7 @@ const HomeJourney = () => {
                   pointerEvents: i === index ? 'auto' : 'none'
                 }}
               >
-                {/*
-                  Compteur « 01 / 04 » et non « 01 — » : la section est encadrée
-                  par les sur-titres numérotés 03 et 04, un simple « 01 » se
-                  lirait comme un numéro de section.
-                */}
                 <p className="mb-5 text-[12.5px] font-extrabold tracking-[0.26em]" style={{ color: ACCENT }}>
-                  {chapter?.num} / {String(chapters?.length)?.padStart(2, '0')}
-                  <span className="mx-2.5 text-[rgba(255,255,255,0.4)]">—</span>
                   {chapter?.label}
                 </p>
                 <h2

@@ -208,7 +208,6 @@ const SiteHeader = ({ variant = 'light', links = navLinks }) => {
             {links?.map((link) => {
               const inner = (
                 <>
-                  <span className="text-[11px] font-extrabold tracking-[0.2em] text-[#2478BE]">{link?.num}</span>
                   <span className="text-[30px] font-bold tracking-[-0.01em] text-white" style={headingFont}>
                     {label(link)}
                   </span>

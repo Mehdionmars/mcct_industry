@@ -38,9 +38,7 @@ const QualitySection = () => {
             delay={index * 80}
             className="bg-[#F5F5F2] px-[26px] pb-9 pt-7 transition-colors duration-300 hover:bg-white"
           >
-            <p className="mb-9 text-[13px] font-extrabold tracking-[0.18em]" style={{ color: ACCENT }}>
-              {String(index + 1)?.padStart(2, '0')}
-            </p>
+            <span aria-hidden="true" className="mb-9 block h-[3px] w-10 bg-[#2478BE]" />
             <p className="text-[16px] font-extrabold tracking-[0.06em]">{point?.label}</p>
             <p className="mt-2.5 text-[13.5px] leading-[1.55] text-[#565e66]">{point?.text}</p>
           </Reveal>

@@ -191,9 +191,6 @@ export const SavoirFaireSection = () => {
                 name={step?.icon}
                 className="h-9 w-9 text-[#17191C] transition-all [transition-duration:450ms] [transition-timing-function:cubic-bezier(0.22,1,0.36,1)] group-hover:-translate-y-0.5 group-hover:text-[#2478BE] motion-reduce:transition-none motion-reduce:group-hover:translate-y-0"
               />
-              <p className="text-[13px] font-extrabold tracking-[0.18em]" style={{ color: ACCENT }}>
-                {step?.num}
-              </p>
             </div>
             <p className="text-[16px] font-extrabold tracking-[0.06em]">{step?.title}</p>
             <p className="mt-2.5 text-[13.5px] leading-[1.55] text-[#565e66]">{step?.desc}</p>

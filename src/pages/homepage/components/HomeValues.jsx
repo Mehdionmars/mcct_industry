@@ -22,7 +22,6 @@ const HomeValues = () => {
     orientation: 'vertical'
   });
   const { ref: parallaxRef, offset } = useParallax(70);
-  const active = values?.[index];
 
   return (
     <section ref={parallaxRef} className="relative overflow-hidden bg-[#0D0F10] py-[120px] text-white">
@@ -105,9 +104,6 @@ const HomeValues = () => {
                     className="flex h-[290px] flex-col justify-center transition-opacity duration-500 min-[900px]:h-[270px]"
                     style={{ opacity: i === index ? 1 : 0 }}
                   >
-                    <p className="mb-4 text-[13px] font-extrabold tracking-[0.2em]" style={{ color: ACCENT }}>
-                      {value?.num}
-                    </p>
                     <p
                       className="text-[clamp(2.1rem,5vw,3.8rem)] font-extrabold leading-[0.98] tracking-[-0.03em]"
                       style={headingFont}
@@ -141,10 +137,7 @@ const HomeValues = () => {
               />
             </div>
 
-            <div className="flex items-center justify-between">
-              <p className="text-[12px] font-bold tracking-[0.2em] text-[#565e66]">
-                <span className="text-white">{active?.num}</span> / {String(values?.length)?.padStart(2, '0')}
-              </p>
+            <div className="flex items-center justify-end">
               <div className="flex gap-2.5">
                 <button
                   type="button"
