@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo noupdate="1">
+
+    <record id="mail_template_situation" model="mail.template">
+        <field name="name">Chantier : envoi d'une situation de travaux</field>
+        <field name="model_id" ref="model_mcct_situation"/>
+        <field name="subject">{{ object.company_id.name }} — {{ object.name }} — {{ object.project_id.name }}</field>
+        <field name="email_from">{{ (object.project_id.user_id.email_formatted or user.email_formatted) }}</field>
+        <field name="partner_to">{{ object.partner_id.id }}</field>
+        <field name="lang">{{ object.partner_id.lang }}</field>
+        <field name="report_template_ids" eval="[(4, ref('mcct_industry.action_report_situation'))]"/>
+        <field name="description">Envoyé au client avec le PDF de la situation de travaux.</field>
+        <field name="body_html" type="html">
+<div style="margin: 0px; padding: 0px;">
+    <p style="margin: 0px; padding: 0px; font-size: 13px;">
+        Bonjour <t t-out="object.partner_id.name or ''">Monsieur</t>,
+        <br/><br/>
+        Veuillez trouver ci-joint la <strong t-out="object.name or ''">Situation N°01</strong>
+        du chantier <strong t-out="object.project_id.name or ''">Hangar</strong>
+        (avancement cumulé : <t t-out="('%.1f' % object.progress).replace('.', ',')">40</t> %).
+        <br/><br/>
+        Montant de la période :
+        <strong t-out="format_amount(object.amount_total, object.currency_id) or ''">100 000,00 DH</strong> TTC,
+        soit un net à payer de
+        <strong t-out="format_amount(object.amount_net, object.currency_id) or ''">90 000,00 DH</strong>
+        après retenue de garantie.
+        <br/><br/>
+        Vous pouvez consulter l'avancement de votre chantier et approuver cette situation
+        directement depuis votre espace client :
+        <br/><br/>
+        <a t-att-href="object.get_base_url() + object.get_portal_url()"
+           style="background-color: #2478BE; padding: 8px 16px; text-decoration: none; color: #fff; border-radius: 5px; font-size: 13px;">
+            Voir mon chantier
+        </a>
+        <br/><br/>
+        Nous restons à votre disposition pour toute question.
+        <br/>
+        Cordialement,
+        <br/>
+        <t t-out="object.company_id.name or ''">MCCT Industry</t>
+    </p>
+</div>
+        </field>
+        <field name="auto_delete" eval="True"/>
+    </record>
+
+</odoo>

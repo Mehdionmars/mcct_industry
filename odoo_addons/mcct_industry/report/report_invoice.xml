@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <template id="report_invoice_document_mcct" inherit_id="account.report_invoice_document">
+
+        <!-- Chantier, situation et réf. marché dans le bandeau d'informations -->
+        <xpath expr="//div[@id='informations']" position="inside">
+            <div class="col" t-if="o.mcct_project_id" name="mcct_project">
+                <strong>Chantier</strong>
+                <div t-field="o.mcct_project_id.name"/>
+            </div>
+            <div class="col" t-if="o.mcct_situation_id" name="mcct_situation">
+                <strong>Situation</strong>
+                <div>
+                    N°<t t-out="'%02d' % o.mcct_situation_id.number"/>
+                    (<t t-out="('%.1f' % o.mcct_situation_id.progress).replace('.', ',')"/> % cumulé)
+                </div>
+            </div>
+            <div class="col" t-if="o.mcct_is_advance" name="mcct_advance">
+                <strong>Type</strong>
+                <div>Facture d'avance</div>
+            </div>
+        </xpath>
+
+        <!-- Retenue de garantie et net à payer sous les totaux -->
+        <xpath expr="//div[@id='total']//table/t[@t-call='account.document_tax_totals']" position="after">
+            <t t-if="o.mcct_retention_amount">
+                <tr class="mcct-retention">
+                    <td>Retenue de garantie (<t t-out="('%g' % o.mcct_retention_rate).replace('.', ',')"/> %)</td>
+                    <td class="text-end">
+                        − <span t-field="o.mcct_retention_amount"/>
+                    </td>
+                </tr>
+                <tr class="fw-bold o_total mcct-net">
+                    <td>Net à payer</td>
+                    <td class="text-end"><span t-field="o.mcct_net_to_pay"/></td>
+                </tr>
+            </t>
+        </xpath>
+
+        <!-- Montant en lettres : formule marocaine pour les factures en dirhams -->
+        <xpath expr="//span[@t-field='o.amount_total_words']/ancestor::p[1]" position="attributes">
+            <attribute name="t-if">o.company_id.display_invoice_amount_total_words and o.currency_id.name != 'MAD'</attribute>
+        </xpath>
+        <xpath expr="//span[@t-field='o.amount_total_words']/ancestor::p[1]" position="after">
+            <p class="text-end lh-sm mcct-amount-words" t-if="o.currency_id.name == 'MAD' and o.move_type in ('out_invoice', 'out_refund')">
+                <t t-if="o.move_type == 'out_refund'">Arrêté le présent avoir à la somme de :</t>
+                <t t-else="">Arrêtée la présente facture à la somme de :</t>
+                <br/>
+                <strong t-field="o.amount_total_words"/> TTC
+                <t t-if="o.mcct_retention_amount">
+                    <br/>
+                    <small class="text-muted">Net à payer après retenue de garantie :
+                        <t t-out="o._mcct_net_to_pay_words()"/></small>
+                </t>
+            </p>
+        </xpath>
+
+        <!-- Mentions légales de la société -->
+        <xpath expr="//div[@id='payment_term']" position="after">
+            <t t-call="mcct_industry.legal_mentions"/>
+        </xpath>
+    </template>
+
+</odoo>

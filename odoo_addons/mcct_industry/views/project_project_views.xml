@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- Formulaire projet : onglet « Chantier », boutons et indicateurs -->
+    <record id="edit_project_mcct" model="ir.ui.view">
+        <field name="name">project.project.form.mcct</field>
+        <field name="model">project.project</field>
+        <field name="inherit_id" ref="project.edit_project"/>
+        <field name="arch" type="xml">
+            <xpath expr="//header" position="inside">
+                <button name="action_mcct_new_situation" string="Nouvelle situation" type="object"
+                        class="btn-primary" invisible="not mcct_is_site or is_template"
+                        groups="project.group_project_user"/>
+                <button name="action_mcct_invoice_advance" string="Facturer l'avance" type="object"
+                        invisible="not mcct_is_site or mcct_advance_rate &lt;= 0"
+                        groups="account.group_account_invoice"/>
+                <button name="action_mcct_release_retention" string="Libérer la retenue" type="object"
+                        invisible="not mcct_is_site or mcct_retention_released or not mcct_date_reception_definitive"
+                        groups="account.group_account_invoice"
+                        confirm="Confirmer la libération de la retenue de garantie (réception définitive prononcée) ?"/>
+                <button name="action_mcct_open_portal" string="Vue client" type="object" icon="fa-globe"
+                        invisible="not mcct_is_site or not partner_id"/>
+            </xpath>
+            <xpath expr="//div[@name='button_box']" position="inside">
+                <button class="oe_stat_button" type="object" name="action_mcct_view_situations"
+                        icon="fa-list-ol" invisible="not mcct_is_site">
+                    <div class="o_stat_info">
+                        <span class="o_stat_value"><field name="mcct_situation_count"/></span>
+                        <span class="o_stat_text">Situations</span>
+                    </div>
+                </button>
+                <button class="oe_stat_button" type="object" name="action_mcct_view_site_reports"
+                        icon="fa-camera" invisible="not mcct_is_site">
+                    <div class="o_stat_info">
+                        <span class="o_stat_value"><field name="mcct_site_report_count"/></span>
+                        <span class="o_stat_text">Rapports</span>
+                    </div>
+                </button>
+                <button class="oe_stat_button" type="object" name="action_mcct_view_invoices"
+                        icon="fa-file-text-o" invisible="not mcct_is_site"
+                        groups="account.group_account_invoice">
+                    <div class="o_stat_info">
+                        <span class="o_stat_value"><field name="mcct_invoice_count"/></span>
+                        <span class="o_stat_text">Factures</span>
+                    </div>
+                </button>
+            </xpath>
+            <xpath expr="//field[@name='partner_id']" position="after">
+                <field name="mcct_is_site"/>
+            </xpath>
+            <xpath expr="//notebook" position="inside">
+                <page name="mcct_site" string="Chantier" invisible="not mcct_is_site">
+                    <field name="currency_id" invisible="1"/>
+                    <group>
+                        <group string="Chantier">
+                            <field name="mcct_activity"/>
+                            <field name="mcct_phase"/>
+                            <field name="mcct_progress" widget="progressbar" options="{'editable': true}"/>
+                            <field name="mcct_site_address"/>
+                            <field name="mcct_site_city"/>
+                        </group>
+                        <group string="Marché">
+                            <field name="mcct_contract_ref"/>
+                            <field name="mcct_contract_date"/>
+                            <field name="mcct_contract_amount"/>
+                            <field name="mcct_advance_rate"/>
+                            <field name="mcct_retention_rate"/>
+                            <field name="mcct_retention_cap_rate"/>
+                        </group>
+                        <group string="Réceptions">
+                            <field name="mcct_date_reception_provisoire"/>
+                            <field name="mcct_date_reception_definitive"/>
+                            <field name="mcct_retention_released"/>
+                        </group>
+                        <group string="Situation financière"
+                               groups="account.group_account_invoice,sales_team.group_sale_salesman">
+                            <field name="mcct_amount_done"/>
+                            <field name="mcct_amount_remaining"/>
+                            <field name="mcct_amount_invoiced"/>
+                            <field name="mcct_amount_paid"/>
+                            <field name="mcct_amount_residual"/>
+                            <field name="mcct_retention_held"/>
+                            <field name="mcct_advance_invoiced" invisible="not mcct_advance_rate"/>
+                            <field name="mcct_advance_remaining" invisible="not mcct_advance_rate"/>
+                        </group>
+                    </group>
+                    <separator string="Documents partagés avec le client (plans, PV, fiches techniques)"/>
+                    <field name="mcct_document_ids" widget="many2many_binary" nolabel="1"/>
+                </page>
+            </xpath>
+        </field>
+    </record>
+
+    <!-- Tableau de suivi des chantiers par phase -->
+    <record id="view_project_kanban_mcct" model="ir.ui.view">
+        <field name="name">project.project.kanban.mcct</field>
+        <field name="model">project.project</field>
+        <field name="priority">99</field>
+        <field name="arch" type="xml">
+            <kanban default_group_by="mcct_phase" quick_create="false" group_create="false"
+                    group_delete="false" sample="1" class="o_mcct_kanban">
+                <field name="currency_id"/>
+                <templates>
+                    <t t-name="card">
+                        <field name="name" class="fw-bold fs-5"/>
+                        <field name="partner_id" class="text-muted"/>
+                        <div class="small">
+                            <field name="mcct_activity"/>
+                            <span t-if="record.mcct_site_city.raw_value"> · <field name="mcct_site_city"/></span>
+                        </div>
+                        <field name="mcct_progress" widget="progressbar" class="mt-2"/>
+                        <footer class="pt-1">
+                            <field name="mcct_contract_amount" widget="monetary" class="small"/>
+                            <field name="user_id" widget="many2one_avatar_user" class="ms-auto"/>
+                        </footer>
+                    </t>
+                </templates>
+            </kanban>
+        </field>
+    </record>
+
+    <record id="view_project_list_mcct" model="ir.ui.view">
+        <field name="name">project.project.list.mcct</field>
+        <field name="model">project.project</field>
+        <field name="priority">99</field>
+        <field name="arch" type="xml">
+            <list string="Chantiers" sample="1">
+                <field name="currency_id" column_invisible="1"/>
+                <field name="name"/>
+                <field name="partner_id"/>
+                <field name="mcct_activity" optional="show"/>
+                <field name="mcct_site_city" optional="show"/>
+                <field name="mcct_phase" widget="badge"/>
+                <field name="mcct_progress" widget="progressbar"/>
+                <field name="mcct_contract_amount" sum="Total marchés"/>
+                <field name="date_start" optional="hide"/>
+                <field name="date" optional="show"/>
+                <field name="user_id" widget="many2one_avatar_user" optional="show"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="view_project_project_filter_mcct" model="ir.ui.view">
+        <field name="name">project.project.search.mcct</field>
+        <field name="model">project.project</field>
+        <field name="inherit_id" ref="project.view_project_project_filter"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='name']" position="after">
+                <field name="mcct_contract_ref"/>
+                <field name="mcct_site_city"/>
+            </xpath>
+            <xpath expr="//search" position="inside">
+                <separator/>
+                <filter name="mcct_sites" string="Chantiers" domain="[('mcct_is_site', '=', True)]"/>
+                <filter name="mcct_in_progress" string="En cours"
+                        domain="[('mcct_phase', 'not in', ('reception_provisoire', 'reception_definitive'))]"/>
+                <filter name="mcct_retention_held" string="Retenue non libérée"
+                        domain="[('mcct_retention_released', '=', False), ('mcct_date_reception_provisoire', '!=', False)]"/>
+                <group>
+                    <filter name="group_mcct_phase" string="Phase" context="{'group_by': 'mcct_phase'}"/>
+                    <filter name="group_mcct_activity" string="Activité" context="{'group_by': 'mcct_activity'}"/>
+                </group>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="action_mcct_project" model="ir.actions.act_window">
+        <field name="name">Chantiers</field>
+        <field name="res_model">project.project</field>
+        <field name="view_mode">kanban,list,form</field>
+        <field name="domain">[('mcct_is_site', '=', True)]</field>
+        <field name="context">{'default_mcct_is_site': True, 'default_privacy_visibility': 'portal', 'default_allow_billable': True}</field>
+        <field name="search_view_id" ref="project.view_project_project_filter"/>
+        <field name="view_ids" eval="[(5, 0, 0),
+            (0, 0, {'view_mode': 'kanban', 'view_id': ref('view_project_kanban_mcct')}),
+            (0, 0, {'view_mode': 'list', 'view_id': ref('view_project_list_mcct')}),
+            (0, 0, {'view_mode': 'form', 'view_id': ref('project.edit_project')})]"/>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">Créer votre premier chantier</p>
+            <p>Un chantier est créé automatiquement à la confirmation d'un devis contenant des
+               ouvrages (charpente, bardage, tuyauterie…). Vous pouvez aussi le créer ici.</p>
+        </field>
+    </record>
+
+</odoo>

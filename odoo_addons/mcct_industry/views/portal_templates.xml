@@ -1,0 +1,338 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- Tuile « Mes chantiers » sur l'accueil du portail -->
+    <template id="portal_my_home_mcct" name="Mes chantiers" inherit_id="portal.portal_my_home" priority="30" customize_show="True">
+        <xpath expr="//div[hasclass('o_portal_docs')]" position="before">
+            <t t-set="portal_service_category_enable" t-value="True"/>
+        </xpath>
+        <div id="portal_service_category" position="inside">
+            <t t-call="portal.portal_docs_entry">
+                <t t-set="icon" t-value="'/mcct_industry/static/src/img/chantier.svg'"/>
+                <t t-set="title">Mes chantiers</t>
+                <t t-set="url" t-value="'/my/chantiers'"/>
+                <t t-set="text">Avancement, situations de travaux, factures et photos de vos chantiers</t>
+                <t t-set="placeholder_count" t-value="'mcct_site_count'"/>
+            </t>
+        </div>
+    </template>
+
+    <!-- Fil d'Ariane -->
+    <template id="portal_breadcrumbs_mcct" inherit_id="portal.portal_breadcrumbs" priority="40">
+        <xpath expr="//ol[hasclass('o_portal_submenu')]" position="inside">
+            <li t-if="page_name == 'mcct_chantiers'" class="breadcrumb-item active">Mes chantiers</li>
+            <t t-if="page_name == 'mcct_chantier'">
+                <li class="breadcrumb-item"><a href="/my/chantiers">Mes chantiers</a></li>
+                <li class="breadcrumb-item active text-truncate"><t t-out="mcct_project.name"/></li>
+            </t>
+        </xpath>
+    </template>
+
+    <!-- Liste des chantiers -->
+    <template id="portal_my_chantiers" name="Mes chantiers">
+        <t t-call="portal.portal_layout">
+            <t t-set="breadcrumbs_searchbar" t-value="True"/>
+            <t t-call="portal.portal_searchbar">
+                <t t-set="title">Mes chantiers</t>
+            </t>
+            <div t-if="not projects" class="alert alert-info mt-3" role="alert">
+                Aucun chantier pour le moment.
+            </div>
+            <t t-if="projects" t-call="portal.portal_table">
+                <thead>
+                    <tr>
+                        <th>Chantier</th>
+                        <th>Phase</th>
+                        <th class="o_mcct_col_progress">Avancement</th>
+                        <th class="text-end d-none d-md-table-cell">Fin prévue</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr t-foreach="projects" t-as="p">
+                        <td>
+                            <a t-attf-href="/my/chantiers/#{p.id}"><strong t-field="p.name"/></a>
+                            <div class="small text-muted">
+                                <span t-if="p.mcct_activity" t-field="p.mcct_activity"/>
+                                <span t-if="p.mcct_activity and p.mcct_site_city"> · </span>
+                                <span t-if="p.mcct_site_city" t-field="p.mcct_site_city"/>
+                            </div>
+                        </td>
+                        <td><span class="badge rounded-pill text-bg-light border" t-field="p.mcct_phase"/></td>
+                        <td>
+                            <div class="progress o_mcct_progress" role="progressbar"
+                                 t-att-aria-valuenow="int(p.mcct_progress)" aria-valuemin="0" aria-valuemax="100">
+                                <div class="progress-bar" t-attf-style="width: #{min(p.mcct_progress, 100)}%"/>
+                            </div>
+                            <small><t t-out="('%.0f' % p.mcct_progress).replace('.', ',')"/> %</small>
+                        </td>
+                        <td class="text-end d-none d-md-table-cell"><span t-field="p.date"/></td>
+                    </tr>
+                </tbody>
+            </t>
+        </t>
+    </template>
+
+    <!-- Fiche chantier -->
+    <template id="portal_my_chantier" name="Mon chantier">
+        <t t-call="portal.portal_layout">
+            <t t-set="p" t-value="mcct_project"/>
+            <t t-set="o_portal_fullwidth_alert" t-if="is_internal_preview">
+                <t t-call="portal.portal_back_in_edit_mode">
+                    <t t-set="backend_url" t-value="'/odoo/action-mcct_industry.action_mcct_project/%s' % p.id"/>
+                </t>
+            </t>
+
+            <div class="o_mcct_portal mt-3">
+                <div t-if="message == 'approved'" class="alert alert-success" role="alert">
+                    Merci, la situation a été approuvée. Nous établissons la facture correspondante.
+                </div>
+                <div t-if="message == 'changes'" class="alert alert-info" role="alert">
+                    Votre demande de correction a été transmise à notre équipe.
+                </div>
+                <div t-if="message == 'not_pending'" class="alert alert-warning" role="alert">
+                    Cette situation n'est plus en attente d'approbation.
+                </div>
+
+                <!-- En-tête -->
+                <div class="d-flex flex-wrap align-items-start gap-3 mb-3">
+                    <div class="flex-grow-1">
+                        <h2 class="mb-1" t-field="p.name"/>
+                        <div class="text-muted">
+                            <span t-if="p.mcct_activity" t-field="p.mcct_activity"/>
+                            <t t-if="p.mcct_site_address or p.mcct_site_city">
+                                · <i class="fa fa-map-marker" title="Lieu"/>
+                                <span t-field="p.mcct_site_address"/>
+                                <span t-if="p.mcct_site_address and p.mcct_site_city">, </span>
+                                <span t-field="p.mcct_site_city"/>
+                            </t>
+                        </div>
+                        <div class="small text-muted mt-1">
+                            <t t-if="p.mcct_contract_ref">Réf. marché : <strong t-field="p.mcct_contract_ref"/></t>
+                            <t t-if="p.date_start"> · Début : <span t-field="p.date_start"/></t>
+                            <t t-if="p.date"> · Fin prévue : <span t-field="p.date"/></t>
+                        </div>
+                    </div>
+                    <div t-if="p.user_id" class="o_mcct_contact card">
+                        <div class="card-body py-2 px-3 small">
+                            <div class="text-muted">Votre interlocuteur</div>
+                            <strong t-field="p.user_id.name"/>
+                            <div t-if="p.user_id.email"><a t-attf-href="mailto:#{p.user_id.email}" t-out="p.user_id.email"/></div>
+                            <div t-if="p.user_id.phone"><a t-attf-href="tel:#{p.user_id.phone}" t-out="p.user_id.phone"/></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Frise des phases -->
+                <ol class="o_mcct_steps mb-4">
+                    <li t-foreach="phase_steps" t-as="step" t-attf-class="o_mcct_step #{step[2]}">
+                        <span t-out="step[1]"/>
+                    </li>
+                </ol>
+
+                <!-- Indicateurs -->
+                <div class="row g-3 mb-4">
+                    <div class="col-6 col-lg">
+                        <div class="o_mcct_kpi o_mcct_kpi_main">
+                            <div class="o_mcct_kpi_label">Avancement</div>
+                            <div class="o_mcct_kpi_value"><t t-out="('%.0f' % p.mcct_progress).replace('.', ',')"/> %</div>
+                            <div class="progress o_mcct_progress mt-2">
+                                <div class="progress-bar" t-attf-style="width: #{min(p.mcct_progress, 100)}%"/>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-6 col-lg">
+                        <div class="o_mcct_kpi">
+                            <div class="o_mcct_kpi_label">Montant du marché HT</div>
+                            <div class="o_mcct_kpi_value" t-field="p.mcct_contract_amount"/>
+                        </div>
+                    </div>
+                    <div class="col-6 col-lg">
+                        <div class="o_mcct_kpi">
+                            <div class="o_mcct_kpi_label">Facturé TTC</div>
+                            <div class="o_mcct_kpi_value" t-field="p.mcct_amount_invoiced"/>
+                        </div>
+                    </div>
+                    <div class="col-6 col-lg">
+                        <div class="o_mcct_kpi">
+                            <div class="o_mcct_kpi_label">Reste à régler</div>
+                            <div class="o_mcct_kpi_value" t-field="p.mcct_amount_residual"/>
+                        </div>
+                    </div>
+                    <div class="col-6 col-lg" t-if="p.mcct_retention_held">
+                        <div class="o_mcct_kpi">
+                            <div class="o_mcct_kpi_label">Retenue de garantie</div>
+                            <div class="o_mcct_kpi_value" t-field="p.mcct_retention_held"/>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Situations de travaux -->
+                <section id="situations" class="mb-4">
+                    <h4>Situations de travaux</h4>
+                    <div t-if="not situations" class="text-muted">Aucune situation pour le moment.</div>
+                    <div t-if="situations" class="table-responsive">
+                        <table class="table table-sm align-middle">
+                            <thead>
+                                <tr>
+                                    <th>N°</th>
+                                    <th>Date</th>
+                                    <th class="text-end">Avancement</th>
+                                    <th class="text-end d-none d-md-table-cell">Montant TTC</th>
+                                    <th class="text-end">Net à payer</th>
+                                    <th>Statut</th>
+                                    <th class="text-end"/>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr t-foreach="situations" t-as="s">
+                                    <td><strong t-out="'%02d' % s.number"/></td>
+                                    <td><span t-field="s.date"/></td>
+                                    <td class="text-end"><t t-out="('%.1f' % s.progress).replace('.', ',')"/> %</td>
+                                    <td class="text-end d-none d-md-table-cell"><span t-field="s.amount_total"/></td>
+                                    <td class="text-end"><span t-field="s.amount_net"/></td>
+                                    <td>
+                                        <span t-if="s.state == 'sent'" class="badge text-bg-warning">À approuver</span>
+                                        <span t-elif="s.state == 'approved'" class="badge text-bg-info">Approuvée</span>
+                                        <span t-elif="s.state == 'invoiced'" class="badge text-bg-success">Facturée</span>
+                                    </td>
+                                    <td class="text-end text-nowrap">
+                                        <a class="btn btn-sm btn-outline-secondary" t-attf-href="/my/chantiers/situation/#{s.id}/pdf" target="_blank">
+                                            <i class="fa fa-file-pdf-o" title="PDF"/> PDF
+                                        </a>
+                                        <button t-if="s.state == 'sent'" type="button" class="btn btn-sm btn-primary"
+                                                data-bs-toggle="modal" t-attf-data-bs-target="#mcct_approve_#{s.id}">
+                                            Approuver
+                                        </button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <!-- Fenêtres d'approbation -->
+                    <t t-foreach="situations.filtered(lambda s: s.state == 'sent')" t-as="s">
+                        <div class="modal fade" t-attf-id="mcct_approve_#{s.id}" tabindex="-1" aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title">Situation N°<t t-out="'%02d' % s.number"/></h5>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fermer"/>
+                                    </div>
+                                    <div class="modal-body">
+                                        <p>
+                                            Travaux de la période : <strong t-field="s.amount_current"/> HT —
+                                            net à payer <strong t-field="s.amount_net"/>.
+                                        </p>
+                                        <form t-attf-action="/my/chantiers/situation/#{s.id}/approve" method="post">
+                                            <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
+                                            <label class="form-label" t-attf-for="signer_#{s.id}">Nom du signataire</label>
+                                            <input type="text" class="form-control mb-3" name="signer_name" required="required"
+                                                   t-attf-id="signer_#{s.id}" t-att-value="request.env.user.partner_id.name"/>
+                                            <button type="submit" class="btn btn-primary w-100">
+                                                <i class="fa fa-check" title="Approuver"/> Bon pour accord
+                                            </button>
+                                        </form>
+                                        <hr/>
+                                        <form t-attf-action="/my/chantiers/situation/#{s.id}/changes" method="post">
+                                            <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
+                                            <input type="hidden" name="signer_name" t-att-value="request.env.user.partner_id.name"/>
+                                            <label class="form-label" t-attf-for="comment_#{s.id}">Une remarque sur les quantités ?</label>
+                                            <textarea class="form-control mb-2" name="comment" rows="3" required="required"
+                                                      t-attf-id="comment_#{s.id}"
+                                                      placeholder="Ex. : bardage façade nord, 120 m² posés au lieu de 150 m²"/>
+                                            <button type="submit" class="btn btn-outline-secondary w-100">Demander une correction</button>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </t>
+                </section>
+
+                <!-- Factures -->
+                <section id="factures" class="mb-4">
+                    <h4>Factures</h4>
+                    <div t-if="not invoices" class="text-muted">Aucune facture pour le moment.</div>
+                    <div t-if="invoices" class="table-responsive">
+                        <table class="table table-sm align-middle">
+                            <thead>
+                                <tr>
+                                    <th>Facture</th>
+                                    <th>Date</th>
+                                    <th class="d-none d-md-table-cell">Échéance</th>
+                                    <th class="text-end">Montant TTC</th>
+                                    <th class="text-end">Reste dû</th>
+                                    <th>Paiement</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr t-foreach="invoices" t-as="inv">
+                                    <td><a t-att-href="inv.get_portal_url()" t-out="inv.name"/></td>
+                                    <td><span t-field="inv.invoice_date"/></td>
+                                    <td class="d-none d-md-table-cell"><span t-field="inv.invoice_date_due"/></td>
+                                    <td class="text-end"><span t-field="inv.amount_total"/></td>
+                                    <td class="text-end"><span t-field="inv.amount_residual"/></td>
+                                    <td>
+                                        <span t-if="inv.payment_state in ('paid', 'in_payment')" class="badge text-bg-success">Payée</span>
+                                        <span t-elif="inv.payment_state == 'partial'" class="badge text-bg-warning">Partiellement payée</span>
+                                        <span t-elif="inv.payment_state == 'reversed'" class="badge text-bg-secondary">Annulée par avoir</span>
+                                        <span t-else="" class="badge text-bg-light border">À payer</span>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </section>
+
+                <!-- Rapports de chantier -->
+                <section id="rapports" class="mb-4">
+                    <h4>Journal de chantier</h4>
+                    <div t-if="not site_reports" class="text-muted">Aucun rapport publié pour le moment.</div>
+                    <div t-foreach="site_reports" t-as="r" class="card mb-3 o_mcct_report">
+                        <div class="card-header d-flex flex-wrap gap-2 align-items-center">
+                            <strong t-field="r.date"/>
+                            <span t-field="r.name"/>
+                            <span class="ms-auto small text-muted">
+                                <t t-if="r.weather"><span t-field="r.weather"/> · </t>
+                                <t t-out="r.workforce"/> pers. sur site
+                            </span>
+                            <a class="btn btn-sm btn-link" t-attf-href="/my/chantiers/rapport/#{r.id}/pdf" target="_blank">
+                                <i class="fa fa-file-pdf-o" title="PDF"/>
+                            </a>
+                        </div>
+                        <div class="card-body">
+                            <div t-if="not is_html_empty(r.work_done)" t-field="r.work_done"/>
+                            <div t-if="not is_html_empty(r.issues)" class="alert alert-warning py-2 mt-2 mb-0">
+                                <strong>Points d'attention :</strong>
+                                <div t-field="r.issues"/>
+                            </div>
+                            <t t-set="photos" t-value="r.photo_ids.filtered(lambda a: (a.mimetype or '').startswith('image/'))"/>
+                            <div t-if="photos" class="row g-2 mt-2">
+                                <div class="col-4 col-md-2" t-foreach="photos" t-as="photo">
+                                    <a t-attf-href="/my/chantiers/#{p.id}/fichier/#{photo.id}" target="_blank">
+                                        <img class="img-fluid rounded o_mcct_photo" loading="lazy"
+                                             t-attf-src="/my/chantiers/#{p.id}/fichier/#{photo.id}" t-att-alt="photo.name"/>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Documents -->
+                <section id="documents" class="mb-4" t-if="documents">
+                    <h4>Documents</h4>
+                    <ul class="list-group">
+                        <li t-foreach="documents" t-as="doc" class="list-group-item d-flex align-items-center">
+                            <i class="fa fa-file-o me-2" title="Document"/>
+                            <span t-out="doc.name" class="text-truncate"/>
+                            <a class="btn btn-sm btn-outline-primary ms-auto" t-attf-href="/my/chantiers/#{p.id}/fichier/#{doc.id}?download=1">
+                                Télécharger
+                            </a>
+                        </li>
+                    </ul>
+                </section>
+            </div>
+        </t>
+    </template>
+
+</odoo>

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="paperformat_a4_landscape" model="report.paperformat">
+        <field name="name">A4 paysage (situations de travaux)</field>
+        <field name="format">A4</field>
+        <field name="orientation">Landscape</field>
+        <field name="margin_top">40</field>
+        <field name="margin_bottom">25</field>
+        <field name="margin_left">7</field>
+        <field name="margin_right">7</field>
+        <field name="header_line" eval="False"/>
+        <field name="header_spacing">35</field>
+        <field name="dpi">90</field>
+    </record>
+
+    <!-- Mentions légales marocaines (ICE, IF, RC, Patente, CNSS) -->
+    <template id="legal_mentions">
+        <t t-set="company" t-value="o.company_id"/>
+        <div class="mcct-legal text-muted small text-center mt-3"
+             t-if="company.company_registry or company.mcct_if or company.mcct_rc or company.mcct_patente or company.mcct_cnss">
+            <span t-field="company.name"/>
+            <t t-if="company.company_registry"> · ICE : <span t-field="company.company_registry"/></t>
+            <t t-if="company.mcct_if"> · IF : <span t-field="company.mcct_if"/></t>
+            <t t-if="company.mcct_rc"> · RC : <span t-field="company.mcct_rc"/></t>
+            <t t-if="company.mcct_patente"> · Patente : <span t-field="company.mcct_patente"/></t>
+            <t t-if="company.mcct_cnss"> · CNSS : <span t-field="company.mcct_cnss"/></t>
+        </div>
+    </template>
+</odoo>

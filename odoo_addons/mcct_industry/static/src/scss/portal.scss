@@ -1,0 +1,166 @@
+// Portail client « Mes chantiers »
+$mcct-accent: #2478BE;
+$mcct-ink: #17191C;
+$mcct-line: #d5d8dc;
+
+.o_mcct_progress {
+    height: 8px;
+    .progress-bar {
+        background-color: $mcct-accent;
+    }
+}
+
+.o_mcct_col_progress {
+    width: 30%;
+}
+
+// Frise des phases du chantier
+.o_mcct_steps {
+    display: flex;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    counter-reset: mcct-step;
+
+    .o_mcct_step {
+        flex: 1 1 0;
+        position: relative;
+        text-align: center;
+        font-size: 0.78rem;
+        line-height: 1.2;
+        color: #7b8288;
+        padding: 0 0.15rem;
+
+        &::before {
+            counter-increment: mcct-step;
+            content: counter(mcct-step);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 28px;
+            height: 28px;
+            margin: 0 auto 0.4rem;
+            border-radius: 50%;
+            border: 2px solid $mcct-line;
+            background: #fff;
+            font-weight: 600;
+            position: relative;
+            z-index: 1;
+        }
+
+        &::after {
+            content: '';
+            position: absolute;
+            top: 13px;
+            left: calc(50% + 14px);
+            right: calc(-50% + 14px);
+            height: 2px;
+            background: $mcct-line;
+        }
+
+        &:last-child::after {
+            display: none;
+        }
+
+        &.done {
+            color: $mcct-ink;
+            &::before {
+                content: '✓';
+                background: $mcct-accent;
+                border-color: $mcct-accent;
+                color: #fff;
+            }
+            &::after {
+                background: $mcct-accent;
+            }
+        }
+
+        &.current {
+            color: $mcct-ink;
+            font-weight: 700;
+            &::before {
+                border-color: $mcct-accent;
+                color: $mcct-accent;
+                box-shadow: 0 0 0 4px rgba($mcct-accent, 0.15);
+            }
+        }
+    }
+}
+
+@include media-breakpoint-down(md) {
+    .o_mcct_steps {
+        flex-direction: column;
+        gap: 0.5rem;
+
+        .o_mcct_step {
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            text-align: left;
+
+            &::before {
+                margin: 0;
+                flex: 0 0 28px;
+            }
+
+            &::after {
+                display: none;
+            }
+        }
+    }
+}
+
+// Indicateurs
+.o_mcct_kpi {
+    height: 100%;
+    padding: 0.85rem 1rem;
+    border: 1px solid $mcct-line;
+    border-radius: 0.5rem;
+    background: #fff;
+
+    .o_mcct_kpi_label {
+        font-size: 0.72rem;
+        text-transform: uppercase;
+        letter-spacing: 0.04em;
+        color: #6c757d;
+    }
+
+    .o_mcct_kpi_value {
+        font-size: 1.25rem;
+        font-weight: 700;
+        color: $mcct-ink;
+        white-space: nowrap;
+    }
+
+    &.o_mcct_kpi_main {
+        border-color: $mcct-accent;
+        .o_mcct_kpi_value {
+            color: $mcct-accent;
+            font-size: 1.6rem;
+        }
+    }
+}
+
+.o_mcct_contact {
+    min-width: 220px;
+}
+
+.o_mcct_photo {
+    aspect-ratio: 4 / 3;
+    object-fit: cover;
+    width: 100%;
+}
+
+@include media-breakpoint-down(sm) {
+    .o_mcct_kpi {
+        padding: 0.7rem 0.75rem;
+
+        .o_mcct_kpi_value {
+            font-size: 1rem;
+        }
+
+        &.o_mcct_kpi_main .o_mcct_kpi_value {
+            font-size: 1.35rem;
+        }
+    }
+}
