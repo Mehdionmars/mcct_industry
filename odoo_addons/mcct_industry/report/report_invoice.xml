@@ -42,18 +42,20 @@
         <xpath expr="//span[@t-field='o.amount_total_words']/ancestor::p[1]" position="attributes">
             <attribute name="t-if">o.company_id.display_invoice_amount_total_words and o.currency_id.name != 'MAD'</attribute>
         </xpath>
-        <xpath expr="//span[@t-field='o.amount_total_words']/ancestor::p[1]" position="after">
-            <p class="text-end lh-sm mcct-amount-words" t-if="o.currency_id.name == 'MAD' and o.move_type in ('out_invoice', 'out_refund')">
-                <t t-if="o.move_type == 'out_refund'">Arrêté le présent avoir à la somme de :</t>
-                <t t-else="">Arrêtée la présente facture à la somme de :</t>
-                <br/>
-                <strong t-field="o.amount_total_words"/> TTC
-                <t t-if="o.mcct_retention_amount">
-                    <br/>
-                    <small class="text-muted">Net à payer après retenue de garantie :
-                        <t t-out="o._mcct_net_to_pay_words()"/></small>
-                </t>
-            </p>
+        <!-- Pleine largeur sous les totaux : dans la colonne étroite des totaux,
+             wkhtmltopdf coupait la fin des montants longs. -->
+        <xpath expr="//div[@id='payment_term']" position="before">
+            <div class="mt-3 pt-2 mcct-amount-words" style="clear: both;" t-if="o.currency_id.name == 'MAD' and o.move_type in ('out_invoice', 'out_refund')">
+                <p class="mb-1">
+                    <t t-if="o.move_type == 'out_refund'">Arrêté le présent avoir à la somme de :</t>
+                    <t t-else="">Arrêtée la présente facture à la somme de :</t>
+                    <strong><span t-field="o.amount_total_words"/> TTC</strong>.
+                </p>
+                <p class="small text-muted mb-0" t-if="o.mcct_retention_amount">
+                    Net à payer après retenue de garantie :
+                    <t t-out="o._mcct_net_to_pay_words()"/>.
+                </p>
+            </div>
         </xpath>
 
         <!-- Mentions légales de la société -->
