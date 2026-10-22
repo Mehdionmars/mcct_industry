@@ -81,9 +81,6 @@ export const ActivitiesSection = () => {
             style={{ transform: `scaleX(${Math.max(0.08, progress?.ratio)})` }}
           />
         </div>
-        <p className="shrink-0 text-[12px] font-bold tracking-[0.18em] text-[#565e66]">
-          {String(activities?.length)?.padStart(2, '0')} {t('home.activitiesCountLabel')}
-        </p>
         <div className="flex shrink-0 gap-2.5">
           <button
             type="button"
@@ -127,10 +124,7 @@ export const ActivitiesSection = () => {
                 className="absolute inset-0 h-full w-full object-cover opacity-55 transition-all [transition-duration:600ms] [transition-timing-function:cubic-bezier(0.22,1,0.36,1)] group-hover:scale-[1.06] group-hover:opacity-40"
               />
               <span className="absolute inset-0 bg-[linear-gradient(180deg,rgba(13,15,16,0)_30%,rgba(13,15,16,0.85)_100%)]" />
-              <span className="relative flex min-h-[420px] flex-col justify-between p-7">
-                <span className="text-[13px] font-extrabold tracking-[0.2em]" style={{ color: ACCENT }}>
-                  {activity?.num}
-                </span>
+              <span className="relative flex min-h-[420px] flex-col justify-end p-7">
                 <span>
                   <span className="mb-4 block h-[3px] w-10 bg-[#2478BE]" />
                   <span className="block text-[24px] font-extrabold leading-[1.1] tracking-[-0.01em]">
