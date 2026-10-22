@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Client de démonstration. Le devis, le chantier, les situations et les
+         rapports sont créés par le hook d'installation (hooks.py, _load_demo). -->
+    <record id="demo_partner_client" model="res.partner">
+        <field name="name">Cimenterie Atlas SA</field>
+        <field name="is_company" eval="True"/>
+        <field name="street">Zone industrielle Sidi Bernoussi</field>
+        <field name="city">Casablanca</field>
+        <field name="country_id" ref="base.ma"/>
+        <field name="company_registry">001234567000089</field>
+        <field name="email">achats@atlas-ciment.example.ma</field>
+        <field name="phone">+212 522 00 00 00</field>
+    </record>
+
+    <record id="demo_partner_contact" model="res.partner">
+        <field name="name">Karim Benali</field>
+        <field name="parent_id" ref="demo_partner_client"/>
+        <field name="function">Responsable travaux neufs</field>
+        <field name="email">k.benali@atlas-ciment.example.ma</field>
+    </record>
+</odoo>

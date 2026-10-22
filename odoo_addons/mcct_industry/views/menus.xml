@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="action_mcct_products" model="ir.actions.act_window">
+        <field name="name">Ouvrages et articles</field>
+        <field name="res_model">product.template</field>
+        <field name="view_mode">list,kanban,form</field>
+        <field name="domain">[('categ_id', 'child_of', ref('mcct_industry.product_category_ouvrages'))]</field>
+        <field name="context">{'default_type': 'service', 'default_categ_id': ref('mcct_industry.product_category_ouvrages'), 'default_invoice_policy': 'delivery', 'default_service_tracking': 'project_only'}</field>
+    </record>
+
+    <record id="action_mcct_uom" model="ir.actions.act_window">
+        <field name="name">Unités de mesure</field>
+        <field name="res_model">uom.uom</field>
+        <field name="view_mode">list,form</field>
+    </record>
+
+    <menuitem id="menu_mcct_root" name="Chantiers" sequence="45"
+              web_icon="mcct_industry,static/description/icon.png"
+              groups="project.group_project_user,account.group_account_invoice"/>
+
+    <menuitem id="menu_mcct_projects" name="Chantiers" parent="menu_mcct_root"
+              action="action_mcct_project" sequence="10"/>
+
+    <menuitem id="menu_mcct_situations" name="Situations de travaux" parent="menu_mcct_root"
+              action="action_mcct_situation" sequence="20"/>
+
+    <menuitem id="menu_mcct_site_reports" name="Rapports de chantier" parent="menu_mcct_root"
+              action="action_mcct_site_report" sequence="30"/>
+
+    <menuitem id="menu_mcct_billing" name="Facturation" parent="menu_mcct_root" sequence="40"
+              groups="account.group_account_invoice,sales_team.group_sale_salesman"/>
+    <menuitem id="menu_mcct_quotations" name="Devis" parent="menu_mcct_billing"
+              action="sale.action_quotations_with_onboarding" sequence="10"
+              groups="sales_team.group_sale_salesman"/>
+    <menuitem id="menu_mcct_invoices" name="Factures chantier" parent="menu_mcct_billing"
+              action="action_mcct_invoices" sequence="20" groups="account.group_account_invoice"/>
+    <menuitem id="menu_mcct_purchases" name="Achats de matériaux" parent="menu_mcct_billing"
+              action="purchase.purchase_rfq" sequence="30" groups="purchase.group_purchase_user"/>
+
+    <menuitem id="menu_mcct_config" name="Configuration" parent="menu_mcct_root" sequence="90"
+              groups="project.group_project_manager,account.group_account_manager"/>
+    <menuitem id="menu_mcct_settings" name="Paramètres" parent="menu_mcct_config"
+              action="action_mcct_settings" sequence="10" groups="base.group_erp_manager"/>
+    <menuitem id="menu_mcct_products" name="Ouvrages et articles" parent="menu_mcct_config"
+              action="action_mcct_products" sequence="20"/>
+    <menuitem id="menu_mcct_uom" name="Unités de mesure" parent="menu_mcct_config"
+              action="action_mcct_uom" sequence="30"/>
+
+</odoo>

@@ -1,0 +1,27 @@
+// Rapports PDF (situations de travaux)
+.mcct-situation-table {
+    font-size: 11px;
+
+    th {
+        white-space: nowrap;
+    }
+
+    .o_line_section td {
+        background-color: #eef3f8;
+    }
+}
+
+.mcct-totals td {
+    padding: 2px 6px;
+}
+
+.mcct-signatures .mcct-signature-box {
+    height: 70px;
+    margin-top: 6px;
+    border: 1px solid #c8c8c8;
+}
+
+.mcct-legal {
+    border-top: 1px solid #e3e3e3;
+    padding-top: 4px;
+}

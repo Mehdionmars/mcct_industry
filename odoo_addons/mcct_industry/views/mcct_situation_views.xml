@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="view_mcct_situation_form" model="ir.ui.view">
+        <field name="name">mcct.situation.form</field>
+        <field name="model">mcct.situation</field>
+        <field name="arch" type="xml">
+            <form string="Situation de travaux">
+                <header>
+                    <button name="action_send" string="Envoyer au client" type="object"
+                            class="btn-primary" invisible="state != 'draft'"/>
+                    <button name="action_approve" string="Approuver" type="object"
+                            class="btn-primary" invisible="state != 'sent'"/>
+                    <button name="action_create_invoice" string="Créer la facture" type="object"
+                            class="btn-primary" invisible="state != 'approved'"
+                            groups="account.group_account_invoice"/>
+                    <button name="action_mark_sent" string="Marquer comme envoyée" type="object"
+                            invisible="state != 'draft'"/>
+                    <button name="action_approve" string="Approuver sans envoi" type="object"
+                            invisible="state != 'draft'"
+                            confirm="Approuver cette situation sans l'envoyer au client ?"/>
+                    <button name="action_reset_draft" string="Remettre en brouillon" type="object"
+                            invisible="state not in ('sent', 'approved', 'cancel')"/>
+                    <button name="action_cancel" string="Annuler" type="object"
+                            invisible="state in ('invoiced', 'cancel')"/>
+                    <field name="state" widget="statusbar" statusbar_visible="draft,sent,approved,invoiced"/>
+                </header>
+                <sheet>
+                    <div class="oe_button_box" name="button_box">
+                        <button name="action_view_invoice" type="object" class="oe_stat_button"
+                                icon="fa-file-text-o" invisible="not invoice_id"
+                                groups="account.group_account_invoice">
+                            <div class="o_stat_info">
+                                <span class="o_stat_text">Facture</span>
+                                <span class="o_stat_value"><field name="invoice_payment_state" readonly="1"/></span>
+                            </div>
+                        </button>
+                        <button name="action_preview_portal" type="object" class="oe_stat_button" icon="fa-globe">
+                            <div class="o_stat_info">
+                                <span class="o_stat_text">Vue client</span>
+                            </div>
+                        </button>
+                    </div>
+                    <widget name="web_ribbon" title="Facturée" invisible="state != 'invoiced'"/>
+                    <widget name="web_ribbon" title="Annulée" bg_color="text-bg-danger" invisible="state != 'cancel'"/>
+                    <div class="oe_title">
+                        <h1><field name="name" readonly="1"/></h1>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="project_id" readonly="id" options="{'no_create': True}"/>
+                            <field name="partner_id"/>
+                            <field name="date" readonly="state != 'draft'"/>
+                            <label for="period_start" string="Période"/>
+                            <div class="o_row">
+                                <field name="period_start" readonly="state != 'draft'"/>
+                                <span>→</span>
+                                <field name="period_end" readonly="state != 'draft'"/>
+                            </div>
+                        </group>
+                        <group>
+                            <field name="progress" widget="progressbar"/>
+                            <field name="retention_rate" readonly="state != 'draft'"/>
+                            <field name="retention_cap_rate" readonly="state != 'draft'"/>
+                            <field name="advance_rate" readonly="state != 'draft'"/>
+                            <field name="advance_deduction" string="Déduction avance HT (ajustable)"
+                                   readonly="state != 'draft'" invisible="not advance_rate"/>
+                            <field name="retention_amount" string="Retenue de garantie (ajustable)"
+                                   readonly="state != 'draft'"/>
+                            <field name="approved_by" invisible="not approved_by"/>
+                            <field name="approved_date" invisible="not approved_date"/>
+                            <field name="company_id" groups="base.group_multi_company" readonly="1"/>
+                            <field name="currency_id" invisible="1"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Métré / décompte" name="lines">
+                            <field name="line_ids" widget="section_and_note_one2many" mode="list"
+                                   readonly="state != 'draft'">
+                                <list editable="bottom" decoration-warning="progress &gt; 100.01">
+                                    <control>
+                                        <create name="add_line_control" string="Ajouter une ligne"/>
+                                        <create name="add_section_control" string="Ajouter une section"
+                                                context="{'default_display_type': 'line_section'}"/>
+                                        <create name="add_note_control" string="Ajouter une note"
+                                                context="{'default_display_type': 'line_note'}"/>
+                                    </control>
+                                    <field name="sequence" widget="handle"/>
+                                    <field name="display_type" column_invisible="True"/>
+                                    <field name="currency_id" column_invisible="True"/>
+                                    <field name="product_id" optional="hide"/>
+                                    <field name="name" widget="section_and_note_text" width="260px"/>
+                                    <field name="uom_id" string="U" options="{'no_create': True}"/>
+                                    <field name="contract_qty"/>
+                                    <field name="price_unit"/>
+                                    <field name="contract_amount" sum="Total marché" optional="hide"/>
+                                    <field name="previous_qty" optional="show"/>
+                                    <field name="cumulative_qty"/>
+                                    <field name="progress" string="%"/>
+                                    <field name="current_qty"/>
+                                    <field name="current_amount" sum="Total période"/>
+                                    <field name="cumulative_amount" sum="Total cumulé" optional="show"/>
+                                    <field name="tax_ids" widget="many2many_tags" optional="hide"/>
+                                </list>
+                            </field>
+                            <group class="oe_subtotal_footer">
+                                <field name="amount_contract"/>
+                                <field name="amount_cumulative"/>
+                                <field name="amount_previous"/>
+                                <field name="amount_current"/>
+                                <field name="advance_deduction" readonly="1" invisible="not advance_rate"/>
+                                <field name="amount_untaxed"/>
+                                <field name="amount_tax"/>
+                                <field name="amount_total" class="oe_subtotal_footer_separator"/>
+                                <field name="retention_amount" readonly="1"/>
+                                <field name="amount_net" class="oe_subtotal_footer_separator"/>
+                            </group>
+                        </page>
+                        <page string="Observations" name="notes">
+                            <field name="note" placeholder="Remarques visibles sur le PDF de la situation…"/>
+                        </page>
+                    </notebook>
+                </sheet>
+                <chatter/>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_mcct_situation_list" model="ir.ui.view">
+        <field name="name">mcct.situation.list</field>
+        <field name="model">mcct.situation</field>
+        <field name="arch" type="xml">
+            <list string="Situations de travaux" sample="1"
+                  decoration-muted="state == 'cancel'" decoration-info="state == 'sent'">
+                <field name="currency_id" column_invisible="True"/>
+                <field name="project_id"/>
+                <field name="name"/>
+                <field name="partner_id" optional="show"/>
+                <field name="date"/>
+                <field name="progress" widget="progressbar"/>
+                <field name="amount_current" sum="Total"/>
+                <field name="amount_total" sum="Total" optional="show"/>
+                <field name="retention_amount" sum="Total" optional="show"/>
+                <field name="amount_net" sum="Total"/>
+                <field name="state" widget="badge"
+                       decoration-info="state == 'sent'" decoration-success="state == 'invoiced'"
+                       decoration-warning="state == 'approved'"/>
+                <field name="invoice_payment_state" widget="badge" optional="show"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="view_mcct_situation_search" model="ir.ui.view">
+        <field name="name">mcct.situation.search</field>
+        <field name="model">mcct.situation</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="project_id"/>
+                <field name="partner_id"/>
+                <filter name="to_send" string="À envoyer" domain="[('state', '=', 'draft')]"/>
+                <filter name="waiting" string="En attente client" domain="[('state', '=', 'sent')]"/>
+                <filter name="to_invoice" string="À facturer" domain="[('state', '=', 'approved')]"/>
+                <filter name="invoiced" string="Facturées" domain="[('state', '=', 'invoiced')]"/>
+                <separator/>
+                <filter name="date" string="Date" date="date"/>
+                <group>
+                    <filter name="group_project" string="Chantier" context="{'group_by': 'project_id'}"/>
+                    <filter name="group_partner" string="Client" context="{'group_by': 'partner_id'}"/>
+                    <filter name="group_state" string="Statut" context="{'group_by': 'state'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <record id="action_mcct_situation" model="ir.actions.act_window">
+        <field name="name">Situations de travaux</field>
+        <field name="res_model">mcct.situation</field>
+        <field name="view_mode">list,form</field>
+        <field name="search_view_id" ref="view_mcct_situation_search"/>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">Aucune situation de travaux</p>
+            <p>Depuis un chantier, cliquez sur « Nouvelle situation » : les lignes du devis
+               (quantités du marché en m, m², m³, kg…) sont reprises automatiquement.
+               Saisissez les quantités cumulées, envoyez au client puis facturez.</p>
+        </field>
+    </record>
+
+</odoo>

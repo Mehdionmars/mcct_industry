@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="action_report_site_report" model="ir.actions.report">
+        <field name="name">Rapport de chantier</field>
+        <field name="model">mcct.site.report</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">mcct_industry.report_site_report</field>
+        <field name="report_file">mcct_industry.report_site_report</field>
+        <field name="print_report_name">'Rapport chantier - %s - %s' % (object.project_id.name, object.date)</field>
+        <field name="binding_model_id" ref="model_mcct_site_report"/>
+        <field name="binding_type">report</field>
+    </record>
+
+    <template id="report_site_report_document">
+        <t t-call="web.external_layout">
+            <t t-set="o" t-value="o.with_context(lang=o.partner_id.lang or 'fr_FR')"/>
+            <div class="page">
+                <h3><span t-field="o.name"/> du <span t-field="o.date"/></h3>
+                <div class="row mb-3">
+                    <div class="col">
+                        <strong>Chantier</strong>
+                        <div t-field="o.project_id.name"/>
+                    </div>
+                    <div class="col" t-if="o.partner_id">
+                        <strong>Client</strong>
+                        <div t-field="o.partner_id.commercial_partner_id.name"/>
+                    </div>
+                    <div class="col" t-if="o.phase">
+                        <strong>Phase</strong>
+                        <div t-field="o.phase"/>
+                    </div>
+                    <div class="col" t-if="o.weather">
+                        <strong>Météo</strong>
+                        <div t-field="o.weather"/>
+                    </div>
+                    <div class="col">
+                        <strong>Effectif</strong>
+                        <div><t t-out="o.workforce"/> personne(s)</div>
+                    </div>
+                    <div class="col" t-if="o.progress">
+                        <strong>Avancement estimé</strong>
+                        <div><t t-out="('%.0f' % o.progress).replace('.', ',')"/> %</div>
+                    </div>
+                </div>
+                <div t-if="not is_html_empty(o.work_done)" class="mb-3">
+                    <h5>Travaux réalisés</h5>
+                    <div t-field="o.work_done"/>
+                </div>
+                <div t-if="not is_html_empty(o.issues)" class="mb-3">
+                    <h5>Problèmes / réserves</h5>
+                    <div t-field="o.issues"/>
+                </div>
+                <div t-if="not is_html_empty(o.next_steps)" class="mb-3">
+                    <h5>Prévisions</h5>
+                    <div t-field="o.next_steps"/>
+                </div>
+                <t t-set="photos" t-value="o.photo_ids.filtered(lambda a: (a.mimetype or '').startswith('image/'))"/>
+                <div t-if="photos" class="mcct-photos">
+                    <h5>Photos</h5>
+                    <div class="row">
+                        <div class="col-4 mb-3" t-foreach="photos" t-as="photo">
+                            <img t-att-src="image_data_uri(photo.datas)" class="img-fluid" t-att-alt="photo.name"/>
+                        </div>
+                    </div>
+                </div>
+                <p class="text-muted small">Rédigé par <span t-field="o.user_id.name"/></p>
+            </div>
+        </t>
+    </template>
+
+    <template id="report_site_report">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="o">
+                <t t-call="mcct_industry.report_site_report_document" t-lang="o.partner_id.lang or 'fr_FR'"/>
+            </t>
+        </t>
+    </template>
+
+</odoo>

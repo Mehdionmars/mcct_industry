@@ -1,0 +1,9 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_mcct_situation_user,mcct.situation.user,model_mcct_situation,project.group_project_user,1,1,1,1
+access_mcct_situation_line_user,mcct.situation.line.user,model_mcct_situation_line,project.group_project_user,1,1,1,1
+access_mcct_situation_invoice,mcct.situation.invoice,model_mcct_situation,account.group_account_invoice,1,1,0,0
+access_mcct_situation_line_invoice,mcct.situation.line.invoice,model_mcct_situation_line,account.group_account_invoice,1,0,0,0
+access_mcct_situation_salesman,mcct.situation.salesman,model_mcct_situation,sales_team.group_sale_salesman,1,0,0,0
+access_mcct_situation_line_salesman,mcct.situation.line.salesman,model_mcct_situation_line,sales_team.group_sale_salesman,1,0,0,0
+access_mcct_site_report_user,mcct.site.report.user,model_mcct_site_report,project.group_project_user,1,1,1,1
+access_mcct_site_report_salesman,mcct.site.report.salesman,model_mcct_site_report,sales_team.group_sale_salesman,1,0,0,0

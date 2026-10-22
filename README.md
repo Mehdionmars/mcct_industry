@@ -1,5 +1,8 @@
 # React
 
+> **Odoo — chantiers & facturation** : le module Odoo de MCCT Industry (situations de travaux,
+> retenue de garantie, portail client, MAD, mètres) se trouve dans [`odoo_addons/`](odoo_addons/README.md).
+
 A modern React-based project utilizing the latest frontend technologies and tools for building responsive web applications.
 
 ## 🚀 Features

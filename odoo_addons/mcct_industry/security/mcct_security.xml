@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo noupdate="1">
+
+    <record id="rule_mcct_situation_company" model="ir.rule">
+        <field name="name">Situations : multi-société</field>
+        <field name="model_id" ref="model_mcct_situation"/>
+        <field name="domain_force">[('company_id', 'in', company_ids)]</field>
+    </record>
+
+    <record id="rule_mcct_situation_line_company" model="ir.rule">
+        <field name="name">Lignes de situation : multi-société</field>
+        <field name="model_id" ref="model_mcct_situation_line"/>
+        <field name="domain_force">[('company_id', 'in', company_ids)]</field>
+    </record>
+
+    <record id="rule_mcct_site_report_company" model="ir.rule">
+        <field name="name">Rapports de chantier : multi-société</field>
+        <field name="model_id" ref="model_mcct_site_report"/>
+        <field name="domain_force">[('company_id', 'in', company_ids)]</field>
+    </record>
+
+</odoo>

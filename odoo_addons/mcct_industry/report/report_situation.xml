@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="action_report_situation" model="ir.actions.report">
+        <field name="name">Situation de travaux</field>
+        <field name="model">mcct.situation</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">mcct_industry.report_situation</field>
+        <field name="report_file">mcct_industry.report_situation</field>
+        <field name="print_report_name">'%s - %s' % (object.name, object.project_id.name)</field>
+        <field name="paperformat_id" ref="paperformat_a4_landscape"/>
+        <field name="binding_model_id" ref="model_mcct_situation"/>
+        <field name="binding_type">report</field>
+    </record>
+
+    <template id="report_situation_document">
+        <t t-call="web.external_layout">
+            <t t-set="o" t-value="o.with_context(lang=o.partner_id.lang or 'fr_FR')"/>
+            <t t-set="currency" t-value="o.currency_id"/>
+            <t t-set="address">
+                <address class="mb-0" t-field="o.partner_id"
+                         t-options='{"widget": "contact", "fields": ["address", "name"], "no_marker": True}'/>
+                <div t-if="o.partner_id.company_registry">ICE : <span t-field="o.partner_id.company_registry"/></div>
+            </t>
+            <div class="page mcct-situation">
+                <h3 class="mb-3">
+                    Situation de travaux N°<t t-out="'%02d' % o.number"/>
+                    <small class="text-muted" t-if="o.state == 'draft'">— projet</small>
+                    <small class="text-muted" t-if="o.state == 'cancel'">— annulée</small>
+                </h3>
+
+                <div class="row mb-3" id="informations">
+                    <div class="col-3">
+                        <strong>Chantier</strong>
+                        <div t-field="o.project_id.name"/>
+                        <div t-if="o.project_id.mcct_site_city" class="text-muted" t-field="o.project_id.mcct_site_city"/>
+                    </div>
+                    <div class="col" t-if="o.project_id.mcct_contract_ref">
+                        <strong>Réf. marché</strong>
+                        <div t-field="o.project_id.mcct_contract_ref"/>
+                    </div>
+                    <div class="col">
+                        <strong>Date</strong>
+                        <div t-field="o.date"/>
+                    </div>
+                    <div class="col" t-if="o.period_start or o.period_end">
+                        <strong>Période</strong>
+                        <div><span t-field="o.period_start"/> → <span t-field="o.period_end"/></div>
+                    </div>
+                    <div class="col">
+                        <strong>Avancement cumulé</strong>
+                        <div><t t-out="('%.1f' % o.progress).replace('.', ',')"/> %</div>
+                    </div>
+                </div>
+
+                <table class="table table-sm o_main_table table-borderless mcct-situation-table">
+                    <thead>
+                        <tr>
+                            <th class="text-start">Désignation</th>
+                            <th class="text-center">U</th>
+                            <th class="text-end">Qté marché</th>
+                            <th class="text-end">PU HT</th>
+                            <th class="text-end">Montant marché</th>
+                            <th class="text-end">Qté préc.</th>
+                            <th class="text-end">Qté période</th>
+                            <th class="text-end">Qté cumulée</th>
+                            <th class="text-end">%</th>
+                            <th class="text-end">Montant période</th>
+                            <th class="text-end">Montant cumulé</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <t t-foreach="o.line_ids" t-as="line">
+                            <tr t-if="line.display_type in ('line_section', 'line_subsection')" class="fw-bold o_line_section">
+                                <td colspan="11"><span t-field="line.name"/></td>
+                            </tr>
+                            <tr t-elif="line.display_type == 'line_note'" class="fst-italic o_line_note">
+                                <td colspan="11"><span t-field="line.name"/></td>
+                            </tr>
+                            <tr t-else="">
+                                <td><span t-field="line.name"/></td>
+                                <td class="text-center"><span t-field="line.uom_id.name"/></td>
+                                <td class="text-end"><span t-out="line.contract_qty" t-options='{"widget": "float", "precision": 2}'/></td>
+                                <td class="text-end"><span t-out="line.price_unit" t-options='{"widget": "float", "precision": 2}'/></td>
+                                <td class="text-end"><span t-out="line.contract_amount" t-options='{"widget": "float", "precision": 2}'/></td>
+                                <td class="text-end"><span t-out="line.previous_qty" t-options='{"widget": "float", "precision": 2}'/></td>
+                                <td class="text-end"><span t-out="line.current_qty" t-options='{"widget": "float", "precision": 2}'/></td>
+                                <td class="text-end"><span t-out="line.cumulative_qty" t-options='{"widget": "float", "precision": 2}'/></td>
+                                <td class="text-end"><t t-out="('%.0f' % line.progress).replace('.', ',')"/></td>
+                                <td class="text-end"><span t-out="line.current_amount" t-options='{"widget": "float", "precision": 2}'/></td>
+                                <td class="text-end"><span t-out="line.cumulative_amount" t-options='{"widget": "float", "precision": 2}'/></td>
+                            </tr>
+                        </t>
+                    </tbody>
+                </table>
+
+                <div class="row avoid-page-break-inside">
+                    <div class="col-6">
+                        <div t-if="not is_html_empty(o.note)" class="mb-3">
+                            <strong>Observations</strong>
+                            <div t-field="o.note"/>
+                        </div>
+                        <div class="row mt-4 mcct-signatures">
+                            <div class="col-6">
+                                <strong>L'entreprise</strong>
+                                <div t-field="o.company_id.name"/>
+                                <div class="mcct-signature-box"/>
+                            </div>
+                            <div class="col-6">
+                                <strong>Le client — bon pour accord</strong>
+                                <div t-if="o.approved_by">
+                                    Approuvée par <span t-field="o.approved_by"/>
+                                    le <span t-field="o.approved_date" t-options='{"widget": "date"}'/>
+                                </div>
+                                <div class="mcct-signature-box"/>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <table class="table table-sm o_total_table mcct-totals">
+                            <tr>
+                                <td>Montant du marché HT</td>
+                                <td class="text-end"><span t-field="o.amount_contract"/></td>
+                            </tr>
+                            <tr>
+                                <td>Travaux cumulés HT (<t t-out="('%.1f' % o.progress).replace('.', ',')"/> %)</td>
+                                <td class="text-end"><span t-field="o.amount_cumulative"/></td>
+                            </tr>
+                            <tr>
+                                <td>À déduire : situations précédentes HT</td>
+                                <td class="text-end">− <span t-field="o.amount_previous"/></td>
+                            </tr>
+                            <tr class="fw-bold">
+                                <td>Travaux de la période HT</td>
+                                <td class="text-end"><span t-field="o.amount_current"/></td>
+                            </tr>
+                            <tr t-if="o.advance_deduction">
+                                <td>Déduction de l'avance (<t t-out="('%g' % o.advance_rate).replace('.', ',')"/> %)</td>
+                                <td class="text-end">− <span t-field="o.advance_deduction"/></td>
+                            </tr>
+                            <tr>
+                                <td>Total HT</td>
+                                <td class="text-end"><span t-field="o.amount_untaxed"/></td>
+                            </tr>
+                            <tr>
+                                <td>TVA</td>
+                                <td class="text-end"><span t-field="o.amount_tax"/></td>
+                            </tr>
+                            <tr class="fw-bold">
+                                <td>Total TTC</td>
+                                <td class="text-end"><span t-field="o.amount_total"/></td>
+                            </tr>
+                            <tr t-if="o.retention_amount">
+                                <td>Retenue de garantie (<t t-out="('%g' % o.retention_rate).replace('.', ',')"/> %)</td>
+                                <td class="text-end">− <span t-field="o.retention_amount"/></td>
+                            </tr>
+                            <tr class="fw-bold o_total">
+                                <td>Net à payer</td>
+                                <td class="text-end"><span t-field="o.amount_net"/></td>
+                            </tr>
+                        </table>
+                        <p class="small">
+                            Arrêtée la présente situation à la somme de :
+                            <strong t-out="o._mcct_amount_net_words()"/> (net à payer TTC).
+                        </p>
+                    </div>
+                </div>
+                <t t-call="mcct_industry.legal_mentions"/>
+            </div>
+        </t>
+    </template>
+
+    <template id="report_situation">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="o">
+                <t t-call="mcct_industry.report_situation_document" t-lang="o.partner_id.lang or 'fr_FR'"/>
+            </t>
+        </t>
+    </template>
+
+</odoo>
