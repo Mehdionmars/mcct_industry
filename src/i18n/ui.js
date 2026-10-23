@@ -53,7 +53,7 @@ export const ui = {
       scroll: 'SCROLL',
       heroImageAlt: 'Charpente métallique MCCT sous ciel dégagé',
       baselineEyebrow: 'EXCELLENCE — RAPIDITÉ — SATISFACTION',
-      introEyebrow: "01 — L'ENTREPRISE",
+      introEyebrow: "L'ENTREPRISE",
       introTitle: ["L'INGÉNIERIE", 'AVEC EXIGENCE'],
       introP1:
         'MCCT Industrie est un acteur marocain spécialisé dans les solutions industrielles et la réalisation de projets à forte exigence technique.',
@@ -61,13 +61,13 @@ export const ui = {
         "De l'étude à la fabrication, du montage à la maintenance, nous accompagnons nos clients sur l'ensemble du cycle de leurs projets.",
       introLink: 'NOTRE SAVOIR-FAIRE',
       introImageAlt: "Intérieur d'un hangar métallique réalisé par MCCT",
-      activitiesEyebrow: '03 — NOS ACTIVITÉS',
+      activitiesEyebrow: 'NOS ACTIVITÉS',
       activitiesTitle: ['DES SOLUTIONS', 'CONÇUES POUR', "L'INDUSTRIE"],
       activitiesText:
         "Un périmètre d'intervention complet, de la charpente métallique aux équipements industriels.",
-      processEyebrow: '04 — NOTRE SAVOIR-FAIRE',
+      processEyebrow: 'NOTRE SAVOIR-FAIRE',
       processTitle: ["DE L'IDÉE", 'À LA RÉALISATION'],
-      featuredEyebrow: '02 — PROJET À LA UNE',
+      featuredEyebrow: 'PROJET À LA UNE',
       featuredTitle: ['HANGAR INDUSTRIEL', 'CLÉ EN MAIN'],
       featuredMeta: 'CONSTRUCTION MÉTALLIQUE — MAROC',
       featuredAlt: 'Hangar industriel livré par MCCT Industrie',
@@ -78,11 +78,11 @@ export const ui = {
       commitmentAlt: "Montage d'une structure métallique sur site",
       sectorsEyebrow: "SECTEURS D'INTERVENTION",
       sectorsTitle: ['UNE EXPERTISE', 'MULTI-SECTORIELLE'],
-      reviewsEyebrow: '05 — CE QU’ILS EN DISENT',
+      reviewsEyebrow: 'CE QU’ILS EN DISENT',
       reviewsTitle: ['DES DONNEURS D’ORDRE', 'QUI NOUS RAPPELLENT'],
       reviewsText:
         'Retours recueillis auprès de nos clients industriels. Publiés de façon anonyme : seuls la fonction et le secteur sont indiqués.',
-      qualityEyebrow: '06 — QUALITÉ & HSE',
+      qualityEyebrow: 'QUALITÉ & HSE',
       qualityTitle: ['LA PERFORMANCE', 'SANS COMPROMIS'],
       qualityText:
         'Nos réalisations respectent les normes de l’industrie, les réglementations de sécurité et les spécifications de nos clients. Le contrôle est intégré à chaque étape, de l’approvisionnement à la réception sur site.',
@@ -104,7 +104,7 @@ export const ui = {
           text: 'Suivi des matériaux, des soudures et des travaux associés tout au long du projet.'
         }
       ],
-      valuesEyebrow: '07 — CE QUI NOUS ANIME',
+      valuesEyebrow: 'CE QUI NOUS ANIME',
       valuesTitle: ['QUATRE PRINCIPES', 'QUI TIENNENT LE CHANTIER'],
       valuesText:
         'Ce ne sont pas des mots d’affiche : ce sont les quatre règles qui décident de la façon dont un projet MCCT est mené, de l’atelier à la réception.',
@@ -113,9 +113,8 @@ export const ui = {
       activitiesPrev: 'Activité précédente',
       activitiesNext: 'Activité suivante',
       activitiesOf: 'sur',
-      activitiesCountLabel: 'ACTIVITÉS',
       contactTitle: ['UN PROJET', 'INDUSTRIEL'],
-      contactEyebrow: '08 — CONTACT',
+      contactEyebrow: 'CONTACT',
       contactSubtitle: ['CONSTRUISONS', 'ENSEMBLE'],
       footerTagline: 'Ingénierie, fabrication et construction métallique au Maroc.',
       brochure: 'BROCHURE',
@@ -125,7 +124,7 @@ export const ui = {
       eyebrow: 'À PROPOS',
       title: ['UNE ENTREPRISE', "D'INGÉNIEURS", 'ET DE BÂTISSEURS'],
       heroAlt: 'Équipe MCCT sur un chantier de levage',
-      whoEyebrow: '01 — QUI SOMMES-NOUS',
+      whoEyebrow: 'QUI SOMMES-NOUS',
       whoTitle: 'MOROCCAN COMPANY OF CONSTRUCTION TECHNOLOGY',
       p1:
         "MCCT Industrie est une entreprise marocaine basée à Casablanca, spécialisée dans l'ingénierie, la fabrication et la construction métallique.",
@@ -269,7 +268,7 @@ export const ui = {
       scroll: 'SCROLL',
       heroImageAlt: 'MCCT steel canopy against open sky',
       baselineEyebrow: 'EXCELLENCE — SPEED — SATISFACTION',
-      introEyebrow: '01 — THE COMPANY',
+      introEyebrow: 'THE COMPANY',
       introTitle: ['ENGINEERING', 'WITH RIGOUR'],
       introP1:
         'MCCT Industrie is a Moroccan company specialised in industrial solutions and technically demanding projects.',
@@ -277,12 +276,12 @@ export const ui = {
         'From design to fabrication, from erection to maintenance, we support our clients across the full life cycle of their projects.',
       introLink: 'OUR EXPERTISE',
       introImageAlt: 'Interior of a steel warehouse built by MCCT',
-      activitiesEyebrow: '03 — OUR SERVICES',
+      activitiesEyebrow: 'OUR SERVICES',
       activitiesTitle: ['SOLUTIONS', 'ENGINEERED FOR', 'INDUSTRY'],
       activitiesText: 'A complete scope of work, from steel structures to industrial equipment.',
-      processEyebrow: '04 — OUR EXPERTISE',
+      processEyebrow: 'OUR EXPERTISE',
       processTitle: ['FROM IDEA', 'TO DELIVERY'],
-      featuredEyebrow: '02 — FEATURED PROJECT',
+      featuredEyebrow: 'FEATURED PROJECT',
       featuredTitle: ['TURNKEY INDUSTRIAL', 'BUILDING'],
       featuredMeta: 'STEEL CONSTRUCTION — MOROCCO',
       featuredAlt: 'Industrial building delivered by MCCT Industrie',
@@ -293,11 +292,11 @@ export const ui = {
       commitmentAlt: 'Erecting a steel structure on site',
       sectorsEyebrow: 'SECTORS WE SERVE',
       sectorsTitle: ['CROSS-SECTOR', 'EXPERTISE'],
-      reviewsEyebrow: '05 — WHAT THEY SAY',
+      reviewsEyebrow: 'WHAT THEY SAY',
       reviewsTitle: ['PRINCIPALS WHO', 'CALL US BACK'],
       reviewsText:
         'Feedback gathered from our industrial clients. Published anonymously: only the role and the sector are given.',
-      qualityEyebrow: '06 — QUALITY & HSE',
+      qualityEyebrow: 'QUALITY & HSE',
       qualityTitle: ['PERFORMANCE', 'WITHOUT COMPROMISE'],
       qualityText:
         'Our work meets industry standards, safety regulations and client specifications. Inspection is built into every stage, from procurement through to site handover.',
@@ -319,7 +318,7 @@ export const ui = {
           text: 'Materials, welds and associated works tracked throughout the project.'
         }
       ],
-      valuesEyebrow: '07 — WHAT DRIVES US',
+      valuesEyebrow: 'WHAT DRIVES US',
       valuesTitle: ['FOUR PRINCIPLES', 'THAT HOLD THE SITE TOGETHER'],
       valuesText:
         'Not poster words: these are the four rules that decide how an MCCT project is run, from the workshop through to handover.',
@@ -328,9 +327,8 @@ export const ui = {
       activitiesPrev: 'Previous service',
       activitiesNext: 'Next service',
       activitiesOf: 'of',
-      activitiesCountLabel: 'SERVICES',
       contactTitle: ['AN INDUSTRIAL', 'PROJECT'],
-      contactEyebrow: '08 — CONTACT',
+      contactEyebrow: 'CONTACT',
       contactSubtitle: ["LET'S BUILD", 'TOGETHER'],
       footerTagline: 'Engineering, fabrication and steel construction in Morocco.',
       brochure: 'BROCHURE',
@@ -340,7 +338,7 @@ export const ui = {
       eyebrow: 'ABOUT',
       title: ['A COMPANY OF', 'ENGINEERS', 'AND BUILDERS'],
       heroAlt: 'MCCT team on a lifting site',
-      whoEyebrow: '01 — WHO WE ARE',
+      whoEyebrow: 'WHO WE ARE',
       whoTitle: 'MOROCCAN COMPANY OF CONSTRUCTION TECHNOLOGY',
       p1:
         'MCCT Industrie is a Moroccan company based in Casablanca, specialised in engineering, fabrication and steel construction.',

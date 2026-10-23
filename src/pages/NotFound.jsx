@@ -53,7 +53,6 @@ const NotFound = () => {
             to="/"
             className="flex items-baseline gap-7 border-t border-[#c6c6c1] py-6 transition-colors duration-300 hover:text-[#2478BE]"
           >
-            <span className="text-[13px] font-extrabold tracking-[0.18em] text-[#8a9096]">00</span>
             <span
               className="text-[clamp(1.6rem,3.4vw,2.8rem)] font-extrabold leading-none tracking-[-0.02em]"
               style={headingFont}
@@ -67,7 +66,6 @@ const NotFound = () => {
               to={link?.to}
               className="flex items-baseline gap-7 border-t border-[#c6c6c1] py-6 transition-colors duration-300 hover:text-[#2478BE]"
             >
-              <span className="text-[13px] font-extrabold tracking-[0.18em] text-[#8a9096]">{link?.num}</span>
               <span
                 className="text-[clamp(1.6rem,3.4vw,2.8rem)] font-extrabold leading-none tracking-[-0.02em]"
                 style={headingFont}

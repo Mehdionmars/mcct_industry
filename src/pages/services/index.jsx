@@ -20,7 +20,7 @@ const ActivitySection = ({ activity, index }) => {
       <div className={`${container} grid items-center gap-14 [grid-template-columns:repeat(auto-fit,minmax(320px,1fr))]`}>
         <Reveal className={isDark ? 'min-[900px]:order-2' : undefined}>
           <p className="mb-4 text-[13px] font-extrabold tracking-[0.24em]" style={{ color: ACCENT }}>
-            {`${activity?.num} — ${activity?.title?.toUpperCase()}`}
+            {activity?.title?.toUpperCase()}
           </p>
           <h2
             id={`activite-${activity?.num}`}

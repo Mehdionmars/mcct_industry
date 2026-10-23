@@ -19,8 +19,8 @@ import HomeContact from './components/HomeContact';
 const homeNavLinks = [
   navLinks?.[0],
   navLinks?.[1],
-  { num: '03', key: 'expertise', href: '#savoirfaire' },
-  { ...navLinks?.[2], num: '04' }
+  { key: 'expertise', href: '#savoirfaire' },
+  navLinks?.[2]
 ];
 
 const Homepage = () => {

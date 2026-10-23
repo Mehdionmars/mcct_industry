@@ -11,9 +11,9 @@ export const headingFont = { fontFamily: "'Space Grotesk', 'Manrope', sans-serif
 // les composants utilisent les variantes arbitraires min-[900px]: / max-[899px]:.
 // `key` renvoie vers ui.nav.<key> pour le libellé traduit.
 export const navLinks = [
-  { key: 'about', num: '01', to: '/about' },
-  { key: 'services', num: '02', to: '/services' },
-  { key: 'contact', num: '03', to: '/contact' }
+  { key: 'about', to: '/about' },
+  { key: 'services', to: '/services' },
+  { key: 'contact', to: '/contact' }
 ];
 
 export const PHONE = '+212 661 49 47 61';
