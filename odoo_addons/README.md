@@ -51,9 +51,15 @@ docker compose up -d
 ```
 
 Ouvrez <http://localhost:8069>, créez une base (pays : **Maroc**, langue : **Français**), puis
-dans **Applications**, recherchez « MCCT » et installez **MCCT Industry — Chantiers & Facturation**.
+dans **Applications**, recherchez « MCCT » et activez **MCCT Industry — Chantiers & Facturation**.
 Pour une base de démonstration, cochez « Données de démonstration » à la création : un chantier
-complet (devis, 2 situations, avance, factures, rapports) est créé dans la société « MCCT Industry ».
+complet (devis, 2 situations, avance, factures, rapports), 8 autres chantiers, le parc matériel et un
+échéancier sont créés dans la société « MCCT Industry ». Après l'installation, **choisissez la société
+« MCCT Industry » en haut à droite** : Odoo reste sinon sur la société par défaut, où les écrans sont vides.
+
+Dans Odoo 19, le bouton d'installation d'une application s'appelle **Activer**. L'installation prend
+quelques minutes ; le `docker-compose.yml` relève la limite de durée des requêtes d'Odoo (120 s par
+défaut) pour qu'elle aille à son terme.
 
 ### Option 2 — Serveur Odoo 19 existant
 
