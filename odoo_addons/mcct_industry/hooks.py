@@ -215,6 +215,7 @@ def _load_demo(env, company):
 
     _load_demo_sites(env, company)
     _load_demo_equipment(env, company, project)
+    _load_demo_milestones(env, company)
 
 
 # Autres chantiers de démonstration pour la carte : (client, ICE, ville du client,
@@ -345,3 +346,32 @@ def _load_demo_equipment(env, company, main_project):
             'maintenance_type': 'corrective',
             'priority': '2',
         })
+
+
+def _load_demo_milestones(env, company):
+    """Chantier de Mohammedia facturé par échéancier : avance encaissée, livraison à venir."""
+    site = env['project.project'].search([
+        ('company_id', '=', company.id), ('mcct_site_city', '=', "Mohammedia"),
+        ('mcct_is_site', '=', True)], limit=1)
+    if not site:
+        return
+    today = fields.Date.context_today(site)
+    site.write({
+        'mcct_billing_mode': 'milestones',
+        'mcct_contract_ref': "CMD-AE-2026-071",
+        'mcct_contract_date': today - timedelta(days=75),
+    })
+    site.action_mcct_milestone_template()
+    advance = site.mcct_milestone_ids.sorted('sequence')[:1]
+    site.mcct_milestone_ids.filtered('phase').sorted('sequence')[:1].date_planned = today + timedelta(days=40)
+    advance.action_create_invoice()
+    invoice = advance.invoice_id
+    invoice.write({'invoice_date': today - timedelta(days=70)})
+    invoice.action_post()
+    try:
+        with env.cr.savepoint():
+            env['account.payment.register'].with_context(
+                active_model='account.move', active_ids=invoice.ids,
+            ).create({'payment_date': today - timedelta(days=20)})._create_payments()
+    except Exception:  # noqa: BLE001 — l'encaissement de démo est facultatif
+        _logger.warning("Encaissement de démonstration non enregistré.", exc_info=True)

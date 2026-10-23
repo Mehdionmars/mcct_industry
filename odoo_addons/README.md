@@ -17,12 +17,13 @@ L'entreprise ne vend pas de marchandises : elle facture des **ouvrages** (travau
 | **Situations de travaux** | Métré par ligne : quantité du marché, cumul précédent, cumul à date (en quantité ou en %), montant de la période. Sections « Lot 1, Lot 2… ». PDF « Situation de travaux N°xx » en paysage avec cadres de signature. |
 | **Retenue de garantie** | 10 % par défaut sur chaque situation, plafonnée à 7 % du marché (règle du CCAG-Travaux). Base TTC ou HT au choix. |
 | **Avance sur travaux** | Facture d'avance (ex. 10 % du marché) puis déduction automatique au même taux sur chaque situation. |
+| **Échéancier de paiement** | Autre mode de facturation, au choix par chantier : les échéances prévues au marché (ex. 30 % à la commande, 40 % à la livraison, 20 % à la réception provisoire, 10 % à la réception définitive), chacune avec une date prévue ou une phase déclenchante. Facture en un clic, suivi des encaissements (à venir, à facturer, facturée, échue impayée, encaissée) et rappel au chef de projet quand une phase rend une échéance exigible. Vue globale **Facturation → Échéancier des marchés** pour le prévisionnel par mois. |
 | **Facturation** | La facture est générée depuis la situation approuvée : lignes en m / m² / kg, TVA 20 %, retenue, **net à payer**, ICE du client et **montant en lettres** (« Arrêtée la présente facture à la somme de : … dirhams »). Les quantités livrées et facturées remontent sur le devis. |
 | **Carte des chantiers** | Carte du Maroc (provinces du Sud incluses) : un cercle par ville avec le nombre de chantiers, en bleu (en cours), orange (en retard) ou vert (réceptionné). Zoom à la molette, déplacement à la souris. Liste des villes, montants des marchés, matériel sur site et chantiers non localisés. |
 | **Matériel, engins et machines** | Parc complet (grues, nacelles, camions, pelles, plieuses, postes à souder, échafaudages…) classé en engins, machines et matériel. Planning par chantier : on fait glisser une carte d'une colonne à l'autre pour l'affecter. Historique des affectations, **coût d'immobilisation** imputé au chantier (jours × coût journalier), immatriculation, compteur horaire, opérateur, **contrôles réglementaires** (alerte à échéance), assurance et demandes de maintenance. |
 | **Fiscalité marocaine** | TVA par nature (travaux immobiliers / prestations de services), régime des encaissements, **retenue à la source sur la TVA** (article 117 du CGI), exonération (article 92) et suspension (article 94), mentions de l'article 145 du CGI, délai de paiement de 60 jours (loi 69-21). Détails ci-dessous. |
 | **Rapports de chantier** | Journal quotidien : météo, effectif, heures, travaux réalisés, réserves, photos. Publication au client en un clic. |
-| **Portail client « Mes chantiers »** | Le client voit la frise des phases, l'avancement, le montant du marché, le facturé, le reste à régler, la retenue détenue, ses situations (PDF + **approbation en ligne** ou demande de correction), ses factures, les engins et machines présents sur son chantier (sans les coûts), le journal de chantier avec photos et les documents partagés (plans, PV…). |
+| **Portail client « Mes chantiers »** | Le client voit la frise des phases, l'avancement, le montant du marché, le facturé, le reste à régler, la retenue détenue, ses situations (PDF + **approbation en ligne** ou demande de correction) ou son échéancier de paiement (prévu, facturé, encaissé), ses factures, les engins et machines présents sur son chantier (sans les coûts), le journal de chantier avec photos et les documents partagés (plans, PV…). |
 | **Achats et temps passés** | Les modules Achats et Feuilles de temps d'Odoo sont installés : achats de matériaux et heures sont rattachés au compte analytique du chantier. |
 
 À l'installation sur une base neuve, le module configure aussi :
@@ -88,6 +89,9 @@ taxes choisies à la main.
    dans la colonne du chantier où il se trouve.
 5. **Chantiers → Facturation → Devis** : créez le devis du client et confirmez-le.
    Le chantier est créé, avec le montant du marché repris du devis.
+   Pour un marché payé par échéances, choisissez **Mode de facturation : Échéancier de paiement**
+   sur le chantier, puis remplissez l'onglet **Échéancier** (bouton « Échéancier type » ou vos
+   propres échéances) et facturez chaque échéance quand elle devient exigible.
 6. Sur le chantier, onglet **Chantier** : phase, adresse, **ville** (elle place le chantier sur la
    carte ; à défaut, saisissez les coordonnées GPS), taux d'avance, retenue.
    Bouton **Facturer l'avance** si une avance est prévue.
@@ -118,6 +122,10 @@ La retenue reste due par le client dans son compte : la facture affiche le net �
 solde correspondant à la retenue reste ouvert jusqu'à la réception définitive
 (bouton **Libérer la retenue** sur le chantier).
 
+En mode échéancier, chaque échéance vaut `% × montant du marché HT` ; la facture porte la TVA
+des travaux et, le cas échéant, la retenue à la source. Une échéance facturée garde son montant
+même si le marché change par avenant ; annuler sa facture la rend à nouveau facturable.
+
 Une situation envoyée, approuvée ou facturée est verrouillée. Seule la dernière situation d'un
 chantier peut être remise en brouillon ou annulée ; annuler sa facture la rend à nouveau facturable.
 
@@ -140,7 +148,7 @@ chantier peut être remise en brouillon ou annulée ; annuler sa facture la rend
 odoo_addons/
 ├── docker-compose.yml
 └── mcct_industry/
-    ├── models/        chantier, situations, rapports, factures, société, parc matériel
+    ├── models/        chantier, situations, échéancier, rapports, factures, société, parc matériel
     ├── controllers/   portail client « Mes chantiers »
     ├── views/         écrans, menus, pages du portail
     ├── report/        PDF situation, rapport de chantier, ajouts sur la facture

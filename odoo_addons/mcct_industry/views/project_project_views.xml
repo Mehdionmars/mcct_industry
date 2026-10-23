@@ -9,10 +9,14 @@
         <field name="arch" type="xml">
             <xpath expr="//header" position="inside">
                 <button name="action_mcct_new_situation" string="Nouvelle situation" type="object"
-                        class="btn-primary" invisible="not mcct_is_site or is_template"
+                        class="btn-primary" invisible="not mcct_is_site or is_template or mcct_billing_mode != 'situations'"
                         groups="project.group_project_user"/>
+                <button name="action_mcct_invoice_due_milestones" type="object" class="btn-primary"
+                        string="Facturer les échéances dues"
+                        invisible="not mcct_is_site or mcct_billing_mode != 'milestones' or not mcct_milestone_due_count"
+                        groups="account.group_account_invoice"/>
                 <button name="action_mcct_invoice_advance" string="Facturer l'avance" type="object"
-                        invisible="not mcct_is_site or mcct_advance_rate &lt;= 0"
+                        invisible="not mcct_is_site or mcct_advance_rate &lt;= 0 or mcct_billing_mode != 'situations'"
                         groups="account.group_account_invoice"/>
                 <button name="action_mcct_release_retention" string="Libérer la retenue" type="object"
                         invisible="not mcct_is_site or mcct_retention_released or not mcct_date_reception_definitive"
@@ -23,7 +27,7 @@
             </xpath>
             <xpath expr="//div[@name='button_box']" position="inside">
                 <button class="oe_stat_button" type="object" name="action_mcct_view_situations"
-                        icon="fa-list-ol" invisible="not mcct_is_site">
+                        icon="fa-list-ol" invisible="not mcct_is_site or mcct_billing_mode != 'situations'">
                     <div class="o_stat_info">
                         <span class="o_stat_value"><field name="mcct_situation_count"/></span>
                         <span class="o_stat_text">Situations</span>
@@ -56,6 +60,57 @@
                 <field name="mcct_is_site"/>
             </xpath>
             <xpath expr="//notebook" position="inside">
+                <page name="mcct_milestones" string="Échéancier"
+                      invisible="not mcct_is_site or mcct_billing_mode != 'milestones'">
+                    <field name="mcct_milestone_due_count" invisible="1"/>
+                    <div class="alert alert-warning mb-2" role="alert"
+                         invisible="not mcct_milestone_ids or mcct_milestone_rate_total == 100">
+                        Le total de l'échéancier fait <field name="mcct_milestone_rate_total" class="oe_inline" nolabel="1"/> %
+                        du marché au lieu de 100 %.
+                    </div>
+                    <div class="mb-2" invisible="mcct_milestone_ids">
+                        <button name="action_mcct_milestone_template" type="object" class="btn-secondary"
+                                icon="fa-magic" string="Échéancier type (30 / 40 / 20 / 10 %)"/>
+                        <span class="text-muted ms-2">ou ajoutez vos échéances ci-dessous.</span>
+                    </div>
+                    <field name="mcct_milestone_ids" nolabel="1" context="{'default_project_id': id}">
+                        <list editable="bottom"
+                              decoration-success="display_state == 'paid'"
+                              decoration-warning="display_state == 'due'"
+                              decoration-danger="display_state == 'overdue'">
+                            <field name="currency_id" column_invisible="1"/>
+                            <field name="state" column_invisible="1"/>
+                            <field name="invoice_id" column_invisible="1"/>
+                            <field name="sequence" widget="handle"/>
+                            <field name="number"/>
+                            <field name="name"/>
+                            <field name="phase" string="Phase"/>
+                            <field name="date_planned" string="Prévue le"/>
+                            <field name="rate" string="%" sum="Total" readonly="state != 'planned'"/>
+                            <field name="amount_untaxed" sum="Total HT" readonly="state != 'planned'"/>
+                            <field name="amount_total" sum="Total TTC" optional="hide"/>
+                            <field name="invoice_date_due" optional="hide"/>
+                            <field name="amount_paid" sum="Encaissé" optional="show"/>
+                            <field name="date_paid" optional="hide"/>
+                            <field name="display_state" widget="badge"
+                                   decoration-info="display_state == 'invoiced'"
+                                   decoration-warning="display_state == 'due'"
+                                   decoration-danger="display_state == 'overdue'"
+                                   decoration-success="display_state == 'paid'"/>
+                            <button name="action_create_invoice" type="object" string="Facturer"
+                                    icon="fa-file-text-o" invisible="state != 'planned' or not id"
+                                    groups="account.group_account_invoice"/>
+                            <button name="action_open_invoice" type="object" string="Facture"
+                                    icon="fa-external-link" invisible="not invoice_id"/>
+                        </list>
+                    </field>
+                    <group class="mt-2">
+                        <group>
+                            <field name="mcct_milestone_amount_total"/>
+                            <field name="mcct_milestone_amount_paid"/>
+                        </group>
+                    </group>
+                </page>
                 <page name="mcct_site" string="Chantier" invisible="not mcct_is_site">
                     <field name="currency_id" invisible="1"/>
                     <group>
@@ -81,9 +136,10 @@
                             <field name="mcct_contract_ref"/>
                             <field name="mcct_contract_date"/>
                             <field name="mcct_contract_amount"/>
-                            <field name="mcct_advance_rate"/>
-                            <field name="mcct_retention_rate"/>
-                            <field name="mcct_retention_cap_rate"/>
+                            <field name="mcct_billing_mode"/>
+                            <field name="mcct_advance_rate" invisible="mcct_billing_mode != 'situations'"/>
+                            <field name="mcct_retention_rate" invisible="mcct_billing_mode != 'situations'"/>
+                            <field name="mcct_retention_cap_rate" invisible="mcct_billing_mode != 'situations'"/>
                         </group>
                         <group string="Réceptions">
                             <field name="mcct_date_reception_provisoire"/>

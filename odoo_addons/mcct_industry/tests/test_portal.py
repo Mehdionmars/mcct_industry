@@ -109,6 +109,22 @@ class TestMcctPortal(BaseCommon, HttpCase):
         page = self.url_open(f'/my/chantiers/{self.project.id}').text
         self.assertNotIn("Grue mobile 60 t", page)
 
+    def test_site_page_shows_payment_schedule(self):
+        site = self.env['project.project'].create({
+            'name': "Réservoirs Portail", 'partner_id': self.client.id, 'mcct_is_site': True,
+            'privacy_visibility': 'portal', 'mcct_contract_amount': 500000.0,
+            'mcct_billing_mode': 'milestones',
+        })
+        site.action_mcct_milestone_template()
+        page = self.url_open(f'/my/chantiers/{site.id}').text
+        self.assertIn("Échéancier de paiement", page)
+        self.assertIn("Avance à la commande", page)
+        self.assertIn("À la réception définitive", page)
+        self.assertNotIn("Situations de travaux", page)
+        # Chantier facturé par situations : pas d'échéancier affiché.
+        page = self.url_open(f'/my/chantiers/{self.project.id}').text
+        self.assertNotIn("Échéancier de paiement", page)
+
     def test_other_client_site_is_hidden(self):
         response = self.url_open(f'/my/chantiers/{self.other_project.id}', allow_redirects=False)
         self.assertIn(response.status_code, (302, 303))

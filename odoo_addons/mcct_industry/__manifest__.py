@@ -1,6 +1,6 @@
 {
     'name': 'MCCT Industry — Chantiers & Facturation',
-    'version': '19.0.1.1.0',
+    'version': '19.0.1.2.0',
     'summary': "Suivi de chantiers industriels, situations de travaux, "
                "retenue de garantie et portail client (MAD, mètres)",
     'description': """
@@ -17,6 +17,9 @@ d'engins et de machines.
 * Situations de travaux (décomptes) : quantités du marché, cumul précédent,
   cumul à date, montant de la période.
 * Avance sur travaux et déduction automatique sur chaque situation.
+* Ou facturation par échéancier de paiement : échéances du marché (à la
+  commande, à la livraison, aux réceptions), facture en un clic, suivi des
+  encaissements, rappel quand une phase rend une échéance exigible.
 * Retenue de garantie (10 % par défaut) plafonnée à 7 % du marché.
 * Facture générée depuis la situation, montant en lettres en français,
   ICE du client, net à payer.
@@ -62,6 +65,7 @@ d'engins et de machines.
         'data/mail_template_data.xml',
         'views/project_project_views.xml',
         'views/mcct_situation_views.xml',
+        'views/payment_milestone_views.xml',
         'views/mcct_site_report_views.xml',
         'views/account_move_views.xml',
         'views/res_company_views.xml',

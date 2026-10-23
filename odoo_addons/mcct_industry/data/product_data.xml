@@ -132,6 +132,17 @@
         <field name="service_tracking">project_only</field>
     </record>
 
+    <!-- Article technique : factures des échéances de paiement (chantiers en échéancier). -->
+    <record id="product_milestone" model="product.template">
+        <field name="name">Échéance du marché</field>
+        <field name="type">service</field>
+        <field name="categ_id" ref="product_category_ouvrages"/>
+        <field name="uom_id" ref="uom_forfait"/>
+        <field name="invoice_policy">order</field>
+        <field name="sale_ok" eval="False"/>
+        <field name="purchase_ok" eval="False"/>
+    </record>
+
     <!-- Article technique : facture d'avance puis déduction sur les situations. -->
     <record id="product_advance" model="product.template">
         <field name="name">Avance sur travaux</field>

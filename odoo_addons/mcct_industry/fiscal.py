@@ -39,6 +39,7 @@ PRODUCT_NATURE = {
     'product_beton_m3': ('travaux', None),
     'product_dallage_m2': ('travaux', None),
     'product_advance': ('travaux', None),
+    'product_milestone': ('travaux', None),
     'product_chaudronnerie_kg': ('travaux', None),
     'product_montage_h': ('services', None),
     'product_levage_forfait': ('services', None),

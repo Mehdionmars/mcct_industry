@@ -28,6 +28,13 @@ PHASES = [
 # Situations prises en compte dans les cumuls (approuvées par le client ou facturées).
 VALIDATED_STATES = ('approved', 'invoiced')
 RECEIVED_PHASES = ('reception_provisoire', 'reception_definitive')
+# Échéancier proposé par défaut : (désignation, % du marché, phase déclenchante).
+STANDARD_SCHEDULE = [
+    ("Avance à la commande", 30.0, False),
+    ("À la livraison sur site", 40.0, 'livraison'),
+    ("À la réception provisoire", 20.0, 'reception_provisoire'),
+    ("À la réception définitive", 10.0, 'reception_definitive'),
+]
 # Repères affichés en gris sur la carte pour s'orienter.
 MAP_LANDMARKS = ('Tanger', 'Rabat', 'Casablanca', 'Fès', 'Oujda', 'Marrakech', 'Agadir',
                  'Errachidia', 'Laâyoune', 'Dakhla')
@@ -68,6 +75,22 @@ class ProjectProject(models.Model):
         "Plafond retenue (% du marché)",
         default=lambda self: self.env.company.mcct_retention_cap_rate)
     mcct_retention_released = fields.Boolean("Retenue libérée", copy=False, tracking=True)
+    mcct_billing_mode = fields.Selection(
+        [('situations', "Situations de travaux (au métré)"),
+         ('milestones', "Échéancier de paiement")],
+        string="Mode de facturation", default='situations', required=True, tracking=True,
+        help="Situations : facturation à l'avancement mesuré. Échéancier : facturation aux "
+             "échéances prévues au marché (à la commande, à la livraison, à la réception…).")
+    mcct_milestone_ids = fields.One2many(
+        'mcct.payment.milestone', 'project_id', string="Échéancier de paiement", copy=True)
+    mcct_milestone_rate_total = fields.Float(
+        "Total de l'échéancier (%)", compute='_compute_mcct_milestones')
+    mcct_milestone_due_count = fields.Integer(
+        "Échéances à facturer", compute='_compute_mcct_milestones')
+    mcct_milestone_amount_paid = fields.Monetary(
+        "Échéances encaissées", compute='_compute_mcct_milestones')
+    mcct_milestone_amount_total = fields.Monetary(
+        "Total des échéances TTC", compute='_compute_mcct_milestones')
     mcct_advance_rate = fields.Float(
         "Avance sur travaux (%)",
         help="Avance facturée au démarrage puis déduite au même taux sur chaque situation.")
@@ -145,6 +168,17 @@ class ProjectProject(models.Model):
     def _compute_mcct_map_city(self):
         for project in self:
             project.mcct_map_city = find_city(project.mcct_site_city) or False
+
+    @api.depends('mcct_milestone_ids.rate', 'mcct_milestone_ids.state',
+                 'mcct_milestone_ids.amount_untaxed', 'mcct_milestone_ids.phase_reached',
+                 'mcct_milestone_ids.date_planned')
+    def _compute_mcct_milestones(self):
+        for project in self:
+            milestones = project.mcct_milestone_ids
+            project.mcct_milestone_rate_total = sum(milestones.mapped('rate'))
+            project.mcct_milestone_due_count = len(milestones.filtered(lambda m: m.display_state == 'due'))
+            project.mcct_milestone_amount_paid = sum(milestones.mapped('amount_paid'))
+            project.mcct_milestone_amount_total = sum(milestones.mapped('amount_total'))
 
     @api.depends('mcct_equipment_ids', 'mcct_equipment_assignment_ids.cost')
     def _compute_mcct_equipment(self):
@@ -253,8 +287,71 @@ class ProjectProject(models.Model):
                              'default_partner_id': self.partner_id.id}
         return action
 
+    def write(self, vals):
+        if 'mcct_billing_mode' in vals:
+            self._mcct_check_billing_mode_change(vals['mcct_billing_mode'])
+        due_before = {}
+        if 'mcct_phase' in vals:
+            due_before = {project.id: project.mcct_milestone_ids.filtered('phase_reached')
+                          for project in self}
+        result = super().write(vals)
+        if due_before:
+            for project in self:
+                newly_due = project.mcct_milestone_ids.filtered(
+                    lambda m: m.phase_reached and m.state == 'planned') - due_before[project.id]
+                if newly_due:
+                    project._mcct_notify_due_milestones(newly_due)
+        return result
+
+    def _mcct_check_billing_mode_change(self, mode):
+        for project in self.filtered(lambda p: p.mcct_billing_mode != mode):
+            if mode == 'milestones' and project.mcct_situation_ids.filtered(lambda s: s.state != 'cancel'):
+                raise UserError("Ce chantier a déjà des situations de travaux : il reste facturé par situations.")
+            if mode == 'situations' and project.mcct_milestone_ids.filtered(lambda m: m.invoice_id.state == 'posted'):
+                raise UserError("Des échéances de ce chantier sont déjà facturées : il reste facturé par échéancier.")
+
+    def _mcct_notify_due_milestones(self, milestones):
+        self.ensure_one()
+        lines = ", ".join(f"{m.name} ({self.currency_id.format(m.amount_untaxed)} HT)" for m in milestones)
+        body = f"Phase « {dict(PHASES).get(self.mcct_phase)} » atteinte : échéance(s) à facturer — {lines}."
+        self.message_post(body=body)
+        self.activity_schedule(
+            'mail.mail_activity_data_todo',
+            summary="Échéance à facturer",
+            note=body,
+            user_id=(self.user_id or self.env.user).id,
+        )
+
+    def action_mcct_milestone_template(self):
+        """Échéancier type : 30 % à la commande, 40 % à la livraison, 20 % et 10 % aux réceptions."""
+        for project in self:
+            if project.mcct_milestone_ids:
+                raise UserError("L'échéancier de ce chantier est déjà renseigné.")
+            today = fields.Date.context_today(self)
+            project.mcct_milestone_ids = [
+                (0, 0, {
+                    'sequence': index * 10,
+                    'name': name,
+                    'rate': rate,
+                    'phase': phase,
+                    'date_planned': (project.mcct_contract_date or today) if not phase else False,
+                })
+                for index, (name, rate, phase) in enumerate(STANDARD_SCHEDULE, start=1)
+            ]
+        return True
+
+    def action_mcct_invoice_due_milestones(self):
+        self.ensure_one()
+        due = self.mcct_milestone_ids.filtered(lambda m: m.display_state == 'due')
+        if not due:
+            raise UserError("Aucune échéance à facturer pour le moment.")
+        return due.action_create_invoice()
+
     def action_mcct_new_situation(self):
         self.ensure_one()
+        if self.mcct_billing_mode == 'milestones':
+            raise UserError("Ce chantier est facturé par échéancier de paiement : utilisez "
+                            "l'onglet « Échéancier » pour facturer.")
         situation = self.env['mcct.situation'].create({'project_id': self.id})
         return {
             'type': 'ir.actions.act_window',
@@ -267,6 +364,8 @@ class ProjectProject(models.Model):
     def action_mcct_invoice_advance(self):
         """Facture d'avance sur travaux (brouillon), déduite ensuite des situations."""
         self.ensure_one()
+        if self.mcct_billing_mode == 'milestones':
+            raise UserError("En échéancier de paiement, l'avance est une échéance de l'échéancier.")
         if not self.partner_id:
             raise UserError("Renseignez le client du chantier avant de facturer l'avance.")
         if self.mcct_advance_rate <= 0 or not self.mcct_contract_amount:

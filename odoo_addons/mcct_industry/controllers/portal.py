@@ -120,6 +120,8 @@ class McctCustomerPortal(CustomerPortal):
             'invoices': invoices,
             'site_reports': reports,
             'documents': project.mcct_document_ids,
+            'milestones': project.mcct_milestone_ids if project.mcct_billing_mode == 'milestones'
+            else project.mcct_milestone_ids.browse(),
             'equipment_assignments': project.sudo().mcct_equipment_assignment_ids.filtered(
                 lambda a: not a.date_end).sorted(lambda a: (a.kind or '', a.equipment_id.name)),
             'message': message,

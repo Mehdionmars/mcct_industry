@@ -47,6 +47,8 @@
               groups="sales_team.group_sale_salesman"/>
     <menuitem id="menu_mcct_invoices" name="Factures chantier" parent="menu_mcct_billing"
               action="action_mcct_invoices" sequence="20" groups="account.group_account_invoice"/>
+    <menuitem id="menu_mcct_payment_milestones" name="Échéancier des marchés" parent="menu_mcct_billing"
+              action="action_mcct_payment_milestones" sequence="25"/>
     <menuitem id="menu_mcct_purchases" name="Achats de matériaux" parent="menu_mcct_billing"
               action="purchase.purchase_rfq" sequence="30" groups="purchase.group_purchase_user"/>
 

@@ -166,8 +166,64 @@
                     </div>
                 </div>
 
+                <!-- Échéancier de paiement : prévu et réalisé -->
+                <section id="echeancier" class="mb-4" t-if="milestones">
+                    <h4>Échéancier de paiement</h4>
+                    <t t-set="ms_total" t-value="sum(milestones.mapped('amount_total'))"/>
+                    <t t-set="ms_paid" t-value="sum(milestones.mapped('amount_paid'))"/>
+                    <div class="d-flex align-items-center gap-3 mb-2">
+                        <div class="progress o_mcct_progress flex-grow-1">
+                            <div class="progress-bar bg-success"
+                                 t-attf-style="width: #{min(100, ms_total and ms_paid / ms_total * 100 or 0)}%"/>
+                        </div>
+                        <span class="small text-nowrap">
+                            Encaissé <strong t-out="ms_paid" t-options='{"widget": "monetary", "display_currency": p.currency_id}'/>
+                            sur <span t-out="ms_total" t-options='{"widget": "monetary", "display_currency": p.currency_id}'/> TTC
+                        </span>
+                    </div>
+                    <div class="table-responsive">
+                        <table class="table table-sm align-middle">
+                            <thead>
+                                <tr>
+                                    <th>N°</th>
+                                    <th>Échéance</th>
+                                    <th class="d-none d-md-table-cell">Prévue</th>
+                                    <th class="text-end">%</th>
+                                    <th class="text-end">Montant TTC</th>
+                                    <th class="d-none d-md-table-cell">Facture</th>
+                                    <th class="d-none d-md-table-cell">Encaissée le</th>
+                                    <th>Statut</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr t-foreach="milestones" t-as="ms">
+                                    <td t-out="ms.number"/>
+                                    <td><span t-field="ms.name"/></td>
+                                    <td class="d-none d-md-table-cell">
+                                        <span t-if="ms.phase" t-field="ms.phase"/>
+                                        <span t-elif="ms.date_planned" t-field="ms.date_planned"/>
+                                    </td>
+                                    <td class="text-end"><t t-out="('%g' % ms.rate).replace('.', ',')"/> %</td>
+                                    <td class="text-end"><span t-field="ms.amount_total"/></td>
+                                    <td class="d-none d-md-table-cell">
+                                        <a t-if="ms.invoice_id.state == 'posted'" t-att-href="ms.invoice_id.get_portal_url()" t-out="ms.invoice_id.name"/>
+                                    </td>
+                                    <td class="d-none d-md-table-cell"><span t-field="ms.date_paid"/></td>
+                                    <td>
+                                        <span t-if="ms.display_state == 'paid'" class="badge text-bg-success">Encaissée</span>
+                                        <span t-elif="ms.display_state == 'overdue'" class="badge text-bg-danger">Échue impayée</span>
+                                        <span t-elif="ms.display_state == 'invoiced'" class="badge text-bg-info">Facturée</span>
+                                        <span t-elif="ms.display_state == 'due'" class="badge text-bg-warning">Exigible</span>
+                                        <span t-else="" class="badge text-bg-light border">À venir</span>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </section>
+
                 <!-- Situations de travaux -->
-                <section id="situations" class="mb-4">
+                <section id="situations" class="mb-4" t-if="situations or not milestones">
                     <h4>Situations de travaux</h4>
                     <div t-if="not situations" class="text-muted">Aucune situation pour le moment.</div>
                     <div t-if="situations" class="table-responsive">

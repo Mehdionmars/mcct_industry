@@ -10,3 +10,6 @@ access_mcct_site_report_salesman,mcct.site.report.salesman,model_mcct_site_repor
 access_mcct_equipment_assignment_user,mcct.equipment.assignment.user,model_mcct_equipment_assignment,project.group_project_user,1,1,1,1
 access_mcct_equipment_assignment_employee,mcct.equipment.assignment.employee,model_mcct_equipment_assignment,base.group_user,1,0,0,0
 access_mcct_maintenance_equipment_project_user,maintenance.equipment.project.user,maintenance.model_maintenance_equipment,project.group_project_user,1,1,1,0
+access_mcct_payment_milestone_user,mcct.payment.milestone.user,model_mcct_payment_milestone,project.group_project_user,1,1,1,1
+access_mcct_payment_milestone_invoice,mcct.payment.milestone.invoice,model_mcct_payment_milestone,account.group_account_invoice,1,1,0,0
+access_mcct_payment_milestone_salesman,mcct.payment.milestone.salesman,model_mcct_payment_milestone,sales_team.group_sale_salesman,1,0,0,0

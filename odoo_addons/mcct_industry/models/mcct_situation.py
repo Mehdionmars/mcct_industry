@@ -247,6 +247,14 @@ class McctSituation(models.Model):
     # ------------------------------------------------------------------
     # Contraintes / CRUD
     # ------------------------------------------------------------------
+    @api.constrains('project_id')
+    def _check_billing_mode(self):
+        for situation in self:
+            if situation.project_id.mcct_billing_mode == 'milestones':
+                raise ValidationError(
+                    "Le chantier %s est facturé par échéancier de paiement : pas de situation de "
+                    "travaux." % situation.project_id.name)
+
     @api.constrains('state', 'project_id')
     def _check_single_open_situation(self):
         for situation in self.filtered(lambda s: s.state in OPEN_STATES):

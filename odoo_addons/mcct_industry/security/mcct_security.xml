@@ -19,6 +19,12 @@
         <field name="domain_force">[('company_id', 'in', company_ids)]</field>
     </record>
 
+    <record id="rule_mcct_payment_milestone_company" model="ir.rule">
+        <field name="name">Échéances : multi-société</field>
+        <field name="model_id" ref="model_mcct_payment_milestone"/>
+        <field name="domain_force">[('company_id', 'in', company_ids + [False])]</field>
+    </record>
+
     <record id="rule_mcct_equipment_assignment_company" model="ir.rule">
         <field name="name">Affectations de matériel : multi-société</field>
         <field name="model_id" ref="model_mcct_equipment_assignment"/>

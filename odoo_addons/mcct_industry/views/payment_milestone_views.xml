@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- Liste de toutes les échéances (prévisionnel de facturation et d'encaissement) -->
+    <record id="payment_milestone_list" model="ir.ui.view">
+        <field name="name">mcct.payment.milestone.list</field>
+        <field name="model">mcct.payment.milestone</field>
+        <field name="arch" type="xml">
+            <list string="Échéancier des marchés" create="false"
+                  decoration-success="display_state == 'paid'"
+                  decoration-warning="display_state == 'due'"
+                  decoration-danger="display_state == 'overdue'">
+                <field name="currency_id" column_invisible="1"/>
+                <field name="state" column_invisible="1"/>
+                <field name="project_id"/>
+                <field name="partner_id" optional="show"/>
+                <field name="number" string="N°" optional="hide"/>
+                <field name="name"/>
+                <field name="phase" optional="show"/>
+                <field name="date_planned"/>
+                <field name="rate" optional="show"/>
+                <field name="amount_untaxed" sum="Total HT"/>
+                <field name="amount_total" sum="Total TTC" optional="show"/>
+                <field name="invoice_id" optional="show"/>
+                <field name="invoice_date_due" optional="show"/>
+                <field name="amount_paid" sum="Encaissé" optional="show"/>
+                <field name="amount_residual" sum="Reste dû" optional="hide"/>
+                <field name="date_paid" optional="hide"/>
+                <field name="display_state" widget="badge"
+                       decoration-info="display_state == 'invoiced'"
+                       decoration-warning="display_state == 'due'"
+                       decoration-danger="display_state == 'overdue'"
+                       decoration-success="display_state == 'paid'"/>
+                <button name="action_create_invoice" type="object" string="Facturer" icon="fa-file-text-o"
+                        invisible="state != 'planned'" groups="account.group_account_invoice"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="payment_milestone_search" model="ir.ui.view">
+        <field name="name">mcct.payment.milestone.search</field>
+        <field name="model">mcct.payment.milestone</field>
+        <field name="arch" type="xml">
+            <search string="Échéances">
+                <field name="project_id"/>
+                <field name="partner_id"/>
+                <field name="name"/>
+                <filter name="to_invoice" string="À facturer"
+                        domain="[('state', '=', 'planned'), '|', ('phase_reached', '=', True), ('date_planned', '&lt;=', context_today().strftime('%Y-%m-%d'))]"/>
+                <filter name="not_invoiced" string="Non facturées" domain="[('state', '=', 'planned')]"/>
+                <filter name="unpaid" string="Facturées non encaissées" domain="[('state', '=', 'invoiced')]"/>
+                <filter name="overdue" string="Échues impayées"
+                        domain="[('state', '=', 'invoiced'), ('invoice_date_due', '&lt;', context_today().strftime('%Y-%m-%d'))]"/>
+                <filter name="paid" string="Encaissées" domain="[('state', '=', 'paid')]"/>
+                <separator/>
+                <filter name="date_planned" string="Date prévue" date="date_planned"/>
+                <group>
+                    <filter name="group_project" string="Chantier" context="{'group_by': 'project_id'}"/>
+                    <filter name="group_month" string="Mois prévu" context="{'group_by': 'date_planned:month'}"/>
+                    <filter name="group_state" string="Facturation" context="{'group_by': 'state'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <record id="action_mcct_payment_milestones" model="ir.actions.act_window">
+        <field name="name">Échéancier des marchés</field>
+        <field name="res_model">mcct.payment.milestone</field>
+        <field name="view_mode">list</field>
+        <field name="context">{'search_default_group_project': 1}</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">Aucune échéance</p>
+            <p>Sur un chantier, choisissez le mode de facturation « Échéancier de paiement »,
+               puis renseignez ses échéances dans l'onglet « Échéancier ».</p>
+        </field>
+    </record>
+
+</odoo>
