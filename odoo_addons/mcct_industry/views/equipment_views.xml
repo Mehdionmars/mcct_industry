@@ -1,0 +1,255 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- Catégories : type (engin / machine / matériel) et contrôle réglementaire -->
+    <record id="equipment_category_form_mcct" model="ir.ui.view">
+        <field name="name">maintenance.equipment.category.form.mcct</field>
+        <field name="model">maintenance.equipment.category</field>
+        <field name="inherit_id" ref="maintenance.hr_equipment_category_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='technician_user_id']" position="before">
+                <field name="mcct_kind"/>
+                <field name="mcct_inspection_months"/>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="equipment_category_list_mcct" model="ir.ui.view">
+        <field name="name">maintenance.equipment.category.list.mcct</field>
+        <field name="model">maintenance.equipment.category</field>
+        <field name="inherit_id" ref="maintenance.hr_equipment_category_view_tree"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='name']" position="after">
+                <field name="mcct_kind"/>
+                <field name="mcct_inspection_months"/>
+                <field name="equipment_count" string="Nombre"/>
+            </xpath>
+        </field>
+    </record>
+
+    <!-- Fiche matériel : chantier, immatriculation, compteur, coût, contrôles -->
+    <record id="equipment_form_mcct" model="ir.ui.view">
+        <field name="name">maintenance.equipment.form.mcct</field>
+        <field name="model">maintenance.equipment</field>
+        <field name="inherit_id" ref="maintenance.hr_equipment_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//sheet" position="before">
+                <header>
+                    <button name="action_mcct_return_to_depot" type="object" string="Retour au dépôt"
+                            invisible="not mcct_project_id" icon="fa-home"/>
+                    <field name="mcct_status" widget="statusbar"/>
+                </header>
+            </xpath>
+            <xpath expr="//div[hasclass('oe_title')]" position="after">
+                <field name="mcct_inspection_overdue" invisible="1"/>
+                <div class="alert alert-warning mb-2" role="alert" invisible="not mcct_inspection_overdue">
+                    Contrôle réglementaire échu : planifiez la vérification par l'organisme agréé.
+                </div>
+            </xpath>
+            <xpath expr="//field[@name='category_id']" position="after">
+                <field name="mcct_kind"/>
+                <field name="mcct_project_id" options="{'no_create': True}"/>
+                <field name="mcct_operator_id"/>
+            </xpath>
+            <xpath expr="//group[@name='service_info_group']" position="after">
+                <group name="mcct_park">
+                    <group string="Identification">
+                        <field name="mcct_ownership"/>
+                        <field name="mcct_registration"/>
+                        <field name="mcct_hour_meter"/>
+                        <field name="mcct_currency_id" invisible="1"/>
+                        <field name="mcct_daily_cost"/>
+                    </group>
+                    <group string="Contrôles et échéances">
+                        <field name="mcct_inspection_date"/>
+                        <field name="mcct_next_inspection_date"/>
+                        <field name="mcct_insurance_date"/>
+                    </group>
+                </group>
+            </xpath>
+            <xpath expr="//page[@name='description']" position="before">
+                <page string="Affectations aux chantiers" name="mcct_assignments">
+                    <field name="mcct_assignment_ids" context="{'default_daily_cost': mcct_daily_cost}">
+                        <list editable="bottom">
+                            <field name="currency_id" column_invisible="1"/>
+                            <field name="project_id" options="{'no_create': True}"/>
+                            <field name="date_start"/>
+                            <field name="date_end"/>
+                            <field name="days" sum="Total"/>
+                            <field name="daily_cost"/>
+                            <field name="cost" sum="Total"/>
+                            <field name="note" optional="show"/>
+                        </list>
+                    </field>
+                </page>
+            </xpath>
+            <xpath expr="//field[@name='partner_id']" position="attributes">
+                <attribute name="string">Fournisseur / loueur</attribute>
+            </xpath>
+        </field>
+    </record>
+
+    <!-- Planning du parc : une colonne par chantier en cours, glisser-déposer pour affecter -->
+    <record id="equipment_kanban_mcct" model="ir.ui.view">
+        <field name="name">maintenance.equipment.kanban.mcct</field>
+        <field name="model">maintenance.equipment</field>
+        <field name="priority">99</field>
+        <field name="arch" type="xml">
+            <kanban default_group_by="mcct_project_id" quick_create="false" group_create="false"
+                    group_delete="false" sample="1" class="o_mcct_equipment_kanban">
+                <field name="mcct_kind"/>
+                <field name="mcct_inspection_overdue"/>
+                <templates>
+                    <t t-name="card">
+                        <div class="d-flex align-items-start gap-2">
+                            <i t-attf-class="fa fa-fw fs-4 text-primary mt-1 #{record.mcct_kind.raw_value == 'engin' ? 'fa-truck' : record.mcct_kind.raw_value == 'machine' ? 'fa-cogs' : 'fa-wrench'}"
+                               t-att-title="record.mcct_kind.value"/>
+                            <div class="flex-grow-1">
+                                <field name="name" class="fw-bold"/>
+                                <div class="small text-muted">
+                                    <field name="category_id"/>
+                                    <span t-if="record.mcct_registration.raw_value"> · <field name="mcct_registration"/></span>
+                                    <span t-elif="record.serial_no.raw_value"> · <field name="serial_no"/></span>
+                                </div>
+                            </div>
+                        </div>
+                        <footer class="pt-1">
+                            <field name="mcct_status" widget="badge"
+                                   decoration-success="mcct_status == 'available'"
+                                   decoration-info="mcct_status == 'site'"
+                                   decoration-danger="mcct_status == 'maintenance'"/>
+                            <span class="badge text-bg-warning ms-1" title="Contrôle réglementaire échu"
+                                  t-if="record.mcct_inspection_overdue.raw_value">
+                                <i class="fa fa-exclamation-triangle"/> Contrôle
+                            </span>
+                            <field name="mcct_operator_id" widget="many2one_avatar_employee" class="ms-auto"/>
+                        </footer>
+                    </t>
+                </templates>
+            </kanban>
+        </field>
+    </record>
+
+    <record id="equipment_list_mcct" model="ir.ui.view">
+        <field name="name">maintenance.equipment.list.mcct</field>
+        <field name="model">maintenance.equipment</field>
+        <field name="priority">99</field>
+        <field name="arch" type="xml">
+            <list string="Matériel, engins et machines" sample="1"
+                  decoration-warning="mcct_inspection_overdue">
+                <field name="mcct_currency_id" column_invisible="1"/>
+                <field name="mcct_inspection_overdue" column_invisible="1"/>
+                <field name="name"/>
+                <field name="mcct_kind"/>
+                <field name="category_id"/>
+                <field name="model" optional="show"/>
+                <field name="mcct_registration" optional="show"/>
+                <field name="serial_no" optional="hide"/>
+                <field name="mcct_project_id"/>
+                <field name="mcct_status" widget="badge"
+                       decoration-success="mcct_status == 'available'"
+                       decoration-info="mcct_status == 'site'"
+                       decoration-danger="mcct_status == 'maintenance'"/>
+                <field name="mcct_operator_id" optional="show"/>
+                <field name="mcct_hour_meter" optional="hide"/>
+                <field name="mcct_daily_cost" optional="show"/>
+                <field name="mcct_next_inspection_date" optional="show"/>
+                <field name="mcct_ownership" optional="hide"/>
+                <field name="company_id" groups="base.group_multi_company" optional="hide"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="equipment_search_mcct" model="ir.ui.view">
+        <field name="name">maintenance.equipment.search.mcct</field>
+        <field name="model">maintenance.equipment</field>
+        <field name="inherit_id" ref="maintenance.hr_equipment_view_search"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='category_id']" position="after">
+                <field name="mcct_project_id"/>
+                <field name="mcct_registration"/>
+            </xpath>
+            <xpath expr="//filter[@name='under_maintenance']" position="before">
+                <filter name="mcct_engins" string="Engins" domain="[('mcct_kind', '=', 'engin')]"/>
+                <filter name="mcct_machines" string="Machines" domain="[('mcct_kind', '=', 'machine')]"/>
+                <filter name="mcct_materiel" string="Matériel" domain="[('mcct_kind', '=', 'materiel')]"/>
+                <separator/>
+                <filter name="mcct_on_site" string="Sur chantier" domain="[('mcct_project_id', '!=', False)]"/>
+                <filter name="mcct_at_depot" string="Au dépôt" domain="[('mcct_project_id', '=', False)]"/>
+                <filter name="mcct_inspection_due" string="Contrôle à prévoir (30 jours)"
+                        domain="[('mcct_next_inspection_date', '!=', False), ('mcct_next_inspection_date', '&lt;=', (context_today() + relativedelta(days=30)).strftime('%Y-%m-%d'))]"/>
+                <separator/>
+            </xpath>
+            <xpath expr="//filter[@name='technicians']" position="before">
+                <filter name="group_mcct_project" string="Chantier" context="{'group_by': 'mcct_project_id'}"/>
+                <filter name="group_mcct_kind" string="Type" context="{'group_by': 'mcct_kind'}"/>
+                <filter name="group_mcct_status" string="Disponibilité" context="{'group_by': 'mcct_status'}"/>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="action_mcct_equipment" model="ir.actions.act_window">
+        <field name="name">Matériel, engins et machines</field>
+        <field name="res_model">maintenance.equipment</field>
+        <field name="view_mode">kanban,list,form</field>
+        <field name="search_view_id" ref="maintenance.hr_equipment_view_search"/>
+        <field name="view_ids" eval="[(5, 0, 0),
+            (0, 0, {'view_mode': 'kanban', 'view_id': ref('equipment_kanban_mcct')}),
+            (0, 0, {'view_mode': 'list', 'view_id': ref('equipment_list_mcct')}),
+            (0, 0, {'view_mode': 'form', 'view_id': ref('maintenance.hr_equipment_view_form')})]"/>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">Enregistrer votre premier engin ou machine</p>
+            <p>Grues, nacelles, camions, plieuses, postes à souder, échafaudages…
+               Faites glisser une carte d'une colonne à l'autre pour l'affecter à un chantier :
+               l'historique et le coût d'immobilisation sont tenus automatiquement.</p>
+        </field>
+    </record>
+
+    <!-- Historique des affectations (coût du matériel par chantier) -->
+    <record id="equipment_assignment_list" model="ir.ui.view">
+        <field name="name">mcct.equipment.assignment.list</field>
+        <field name="model">mcct.equipment.assignment</field>
+        <field name="arch" type="xml">
+            <list string="Affectations" editable="bottom">
+                <field name="currency_id" column_invisible="1"/>
+                <field name="equipment_id"/>
+                <field name="kind" optional="show"/>
+                <field name="category_id" optional="hide"/>
+                <field name="project_id"/>
+                <field name="date_start"/>
+                <field name="date_end"/>
+                <field name="days" sum="Total"/>
+                <field name="daily_cost" optional="show"/>
+                <field name="cost" sum="Total"/>
+                <field name="note" optional="hide"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="equipment_assignment_search" model="ir.ui.view">
+        <field name="name">mcct.equipment.assignment.search</field>
+        <field name="model">mcct.equipment.assignment</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="equipment_id"/>
+                <field name="project_id"/>
+                <filter name="current" string="En cours" domain="[('date_end', '=', False)]"/>
+                <separator/>
+                <filter name="date_start" string="Arrivée" date="date_start"/>
+                <group>
+                    <filter name="group_project" string="Chantier" context="{'group_by': 'project_id'}"/>
+                    <filter name="group_equipment" string="Matériel" context="{'group_by': 'equipment_id'}"/>
+                    <filter name="group_kind" string="Type" context="{'group_by': 'kind'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <record id="action_mcct_equipment_assignment" model="ir.actions.act_window">
+        <field name="name">Affectations du matériel</field>
+        <field name="res_model">mcct.equipment.assignment</field>
+        <field name="view_mode">list</field>
+        <field name="context">{'search_default_group_project': 1}</field>
+    </record>
+
+</odoo>

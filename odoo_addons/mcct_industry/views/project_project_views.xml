@@ -36,6 +36,13 @@
                         <span class="o_stat_text">Rapports</span>
                     </div>
                 </button>
+                <button class="oe_stat_button" type="object" name="action_mcct_view_equipment"
+                        icon="fa-truck" invisible="not mcct_is_site">
+                    <div class="o_stat_info">
+                        <span class="o_stat_value"><field name="mcct_equipment_count"/></span>
+                        <span class="o_stat_text">Matériel</span>
+                    </div>
+                </button>
                 <button class="oe_stat_button" type="object" name="action_mcct_view_invoices"
                         icon="fa-file-text-o" invisible="not mcct_is_site"
                         groups="account.group_account_invoice">
@@ -58,6 +65,17 @@
                             <field name="mcct_progress" widget="progressbar" options="{'editable': true}"/>
                             <field name="mcct_site_address"/>
                             <field name="mcct_site_city"/>
+                            <field name="mcct_map_city" invisible="not mcct_site_city or not mcct_map_city"/>
+                            <div colspan="2" class="text-warning small"
+                                 invisible="not mcct_site_city or mcct_map_city or mcct_latitude or mcct_longitude">
+                                Ville non reconnue sur la carte : vérifiez l'orthographe
+                                ou renseignez les coordonnées GPS.
+                            </div>
+                            <label for="mcct_latitude" string="GPS (lat., long.)"/>
+                            <div class="o_row">
+                                <field name="mcct_latitude" placeholder="33.5731"/>
+                                <field name="mcct_longitude" placeholder="-7.5898"/>
+                            </div>
                         </group>
                         <group string="Marché">
                             <field name="mcct_contract_ref"/>
@@ -82,8 +100,23 @@
                             <field name="mcct_retention_held"/>
                             <field name="mcct_advance_invoiced" invisible="not mcct_advance_rate"/>
                             <field name="mcct_advance_remaining" invisible="not mcct_advance_rate"/>
+                            <field name="mcct_equipment_cost" invisible="not mcct_equipment_cost"/>
                         </group>
                     </group>
+                    <separator string="Matériel, engins et machines affectés"/>
+                    <field name="mcct_equipment_assignment_ids" nolabel="1"
+                           context="{'default_project_id': id}">
+                        <list editable="bottom" decoration-muted="date_end">
+                            <field name="currency_id" column_invisible="1"/>
+                            <field name="equipment_id" options="{'no_create': True}"/>
+                            <field name="kind"/>
+                            <field name="date_start"/>
+                            <field name="date_end"/>
+                            <field name="days" sum="Total"/>
+                            <field name="cost" sum="Total"
+                                   groups="account.group_account_invoice,project.group_project_manager"/>
+                        </list>
+                    </field>
                     <separator string="Documents partagés avec le client (plans, PV, fiches techniques)"/>
                     <field name="mcct_document_ids" widget="many2many_binary" nolabel="1"/>
                 </page>

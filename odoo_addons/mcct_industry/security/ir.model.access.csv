@@ -7,3 +7,6 @@ access_mcct_situation_salesman,mcct.situation.salesman,model_mcct_situation,sale
 access_mcct_situation_line_salesman,mcct.situation.line.salesman,model_mcct_situation_line,sales_team.group_sale_salesman,1,0,0,0
 access_mcct_site_report_user,mcct.site.report.user,model_mcct_site_report,project.group_project_user,1,1,1,1
 access_mcct_site_report_salesman,mcct.site.report.salesman,model_mcct_site_report,sales_team.group_sale_salesman,1,0,0,0
+access_mcct_equipment_assignment_user,mcct.equipment.assignment.user,model_mcct_equipment_assignment,project.group_project_user,1,1,1,1
+access_mcct_equipment_assignment_employee,mcct.equipment.assignment.employee,model_mcct_equipment_assignment,base.group_user,1,0,0,0
+access_mcct_maintenance_equipment_project_user,maintenance.equipment.project.user,maintenance.model_maintenance_equipment,project.group_project_user,1,1,1,0

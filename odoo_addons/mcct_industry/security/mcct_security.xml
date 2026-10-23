@@ -19,4 +19,22 @@
         <field name="domain_force">[('company_id', 'in', company_ids)]</field>
     </record>
 
+    <record id="rule_mcct_equipment_assignment_company" model="ir.rule">
+        <field name="name">Affectations de matériel : multi-société</field>
+        <field name="model_id" ref="model_mcct_equipment_assignment"/>
+        <field name="domain_force">[('company_id', 'in', company_ids + [False])]</field>
+    </record>
+
+    <!-- Les chefs de chantier voient et affectent tout le parc (la règle standard
+         ne montre aux employés que le matériel qu'ils suivent). -->
+    <record id="rule_mcct_equipment_project_user" model="ir.rule">
+        <field name="name">Parc matériel : tout le parc pour les utilisateurs projet</field>
+        <field name="model_id" ref="maintenance.model_maintenance_equipment"/>
+        <field name="domain_force">[(1, '=', 1)]</field>
+        <field name="groups" eval="[(4, ref('project.group_project_user'))]"/>
+    </record>
+
+    <record id="project.group_project_manager" model="res.groups">
+        <field name="implied_ids" eval="[(4, ref('maintenance.group_equipment_manager'))]"/>
+    </record>
 </odoo>

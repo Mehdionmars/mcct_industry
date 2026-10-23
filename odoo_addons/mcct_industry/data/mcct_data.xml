@@ -13,6 +13,13 @@
     </record>
 
     <data noupdate="1">
+        <!-- Délai légal par défaut entre entreprises (loi 69-21) : 60 jours. -->
+        <record id="payment_term_60_days" model="account.payment.term">
+            <field name="name">60 jours (loi 69-21)</field>
+            <field name="note">Paiement à 60 jours à compter de la date de facture (loi n° 69-21 relative aux délais de paiement).</field>
+            <field name="line_ids" eval="[(5, 0, 0), (0, 0, {'value': 'percent', 'value_amount': 100.0, 'delay_type': 'days_after', 'nb_days': 60})]"/>
+        </record>
+
         <record id="uom_forfait" model="uom.uom">
             <field name="name">Forfait</field>
             <field name="relative_factor" eval="1.0"/>

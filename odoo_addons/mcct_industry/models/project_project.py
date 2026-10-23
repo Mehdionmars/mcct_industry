@@ -1,6 +1,8 @@
 from odoo import api, fields, models
 from odoo.exceptions import UserError
 
+from ..cities import CITIES, find_city, normalize
+
 ACTIVITIES = [
     ('charpente', "Charpente métallique"),
     ('chaudronnerie', "Chaudronnerie"),
@@ -25,6 +27,10 @@ PHASES = [
 
 # Situations prises en compte dans les cumuls (approuvées par le client ou facturées).
 VALIDATED_STATES = ('approved', 'invoiced')
+RECEIVED_PHASES = ('reception_provisoire', 'reception_definitive')
+# Repères affichés en gris sur la carte pour s'orienter.
+MAP_LANDMARKS = ('Tanger', 'Rabat', 'Casablanca', 'Fès', 'Oujda', 'Marrakech', 'Agadir',
+                 'Errachidia', 'Laâyoune', 'Dakhla')
 
 
 class ProjectProject(models.Model):
@@ -37,6 +43,13 @@ class ProjectProject(models.Model):
         help="Étape en cours, visible par le client sur son portail.")
     mcct_site_address = fields.Char("Adresse du chantier")
     mcct_site_city = fields.Char("Ville du chantier")
+    mcct_latitude = fields.Float(
+        "Latitude", digits=(10, 6),
+        help="Facultatif : position exacte du chantier. Sinon, la carte utilise la ville.")
+    mcct_longitude = fields.Float("Longitude", digits=(10, 6))
+    mcct_map_city = fields.Char(
+        "Ville sur la carte", compute='_compute_mcct_map_city',
+        help="Ville reconnue pour la carte des chantiers.")
     mcct_contract_ref = fields.Char("Réf. marché / BC client", tracking=True)
     mcct_contract_date = fields.Date("Date du marché")
     mcct_contract_amount = fields.Monetary(
@@ -71,6 +84,16 @@ class ProjectProject(models.Model):
         'ir.attachment', 'mcct_project_document_rel', 'project_id', 'attachment_id',
         string="Documents partagés avec le client",
         help="Plans, PV, fiches techniques… téléchargeables depuis le portail client.")
+
+    mcct_equipment_ids = fields.One2many(
+        'maintenance.equipment', 'mcct_project_id', string="Matériel sur le chantier")
+    mcct_equipment_assignment_ids = fields.One2many(
+        'mcct.equipment.assignment', 'project_id', string="Affectations de matériel")
+    mcct_equipment_count = fields.Integer(
+        compute='_compute_mcct_equipment', compute_sudo=True)
+    mcct_equipment_cost = fields.Monetary(
+        "Coût du matériel", compute='_compute_mcct_equipment', compute_sudo=True,
+        help="Jours d'affectation × coût journalier de chaque matériel, engin ou machine.")
 
     mcct_situation_count = fields.Integer(compute='_compute_mcct_counts')
     mcct_site_report_count = fields.Integer(compute='_compute_mcct_counts')
@@ -117,6 +140,17 @@ class ProjectProject(models.Model):
         for project in self:
             project.mcct_situation_count = len(project.mcct_situation_ids)
             project.mcct_site_report_count = len(project.mcct_site_report_ids)
+
+    @api.depends('mcct_site_city')
+    def _compute_mcct_map_city(self):
+        for project in self:
+            project.mcct_map_city = find_city(project.mcct_site_city) or False
+
+    @api.depends('mcct_equipment_ids', 'mcct_equipment_assignment_ids.cost')
+    def _compute_mcct_equipment(self):
+        for project in self:
+            project.mcct_equipment_count = len(project.mcct_equipment_ids)
+            project.mcct_equipment_cost = sum(project.mcct_equipment_assignment_ids.mapped('cost'))
 
     @api.depends('mcct_invoice_ids')
     def _compute_mcct_invoice_count(self):
@@ -202,6 +236,13 @@ class ProjectProject(models.Model):
     def action_mcct_view_site_reports(self):
         return self._mcct_action('mcct_industry.action_mcct_site_report')
 
+    def action_mcct_view_equipment(self):
+        self.ensure_one()
+        action = self.env['ir.actions.act_window']._for_xml_id('mcct_industry.action_mcct_equipment')
+        action['domain'] = [('mcct_project_id', '=', self.id)]
+        action['context'] = {'default_mcct_project_id': self.id}
+        return action
+
     def action_mcct_view_invoices(self):
         self.ensure_one()
         action = self.env['ir.actions.act_window']._for_xml_id('account.action_move_out_invoice_type')
@@ -280,3 +321,73 @@ class ProjectProject(models.Model):
     def _mcct_analytic_distribution(self):
         self.ensure_one()
         return {str(self.account_id.id): 100} if self.account_id else False
+
+    # ------------------------------------------------------------------
+    # Carte des chantiers
+    # ------------------------------------------------------------------
+    @api.model
+    def mcct_get_map_data(self, scope='active'):
+        """Chantiers regroupés par ville pour la carte (client action « Carte des chantiers »)."""
+        domain = [('mcct_is_site', '=', True)]
+        if scope == 'active':
+            domain.append(('mcct_phase', 'not in', RECEIVED_PHASES))
+        elif scope == 'received':
+            domain.append(('mcct_phase', 'in', RECEIVED_PHASES))
+        projects = self.search(domain, order='name')
+        phases = dict(PHASES)
+        today = fields.Date.context_today(self)
+        cities, unlocated = {}, []
+        for project in projects:
+            received = project.mcct_phase in RECEIVED_PHASES
+            item = {
+                'id': project.id,
+                'name': project.name,
+                'partner': project.partner_id.display_name or '',
+                'city': project.mcct_site_city or '',
+                'phase': project.mcct_phase or '',
+                'phase_label': phases.get(project.mcct_phase, ''),
+                'progress': project.mcct_progress,
+                'amount': project.mcct_contract_amount,
+                'equipment_count': project.mcct_equipment_count,
+                'received': received,
+                'late': bool(project.date and project.date < today and not received),
+            }
+            city = find_city(project.mcct_site_city)
+            if city:
+                key, (lat, lng) = normalize(city), CITIES[city]
+            elif project.mcct_latitude or project.mcct_longitude:
+                city = project.mcct_site_city or project.name
+                key, lat, lng = 'gps:%s' % normalize(city), project.mcct_latitude, project.mcct_longitude
+            else:
+                unlocated.append(item)
+                continue
+            entry = cities.setdefault(key, {
+                'key': key, 'name': city, 'lat': lat, 'lng': lng, 'projects': [],
+            })
+            entry['projects'].append(item)
+        for entry in cities.values():
+            items = entry['projects']
+            entry.update({
+                'count': len(items),
+                'amount': sum(item['amount'] for item in items),
+                'equipment_count': sum(item['equipment_count'] for item in items),
+                'late': any(item['late'] for item in items),
+                'received': all(item['received'] for item in items),
+            })
+        located = [item for entry in cities.values() for item in entry['projects']]
+        return {
+            'cities': sorted(cities.values(), key=lambda entry: (-entry['count'], entry['name'])),
+            'unlocated': unlocated,
+            'landmarks': [
+                {'name': name, 'lat': CITIES[name][0], 'lng': CITIES[name][1]}
+                for name in MAP_LANDMARKS
+            ],
+            'currency_id': self.env.company.currency_id.id,
+            'totals': {
+                'count': len(projects),
+                'cities': len(cities),
+                'amount': sum(item['amount'] for item in located + unlocated),
+                'late': sum(1 for item in located + unlocated if item['late']),
+                'equipment': sum(item['equipment_count'] for item in located + unlocated),
+            },
+        }

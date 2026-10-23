@@ -81,6 +81,9 @@ class McctSituation(models.Model):
     amount_total = fields.Monetary("Total TTC", compute='_compute_totals', store=True)
     retention_amount = fields.Monetary(
         "Retenue de garantie", compute='_compute_retention_amount', store=True, readonly=False)
+    vat_withholding_amount = fields.Monetary(
+        "TVA retenue à la source", compute='_compute_vat_withholding', store=True,
+        help="Part de la TVA versée directement par le client à la DGI (article 117 du CGI).")
     amount_net = fields.Monetary("Net à payer", compute='_compute_amount_net', store=True)
 
     invoice_id = fields.Many2one('account.move', string="Facture", readonly=True, copy=False)
@@ -190,10 +193,34 @@ class McctSituation(models.Model):
                 amount = min(amount, cap - already)
             situation.retention_amount = situation.currency_id.round(max(amount, 0.0))
 
-    @api.depends('amount_total', 'retention_amount')
+    @api.depends(
+        'date', 'partner_id.commercial_partner_id.mcct_vat_withholding',
+        'line_ids.current_amount', 'line_ids.tax_ids', 'line_ids.product_id',
+        'advance_deduction_tax')
+    def _compute_vat_withholding(self):
+        for situation in self:
+            if situation.state in ('approved', 'invoiced'):
+                # Figé une fois la situation approuvée par le client.
+                situation.vat_withholding_amount = situation.vat_withholding_amount
+                continue
+            if not situation.partner_id.commercial_partner_id.mcct_vat_withholding:
+                situation.vat_withholding_amount = 0.0
+                continue
+            company = situation.company_id
+            rates = company._mcct_vat_withholding_rates(situation.date or fields.Date.context_today(situation))
+            amount = 0.0
+            for line in situation.line_ids.filtered(lambda l: not l.display_type):
+                tax = line._mcct_tax_included(line.current_qty) - line.current_amount
+                amount += tax * rates[company._mcct_line_nature(line.product_id, line.tax_ids)]
+            # La déduction d'avance (travaux) réduit la TVA, donc la retenue.
+            amount -= situation.advance_deduction_tax * rates['travaux']
+            situation.vat_withholding_amount = situation.currency_id.round(max(amount, 0.0))
+
+    @api.depends('amount_total', 'retention_amount', 'vat_withholding_amount')
     def _compute_amount_net(self):
         for situation in self:
-            situation.amount_net = situation.amount_total - situation.retention_amount
+            situation.amount_net = (
+                situation.amount_total - situation.retention_amount - situation.vat_withholding_amount)
 
     def _mcct_amount_net_words(self):
         self.ensure_one()

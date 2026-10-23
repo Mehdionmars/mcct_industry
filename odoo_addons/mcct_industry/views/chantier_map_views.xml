@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Carte des chantiers (composant OWL mcct_industry/static/src/chantier_map) -->
+    <record id="action_mcct_chantier_map" model="ir.actions.client">
+        <field name="name">Carte des chantiers</field>
+        <field name="tag">mcct_industry.chantier_map</field>
+        <field name="path">carte-chantiers</field>
+    </record>
+</odoo>

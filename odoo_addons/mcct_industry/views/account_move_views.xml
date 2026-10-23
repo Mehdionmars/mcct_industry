@@ -6,16 +6,33 @@
         <field name="model">account.move</field>
         <field name="inherit_id" ref="account.view_move_form"/>
         <field name="arch" type="xml">
+            <xpath expr="//header" position="inside">
+                <button name="action_mcct_record_vat_withholding" type="object"
+                        string="Constater la TVA retenue à la source"
+                        invisible="state != 'posted' or move_type != 'out_invoice' or not mcct_vat_withholding_amount or mcct_vat_withholding_move_id or payment_state in ('paid', 'in_payment', 'reversed')"
+                        groups="account.group_account_invoice"/>
+            </xpath>
+            <xpath expr="//header" position="after">
+                <div class="alert alert-warning mb-0" role="alert" invisible="not mcct_payment_delay_exceeded">
+                    Délai de paiement supérieur à 120 jours : non conforme à la loi 69-21
+                    (60 jours par défaut, 120 jours au maximum par accord entre les parties).
+                </div>
+            </xpath>
             <xpath expr="//group[@id='header_left_group']" position="inside">
                 <field name="mcct_project_id" readonly="state != 'draft'"
                        invisible="move_type not in ('out_invoice', 'out_refund')"
                        options="{'no_create': True}"/>
                 <field name="mcct_situation_id" invisible="not mcct_situation_id"/>
                 <field name="mcct_is_advance" invisible="not mcct_is_advance"/>
+                <field name="mcct_payment_mode" invisible="move_type not in ('out_invoice', 'out_refund')"
+                       readonly="state != 'draft'"/>
+                <field name="mcct_vat_withholding_move_id" invisible="not mcct_vat_withholding_move_id"/>
+                <field name="mcct_payment_delay_exceeded" invisible="1"/>
             </xpath>
             <xpath expr="//field[@name='tax_totals']" position="after">
                 <field name="mcct_retention_amount" invisible="not mcct_retention_amount"/>
-                <field name="mcct_net_to_pay" invisible="not mcct_retention_amount"
+                <field name="mcct_vat_withholding_amount" invisible="not mcct_vat_withholding_amount"/>
+                <field name="mcct_net_to_pay" invisible="not mcct_retention_amount and not mcct_vat_withholding_amount"
                        class="oe_subtotal_footer_separator"/>
             </xpath>
         </field>

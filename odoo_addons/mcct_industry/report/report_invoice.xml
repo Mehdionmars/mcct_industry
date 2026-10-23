@@ -16,6 +16,10 @@
                     (<t t-out="('%.1f' % o.mcct_situation_id.progress).replace('.', ',')"/> % cumulé)
                 </div>
             </div>
+            <div class="col" t-if="o.mcct_payment_mode" name="mcct_payment_mode">
+                <strong>Mode de paiement</strong>
+                <div t-out="o._mcct_payment_mode_label()"/>
+            </div>
             <div class="col" t-if="o.mcct_is_advance" name="mcct_advance">
                 <strong>Type</strong>
                 <div>Facture d'avance</div>
@@ -24,11 +28,17 @@
 
         <!-- Retenue de garantie et net à payer sous les totaux -->
         <xpath expr="//div[@id='total']//table/t[@t-call='account.document_tax_totals']" position="after">
-            <t t-if="o.mcct_retention_amount">
-                <tr class="mcct-retention">
+            <t t-if="o.mcct_retention_amount or o.mcct_vat_withholding_amount">
+                <tr class="mcct-retention" t-if="o.mcct_retention_amount">
                     <td>Retenue de garantie (<t t-out="('%g' % o.mcct_retention_rate).replace('.', ',')"/> %)</td>
                     <td class="text-end">
                         − <span t-field="o.mcct_retention_amount"/>
+                    </td>
+                </tr>
+                <tr class="mcct-vat-withholding" t-if="o.mcct_vat_withholding_amount">
+                    <td>TVA retenue à la source par le client (<t t-out="o._mcct_vat_withholding_rate_label()"/>)</td>
+                    <td class="text-end">
+                        − <span t-field="o.mcct_vat_withholding_amount"/>
                     </td>
                 </tr>
                 <tr class="fw-bold o_total mcct-net">
@@ -51,11 +61,18 @@
                     <t t-else="">Arrêtée la présente facture à la somme de :</t>
                     <strong><span t-field="o.amount_total_words"/> TTC</strong>.
                 </p>
-                <p class="small text-muted mb-0" t-if="o.mcct_retention_amount">
-                    Net à payer après retenue de garantie :
+                <p class="small text-muted mb-0" t-if="o.mcct_retention_amount or o.mcct_vat_withholding_amount">
+                    Net à payer après retenues :
                     <t t-out="o._mcct_net_to_pay_words()"/>.
                 </p>
             </div>
+        </xpath>
+
+        <!-- Référence de l'attestation d'exonération ou de suspension de TVA -->
+        <xpath expr="//p[@name='note']" position="after">
+            <p class="mb-2" t-if="o.fiscal_position_id and o.partner_id.commercial_partner_id.mcct_vat_exemption_ref">
+                Attestation : <span t-field="o.partner_id.commercial_partner_id.mcct_vat_exemption_ref"/>
+            </p>
         </xpath>
 
         <!-- Mentions légales de la société -->

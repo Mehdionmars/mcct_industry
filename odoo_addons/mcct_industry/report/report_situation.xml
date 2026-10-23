@@ -154,6 +154,10 @@
                                 <td>Retenue de garantie (<t t-out="('%g' % o.retention_rate).replace('.', ',')"/> %)</td>
                                 <td class="text-end">− <span t-field="o.retention_amount"/></td>
                             </tr>
+                            <tr t-if="o.vat_withholding_amount">
+                                <td>TVA retenue à la source par le client</td>
+                                <td class="text-end">− <span t-field="o.vat_withholding_amount"/></td>
+                            </tr>
                             <tr class="fw-bold o_total">
                                 <td>Net à payer</td>
                                 <td class="text-end"><span t-field="o.amount_net"/></td>
