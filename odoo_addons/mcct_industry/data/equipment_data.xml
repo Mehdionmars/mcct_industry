@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo noupdate="1">
+    <!-- Familles du parc. La périodicité des contrôles est indicative : l'adapter
+         aux prescriptions de l'organisme de contrôle agréé. -->
+    <record id="equipment_category_levage" model="maintenance.equipment.category">
+        <field name="name">Engins de levage</field>
+        <field name="mcct_kind">engin</field>
+        <field name="mcct_inspection_months">6</field>
+        <field name="company_id" eval="False"/>
+        <field name="note">Grues mobiles, grues à tour, nacelles, chariots télescopiques, palans.</field>
+    </record>
+    <record id="equipment_category_terrassement" model="maintenance.equipment.category">
+        <field name="name">Engins de terrassement</field>
+        <field name="mcct_kind">engin</field>
+        <field name="mcct_inspection_months">12</field>
+        <field name="company_id" eval="False"/>
+        <field name="note">Pelles, chargeuses, tractopelles, compacteurs.</field>
+    </record>
+    <record id="equipment_category_vehicules" model="maintenance.equipment.category">
+        <field name="name">Camions et véhicules</field>
+        <field name="mcct_kind">engin</field>
+        <field name="mcct_inspection_months">12</field>
+        <field name="company_id" eval="False"/>
+        <field name="note">Camions plateau, camions grue, pick-up de chantier.</field>
+    </record>
+    <record id="equipment_category_atelier" model="maintenance.equipment.category">
+        <field name="name">Machines d'atelier</field>
+        <field name="mcct_kind">machine</field>
+        <field name="mcct_inspection_months">12</field>
+        <field name="company_id" eval="False"/>
+        <field name="note">Plieuses, cisailles, poinçonneuses, scies, rouleuses, perceuses à colonne.</field>
+    </record>
+    <record id="equipment_category_soudage" model="maintenance.equipment.category">
+        <field name="name">Postes à souder et découpe</field>
+        <field name="mcct_kind">machine</field>
+        <field name="mcct_inspection_months">12</field>
+        <field name="company_id" eval="False"/>
+        <field name="note">Postes MIG/MAG, TIG, à l'arc, découpe plasma et oxycoupage.</field>
+    </record>
+    <record id="equipment_category_materiel" model="maintenance.equipment.category">
+        <field name="name">Matériel de chantier</field>
+        <field name="mcct_kind">materiel</field>
+        <field name="mcct_inspection_months">12</field>
+        <field name="company_id" eval="False"/>
+        <field name="note">Échafaudages, groupes électrogènes, compresseurs, bungalows, élingues.</field>
+    </record>
+    <record id="equipment_category_outillage" model="maintenance.equipment.category">
+        <field name="name">Outillage</field>
+        <field name="mcct_kind">materiel</field>
+        <field name="mcct_inspection_months">0</field>
+        <field name="company_id" eval="False"/>
+        <field name="note">Meuleuses, perceuses, clés dynamométriques, instruments de mesure.</field>
+    </record>
+</odoo>

@@ -120,6 +120,8 @@ class McctCustomerPortal(CustomerPortal):
             'invoices': invoices,
             'site_reports': reports,
             'documents': project.mcct_document_ids,
+            'equipment_assignments': project.sudo().mcct_equipment_assignment_ids.filtered(
+                lambda a: not a.date_end).sorted(lambda a: (a.kind or '', a.equipment_id.name)),
             'message': message,
             'page_name': 'mcct_chantier',
             'is_internal_preview': self._mcct_is_internal_preview(),

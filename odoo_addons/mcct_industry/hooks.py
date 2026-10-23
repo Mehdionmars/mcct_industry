@@ -2,34 +2,17 @@
 marocain, unités métriques et interface en français."""
 import base64
 import logging
+from datetime import timedelta
 
+from odoo import fields
 from odoo.tools.misc import file_open
+
+from .fiscal import setup_moroccan_tax
 
 _logger = logging.getLogger(__name__)
 
 # Noms donnés par Odoo à la société d'une base neuve.
 DEFAULT_COMPANY_NAMES = ('YourCompany', 'Your Company', 'My Company')
-
-# Comptes de produits du plan comptable marocain (PCGM).
-WORKS_INCOME_ACCOUNT = 'pcg_71241'   # Travaux (production au Maroc)
-STUDIES_INCOME_ACCOUNT = 'pcg_71242'  # Études (production au Maroc)
-
-STUDY_PRODUCTS = ('mcct_industry.product_etude',)
-WORK_PRODUCTS = (
-    'mcct_industry.product_advance',
-    'mcct_industry.product_charpente_kg',
-    'mcct_industry.product_bardage_m2',
-    'mcct_industry.product_couverture_m2',
-    'mcct_industry.product_tuyauterie_ml',
-    'mcct_industry.product_garde_corps_ml',
-    'mcct_industry.product_chaudronnerie_kg',
-    'mcct_industry.product_peinture_m2',
-    'mcct_industry.product_beton_m3',
-    'mcct_industry.product_dallage_m2',
-    'mcct_industry.product_montage_h',
-    'mcct_industry.product_levage_forfait',
-)
-
 
 def post_init_hook(env):
     env.ref('base.MAD').active = True
@@ -53,7 +36,7 @@ def post_init_hook(env):
         if previous_loader and not loads_moroccan_chart:
             previous_loader(registry_env)
         _setup_chart_and_currency(registry_env, target)
-        _setup_products_accounting(registry_env, target)
+        setup_moroccan_tax(registry_env, target)
         if with_demo:
             try:
                 with registry_env.cr.savepoint():
@@ -112,31 +95,6 @@ def _setup_chart_and_currency(env, company):
             env['account.chart.template'].try_loading('ma', company, install_demo=False)
     if company.currency_id != mad and not company._existing_accounting():
         company.currency_id = mad
-
-
-def _setup_products_accounting(env, company):
-    """Comptes de produits « Travaux » / « Études » et TVA 20 % sur le catalogue."""
-    if company.chart_template != 'ma':
-        return
-    chart = env['account.chart.template'].with_company(company)
-    accounts = {
-        STUDY_PRODUCTS: chart.ref(STUDIES_INCOME_ACCOUNT, raise_if_not_found=False),
-        WORK_PRODUCTS: chart.ref(WORKS_INCOME_ACCOUNT, raise_if_not_found=False),
-    }
-    sale_tax = company.account_sale_tax_id
-    for xmlids, account in accounts.items():
-        for xmlid in xmlids:
-            template = env.ref(xmlid, raise_if_not_found=False)
-            if not template:
-                continue
-            template = template.with_company(company)
-            vals = {}
-            if account:
-                vals['property_account_income_id'] = account.id
-            if sale_tax and not template.taxes_id.filtered(lambda t: t.company_id == company):
-                vals['taxes_id'] = [(4, sale_tax.id)]
-            if vals:
-                template.write(vals)
 
 
 def _setup_language(env, company):
@@ -253,4 +211,137 @@ def _load_demo(env, company):
             'work_done': work_done,
             'issues': issues,
             'state': 'published',
+        })
+
+    _load_demo_sites(env, company)
+    _load_demo_equipment(env, company, project)
+
+
+# Autres chantiers de démonstration pour la carte : (client, ICE, ville du client,
+# chantier, activité, phase, montant HT, avancement, ville, fin prévue dans N jours).
+DEMO_SITES = [
+    ("Atlas Énergie SARL", "002345678000091", "Mohammedia",
+     "Réservoirs de stockage gasoil 2 × 1 500 m³", 'chaudronnerie', 'fabrication',
+     2450000.0, 35.0, "Mohammedia", 120),
+    ("Phosphates & Engrais du Littoral SA", "003456789000012", "El Jadida",
+     "Passerelle de convoyeur phosphate", 'charpente', 'montage',
+     3800000.0, 60.0, "Jorf Lasfar", -10),
+    ("Tanger Logistique Parc SA", "004567890000034", "Tanger",
+     "Atelier de maintenance et pont roulant 10 t", 'construction', 'approvisionnement',
+     1950000.0, 10.0, "Tanger Med", 210),
+    ("Souss Agro Industrie SARL", "005678901000056", "Agadir",
+     "Réseau de tuyauterie vapeur", 'tuyauterie', 'essais',
+     860000.0, 90.0, "Agadir", 15),
+    ("Dakhla Halieutique SARL", "006789012000078", "Dakhla",
+     "Charpente de l'unité de congélation", 'charpente', 'etude',
+     1200000.0, 5.0, "Dakhla", 300),
+    ("Atlantic Auto Composants SA", "007890123000090", "Kénitra",
+     "Bardage et désenfumage de l'usine", 'charpente', 'reception_provisoire',
+     1450000.0, 100.0, "Kénitra", -60),
+    ("Sahara Logistique SARL", "008901234000013", "Laâyoune",
+     "Hangar logistique 2 400 m²", 'charpente', 'fabrication',
+     1680000.0, 25.0, "Laâyoune", 150),
+]
+
+
+def _load_demo_sites(env, company):
+    today = fields.Date.context_today(env['project.project'])
+    client = env.ref('mcct_industry.demo_partner_client')
+    sites = [(client, "Maintenance des convoyeurs du broyeur", 'maintenance', 'montage',
+              420000.0, 50.0, "Settat", 45)]
+    for name, ice, partner_city, *site in DEMO_SITES:
+        partner = env['res.partner'].create({
+            'name': name,
+            'is_company': True,
+            'city': partner_city,
+            'country_id': env.ref('base.ma').id,
+            'company_registry': ice,
+            'lang': 'fr_FR' if env['res.lang'].search([('code', '=', 'fr_FR')]) else 'en_US',
+        })
+        sites.append((partner, *site))
+    for partner, name, activity, phase, amount, progress, city, end_in in sites:
+        env['project.project'].with_company(company).create({
+            'name': f"{name} — {city}",
+            'partner_id': partner.id,
+            'company_id': company.id,
+            'mcct_is_site': True,
+            'privacy_visibility': 'portal',
+            'allow_billable': True,
+            'mcct_activity': activity,
+            'mcct_phase': phase,
+            'mcct_contract_amount': amount,
+            'mcct_progress': progress,
+            'mcct_site_city': city,
+            'date_start': today - timedelta(days=90),
+            'date': today + timedelta(days=end_in),
+            'user_id': env.ref('base.user_admin').id,
+        })
+
+
+# (nom, modèle, famille, immatriculation, coût/jour, ville du chantier ou None = dépôt,
+#  arrivé depuis N jours, dernier contrôle il y a N mois)
+DEMO_EQUIPMENT = [
+    ("Grue mobile 60 t", "Liebherr LTM 1060-3.1", 'levage', "45872-A-6", 6500.0, "Settat", 40, 5),
+    ("Nacelle articulée 16 m", "Haulotte HA16 RTJ", 'levage', None, 1200.0, "Settat", 35, 2),
+    ("Chariot télescopique 18 m", "Manitou MT 1840", 'levage', None, 1500.0, "Jorf Lasfar", 60, 7),
+    ("Camion grue 12 t·m", "Iveco Eurocargo + Fassi F120", 'vehicules', "31207-B-6", 2200.0, "Mohammedia", 20, 3),
+    ("Camion plateau 26 t", "Mercedes-Benz Actros 2643", 'vehicules', "18934-A-1", 1800.0, None, 0, 4),
+    ("Pelle sur chenilles 21 t", "Caterpillar 320", 'terrassement', "WW-5521", 3500.0, "Tanger Med", 12, 6),
+    ("Plieuse hydraulique 3 m — 135 t", "Amada HFE 1303", 'atelier', None, 900.0, None, 0, 8),
+    ("Cisaille guillotine 3 m", "Durma SBT 3006", 'atelier', None, 600.0, None, 0, 8),
+    ("Poste à souder MIG 400 A", "Lincoln Powertec i420S", 'soudage', None, 150.0, "Mohammedia", 50, 9),
+    ("Poste TIG 300 A", "Fronius MagicWave 3000", 'soudage', None, 150.0, "Agadir", 70, 9),
+    ("Groupe électrogène 100 kVA", "SDMO J110", 'materiel', None, 800.0, "Jorf Lasfar", 60, 10),
+    ("Échafaudage multidirectionnel 400 m²", "Layher Allround", 'materiel', None, 600.0, "Settat", 38, 11),
+    ("Compresseur 7 bar", "Atlas Copco XAS 88", 'materiel', None, 400.0, "Agadir", 70, 10),
+]
+
+
+def _load_demo_equipment(env, company, main_project):
+    today = fields.Date.context_today(env['project.project'])
+    sites = env['project.project'].search([('mcct_is_site', '=', True), ('company_id', '=', company.id)])
+    site_by_city = {}
+    for site in sites.sorted('id'):
+        site_by_city.setdefault(site.mcct_site_city, site)
+    site_by_city["Settat"] = main_project
+    team = env['maintenance.team'].search([('company_id', '=', company.id)], limit=1)
+    if not team:
+        team = env['maintenance.team'].create({'name': "Atelier & parc matériel", 'company_id': company.id})
+    Equipment = env['maintenance.equipment'].with_company(company)
+    for name, model, family, plate, cost, city, days_ago, months_ago in DEMO_EQUIPMENT:
+        site = site_by_city.get(city) if city else False
+        equipment = Equipment.create({
+            'name': name,
+            'model': model,
+            'category_id': env.ref(f'mcct_industry.equipment_category_{family}').id,
+            'company_id': company.id,
+            'maintenance_team_id': team.id,
+            'mcct_registration': plate or False,
+            'mcct_daily_cost': cost,
+            'mcct_project_id': site.id if site else False,
+            'mcct_inspection_date': today - timedelta(days=30 * months_ago),
+        })
+        if site and days_ago:
+            equipment.mcct_assignment_ids.with_context(mcct_skip_assignment=True).date_start = (
+                today - timedelta(days=days_ago))
+    # Historique : la grue était sur le chantier de Kénitra avant Settat.
+    crane = Equipment.search([('name', '=', "Grue mobile 60 t"), ('company_id', '=', company.id)], limit=1)
+    kenitra = site_by_city.get("Kénitra")
+    if crane and kenitra:
+        env['mcct.equipment.assignment'].with_context(mcct_skip_assignment=True).create({
+            'equipment_id': crane.id,
+            'project_id': kenitra.id,
+            'date_start': today - timedelta(days=95),
+            'date_end': today - timedelta(days=41),
+            'daily_cost': crane.mcct_daily_cost,
+        })
+    truck = Equipment.search([('name', '=', "Camion plateau 26 t"), ('company_id', '=', company.id)], limit=1)
+    if truck:
+        env['maintenance.request'].with_company(company).create({
+            'name': "Fuite hydraulique sur la ridelle",
+            'equipment_id': truck.id,
+            'company_id': company.id,
+            'maintenance_team_id': team.id,
+            'maintenance_type': 'corrective',
+            'priority': '2',
         })

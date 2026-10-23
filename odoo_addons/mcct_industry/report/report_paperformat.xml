@@ -17,13 +17,20 @@
     <template id="legal_mentions">
         <t t-set="company" t-value="o.company_id"/>
         <div class="mcct-legal text-muted small text-center mt-3"
-             t-if="company.company_registry or company.mcct_if or company.mcct_rc or company.mcct_patente or company.mcct_cnss">
-            <span t-field="company.name"/>
-            <t t-if="company.company_registry"> · ICE : <span t-field="company.company_registry"/></t>
-            <t t-if="company.mcct_if"> · IF : <span t-field="company.mcct_if"/></t>
-            <t t-if="company.mcct_rc"> · RC : <span t-field="company.mcct_rc"/></t>
-            <t t-if="company.mcct_patente"> · Patente : <span t-field="company.mcct_patente"/></t>
-            <t t-if="company.mcct_cnss"> · CNSS : <span t-field="company.mcct_cnss"/></t>
+             t-if="company.company_registry or company.mcct_if or company.mcct_rc or company.mcct_patente or company.mcct_cnss or company.mcct_legal_form">
+            <div>
+                <span t-field="company.name"/>
+                <t t-if="company.mcct_legal_form"> <t t-out="company._mcct_legal_form_label()"/></t>
+                <t t-if="company.mcct_capital"> au capital de <span t-field="company.mcct_capital"/></t>
+                <t t-if="company.street or company.city"> · Siège : <t t-out="company._mcct_address_line()"/></t>
+            </div>
+            <div>
+                <t t-if="company.mcct_rc">RC <t t-out="company.mcct_rc_city or ''"/> n° <span t-field="company.mcct_rc"/></t>
+                <t t-if="company.mcct_if"> · IF : <span t-field="company.mcct_if"/></t>
+                <t t-if="company.company_registry"> · ICE : <span t-field="company.company_registry"/></t>
+                <t t-if="company.mcct_patente"> · TP : <span t-field="company.mcct_patente"/></t>
+                <t t-if="company.mcct_cnss"> · CNSS : <span t-field="company.mcct_cnss"/></t>
+            </div>
         </div>
     </template>
 </odoo>

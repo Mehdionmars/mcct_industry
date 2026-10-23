@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- Client : retenue à la source, mode de paiement, attestation d'exonération -->
+    <record id="view_partner_property_form_mcct" model="ir.ui.view">
+        <field name="name">res.partner.form.mcct.fiscal</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="account.view_partner_property_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='property_account_position_id']" position="after">
+                <field name="mcct_vat_exemption_ref" invisible="not property_account_position_id"
+                       placeholder="N° et date de l'attestation"/>
+                <field name="mcct_vat_withholding"/>
+                <field name="mcct_payment_mode"/>
+            </xpath>
+        </field>
+    </record>
+
+    <!-- Article : nature fiscale (ligne de la déclaration de TVA) -->
+    <record id="product_template_form_view_mcct" model="ir.ui.view">
+        <field name="name">product.template.form.mcct.fiscal</field>
+        <field name="model">product.template</field>
+        <field name="inherit_id" ref="account.product_template_form_view"/>
+        <field name="arch" type="xml">
+            <xpath expr="//label[@for='taxes_id']" position="before">
+                <field name="mcct_vat_nature" invisible="type == 'combo'"/>
+            </xpath>
+        </field>
+    </record>
+
+</odoo>

@@ -23,7 +23,7 @@
         <strong t-out="format_amount(object.amount_total, object.currency_id) or ''">100 000,00 DH</strong> TTC,
         soit un net à payer de
         <strong t-out="format_amount(object.amount_net, object.currency_id) or ''">90 000,00 DH</strong>
-        après retenue de garantie.
+        après retenues.
         <br/><br/>
         Vous pouvez consulter l'avancement de votre chantier et approuver cette situation
         directement depuis votre espace client :

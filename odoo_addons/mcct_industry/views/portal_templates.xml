@@ -283,6 +283,34 @@
                     </div>
                 </section>
 
+                <!-- Matériel, engins et machines présents sur le chantier -->
+                <section id="materiel" class="mb-4" t-if="equipment_assignments">
+                    <h4>Moyens matériels sur le chantier</h4>
+                    <div class="table-responsive">
+                        <table class="table table-sm align-middle">
+                            <thead>
+                                <tr>
+                                    <th>Désignation</th>
+                                    <th>Type</th>
+                                    <th class="text-end">Sur site depuis</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr t-foreach="equipment_assignments" t-as="assignment">
+                                    <td>
+                                        <span t-out="assignment.equipment_id.name"/>
+                                        <small t-if="assignment.equipment_id.model" class="text-muted">
+                                            — <span t-out="assignment.equipment_id.model"/>
+                                        </small>
+                                    </td>
+                                    <td><span t-field="assignment.kind"/></td>
+                                    <td class="text-end"><span t-field="assignment.date_start"/></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </section>
+
                 <!-- Rapports de chantier -->
                 <section id="rapports" class="mb-4">
                     <h4>Journal de chantier</h4>

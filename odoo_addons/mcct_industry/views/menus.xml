@@ -2,7 +2,7 @@
 <odoo>
 
     <record id="action_mcct_products" model="ir.actions.act_window">
-        <field name="name">Ouvrages et articles</field>
+        <field name="name">Ouvrages et prestations</field>
         <field name="res_model">product.template</field>
         <field name="view_mode">list,kanban,form</field>
         <field name="domain">[('categ_id', 'child_of', ref('mcct_industry.product_category_ouvrages'))]</field>
@@ -25,8 +25,20 @@
     <menuitem id="menu_mcct_situations" name="Situations de travaux" parent="menu_mcct_root"
               action="action_mcct_situation" sequence="20"/>
 
+    <menuitem id="menu_mcct_map" name="Carte des chantiers" parent="menu_mcct_root"
+              action="action_mcct_chantier_map" sequence="15"/>
+
     <menuitem id="menu_mcct_site_reports" name="Rapports de chantier" parent="menu_mcct_root"
               action="action_mcct_site_report" sequence="30"/>
+
+    <menuitem id="menu_mcct_park" name="Matériel &amp; engins" parent="menu_mcct_root" sequence="35"
+              groups="project.group_project_user,maintenance.group_equipment_manager"/>
+    <menuitem id="menu_mcct_equipment" name="Matériel, engins et machines" parent="menu_mcct_park"
+              action="action_mcct_equipment" sequence="10"/>
+    <menuitem id="menu_mcct_equipment_assignments" name="Affectations aux chantiers" parent="menu_mcct_park"
+              action="action_mcct_equipment_assignment" sequence="20"/>
+    <menuitem id="menu_mcct_equipment_requests" name="Demandes de maintenance" parent="menu_mcct_park"
+              action="maintenance.hr_equipment_request_action" sequence="30"/>
 
     <menuitem id="menu_mcct_billing" name="Facturation" parent="menu_mcct_root" sequence="40"
               groups="account.group_account_invoice,sales_team.group_sale_salesman"/>
@@ -42,8 +54,10 @@
               groups="project.group_project_manager,account.group_account_manager"/>
     <menuitem id="menu_mcct_settings" name="Paramètres" parent="menu_mcct_config"
               action="action_mcct_settings" sequence="10" groups="base.group_erp_manager"/>
-    <menuitem id="menu_mcct_products" name="Ouvrages et articles" parent="menu_mcct_config"
+    <menuitem id="menu_mcct_products" name="Ouvrages et prestations" parent="menu_mcct_config"
               action="action_mcct_products" sequence="20"/>
+    <menuitem id="menu_mcct_equipment_categories" name="Familles de matériel" parent="menu_mcct_config"
+              action="maintenance.hr_equipment_category_action" sequence="25"/>
     <menuitem id="menu_mcct_uom" name="Unités de mesure" parent="menu_mcct_config"
               action="action_mcct_uom" sequence="30"/>
 

@@ -11,11 +11,18 @@
                 <page string="Chantiers &amp; mentions légales" name="mcct">
                     <group>
                         <group string="Mentions légales (Maroc)">
+                            <field name="mcct_legal_form"/>
+                            <field name="mcct_capital"/>
                             <field name="company_registry" string="ICE"/>
                             <field name="mcct_if"/>
                             <field name="mcct_rc"/>
+                            <field name="mcct_rc_city"/>
                             <field name="mcct_patente"/>
                             <field name="mcct_cnss"/>
+                        </group>
+                        <group string="Retenue à la source sur la TVA (art. 117 CGI)">
+                            <field name="mcct_tax_certificate_date"/>
+                            <field name="mcct_vat_withholding_account_id"/>
                         </group>
                         <group string="Retenue de garantie par défaut">
                             <field name="mcct_retention_rate"/>
@@ -42,11 +49,23 @@
                     </div>
                     <group>
                         <group string="Mentions légales (Maroc)">
+                            <field name="mcct_legal_form"/>
+                            <field name="mcct_capital"/>
                             <field name="company_registry" string="ICE" placeholder="15 chiffres"/>
                             <field name="mcct_if"/>
                             <field name="mcct_rc"/>
+                            <field name="mcct_rc_city"/>
                             <field name="mcct_patente"/>
                             <field name="mcct_cnss"/>
+                        </group>
+                        <group string="Retenue à la source sur la TVA (art. 117 CGI)">
+                            <field name="mcct_tax_certificate_date"/>
+                            <field name="mcct_vat_withholding_account_id"/>
+                            <div colspan="2" class="text-muted">
+                                Attestation valable : vos clients concernés retiennent 75 % de la TVA
+                                sur les prestations de services et rien sur les travaux.
+                                Attestation absente ou expirée : ils retiennent 100 % de la TVA.
+                            </div>
                         </group>
                         <group string="Retenue de garantie par défaut">
                             <field name="mcct_retention_rate"/>
@@ -56,8 +75,9 @@
                     </group>
                     <div class="text-muted">
                         Ces valeurs sont reprises sur chaque nouveau chantier et restent modifiables
-                        chantier par chantier. Les mentions légales apparaissent en bas des factures
-                        et des situations de travaux.
+                        chantier par chantier. Les mentions légales (forme juridique, capital, siège,
+                        RC, IF, ICE, taxe professionnelle, CNSS) apparaissent en bas des factures et
+                        des situations de travaux.
                     </div>
                 </sheet>
             </form>

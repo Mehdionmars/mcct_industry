@@ -96,6 +96,19 @@ class TestMcctPortal(BaseCommon, HttpCase):
         self.assertNotIn("Brouillon interne", page)
         self.assertIn("plan-implantation.pdf", page)
 
+    def test_site_page_lists_equipment_on_site(self):
+        crane = self.env['maintenance.equipment'].create({
+            'name': "Grue mobile 60 t", 'model': "LTM 1060", 'mcct_daily_cost': 6500.0,
+            'mcct_project_id': self.project.id,
+        })
+        page = self.url_open(f'/my/chantiers/{self.project.id}').text
+        self.assertIn("Moyens matériels sur le chantier", page)
+        self.assertIn("Grue mobile 60 t", page)
+        self.assertNotIn("6 500", page)  # coût interne jamais montré au client
+        crane.action_mcct_return_to_depot()
+        page = self.url_open(f'/my/chantiers/{self.project.id}').text
+        self.assertNotIn("Grue mobile 60 t", page)
+
     def test_other_client_site_is_hidden(self):
         response = self.url_open(f'/my/chantiers/{self.other_project.id}', allow_redirects=False)
         self.assertIn(response.status_code, (302, 303))
