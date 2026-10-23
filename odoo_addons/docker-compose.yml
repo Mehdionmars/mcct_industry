@@ -17,6 +17,9 @@ services:
     image: odoo:19.0
     depends_on:
       - db
+    # L'installation du module (comptabilité marocaine, ventes, projets, français,
+    # démo) dépasse la limite par défaut de 120 s par requête : on la relève.
+    command: ["odoo", "--limit-time-real=1800"]
     ports:
       - "8069:8069"
     environment:
